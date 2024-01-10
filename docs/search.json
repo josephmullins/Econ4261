@@ -1,10 +1,31 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "lectures/Lecture-3-LinearModels.html#the-main-theme-so-far",
+    "href": "lectures/Lecture-3-LinearModels.html#the-main-theme-so-far",
+    "title": "Stats Review: Linear Models",
+    "section": "The main theme so far:",
+    "text": "The main theme so far:\nEverything we do boils down to population and sample mean\n\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)"
+  },
+  {
+    "objectID": "lectures/Lecture-3-LinearModels.html#next-steps",
+    "href": "lectures/Lecture-3-LinearModels.html#next-steps",
+    "title": "Stats Review: Linear Models",
+    "section": "Next Steps",
+    "text": "Next Steps\n\nShow how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
+  },
+  {
+    "objectID": "lectures/Lecture-3-LinearModels.html#the-linear-model-1",
+    "href": "lectures/Lecture-3-LinearModels.html#the-linear-model-1",
+    "title": "Stats Review: Linear Models",
+    "section": "The Linear Model",
+    "text": "The Linear Model\n\\((y_{i},x_{i,1},x_{i,2},...,x_{i,K})\\) is random vector for \\(i\\)th observation from sample of size \\(N\\)\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] = \\sum_{k=1}^{K}x_{i,k}\\beta_{k}\n\\end{equation*}\\]\n\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\\left[\\begin{array}{c}\\beta_{1}\\\\\\beta_{2}\\\\\\vdots\\\\\\beta_{K}\\end{array}\\right] = \\mathbf{x}_{i}{\\beta}\n\\end{equation*}\\]"
+  },
+  {
+    "objectID": "lectures/Lecture-3-LinearModels.html#the-law-of-large-numbers",
+    "href": "lectures/Lecture-3-LinearModels.html#the-law-of-large-numbers",
+    "title": "Stats Review: Linear Models",
+    "section": "The Law of Large Numbers",
+    "text": "The Law of Large Numbers"
   },
   {
     "objectID": "index.html",
@@ -12,5 +33,12 @@
     "title": "Econ4261",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
   }
 ]
