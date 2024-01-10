@@ -2,8 +2,11 @@
 title: "Stats Review: Linear Models"
 format: 
   revealjs:
-    chalkboard: 
-      buttons: false
+    theme: solarized
+    chalkboard:
+        theme: whiteboard
+        chalk-effect: 0.0
+        chalk-width: 6
 ---
 
 # Introduction
