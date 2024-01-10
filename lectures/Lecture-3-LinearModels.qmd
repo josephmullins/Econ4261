@@ -3,6 +3,7 @@ title: "Stats Review: Linear Models"
 format: 
   revealjs:
     theme: solarized
+    transition: slide
     chalkboard:
         theme: whiteboard
         chalk-effect: 0.0
