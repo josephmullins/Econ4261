@@ -9,7 +9,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: Lectures/Lecture-3-LinearModels.qmd
+      - href: lectures/Lecture-3-LinearModels.qmd
         text: Lecture 3
 
 format:
