@@ -1,0 +1,58 @@
+---
+title: "Homework 2"
+---
+
+```{r}
+#| warning: false
+library(tidyverse)
+```
+
+## Question 1
+
+Here is code to import and clean the cps data.
+```{r}
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR>=2014,YEAR<=2018) %>%
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99)) %>%
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  mutate(kids = NCHILD>0,female = SEX==2) %>%
+  filter(!is.na(Wage))
+
+```
+
+*EDIT* this code to also include only individuals who are younger than 40.
+
+## Question 2
+
+Estimate the model:
+
+$$\log(W_{n}) = \beta_{0} + \beta_{1}F_{n} $$
+
+where $W_{n}$ is the wage and $F_{n}$ a dummy variable that is equal to one if the individual is female.
+
+## Question 3
+
+Now calculate the difference between the sample mean of log wages for women and the sample mean for men. What do you notice? Explain why.
+
+## Question 4
+
+Write down a linear model that allows for wage gaps to be different by the individual's fertility status.
+
+## Question 5
+
+Suppose that the null hypothesis is that wage gaps are the same for each fertility status. Write this null hypothesis in terms of the parameters of your model.
+
+## Question 6
+
+Test the null hypothesis against a two-sided alternative. Make your test size 5\%.
+
+## Question 7
+
+Re-write the model to allow for:
+  (1) A linear trend for all wages with age;
+  (2) A linear trend for wage gaps with age; AND
+  (3) A linear trend for the the *difference* in wage gaps by fertility status.
+  
+Use this model to test the null hypothesis that the difference in wage gaps by fertility status does not change with age. Use a two-sided alternative with size 10\%.

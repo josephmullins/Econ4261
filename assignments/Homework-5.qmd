@@ -1,0 +1,74 @@
+---
+title: "Homework 5"
+---
+
+# 1 - Introduction 
+
+This Homework is based on the paper: [The China Syndrome: Local Labor Market Effects of Import Competition in the United States](https://www.aeaweb.org/articles?id=10.1257/aer.103.6.2121), AER (2013), as in your Week 12 recitation.
+
+The authors begin by proposing a simple measure of the growth China's local import penetration into a local market $i$ in the US:
+
+$$ \Delta IPW_{uit} =  \sum_{j}\frac{L_{ijt}}{L_{ujt}}\frac{\Delta M_{ucjt}}{L_{it}} $$
+
+where:
+
+  - $\Delta M_{ucjt}$ is the growth in overall imports from China to the US in industry $j$
+  - $L_{it}$ is total employment in local labor market $i$ at the start of period $t$
+  - $L_{ijt}$ is total employment in market $i$ in industry $j$ at the start of period $t$
+  - $L_{ujt}$ is total employment in the US in industry $j$ at the start of period $t$
+  
+The authors estimate a series of specifications of the form:
+
+$$ \Delta Y_{it} = \gamma_{t} + \beta_{1}\Delta IPW_{uit} + \mathbf{X}_{it}'\beta_{2} + e_{it} $$
+
+where $Y$ are the outcomes of interest. To isolate the portion of the change in import competition that is due to the supply side, the authors construct an instrumental variable:
+
+$$ \Delta IPW_{oit} = \sum_{j}\frac{L_{ijt-1}}{L_{ujt-1}}\frac{\Delta M_{oct}}{L_{it-1}} $$
+
+where:
+
+  - $\Delta M_{oct}$ is the change in China's exports to other high income countries.
+  - $L_{ijt-1}$ is lagged employment and so on.
+
+Recall the following from recitation:
+
+  (1) change in manufacturing is given by the variable `d_sh_empl_mfg`
+  (2) the change in import exposure is `d_tradeusch_pw`
+  (3) the predicted change given global trends (the instrument) is `d_tradeotch_pw_lag`
+  (4) local labor markets are defined at the commuting zone level, and so each observation in the regressions is weighted using population share of the CZ, given by `timepwt48`
+  (5) standard errors are clustered by state level
+  (6) Other control variables that you may need are explained in Recitation, or listed below.
+
+
+# Question 1
+
+Reproduce Figure 2 Panel B from the paper (in the same way that we replicated Panel A in recitation). 
+
+# Question 2:
+
+(1) Use the `fixest` package to replicate the estimates from Column (6) of Table 3. Some notes on additional variables you will need (beyond what you saw in recitation):
+  - `l_sh_routine33` is the percentage of employment in routine occupations
+  - `l_task_outsource` is the average offshoreability of occupations in the CZ at the beginning of the period.
+
+(2) By reading the paper, briefly explain the logic of including the perecnt of employment in routine occupations and the average measure of offshoreability.
+
+# Question 3:
+
+(1) Replicate the analysis in Table 4, Panel (C), in the first three columns. The additional variables you will need are:
+  - `lnchg_popworkage`: log change in the working age population 
+  - `lnchg_popworkage_edu_c`: log change in the working age population with college education
+  - `lnchg_popworkage_edu_nc`: log change in the working age population without a college education
+
+
+(2) List one of the three potential explanations for the fact that there does not appear to be a response in population flows to import penetration.
+
+# Question 4
+
+(1) Replicate the findings presented in Columns (5) and (6) in Table 7. You will need the additional variables:
+  - `lnchg_no_empl_nmfg_edu_c`: log change in total non-manufacturing employment for college educated works.
+  - `lnchg_no_empl_nmfg_edu_nc`: log change in total non-manufacturing employment for non-college educated works.
+  - `d_avg_lnwkwage_nmfg_c`: average change in log weekly earnings for college educated workers in non-manufacturing jobs
+  - `d_avg_lnwkwage_nmfg_nc`: average change in log weekly earnings for non-college educated workers in non-manufacturing jobs
+
+
+(2) How do the authors interpret the fact that import penetration appears to have a negative impact on wages in the non-manufacturing sector?

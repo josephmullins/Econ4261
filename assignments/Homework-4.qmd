@@ -1,0 +1,23 @@
+---
+title: "Homework 4"
+---
+
+## Introduction
+
+This Homework is based on the paper [The Geography of Child Penalties and Gender Norms: Evidence from the United States](https://www.henrikkleven.com/uploads/3/7/3/1/37310663/childpenalties-culture_kleven_jan2023.pdf) by Henrik Kleven.
+
+## Part 1: Estimating the Child Penalty
+
+1 - Estimate the specification described in equation (1) of this paper for annual employment and annual earnings, using the the PSID dataset [psid_clean_all](/data/psid_clean_all.RData). The variable names and definitions are identical to the NLSY dataset we used in recitation. You should estimate this model separately for both Men and Women, and use the same omitted event-time dummy as described in the paper. Hint: you can use what we did with the NLSY in recitation, although you will have to change the steps slightly because a different event-time dummy is omitted here (i.e. a different reference time period is used to normalize $\alpha$).
+
+2 - Plot your event-study estimates in a similar style to Figure (1) in the paper.
+
+3 - Repeat your analysis for earnings separately by college education (as well as by gender), using the dummy variable `college`. Comment briefly on your findings relative to question (1).
+
+## Part 2: Comprehension of the Paper
+
+1 - Provide a brief summary (2-3 sentences) of the paper's main findings.
+
+2 - Why does the author opt to construct a pooled ACS/CPS dataset rather than use the PSID and NLSY datasets? What are the advantages of the former over the latter? You can be brief here (2-3 sentences).
+
+3 - What is the main *disadvantage* of the combined ACS/CPS dataset relative to the PSID/NLSY? How does the author overcome this technical challenge? How do they validate their approach? You should not need more than a paragraph here.

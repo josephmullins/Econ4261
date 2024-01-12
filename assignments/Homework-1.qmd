@@ -1,0 +1,81 @@
+---
+title: "Homework 1"
+---
+
+```{r}
+#| warning: false
+library(tidyverse)
+```
+
+
+# Part 1: Introduction to for Loops and Simulation
+
+In this section you are going to write a `for` loop to help with simulation.  I have written an example below that you can use to help you.
+
+Assume the following data generating process. $X_{n,1}$ is a normal random variable that can be written as:
+
+$$ X_{n,1} = \mu + \epsilon_{n,1} $$
+
+where $\epsilon_{n,1} \sim \mathcal{N}(0,\sigma^2)$. $X_{n,2}$ is a normal random variable given by:
+
+$$ X_{n,2} = \mu + \rho\times\epsilon_{n,1} + \epsilon_{n,2} $$
+
+where $\epsilon_{n,2} \sim \mathcal{N}(0,\sigma^2)$. Each random variable $\epsilon_{n,j}$ is independent of $\epsilon_{m,k}$ for all $m$, $n$, $j$, and $k$.
+
+Here is a function to simulate a sample of $(X_{n,1},X_{n,2})$ of size $N$ given parameter values $\mu$, $\sigma$, and $\rho$.
+
+```{r}
+draw_data <- function(mu,sig,rho,N) {
+  X = matrix(0,N,2) #<- this is an N x 2 array that will store X_{n,1} in the n-th row and 1st column, and X_{n,2} in the second column of the n-th row
+  eps_1 = rnorm(N,0,sig) #<- this command simulates N random realizations from a normal with mean zero and standard deviation sig. The n-th entry of this vector will be taken as the valuate of epsilon_{n,2}
+  eps_2 = rnorm(N,0,sig) #<- another vector of normal random variables, this time the n-th entry is epsilon_{n,2}
+  X[,1] = mu + eps_1 #<- This command sets of the value of the first column of X (i.e. each X_{n,1} for n=1,...N)
+  X[,2] = mu + rho*eps_1 + eps_2 #<- And setting the value for the second column (each X_{n,2} for n=1,...,N)
+  X
+}
+```
+
+## Question 1:
+Suppose we were to treat each observation of $X_{n,j}$ as taken from an iid sample of size 2$N$. In this case the best estimator of $\mu$ would be the sample mean:
+
+$$\hat{\mu} = \frac{\sum_{n=1}^{N}\sum_{j=1,2}X_{n,j}}{2N}$$
+
+What value of $\rho$ would be necessary for the iid assumption to be true? When $\rho=0$, write a formula for the variance (i.e. $E[(\hat{\mu}-\mu)^2]$) of $\hat{\mu}$ in terms of $\sigma$ and $N$.
+
+## Question 2:
+
+Below is code that "tests" the estimator by repeatedly drawing a sample of size $N$ and calculating the estimator on that sample. Effectively, we are simulating draws from the sampling distribution of $\hat{\mu}$. The argument $B$ is the number of times to repeat the test.
+
+```{r}
+montecarlo <- function(mu,sig,rho,N,B) {
+  mu_hat = matrix(0,B) #<- this will store an estimate from each trial
+  for (b in 1:B) {
+    xb = draw_data(mu,sig,rho,N) #<- simulate a sample of size N
+    mu_hat[b] = sum(xb) / (2*N) #<- store the estimator for this trial
+  }
+  mu_hat
+}
+```
+
+Assuming that $\mu=2$, $\sigma=1$ and $N=100$ (and $\rho=0$), use this function to calculate the variance of $\hat{\mu}$ for $B=10,50,100,1000$ repetitions of the test. Show that the sample variance of $\hat{\mu}$ converges to what your formula in Question (1) predicts.
+
+
+## Question 3:
+Repeat the above exercise using $\rho=0.5$ instead. What do you notice about the sample variance of $\hat{\mu}$ relative to your formula? Explain what is happening here.
+
+## Question 4:
+
+Update the simulation function above to instead calculate a confidence interval for $\mu$. Using a value of $B=1000$, show that the confidence interval works as it is intended when $\rho=0$. Repeat the exercise for $\rho=0.5$. Does the confidence interval still work as intended? Why or why not?
+
+# Part 2: An introduction to reading and analyzing data
+
+You are going to document some patterns using the *Current Population Survey* which you have been introduced to in recitation and in class.
+
+## Question 1:
+Following the example from recitation, load the csv file [cps-econ-4261.csv](/data/cps-econ-4261) and replicate the steps for cleaning the data and creating the Wage variable, with **one** key difference: keep only observations between 2014 and 2018.
+
+## Question 2:
+Write code to calculate mean wages separately by age (variable `AGE`), sex, and fertility status (hint: in recitation you did this by year, sex, and fertility status).
+
+## Question 3:
+Write code to plot mean wages by age, sex, and fertility status. You can present the plot in whichever way makes the patterns most clear. Offer a brief interpretation of what the evolution of wage gaps by age and fertility status tell us about one potential source of gender gaps in wages.

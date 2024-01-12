@@ -151,7 +151,7 @@
     "href": "Recitations.html",
     "title": "Recitation Materials",
     "section": "",
-    "text": "Topic\nNotebook\nData\n\n\n\n\nIntroduction to R and Monte Carlo Simulation\nnotebook\n\n\n\nWorking with data in R and the Tidyverse packages\nnotebook\ncps data"
+    "text": "Materials will be updated here as we continue through the course.\nThese recitations have been rendered using Quarto notebooks. The original source files for the notebooks can be downloaded from this site’s Github repo. You may want to study the source files (which can be opened in Rstudio) to learn how to format your own notebooks for the homework assignments.\n\n\n\nTopic\nNotebook\nData\n\n\n\n\nIntroduction to R and Monte Carlo Simulation\nnotebook\n\n\n\nWorking with data in R and the Tidyverse packages\nnotebook\ncps data"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
@@ -320,5 +320,180 @@
     "title": "Group Project",
     "section": "Grading Criteria",
     "text": "Grading Criteria\nThe project is worth 20% of the course grade in total with the following breakdown:\n\nGroups receive 1% for each meeting with their Writing Assistant (5% total).\nGroup presentation (5%)\nIndividual writeup (10%)"
+  },
+  {
+    "objectID": "assignments/Homework-1.html",
+    "href": "assignments/Homework-1.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "library(tidyverse)"
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-1",
+    "href": "assignments/Homework-1.html#question-1",
+    "title": "Homework 1",
+    "section": "Question 1:",
+    "text": "Question 1:\nSuppose we were to treat each observation of \\(X_{n,j}\\) as taken from an iid sample of size 2\\(N\\). In this case the best estimator of \\(\\mu\\) would be the sample mean:\n\\[\\hat{\\mu} = \\frac{\\sum_{n=1}^{N}\\sum_{j=1,2}X_{n,j}}{2N}\\]\nWhat value of \\(\\rho\\) would be necessary for the iid assumption to be true? When \\(\\rho=0\\), write a formula for the variance (i.e. \\(E[(\\hat{\\mu}-\\mu)^2]\\)) of \\(\\hat{\\mu}\\) in terms of \\(\\sigma\\) and \\(N\\)."
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-2",
+    "href": "assignments/Homework-1.html#question-2",
+    "title": "Homework 1",
+    "section": "Question 2:",
+    "text": "Question 2:\nBelow is code that “tests” the estimator by repeatedly drawing a sample of size \\(N\\) and calculating the estimator on that sample. Effectively, we are simulating draws from the sampling distribution of \\(\\hat{\\mu}\\). The argument \\(B\\) is the number of times to repeat the test.\n\nmontecarlo &lt;- function(mu,sig,rho,N,B) {\n  mu_hat = matrix(0,B) #&lt;- this will store an estimate from each trial\n  for (b in 1:B) {\n    xb = draw_data(mu,sig,rho,N) #&lt;- simulate a sample of size N\n    mu_hat[b] = sum(xb) / (2*N) #&lt;- store the estimator for this trial\n  }\n  mu_hat\n}\n\nAssuming that \\(\\mu=2\\), \\(\\sigma=1\\) and \\(N=100\\) (and \\(\\rho=0\\)), use this function to calculate the variance of \\(\\hat{\\mu}\\) for \\(B=10,50,100,1000\\) repetitions of the test. Show that the sample variance of \\(\\hat{\\mu}\\) converges to what your formula in Question (1) predicts."
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-3",
+    "href": "assignments/Homework-1.html#question-3",
+    "title": "Homework 1",
+    "section": "Question 3:",
+    "text": "Question 3:\nRepeat the above exercise using \\(\\rho=0.5\\) instead. What do you notice about the sample variance of \\(\\hat{\\mu}\\) relative to your formula? Explain what is happening here."
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-4",
+    "href": "assignments/Homework-1.html#question-4",
+    "title": "Homework 1",
+    "section": "Question 4:",
+    "text": "Question 4:\nUpdate the simulation function above to instead calculate a confidence interval for \\(\\mu\\). Using a value of \\(B=1000\\), show that the confidence interval works as it is intended when \\(\\rho=0\\). Repeat the exercise for \\(\\rho=0.5\\). Does the confidence interval still work as intended? Why or why not?"
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-1-1",
+    "href": "assignments/Homework-1.html#question-1-1",
+    "title": "Homework 1",
+    "section": "Question 1:",
+    "text": "Question 1:\nFollowing the example from recitation, load the csv file cps-econ-4261.csv and replicate the steps for cleaning the data and creating the Wage variable, with one key difference: keep only observations between 2014 and 2018."
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-2-1",
+    "href": "assignments/Homework-1.html#question-2-1",
+    "title": "Homework 1",
+    "section": "Question 2:",
+    "text": "Question 2:\nWrite code to calculate mean wages separately by age (variable AGE), sex, and fertility status (hint: in recitation you did this by year, sex, and fertility status)."
+  },
+  {
+    "objectID": "assignments/Homework-1.html#question-3-1",
+    "href": "assignments/Homework-1.html#question-3-1",
+    "title": "Homework 1",
+    "section": "Question 3:",
+    "text": "Question 3:\nWrite code to plot mean wages by age, sex, and fertility status. You can present the plot in whichever way makes the patterns most clear. Offer a brief interpretation of what the evolution of wage gaps by age and fertility status tell us about one potential source of gender gaps in wages."
+  },
+  {
+    "objectID": "assignments/Homework-2.html",
+    "href": "assignments/Homework-2.html",
+    "title": "Homework 2",
+    "section": "",
+    "text": "library(tidyverse)"
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-1",
+    "href": "assignments/Homework-2.html#question-1",
+    "title": "Homework 2",
+    "section": "Question 1",
+    "text": "Question 1\nHere is code to import and clean the cps data.\n\nD &lt;- read.csv(\"../data/cps-econ-4261.csv\") %&gt;%\n  filter(YEAR&gt;=2014,YEAR&lt;=2018) %&gt;%\n  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),\n         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),\n         HOURWAGE = na_if(HOURWAGE,999.99)) %&gt;%\n  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %&gt;%\n  mutate(kids = NCHILD&gt;0,female = SEX==2) %&gt;%\n  filter(!is.na(Wage))\n\nEDIT this code to also include only individuals who are younger than 40."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-2",
+    "href": "assignments/Homework-2.html#question-2",
+    "title": "Homework 2",
+    "section": "Question 2",
+    "text": "Question 2\nEstimate the model:\n\\[\\log(W_{n}) = \\beta_{0} + \\beta_{1}F_{n} \\]\nwhere \\(W_{n}\\) is the wage and \\(F_{n}\\) a dummy variable that is equal to one if the individual is female."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-3",
+    "href": "assignments/Homework-2.html#question-3",
+    "title": "Homework 2",
+    "section": "Question 3",
+    "text": "Question 3\nNow calculate the difference between the sample mean of log wages for women and the sample mean for men. What do you notice? Explain why."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-4",
+    "href": "assignments/Homework-2.html#question-4",
+    "title": "Homework 2",
+    "section": "Question 4",
+    "text": "Question 4\nWrite down a linear model that allows for wage gaps to be different by the individual’s fertility status."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-5",
+    "href": "assignments/Homework-2.html#question-5",
+    "title": "Homework 2",
+    "section": "Question 5",
+    "text": "Question 5\nSuppose that the null hypothesis is that wage gaps are the same for each fertility status. Write this null hypothesis in terms of the parameters of your model."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-6",
+    "href": "assignments/Homework-2.html#question-6",
+    "title": "Homework 2",
+    "section": "Question 6",
+    "text": "Question 6\nTest the null hypothesis against a two-sided alternative. Make your test size 5%."
+  },
+  {
+    "objectID": "assignments/Homework-2.html#question-7",
+    "href": "assignments/Homework-2.html#question-7",
+    "title": "Homework 2",
+    "section": "Question 7",
+    "text": "Question 7\nRe-write the model to allow for: (1) A linear trend for all wages with age; (2) A linear trend for wage gaps with age; AND (3) A linear trend for the the difference in wage gaps by fertility status.\nUse this model to test the null hypothesis that the difference in wage gaps by fertility status does not change with age. Use a two-sided alternative with size 10%."
+  },
+  {
+    "objectID": "assignments/Homework-3.html",
+    "href": "assignments/Homework-3.html",
+    "title": "Homework 3",
+    "section": "",
+    "text": "Here is a guide to the experimental data of Bertrand & Mullanaithan (2001)\nEach row of this dataset contains the variables related to one job application. Here is a summary of the variables you will need:\n\ncall: a binary variable equal to 1 if the application receives a callback\nrace: a string variable equal to “w” if white sounding name, “b” if black sounding\neducation: an integer variable between 0 and 4 that indicates level of education reported on the applicant’s resume\nyearsexp: a variable with the applicant’s years of experience\nh: a dummy variable indicating that the resume was of a high quality"
+  },
+  {
+    "objectID": "assignments/Homework-3.html#introduction",
+    "href": "assignments/Homework-3.html#introduction",
+    "title": "Homework 3",
+    "section": "",
+    "text": "Here is a guide to the experimental data of Bertrand & Mullanaithan (2001)\nEach row of this dataset contains the variables related to one job application. Here is a summary of the variables you will need:\n\ncall: a binary variable equal to 1 if the application receives a callback\nrace: a string variable equal to “w” if white sounding name, “b” if black sounding\neducation: an integer variable between 0 and 4 that indicates level of education reported on the applicant’s resume\nyearsexp: a variable with the applicant’s years of experience\nh: a dummy variable indicating that the resume was of a high quality"
+  },
+  {
+    "objectID": "assignments/Homework-3.html#question-1",
+    "href": "assignments/Homework-3.html#question-1",
+    "title": "Homework 3",
+    "section": "Question 1",
+    "text": "Question 1\nUse a regression framework to replicate the paper’s evidence that (1) white sounding names receive more callbacks than black sounding names; and (2) white sounding names receive significantly more (at a significannce of 10%) callbacks when the resume quality is “high”, while black sounding names do not."
+  },
+  {
+    "objectID": "assignments/Homework-3.html#question-2",
+    "href": "assignments/Homework-3.html#question-2",
+    "title": "Homework 3",
+    "section": "Question 2:",
+    "text": "Question 2:\nRe-run the same analysis to document racial bias in callbacks (finding 1) using a regression framework, this time controlling for education and years of experience in the regression."
+  },
+  {
+    "objectID": "assignments/Homework-4.html",
+    "href": "assignments/Homework-4.html",
+    "title": "Homework 4",
+    "section": "",
+    "text": "This Homework is based on the paper The Geography of Child Penalties and Gender Norms: Evidence from the United States by Henrik Kleven."
+  },
+  {
+    "objectID": "assignments/Homework-4.html#introduction",
+    "href": "assignments/Homework-4.html#introduction",
+    "title": "Homework 4",
+    "section": "",
+    "text": "This Homework is based on the paper The Geography of Child Penalties and Gender Norms: Evidence from the United States by Henrik Kleven."
+  },
+  {
+    "objectID": "assignments/Homework-4.html#part-1-estimating-the-child-penalty",
+    "href": "assignments/Homework-4.html#part-1-estimating-the-child-penalty",
+    "title": "Homework 4",
+    "section": "Part 1: Estimating the Child Penalty",
+    "text": "Part 1: Estimating the Child Penalty\n1 - Estimate the specification described in equation (1) of this paper for annual employment and annual earnings, using the the PSID dataset psid_clean_all. The variable names and definitions are identical to the NLSY dataset we used in recitation. You should estimate this model separately for both Men and Women, and use the same omitted event-time dummy as described in the paper. Hint: you can use what we did with the NLSY in recitation, although you will have to change the steps slightly because a different event-time dummy is omitted here (i.e. a different reference time period is used to normalize \\(\\alpha\\)).\n2 - Plot your event-study estimates in a similar style to Figure (1) in the paper.\n3 - Repeat your analysis for earnings separately by college education (as well as by gender), using the dummy variable college. Comment briefly on your findings relative to question (1)."
+  },
+  {
+    "objectID": "assignments/Homework-4.html#part-2-comprehension-of-the-paper",
+    "href": "assignments/Homework-4.html#part-2-comprehension-of-the-paper",
+    "title": "Homework 4",
+    "section": "Part 2: Comprehension of the Paper",
+    "text": "Part 2: Comprehension of the Paper\n1 - Provide a brief summary (2-3 sentences) of the paper’s main findings.\n2 - Why does the author opt to construct a pooled ACS/CPS dataset rather than use the PSID and NLSY datasets? What are the advantages of the former over the latter? You can be brief here (2-3 sentences).\n3 - What is the main disadvantage of the combined ACS/CPS dataset relative to the PSID/NLSY? How does the author overcome this technical challenge? How do they validate their approach? You should not need more than a paragraph here."
+  },
+  {
+    "objectID": "assignments/Homework-5.html",
+    "href": "assignments/Homework-5.html",
+    "title": "Homework 5",
+    "section": "",
+    "text": "1 - Introduction\nThis Homework is based on the paper: The China Syndrome: Local Labor Market Effects of Import Competition in the United States, AER (2013), as in your Week 12 recitation.\nThe authors begin by proposing a simple measure of the growth China’s local import penetration into a local market \\(i\\) in the US:\n\\[ \\Delta IPW_{uit} =  \\sum_{j}\\frac{L_{ijt}}{L_{ujt}}\\frac{\\Delta M_{ucjt}}{L_{it}} \\]\nwhere:\n\n\\(\\Delta M_{ucjt}\\) is the growth in overall imports from China to the US in industry \\(j\\)\n\\(L_{it}\\) is total employment in local labor market \\(i\\) at the start of period \\(t\\)\n\\(L_{ijt}\\) is total employment in market \\(i\\) in industry \\(j\\) at the start of period \\(t\\)\n\\(L_{ujt}\\) is total employment in the US in industry \\(j\\) at the start of period \\(t\\)\n\nThe authors estimate a series of specifications of the form:\n\\[ \\Delta Y_{it} = \\gamma_{t} + \\beta_{1}\\Delta IPW_{uit} + \\mathbf{X}_{it}'\\beta_{2} + e_{it} \\]\nwhere \\(Y\\) are the outcomes of interest. To isolate the portion of the change in import competition that is due to the supply side, the authors construct an instrumental variable:\n\\[ \\Delta IPW_{oit} = \\sum_{j}\\frac{L_{ijt-1}}{L_{ujt-1}}\\frac{\\Delta M_{oct}}{L_{it-1}} \\]\nwhere:\n\n\\(\\Delta M_{oct}\\) is the change in China’s exports to other high income countries.\n\\(L_{ijt-1}\\) is lagged employment and so on.\n\nRecall the following from recitation:\n\nchange in manufacturing is given by the variable d_sh_empl_mfg\nthe change in import exposure is d_tradeusch_pw\nthe predicted change given global trends (the instrument) is d_tradeotch_pw_lag\nlocal labor markets are defined at the commuting zone level, and so each observation in the regressions is weighted using population share of the CZ, given by timepwt48\nstandard errors are clustered by state level\nOther control variables that you may need are explained in Recitation, or listed below.\n\n\n\nQuestion 1\nReproduce Figure 2 Panel B from the paper (in the same way that we replicated Panel A in recitation).\n\n\nQuestion 2:\n\nUse the fixest package to replicate the estimates from Column (6) of Table 3. Some notes on additional variables you will need (beyond what you saw in recitation):\n\n\nl_sh_routine33 is the percentage of employment in routine occupations\nl_task_outsource is the average offshoreability of occupations in the CZ at the beginning of the period.\n\n\nBy reading the paper, briefly explain the logic of including the perecnt of employment in routine occupations and the average measure of offshoreability.\n\n\n\nQuestion 3:\n\nReplicate the analysis in Table 4, Panel (C), in the first three columns. The additional variables you will need are:\n\n\nlnchg_popworkage: log change in the working age population\nlnchg_popworkage_edu_c: log change in the working age population with college education\nlnchg_popworkage_edu_nc: log change in the working age population without a college education\n\n\nList one of the three potential explanations for the fact that there does not appear to be a response in population flows to import penetration.\n\n\n\nQuestion 4\n\nReplicate the findings presented in Columns (5) and (6) in Table 7. You will need the additional variables:\n\n\nlnchg_no_empl_nmfg_edu_c: log change in total non-manufacturing employment for college educated works.\nlnchg_no_empl_nmfg_edu_nc: log change in total non-manufacturing employment for non-college educated works.\nd_avg_lnwkwage_nmfg_c: average change in log weekly earnings for college educated workers in non-manufacturing jobs\nd_avg_lnwkwage_nmfg_nc: average change in log weekly earnings for non-college educated workers in non-manufacturing jobs\n\n\nHow do the authors interpret the fact that import penetration appears to have a negative impact on wages in the non-manufacturing sector?"
   }
 ]

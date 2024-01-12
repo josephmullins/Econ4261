@@ -1,0 +1,38 @@
+---
+title: "Homework 3"
+---
+
+## Introduction
+
+Here is a guide to the experimental data of Bertrand & Mullanaithan (2001)
+
+Each row of this dataset contains the variables related to one job application. Here is a summary of the variables you will need:
+
+  - `call`: a binary variable equal to 1 if the application receives a callback
+  - `race`: a string variable equal to "w" if white sounding name, "b" if black sounding
+  - `education`: an integer variable between 0 and 4 that indicates level of education reported on the applicant's resume
+  - `yearsexp`: a variable with the applicant's years of experience
+  - `h`: a dummy variable indicating that the resume was of a high quality
+
+## Question 1
+
+Use a regression framework to replicate the paper's evidence that (1) white sounding names receive more callbacks than black sounding names; and (2) white sounding names receive significantly more (at a significannce of 10\%) callbacks when the resume quality is "high", while black sounding names do not.
+
+
+## Question 2:
+
+Re-run the same analysis to document racial bias in callbacks (finding 1) using a regression framework, this time controlling for education and years of experience in the regression.
+
+# Question 3:
+
+Use a regression framework to test the null hypothesis that racial differences in callbacks are the same regardless of the applicant's years of experience.
+
+# Question 4
+
+Consider the model:
+
+$$ \mathbb{E}[white|eduction] = \beta_{0} + \beta_{1}education $$
+
+where `white` is a dummy variable equal to 1 if the applicant has a white sounding name.
+
+What does the random assignment of race imply about $\beta_{1}$ in this linear model? Run a regression to test this implication.

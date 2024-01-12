@@ -9,9 +9,16 @@ website:
       - href: index.qmd
         text: Home
       - Lectures.qmd
-      - assignments/GroupProject.qmd
       - Recitations.qmd
       - Data.qmd
+      - text: "Homework"
+        menu:
+          - assignments/GroupProject.qmd
+          - assignments/Homework-1.qmd
+          - assignments/Homework-2.qmd 
+          - assignments/Homework-3.qmd
+          - assignments/Homework-4.qmd
+          - assignments/Homework-5.qmd
 
 format:
   html:
