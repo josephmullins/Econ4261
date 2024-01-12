@@ -1,3 +1,19 @@
 ---
 title: "Lecture Slides"
 ---
+
+Materials here will be uploaded as we continue through the course.
+
+| Topic | Slides | 
+| ----- | ------ |
+| Introduction and Syllabus | [Slides](lectures/Intro-SyllabusOverview.qmd) |
+| Introduction: Overview of Applications | |
+| Review: Probability and Statistics | |
+| Review: Linear Models | [Slides](lectures/Intro-3-LinearModels.qmd) |
+| Causality | |
+| Experiments and Applications | |
+| Introduction to Difference in Differences | | 
+| A Regression Framework for Diff-in-Diff | |
+| Application: the Child Penalty | |
+| Instrumental Variables | |
+| Regression Discontinuity | |

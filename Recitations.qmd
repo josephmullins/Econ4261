@@ -1,0 +1,13 @@
+---
+title: "Recitation Materials"
+---
+
+Materials will be updated here as we continue through the course.
+
+These recitations have been rendered using [Quarto](https://quarto.org) notebooks. The original notebooks can be downloaded from this site's Github repo. You may want to study the source files (which can be opened in Rstudio) to learn how to format your own notebooks for the homework assignments.
+
+| Topic | Notebook | Data |
+| ----- | -------- | ---- |
+| Introduction to `R` and Monte Carlo Simulation | [notebook](recitations/Week-1.qmd) | |
+| Working with data in `R` and the Tidyverse packages | [notebook](recitations/Week-2.qmd) | [cps data](data/cps-econ-4261.csv) |
+

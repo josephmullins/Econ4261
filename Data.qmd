@@ -1,0 +1,13 @@
+---
+title: "Data"
+---
+
+Here are the data sources we will use in our lectures, recitations, and your homework.
+
+| Dataset | Link | Source |
+| ---- | ---- | ------ |
+| CPS data | [data](data/cps-econ-4261.csv) | [IPUMS](https://www.ipums.org) |
+| Resume Audit Study | [data](data/lakisha_aer.csv) | [Bertrand & Mullainathan, AER 2004](https://www.aeaweb.org/articles?id=10.1257/0002828042002561) |
+| College Attendance and Credit Constraints | [NLSY79](data/LM_nlsy79.csv), [NLSY97](data/LM_nlsy97.csv) | [Lochner & Monge-Naranjo, AER 2011](https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2487) |
+| Teacher response to financial incentives | [data](data/DufloHannaRyan.csv) | [Duflo, Hanna & Ryan](https://www.aeaweb.org/articles?id=10.1257/aer.102.4.1241) |
+| CPS replication data for [Card & Krueger's Minimum Wage Study](https://www.jstor.org/stable/2677856) | [data](data/cps-CardKrueger.csv) | [IPUMS](https://www.ipums.org)  |
