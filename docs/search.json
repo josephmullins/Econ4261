@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\n\n\n\nReview: Probability and Statistics\n\n\n\nReview: Linear Models\nSlides\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\n\n\n\nReview: Linear Models\n\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -495,5 +495,54 @@
     "title": "Homework 5",
     "section": "",
     "text": "1 - Introduction\nThis Homework is based on the paper: The China Syndrome: Local Labor Market Effects of Import Competition in the United States, AER (2013), as in your Week 12 recitation.\nThe authors begin by proposing a simple measure of the growth China’s local import penetration into a local market \\(i\\) in the US:\n\\[ \\Delta IPW_{uit} =  \\sum_{j}\\frac{L_{ijt}}{L_{ujt}}\\frac{\\Delta M_{ucjt}}{L_{it}} \\]\nwhere:\n\n\\(\\Delta M_{ucjt}\\) is the growth in overall imports from China to the US in industry \\(j\\)\n\\(L_{it}\\) is total employment in local labor market \\(i\\) at the start of period \\(t\\)\n\\(L_{ijt}\\) is total employment in market \\(i\\) in industry \\(j\\) at the start of period \\(t\\)\n\\(L_{ujt}\\) is total employment in the US in industry \\(j\\) at the start of period \\(t\\)\n\nThe authors estimate a series of specifications of the form:\n\\[ \\Delta Y_{it} = \\gamma_{t} + \\beta_{1}\\Delta IPW_{uit} + \\mathbf{X}_{it}'\\beta_{2} + e_{it} \\]\nwhere \\(Y\\) are the outcomes of interest. To isolate the portion of the change in import competition that is due to the supply side, the authors construct an instrumental variable:\n\\[ \\Delta IPW_{oit} = \\sum_{j}\\frac{L_{ijt-1}}{L_{ujt-1}}\\frac{\\Delta M_{oct}}{L_{it-1}} \\]\nwhere:\n\n\\(\\Delta M_{oct}\\) is the change in China’s exports to other high income countries.\n\\(L_{ijt-1}\\) is lagged employment and so on.\n\nRecall the following from recitation:\n\nchange in manufacturing is given by the variable d_sh_empl_mfg\nthe change in import exposure is d_tradeusch_pw\nthe predicted change given global trends (the instrument) is d_tradeotch_pw_lag\nlocal labor markets are defined at the commuting zone level, and so each observation in the regressions is weighted using population share of the CZ, given by timepwt48\nstandard errors are clustered by state level\nOther control variables that you may need are explained in Recitation, or listed below.\n\n\n\nQuestion 1\nReproduce Figure 2 Panel B from the paper (in the same way that we replicated Panel A in recitation).\n\n\nQuestion 2:\n\nUse the fixest package to replicate the estimates from Column (6) of Table 3. Some notes on additional variables you will need (beyond what you saw in recitation):\n\n\nl_sh_routine33 is the percentage of employment in routine occupations\nl_task_outsource is the average offshoreability of occupations in the CZ at the beginning of the period.\n\n\nBy reading the paper, briefly explain the logic of including the perecnt of employment in routine occupations and the average measure of offshoreability.\n\n\n\nQuestion 3:\n\nReplicate the analysis in Table 4, Panel (C), in the first three columns. The additional variables you will need are:\n\n\nlnchg_popworkage: log change in the working age population\nlnchg_popworkage_edu_c: log change in the working age population with college education\nlnchg_popworkage_edu_nc: log change in the working age population without a college education\n\n\nList one of the three potential explanations for the fact that there does not appear to be a response in population flows to import penetration.\n\n\n\nQuestion 4\n\nReplicate the findings presented in Columns (5) and (6) in Table 7. You will need the additional variables:\n\n\nlnchg_no_empl_nmfg_edu_c: log change in total non-manufacturing employment for college educated works.\nlnchg_no_empl_nmfg_edu_nc: log change in total non-manufacturing employment for non-college educated works.\nd_avg_lnwkwage_nmfg_c: average change in log weekly earnings for college educated workers in non-manufacturing jobs\nd_avg_lnwkwage_nmfg_nc: average change in log weekly earnings for non-college educated workers in non-manufacturing jobs\n\n\nHow do the authors interpret the fact that import penetration appears to have a negative impact on wages in the non-manufacturing sector?"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#overview",
+    "href": "lectures/Intro-1-Applications.html#overview",
+    "title": "Syllabus and Course Overview",
+    "section": "Overview",
+    "text": "Overview\nWe have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
+    "href": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 1: Credit Constraints and Human Capital",
+    "text": "Application 1: Credit Constraints and Human Capital\n\n\n“The Nature of Credit Constraints and Human Capital”, Lochner and Monge-Naranjo, American Economic Review (2011)\nTheory:\n\nIncomplete markets can lead to underinvestment in human capital (agents cannot borrow against returns to investment).\nControlling for returns, income/wealth should not predict investment unless borrowing constraints bind.\n\nQuestion: Evidence of credit constraints in college enrollment decisions?\nData NLSY79 and NLSY 97 (two cohorts of young individuals)\nKey idea: How do skills (measured by AFQT) and parental income predict college enrollment?"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital-1",
+    "href": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital-1",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 1: Credit Constraints and Human Capital",
+    "text": "Application 1: Credit Constraints and Human Capital\n\n\n\n\n\n\n\n\nConsistent gradient in AFQT (cog skill)\nFamily income more important in 97 cohort\nSuggestive evidence of more binding constraints \nNo testing here: how to test formally?"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india",
+    "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 2: Teacher Incentives in Rural India",
+    "text": "Application 2: Teacher Incentives in Rural India\n\n\nPaper: “Incentives Work: Getting Teachers to Come to School”, Duflo, Hanna, and Ryan, American Economic Review (2012)\nBackground: expanding access to primary education crucial in developing countries. Teacher absenteeism in India is a big problem.\nTheory: providing incentives should increase attendance.\nThe Paper: evaluates a teacher incentive program by RCT.\n\nData: Attendance and student outcomes for 57 treatment schools, 56 control schools run by Seva Mandir (NGO)"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-1",
+    "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-1",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 2: Teacher Incentives in Rural India",
+    "text": "Application 2: Teacher Incentives in Rural India\nDetails on “treatment”:\n\n\nMonitoring via tamper-proof cameras.\nFinancial incentives for teachers: \\[ \\text{Rupees per month} = 500 + 50\\times\\max\\{0,D - 10\\} \\] where \\(D\\) is days attended per month.\nFinancial incentives or fear of punishment?\nNotice: no incentive if: \\[ \\text{Days attended so far} + \\text{Days left in month} \\leq 10 \\]"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-2",
+    "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-2",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 2: Teacher Incentives in Rural India",
+    "text": "Application 2: Teacher Incentives in Rural India\n\n\n\n\n\n\n\n\nVisual evidence of effect.\n\n\n\n\nBut how to estimate size of effect?\n\n\n\n\nQuantify uncertainty?\n\n\n\n\nNo testing here: how to test formally?\n\n\n\n\nCan do a regression analysis…"
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-3",
+    "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-3",
+    "title": "Syllabus and Course Overview",
+    "section": "Application 2: Teacher Incentives in Rural India",
+    "text": "Application 2: Teacher Incentives in Rural India\n\n\n\n\n\n\n\n\nHow to interpret this table?\n\n\n\n\nHow are standard errors calculated? \\(R^2\\)?\n\n\n\n\nFixed Effects? Clustering?\n\n\n\n\nWill learn how to replicate and interpret this graph."
   }
 ]

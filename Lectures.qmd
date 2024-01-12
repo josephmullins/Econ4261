@@ -7,9 +7,9 @@ Materials here will be uploaded as we continue through the course.
 | Topic | Slides | 
 | ----- | ------ |
 | Introduction and Syllabus | [Slides](lectures/Intro-SyllabusOverview.qmd) |
-| Introduction: Overview of Applications | |
+| Introduction: Overview of Applications | [Slides](lectures/Intro-1-Applications.qmd) |
 | Review: Probability and Statistics | |
-| Review: Linear Models | [Slides](lectures/Intro-3-LinearModels.qmd) |
+| Review: Linear Models | |
 | Causality | |
 | Experiments and Applications | |
 | Introduction to Difference in Differences | | 
