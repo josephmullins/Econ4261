@@ -4,9 +4,19 @@ title: "Group Project"
 
 ## Project Description
 
-In groups of 5 to 6, you will use the tools we have learned in this course to conduct a quantitative analysis on a topic of your choice. This analysis may be your own original work, or a replication of a paper.
+In groups of 5 to 6, you will use the tools we have learned in this course to conduct a quantitative analysis on a topic of your choice. This analysis may be your own original work, or a replication of an existing paper.
 
-Although you will work together to conduct the analysis, you will **write and submit your own individual reports**. The report (3-5 pages including references, figures, and tables) will have the following structure:
+### Group Presentation
+
+Each group will deliver a 10-15 minute presentation of their findings in class.
+
+### Written report
+
+Although you will work together to conduct the analysis, you will **write and submit your own individual reports**. The report should be 3-5 pages including references, figures, and tables. 
+
+### Project Outline
+
+Both the presentation and your individual reports should use the following structure.
 
 1. Introduction
    1. What is the empirical question you are attempting to answer?
@@ -15,9 +25,9 @@ Although you will work together to conduct the analysis, you will **write and su
    4. Specify the method of analysis you are going to use (linear regression, instrumental variables, difference in differences, etc). If you are replicating a paper, specify which paper.
 2. Data
    1. Describe how the data you are using for your analysis is constructed, including any sample selection criteria.
-   2. Provide a descriptive analysis of the data, including an analysis of the relationship between your outcome variable of interest and the causal variable of interest in your question.
+   2. Provide a descriptive analysis of the data, including an analysis of the cross-sectional relationship between your outcome variable of interest and the causal variable of interest in your question.
 3. Main Analysis
-   1. Explain why the cross-sectional relationship that you demonstrated in section (2) may not recover a causal relationship.
+   1. Explain why the cross-sectional relationship that you demonstrated in section (2) may not reflect a causal relationship.
    2. Describe the method you are going to use to answer your question and **clearly** articulate the assumptions under which this method correctly estimates a causal relationship between the two variables.
    3. Present the analysis and discuss results.
 
@@ -30,32 +40,49 @@ Although you will work together to conduct the analysis, you will **write and su
 | Week 5 | Meeting 2: teams find 2-3 relevant papers on the topic |
 | Week 6 | Meeting 3: teams establish data source |
 | Week 7 | Teams finalize research question, data source, and related papers |
-|        | Spring Break
+|        | Spring Break |
 | Week 8 | Teams work on descriptive analysis |
 | Week 9 | Meeting 4: teams meet with WA to get feedback on descriptive analysis |
 | Week 10 | Teams work on descriptive analysis and main (causal) analysis |
 | Week 11 | Teams work on main (causal) analysis |
 | Week 12 | Meeting 5: teams meet with WA to get feedback on main analysis |
-| Week 13 | |
-| Week 13 | |
-| Week 14 | |
+| Week 13 | Meeting 6: teams meet with WA to get feedback on presentation |
+| Week 14 | Group presentations |
+| Week 15 | Individuals finalize written reports with feedback from WA (due date May 5) |
 
 
 ## Rules for Submission
 
 1. Written reports that are identical will not be graded.
 2. There is no advantage in grading for original work vs a replication, but in both cases you will be assessed on your ability to use tools critically and independently. There is scope for providing original analysis and insight in the replication study also. 
-3. Students must submit **both** their written report as well as the code they used to generate the results in their report. Students in the same group are allowed to submit the same code if their results are identical.
+3. Students must submit **both** their written report as well as the code they used to generate the results in their report. Students in the same group are allowed to submit the same code if their analysis is identical.
 
 ## Suggested List of Topics
 
-If you are struggling to come up with questions for your research project, here is a suggested list of topics.
+If you are struggling to come up with questions for your research project, here is a suggested list of topics where there is plenty of existing research for you to build on/replicate. These are just to get you going, you can adjust the question to fit your interests and any constraints on available data.
 
-
+- What is the impact of rent control on housing supply?
+- What are the impacts of changes in divorce laws on divorce rates and child outcomes?
+- What impacts did welfare reform in the US in the 1990s have on labor supply and welfare participation?
+- What impacts did expansions in the Earned Income Tax Credit (or other tax changes) have on labor supply and earnings?
+- What are the effects of job loss/displacement on future earnings?
+- What are the impacts of job training programs on labor market outcomes?
+- What effects have increases in trade competition had on prices, earnings, or other outcomes?
+- What effect do increases in minimum wages have on wages/employment?
+- What is the effect of mergers on industrial concentration, prices, and wages?
+- What are the effects of job polarization on wages/earnings/employment/education decisions?
 
 ## Finding Data and Replication Materials
 
 Most journals in economics require authors to provide replication materials, including data (when these sources are not confidential). Some journals in which you may find interesting empirical topics from the last ten years include the American Economic Review (plus the associated journals of AER:Macro, AER:Micro, AER:Applied, and AER:Policy), Econometrica, the Quarterly Journal of Economics, the Journal of Political Economy, the Review of Economic Studies, the Journal of Labor Economics, the Journal of Public Economics, and Economic Journal. The websites for these journals host all replication materials. 
+
+## Grading Criteria
+
+The project is worth 20% of the course grade in total with the following breakdown:
+
+- Groups receive 1% for each meeting with their Writing Assistant (5% total).
+- Group presentation (5%)
+- Individual writeup (10%)
 
 ## ECON Capstone-level writing criteria
 

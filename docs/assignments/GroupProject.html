@@ -104,6 +104,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../Recitations.html"> 
 <span class="menu-text">Recitation Materials</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../Data.html"> 
+<span class="menu-text">Data</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -120,11 +124,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-description" id="toc-project-description" class="nav-link active" data-scroll-target="#project-description">Project Description</a></li>
+  <li><a href="#project-description" id="toc-project-description" class="nav-link active" data-scroll-target="#project-description">Project Description</a>
+  <ul class="collapse">
+  <li><a href="#group-presentation" id="toc-group-presentation" class="nav-link" data-scroll-target="#group-presentation">Group Presentation</a></li>
+  <li><a href="#written-report" id="toc-written-report" class="nav-link" data-scroll-target="#written-report">Written report</a></li>
+  <li><a href="#project-outline" id="toc-project-outline" class="nav-link" data-scroll-target="#project-outline">Project Outline</a></li>
+  </ul></li>
   <li><a href="#project-timeline" id="toc-project-timeline" class="nav-link" data-scroll-target="#project-timeline">Project Timeline</a></li>
   <li><a href="#rules-for-submission" id="toc-rules-for-submission" class="nav-link" data-scroll-target="#rules-for-submission">Rules for Submission</a></li>
   <li><a href="#suggested-list-of-topics" id="toc-suggested-list-of-topics" class="nav-link" data-scroll-target="#suggested-list-of-topics">Suggested List of Topics</a></li>
   <li><a href="#finding-data-and-replication-materials" id="toc-finding-data-and-replication-materials" class="nav-link" data-scroll-target="#finding-data-and-replication-materials">Finding Data and Replication Materials</a></li>
+  <li><a href="#grading-criteria" id="toc-grading-criteria" class="nav-link" data-scroll-target="#grading-criteria">Grading Criteria</a></li>
   <li><a href="#econ-capstone-level-writing-criteria" id="toc-econ-capstone-level-writing-criteria" class="nav-link" data-scroll-target="#econ-capstone-level-writing-criteria">ECON Capstone-level writing criteria</a></li>
   </ul>
 </nav>
@@ -153,8 +163,18 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="project-description" class="level2">
 <h2 class="anchored" data-anchor-id="project-description">Project Description</h2>
-<p>In groups of 5 to 6, you will use the tools we have learned in this course to conduct a quantitative analysis on a topic of your choice. This analysis may be your own original work, or a replication of a paper.</p>
-<p>Although you will work together to conduct the analysis, you will <strong>write and submit your own individual reports</strong>. The report (3-5 pages including references, figures, and tables) will have the following structure:</p>
+<p>In groups of 5 to 6, you will use the tools we have learned in this course to conduct a quantitative analysis on a topic of your choice. This analysis may be your own original work, or a replication of an existing paper.</p>
+<section id="group-presentation" class="level3">
+<h3 class="anchored" data-anchor-id="group-presentation">Group Presentation</h3>
+<p>Each group will deliver a 10-15 minute presentation of their findings in class.</p>
+</section>
+<section id="written-report" class="level3">
+<h3 class="anchored" data-anchor-id="written-report">Written report</h3>
+<p>Although you will work together to conduct the analysis, you will <strong>write and submit your own individual reports</strong>. The report should be 3-5 pages including references, figures, and tables.</p>
+</section>
+<section id="project-outline" class="level3">
+<h3 class="anchored" data-anchor-id="project-outline">Project Outline</h3>
+<p>Both the presentation and your individual reports should use the following structure.</p>
 <ol type="1">
 <li>Introduction
 <ol type="1">
@@ -166,15 +186,16 @@ ul.task-list li input[type="checkbox"] {
 <li>Data
 <ol type="1">
 <li>Describe how the data you are using for your analysis is constructed, including any sample selection criteria.</li>
-<li>Provide a descriptive analysis of the data, including an analysis of the relationship between your outcome variable of interest and the causal variable of interest in your question.</li>
+<li>Provide a descriptive analysis of the data, including an analysis of the cross-sectional relationship between your outcome variable of interest and the causal variable of interest in your question.</li>
 </ol></li>
 <li>Main Analysis
 <ol type="1">
-<li>Explain why the cross-sectional relationship that you demonstrated in section (2) may not recover a causal relationship.</li>
+<li>Explain why the cross-sectional relationship that you demonstrated in section (2) may not reflect a causal relationship.</li>
 <li>Describe the method you are going to use to answer your question and <strong>clearly</strong> articulate the assumptions under which this method correctly estimates a causal relationship between the two variables.</li>
 <li>Present the analysis and discuss results.</li>
 </ol></li>
 </ol>
+</section>
 </section>
 <section id="project-timeline" class="level2">
 <h2 class="anchored" data-anchor-id="project-timeline">Project Timeline</h2>
@@ -236,15 +257,15 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>Week 13</td>
-<td></td>
+<td>Meeting 6: teams meet with WA to get feedback on presentation</td>
 </tr>
 <tr class="odd">
-<td>Week 13</td>
-<td></td>
+<td>Week 14</td>
+<td>Group presentations</td>
 </tr>
 <tr class="even">
-<td>Week 14</td>
-<td></td>
+<td>Week 15</td>
+<td>Individuals finalize written reports with feedback from WA (due date May 5)</td>
 </tr>
 </tbody>
 </table>
@@ -254,16 +275,37 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Written reports that are identical will not be graded.</li>
 <li>There is no advantage in grading for original work vs a replication, but in both cases you will be assessed on your ability to use tools critically and independently. There is scope for providing original analysis and insight in the replication study also.</li>
-<li>Students must submit <strong>both</strong> their written report as well as the code they used to generate the results in their report. Students in the same group are allowed to submit the same code if their results are identical.</li>
+<li>Students must submit <strong>both</strong> their written report as well as the code they used to generate the results in their report. Students in the same group are allowed to submit the same code if their analysis is identical.</li>
 </ol>
 </section>
 <section id="suggested-list-of-topics" class="level2">
 <h2 class="anchored" data-anchor-id="suggested-list-of-topics">Suggested List of Topics</h2>
-<p>If you are struggling to come up with questions for your research project, here is a suggested list of topics.</p>
+<p>If you are struggling to come up with questions for your research project, here is a suggested list of topics where there is plenty of existing research for you to build on/replicate. These are just to get you going, you can adjust the question to fit your interests and any constraints on available data.</p>
+<ul>
+<li>What is the impact of rent control on housing supply?</li>
+<li>What are the impacts of changes in divorce laws on divorce rates and child outcomes?</li>
+<li>What impacts did welfare reform in the US in the 1990s have on labor supply and welfare participation?</li>
+<li>What impacts did expansions in the Earned Income Tax Credit (or other tax changes) have on labor supply and earnings?</li>
+<li>What are the effects of job loss/displacement on future earnings?</li>
+<li>What are the impacts of job training programs on labor market outcomes?</li>
+<li>What effects have increases in trade competition had on prices, earnings, or other outcomes?</li>
+<li>What effect do increases in minimum wages have on wages/employment?</li>
+<li>What is the effect of mergers on industrial concentration, prices, and wages?</li>
+<li>What are the effects of job polarization on wages/earnings/employment/education decisions?</li>
+</ul>
 </section>
 <section id="finding-data-and-replication-materials" class="level2">
 <h2 class="anchored" data-anchor-id="finding-data-and-replication-materials">Finding Data and Replication Materials</h2>
 <p>Most journals in economics require authors to provide replication materials, including data (when these sources are not confidential). Some journals in which you may find interesting empirical topics from the last ten years include the American Economic Review (plus the associated journals of AER:Macro, AER:Micro, AER:Applied, and AER:Policy), Econometrica, the Quarterly Journal of Economics, the Journal of Political Economy, the Review of Economic Studies, the Journal of Labor Economics, the Journal of Public Economics, and Economic Journal. The websites for these journals host all replication materials.</p>
+</section>
+<section id="grading-criteria" class="level2">
+<h2 class="anchored" data-anchor-id="grading-criteria">Grading Criteria</h2>
+<p>The project is worth 20% of the course grade in total with the following breakdown:</p>
+<ul>
+<li>Groups receive 1% for each meeting with their Writing Assistant (5% total).</li>
+<li>Group presentation (5%)</li>
+<li>Individual writeup (10%)</li>
+</ul>
 </section>
 <section id="econ-capstone-level-writing-criteria" class="level2">
 <h2 class="anchored" data-anchor-id="econ-capstone-level-writing-criteria">ECON Capstone-level writing criteria</h2>

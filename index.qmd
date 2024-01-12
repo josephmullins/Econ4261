@@ -24,7 +24,7 @@ Tuesdays and Thursdays, 8.15am-9.30am, Blegen Hall 145
 | April 11 | Assignment 4 due |
 | April 25 | Assignment 5 due |
 | April 23 and 25 | Group project presentations |
-| April 29 | Individual writeups for group project due  |
+| May 5 | Individual writeups for group project due  |
 | May 7 | Final Exam [see the schedule](https://onestop.umn.edu/calendar/final-exam-times) |
 
 ## Course Description
@@ -68,6 +68,6 @@ I will provide lots of example code to help students learn how to use this langu
 Additional Resources for R, RStudio, and the "tidyverse" libraries
 I have tried to make materials for learning R in this course self-contained, but if you need a little extra help, I recommend chapters (1)-(4) of [this free online book](https://moderndive.com/index.html). You can find [more helpful resources here](https://www.tidyverse.org/learn/).
 
-## Disability Services
+## Policies and Procedures
 
-Students with disabilities must be registered with Disability Services. Contact <http://ds.umn.edu>. The Department of Economics, in conjunction with Disability Services, will make appropriate accommodations for students with disabilities. Specifically, exams will be administered by Disability Services to meet student needs. Please contact the instructor as soon as possible if you need accommodation.
+Please review the University's [Policies and Procedures](docs/University_department_policies_syllabus_23_24.docx).
