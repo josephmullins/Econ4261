@@ -17,14 +17,14 @@ Tuesdays and Thursdays, 8.15am-9.30am, Blegen Hall 145
 
 | Date | Event |
 | ---- | ---- |
-| January 25 | Assignment 1 due |
-| February 15 | Assignment 2 due |
+| January 25 | [Assignment 1](assignments/Homework-1.qmd) due |
+| February 15 | [Assignment 2](assignments/Homework-2.qmd) due |
 | February 29 | Midterm (in class) |
-| March 21 | Assignment 3 due |
-| April 11 | Assignment 4 due |
-| April 25 | Assignment 5 due |
-| April 23 and 25 | Group project presentations |
-| May 5 | Individual writeups for group project due  |
+| March 21 | [Assignment 3](assignments/Homework-3.qmd) due |
+| April 11 | [Assignment 4](assignments/Homework-4.qmd) due |
+| April 25 | [Assignment 5](assignments/Homework-5.qmd) due |
+| April 23 and 25 | [Group project](assignments/GroupProject.qmd) presentations |
+| May 5 | Individual writeups for [group project](assignments/GroupProject.qmd) due  |
 | May 7 | Final Exam [see the schedule](https://onestop.umn.edu/calendar/final-exam-times) |
 
 ## Course Description
