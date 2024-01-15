@@ -16,7 +16,7 @@ format:
 About me:
 
 - I'm an Assistant Professor in the econ dept. \pause
-- My research is on the development of skills (``human capital'') in early childhood and how it can be shaped by policy
+- My research is on the development of skills ("human capital") in early childhood and how it can be shaped by policy
 - I also study labor markets and the determinants of income inequality. \pause
 - Email: [mullinsj\@umn.edu](mailto:mullinsj@umn.edu?subject=Econ4261) (use ECON4621 in subject)
 
@@ -31,7 +31,7 @@ About me:
 Economics
 
 - Provides normative and positive theories of social phenomena
-- Importantly: markets (everywhere)
+- Markets are everywhere
 - More broadly: choice behavior under constraints
 
 :::
@@ -54,7 +54,7 @@ Econometrics
 :::
 
 ::: {.fragment .fade-up}
-Will learn tools that permit this mapping, allow rigorous analysis of data.
+Will learn tools rigorously analyse data and map data to policy
 :::
 
 ::::
@@ -74,30 +74,32 @@ Will learn tools that permit this mapping, allow rigorous analysis of data.
 
 Three components of assessment (see syllabus on Canvas / Website for dates):
 
-- Writing project
+:::{.incremental}
+- [Writing project](/assignments/GroupProject.qmd) (20\%)
   - A written report that uses data to answer an economic question
+  - Presentation of results in class
   - The analysis will be conducted in groups, reports will be written **individually**
-- Assignments (50\%).
-  - Five total.
+- Assignments (40\%).
+  - Five total, will count hightest four.
   - Some theory exercises. Some applications in `R`.
   - Get you used to data and programming. **Very important**.
-- Midterm and Final (20\% each). **Midterm: February XXX**.
-
+- Midterm and Final (20\% each). **Midterm: February 29 in class**.
+:::
 
 # Submission Guidelines
 
 Keep the following in mind for submitting homework:
 
-- If submitting hand-written answers, they should be as neat as possible and scanned to **pdf format**.
-- You should submit **at most** two files: one with solutions and one with R code if necessary.
-- `R Notebooks` are a good way to combine code, plots, and math solutions (I will provide examples).
+- Must be submitted as a `Quarto` or `R` notebook.
+  - **Will see how to write these in recitation**
+- For theory questions, you can submit additional handwritten answers, but they must be scanned to **pdf format**
 - Your TA has permission to deduct grades for illegible submissions.
 
 
 # How to do well in this class
 
 - To do well, you need a deep understanding of the tools and to be able to think independently with them.
-- Come to class, make sure you {\color{c3}really} understand the exercises we do.
+- Come to class, make sure you **really** understand the exercises we do.
 - Will provide exercises to test your understanding.
 - Use recitation to help you learn programming in `R` and data work.
 
@@ -107,17 +109,20 @@ Keep the following in mind for submitting homework:
 
 Our tools will answer these questions
 
+:::{.incremental}
 - How can we estimate the parameters of this model?
 - How uncertain are we about the estimates?
 - How does this uncertainty change as we get more data?
 - Is the estimate sufficiently far from null (i.e. 0)?
 - Is the relationship we have found **causal**?
 - Can we extrapolate to a policy effect?
+:::
 
 ## Application - Inequality, Institutions, and Policies {.smaller}
 
 Much work in econ dedicated to answering questions around inequality and social policy:
 
+:::{.incremental}
 - What kinds of inequality in outcomes exists?
   - Income and wealth
   - Health
@@ -129,7 +134,7 @@ Much work in econ dedicated to answering questions around inequality and social 
   - Judicial
 - What are **causal** mechanisms? 
 - What can policy do? What are unintended consequences?
-
+:::
 
 ## Diagnosis - What kinds of inequality of opportunity? {.smaller}
 :::: {.columns}
@@ -166,11 +171,12 @@ Much work in econ dedicated to answering questions around inequality and social 
 ## Which relationships are causal?
 Questions:
 
+:::{.incremental}
 - What are mechanisms of inequality?
 - Which observed relationships are causal?
 - What policies have an effect?
-- When can policy effects be inferred? Usually need a model.
-- Some examples...
+- When can policy effects be inferred? Need a model.
+:::
 
 ## Inferring Causality: Neighborhoods {.smaller}
 :::: {.columns}
@@ -181,10 +187,11 @@ Questions:
 
 ::: {.column width=40%}
 
+:::{.incremental}
 - Using *within-family variation* in exposure to neighborhoods.
 - Weaker assumption for causal inference than pure cross-section.
-- Not perfect?
-
+- What do you think?
+:::
 :::
 
 ::::
@@ -199,7 +206,7 @@ Questions:
 ::: {.column width=40%}
 
 - Head Start introduced in some counties before others.
-- Use within-county variation in exposure Head Start.
+- Use *within-county variation* in exposure Head Start.
 - Evidence: long-run impacts of Head Start.
   
 ::: {.fragment .fade-up}

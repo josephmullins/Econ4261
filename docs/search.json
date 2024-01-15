@@ -158,14 +158,14 @@
     "href": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
     "title": "Syllabus and Course Overview",
     "section": "This Course - What is Econometrics?",
-    "text": "This Course - What is Econometrics?\n\n\n\nEconomics\n\nProvides normative and positive theories of social phenomena\nImportantly: markets (everywhere)\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools that permit this mapping, allow rigorous analysis of data."
+    "text": "This Course - What is Econometrics?\n\n\n\nEconomics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#assessment-plan",
     "href": "lectures/Intro-SyllabusOverview.html#assessment-plan",
     "title": "Syllabus and Course Overview",
     "section": "Assessment Plan",
-    "text": "Assessment Plan\nThree components of assessment (see syllabus on Canvas / Website for dates):\n\nWriting project\n\nA written report that uses data to answer an economic question\nThe analysis will be conducted in groups, reports will be written individually\n\nAssignments (50%).\n\nFive total.\nSome theory exercises. Some applications in R.\nGet you used to data and programming. Very important.\n\nMidterm and Final (20% each). Midterm: February XXX."
+    "text": "Assessment Plan\nThree components of assessment (see syllabus on Canvas / Website for dates):\n\n\nWriting project (20%)\n\nA written report that uses data to answer an economic question\nPresentation of results in class\nThe analysis will be conducted in groups, reports will be written individually\n\nAssignments (40%).\n\nFive total, will count hightest four.\nSome theory exercises. Some applications in R.\nGet you used to data and programming. Very important.\n\nMidterm and Final (20% each). Midterm: February 29 in class."
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#econometrics-at-work-labor-supply-example",
@@ -179,14 +179,14 @@
     "href": "lectures/Intro-SyllabusOverview.html#issues-to-work-through",
     "title": "Syllabus and Course Overview",
     "section": "Issues to work through",
-    "text": "Issues to work through\nOur tools will answer these questions\n\nHow can we estimate the parameters of this model?\nHow uncertain are we about the estimates?\nHow does this uncertainty change as we get more data?\nIs the estimate sufficiently far from null (i.e. 0)?\nIs the relationship we have found causal?\nCan we extrapolate to a policy effect?"
+    "text": "Issues to work through\nOur tools will answer these questions\n\n\nHow can we estimate the parameters of this model?\nHow uncertain are we about the estimates?\nHow does this uncertainty change as we get more data?\nIs the estimate sufficiently far from null (i.e. 0)?\nIs the relationship we have found causal?\nCan we extrapolate to a policy effect?"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#application---inequality-institutions-and-policies",
     "href": "lectures/Intro-SyllabusOverview.html#application---inequality-institutions-and-policies",
     "title": "Syllabus and Course Overview",
     "section": "Application - Inequality, Institutions, and Policies",
-    "text": "Application - Inequality, Institutions, and Policies\nMuch work in econ dedicated to answering questions around inequality and social policy:\n\nWhat kinds of inequality in outcomes exists?\n\nIncome and wealth\nHealth\nIncarceration\n\nIs there inequality of opportunity?\n\nEarly childhood and family\nEducation\nLabor market\nJudicial\n\nWhat are causal mechanisms?\nWhat can policy do? What are unintended consequences?"
+    "text": "Application - Inequality, Institutions, and Policies\nMuch work in econ dedicated to answering questions around inequality and social policy:\n\n\nWhat kinds of inequality in outcomes exists?\n\nIncome and wealth\nHealth\nIncarceration\n\nIs there inequality of opportunity?\n\nEarly childhood and family\nEducation\nLabor market\nJudicial\n\nWhat are causal mechanisms?\nWhat can policy do? What are unintended consequences?"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#diagnosis---what-kinds-of-inequality-of-opportunity",
@@ -207,14 +207,14 @@
     "href": "lectures/Intro-SyllabusOverview.html#which-relationships-are-causal",
     "title": "Syllabus and Course Overview",
     "section": "Which relationships are causal?",
-    "text": "Which relationships are causal?\nQuestions:\n\nWhat are mechanisms of inequality?\nWhich observed relationships are causal?\nWhat policies have an effect?\nWhen can policy effects be inferred? Usually need a model.\nSome examples…"
+    "text": "Which relationships are causal?\nQuestions:\n\n\nWhat are mechanisms of inequality?\nWhich observed relationships are causal?\nWhat policies have an effect?\nWhen can policy effects be inferred? Need a model."
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#inferring-causality-neighborhoods",
     "href": "lectures/Intro-SyllabusOverview.html#inferring-causality-neighborhoods",
     "title": "Syllabus and Course Overview",
     "section": "Inferring Causality: Neighborhoods",
-    "text": "Inferring Causality: Neighborhoods\n\n\n\n\n\nUsing within-family variation in exposure to neighborhoods.\nWeaker assumption for causal inference than pure cross-section.\nNot perfect?"
+    "text": "Inferring Causality: Neighborhoods\n\n\n\n\n\n\nUsing within-family variation in exposure to neighborhoods.\nWeaker assumption for causal inference than pure cross-section.\nWhat do you think?"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#inferring-causality-head-start",
