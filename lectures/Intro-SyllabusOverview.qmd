@@ -80,7 +80,7 @@ Three components of assessment (see syllabus on Canvas / Website for dates):
   - Presentation of results in class
   - The analysis will be conducted in groups, reports will be written **individually**
 - Assignments (40\%).
-  - Five total, will count hightest four.
+  - Five total, will count highest four.
   - Some theory exercises. Some applications in `R`.
   - Get you used to data and programming. **Very important**.
 - Midterm and Final (20\% each). **Midterm: February 29 in class**.

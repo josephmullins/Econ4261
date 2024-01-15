@@ -165,7 +165,7 @@
     "href": "lectures/Intro-SyllabusOverview.html#assessment-plan",
     "title": "Syllabus and Course Overview",
     "section": "Assessment Plan",
-    "text": "Assessment Plan\nThree components of assessment (see syllabus on Canvas / Website for dates):\n\n\nWriting project (20%)\n\nA written report that uses data to answer an economic question\nPresentation of results in class\nThe analysis will be conducted in groups, reports will be written individually\n\nAssignments (40%).\n\nFive total, will count hightest four.\nSome theory exercises. Some applications in R.\nGet you used to data and programming. Very important.\n\nMidterm and Final (20% each). Midterm: February 29 in class."
+    "text": "Assessment Plan\nThree components of assessment (see syllabus on Canvas / Website for dates):\n\n\nWriting project (20%)\n\nA written report that uses data to answer an economic question\nPresentation of results in class\nThe analysis will be conducted in groups, reports will be written individually\n\nAssignments (40%).\n\nFive total, will count highest four.\nSome theory exercises. Some applications in R.\nGet you used to data and programming. Very important.\n\nMidterm and Final (20% each). Midterm: February 29 in class."
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#econometrics-at-work-labor-supply-example",
@@ -499,49 +499,49 @@
   {
     "objectID": "lectures/Intro-1-Applications.html#overview",
     "href": "lectures/Intro-1-Applications.html#overview",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Overview",
     "text": "Overview\nWe have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
     "href": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 1: Credit Constraints and Human Capital",
     "text": "Application 1: Credit Constraints and Human Capital\n\n\n“The Nature of Credit Constraints and Human Capital”, Lochner and Monge-Naranjo, American Economic Review (2011)\nTheory:\n\nIncomplete markets can lead to underinvestment in human capital (agents cannot borrow against returns to investment).\nControlling for returns, income/wealth should not predict investment unless borrowing constraints bind.\n\nQuestion: Evidence of credit constraints in college enrollment decisions?\nData NLSY79 and NLSY 97 (two cohorts of young individuals)\nKey idea: How do skills (measured by AFQT) and parental income predict college enrollment?"
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital-1",
     "href": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital-1",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 1: Credit Constraints and Human Capital",
     "text": "Application 1: Credit Constraints and Human Capital\n\n\n\n\n\n\n\n\nConsistent gradient in AFQT (cog skill)\nFamily income more important in 97 cohort\nSuggestive evidence of more binding constraints \nNo testing here: how to test formally?"
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india",
     "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 2: Teacher Incentives in Rural India",
     "text": "Application 2: Teacher Incentives in Rural India\n\n\nPaper: “Incentives Work: Getting Teachers to Come to School”, Duflo, Hanna, and Ryan, American Economic Review (2012)\nBackground: expanding access to primary education crucial in developing countries. Teacher absenteeism in India is a big problem.\nTheory: providing incentives should increase attendance.\nThe Paper: evaluates a teacher incentive program by RCT.\n\nData: Attendance and student outcomes for 57 treatment schools, 56 control schools run by Seva Mandir (NGO)"
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-1",
     "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-1",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 2: Teacher Incentives in Rural India",
     "text": "Application 2: Teacher Incentives in Rural India\nDetails on “treatment”:\n\n\nMonitoring via tamper-proof cameras.\nFinancial incentives for teachers: \\[ \\text{Rupees per month} = 500 + 50\\times\\max\\{0,D - 10\\} \\] where \\(D\\) is days attended per month.\nFinancial incentives or fear of punishment?\nNotice: no incentive if: \\[ \\text{Days attended so far} + \\text{Days left in month} \\leq 10 \\]"
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-2",
     "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-2",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 2: Teacher Incentives in Rural India",
     "text": "Application 2: Teacher Incentives in Rural India\n\n\n\n\n\n\n\n\nVisual evidence of effect.\n\n\n\n\nBut how to estimate size of effect?\n\n\n\n\nQuantify uncertainty?\n\n\n\n\nNo testing here: how to test formally?\n\n\n\n\nCan do a regression analysis…"
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-3",
     "href": "lectures/Intro-1-Applications.html#application-2-teacher-incentives-in-rural-india-3",
-    "title": "Syllabus and Course Overview",
+    "title": "Course Overview: Applications",
     "section": "Application 2: Teacher Incentives in Rural India",
     "text": "Application 2: Teacher Incentives in Rural India\n\n\n\n\n\n\n\n\nHow to interpret this table?\n\n\n\n\nHow are standard errors calculated? \\(R^2\\)?\n\n\n\n\nFixed Effects? Clustering?\n\n\n\n\nWill learn how to replicate and interpret this graph."
   }

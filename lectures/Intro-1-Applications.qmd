@@ -1,5 +1,5 @@
 ---
-title: "Syllabus and Course Overview"
+title: "Course Overview: Applications"
 format: 
   revealjs:
     theme: solarized
