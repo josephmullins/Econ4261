@@ -1,0 +1,167 @@
+---
+title: "Probability and Stats Review"
+format: 
+  revealjs:
+    theme: solarized
+    transition: slide
+    chalkboard:
+        theme: whiteboard
+        chalk-effect: 0.0
+        chalk-width: 6
+---
+
+::: {.hidden}
+$$
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+\newcommand\bfp{\mathbf{p}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+$$
+
+:::
+
+## Overview
+  We have to review some **core tools/ideas** in statistics:
+
+- Basics of distributions, populations vs sample. Mean, variance, etc
+- Sample mean $\rightarrow$ large sample theory $\rightarrow$ population mean (estimation)
+- Hypothesis testing and confidence intervals
+- Linear models and linear regression
+
+We already looked at some research to motivate us.
+
+
+## Random Variables
+
+:::{.incremental}
+- Two kinds: **discrete** and **continuous**
+- **Q**: What is the most complete description of a RV? 
+    - **A**: the distribution, $F_{X}(x)=P[X\leq x]$.
+- **Q**: If $U$ is uniform on the interval $[0,1]$, what is $P[U=0.5]?$ 
+  - **A**: 0. Need density for continuous RVs.
+- Examples: coin flip, binomial, uniform, normal.
+:::
+
+## Joint Random Variables
+
+:::{.incremental}
+- A random variable can take vector values (examples). $F_{X}$ still defined.
+- Suppose $X$ and $Y$ are both RVs. What does it mean for $X$ and $Y$ to be **independent**?
+- **Exercise**: 
+$$ X\sim\mc{N}(\mu_{X},\sigma^2_{X}),\  Y = \alpha X + Z,\  Z\sim\mc{N}(\mu_{Z},\sigma^2_{Z}),\  X\perp Z $$ 
+
+    When is $X\perp Y$?
+:::
+
+## Population vs Sample
+
+Suppose that $X$ is a random vector with distribution $F_{X}$.
+
+:::{.incremental}
+-  **Population** features are functions of the underlying (population) distribution $F_{X}$.
+-  A **sample** is a finite number of observations drawn from this distribution. $X_{1},X_{2},...,X_{N}\leftarrow F_{X}$
+    - The random variable $X_{n}$, the $n$th draw from $F_{X}$.
+-  A **statistic** is any function of a random sample: $T_{N} = g(X_{1},X_{2},....,X_{N})$.
+    - A statistic is therefore **also a random variable**. We call the distribution of a statistic the **sampling distribution**.
+:::
+
+## Two examples
+
+:::{.incremental}
+1. $X_{n}$ is number of heads from four flips of a fair coin. Sample is $(X_{1},X_{2},X_{3},X_{4},X_{5})$.
+    - Q: what is the distribution of $X_{n}$? What is sampling distribution of sample mean? 
+2. $Z_{n}\sim\mc{N}(0,1)$. Sample is $(Z_{1},Z_{2},Z_{3},Z_{4})$. 
+    - Q: What is sampling distribution of sample mean?
+:::
+
+## Simulation example
+To make things concrete, let's code up a simulation.
+
+```{r }
+#| echo: true
+#| code-line-numbers: "|5|6-7"
+N <- 5 # <- sample size
+d <- data.frame()
+
+for (r in 1:100) { #<- draw the sample 100 times
+  X <- rbinom(N,4,0.5) # <- 4 trials, p=0.5
+  sample = data.frame(sample = r, obs=1:N,X = X,sample_mean=mean(X))
+  d <- rbind(d,sample)
+}
+```
+
+For $Z$ we can use `rnorm` instead of `rbinom`.
+
+
+## Simulation example
+
+```{r}
+library(tidyverse)
+library(gganimate)
+d %>%
+    filter(sample<20) %>%
+    ggplot(aes(x=X,group=sample)) + geom_histogram() + geom_vline(aes(xintercept=sample_mean),color="red") + geom_vline(xintercept=2, color="blue") + theme_minimal() + transition_states(sample,state_length=3) + labs(title = "Sample {closest_state}") + enter_fade() + exit_fade()
+```
+
+## Simulation Example
+Now let's look at the sampling distribution of the sample mean $\ov{X}_{5}$ from these 100 trials:
+
+```{r}
+#| echo: true
+#| code-fold: true
+d %>%
+    group_by(sample) %>%
+    summarize(sample_mean = mean(X)) %>%
+    ggplot(aes(x=sample_mean)) + geom_histogram(aes(y = after_stat(count / sum(count)))) + theme_minimal() + ylab("frequency")
+```
+
+
+## Population vs Sample {.smaller}
+
+In general, let $X\sim\text{Binomial}(K,p)$ and $Z\sim\mc{N}(\mu_{Z},\sigma^2_{Z})$. 
+
+:::{.incremental}
+- Population parameters of $F_{X}$ are $p$ and $K$  (prob. of success and number of flips). 
+- Population parameters of $F_{Z}$ are $\mu_{Z}$ and $\sigma^2_{Z}$. 
+- These are (potentially unknown) constants that govern completely the RV. 
+- Statistics is all about using the **sample** to make probabilistic statements about **population**. 
+- An estimator is a statistic designed to provide an estimate of some population parameter. 
+- The key is deriving the sampling distribution of the estimator which allows us to quantify uncertainty.
+:::
+
+
+## The Sample Mean
+
+Why is the sample mean a good estimator of the population mean?
+
+. . .
+
+This matters because lots of estimators are (basically) sample means
+
+:::{.incremental}
+1. Unbiased  
+2. Consistent (LLN)
+3. Asymptotically normal (CLT) 
+:::
+
+
+## The Power of the CLT
+
+:::{.incremental}
+- The CLT says that we can approximate the sampling distribution of $\ov{X}_{N}$ **without knowing** $F_{X}$.  
+- Why is knowing the sampling distribution useful? 
+    1. Confidence intervals.
+    2. Hypothesis testing.
+- **Exercise**: define and derive a $(1-\alpha)\times100\%$ confidence interval
+:::
+

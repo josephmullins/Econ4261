@@ -565,5 +565,82 @@
     "title": "Stats Review: Linear Models",
     "section": "",
     "text": "Everything we do boils down to population and sample mean\n. . .\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)\n\n\n\n\n\n\nShow how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#overview",
+    "href": "lectures/Intro-2-ProbabilityStats.html#overview",
+    "title": "Probability and Stats Review",
+    "section": "Overview",
+    "text": "Overview\nWe have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\nWe already looked at some research to motivate us."
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#random-variables",
+    "href": "lectures/Intro-2-ProbabilityStats.html#random-variables",
+    "title": "Probability and Stats Review",
+    "section": "Random Variables",
+    "text": "Random Variables\n\n\nTwo kinds: discrete and continuous\nQ: What is the most complete description of a RV?\n\nA: the distribution, \\(F_{X}(x)=P[X\\leq x]\\).\n\nQ: If \\(U\\) is uniform on the interval \\([0,1]\\), what is \\(P[U=0.5]?\\)\n\nA: 0. Need density for continuous RVs.\n\nExamples: coin flip, binomial, uniform, normal."
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#joint-random-variables",
+    "href": "lectures/Intro-2-ProbabilityStats.html#joint-random-variables",
+    "title": "Probability and Stats Review",
+    "section": "Joint Random Variables",
+    "text": "Joint Random Variables\n\n\nA random variable can take vector values (examples). \\(F_{X}\\) still defined.\nSuppose \\(X\\) and \\(Y\\) are both RVs. What does it mean for \\(X\\) and \\(Y\\) to be independent?\nExercise: \\[ X\\sim\\mc{N}(\\mu_{X},\\sigma^2_{X}),\\  Y = \\alpha X + Z,\\  Z\\sim\\mc{N}(\\mu_{Z},\\sigma^2_{Z}),\\  X\\perp Z \\]\nWhen is \\(X\\perp Y\\)?"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#population-vs-sample",
+    "href": "lectures/Intro-2-ProbabilityStats.html#population-vs-sample",
+    "title": "Probability and Stats Review",
+    "section": "Population vs Sample",
+    "text": "Population vs Sample\nSuppose that \\(X\\) is a random vector with distribution \\(F_{X}\\).\n\n\nPopulation features are functions of the underlying (population) distribution \\(F_{X}\\).\nA sample is a finite number of observations drawn from this distribution. \\(X_{1},X_{2},...,X_{N}\\leftarrow F_{X}\\)\n\nThe random variable \\(X_{n}\\), the \\(n\\)th draw from \\(F_{X}\\).\n\nA statistic is any function of a random sample: \\(T_{N} = g(X_{1},X_{2},....,X_{N})\\).\n\nA statistic is therefore also a random variable. We call the distribution of a statistic the sampling distribution."
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#two-examples",
+    "href": "lectures/Intro-2-ProbabilityStats.html#two-examples",
+    "title": "Probability and Stats Review",
+    "section": "Two examples",
+    "text": "Two examples\n\n\n\\(X_{n}\\) is number of heads from four flips of a fair coin. Sample is \\((X_{1},X_{2},X_{3},X_{4},X_{5})\\).\n\nQ: what is the distribution of \\(X_{n}\\)? What is sampling distribution of sample mean?\n\n\\(Z_{n}\\sim\\mc{N}(0,1)\\). Sample is \\((Z_{1},Z_{2},Z_{3},Z_{4})\\).\n\nQ: What is sampling distribution of sample mean?"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#simulation-example",
+    "href": "lectures/Intro-2-ProbabilityStats.html#simulation-example",
+    "title": "Probability and Stats Review",
+    "section": "Simulation example",
+    "text": "Simulation example\nTo make things concrete, let’s code up a simulation.\n\nN &lt;- 5 # &lt;- sample size\nd &lt;- data.frame()\n\nfor (r in 1:100) { #&lt;- draw the sample 100 times\n  X &lt;- rbinom(N,4,0.5) # &lt;- 4 trials, p=0.5\n  sample = data.frame(sample = r, obs=1:N,X = X,sample_mean=mean(X))\n  d &lt;- rbind(d,sample)\n}\n\nFor \\(Z\\) we can use rnorm instead of rbinom."
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#simulation-example-1",
+    "href": "lectures/Intro-2-ProbabilityStats.html#simulation-example-1",
+    "title": "Probability and Stats Review",
+    "section": "Simulation example",
+    "text": "Simulation example"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#simulation-example-2",
+    "href": "lectures/Intro-2-ProbabilityStats.html#simulation-example-2",
+    "title": "Probability and Stats Review",
+    "section": "Simulation Example",
+    "text": "Simulation Example\nNow let’s look at the sampling distribution of the sample mean \\(\\ov{X}_{5}\\) from these 100 trials:\n\n\nCode\nd %&gt;%\n    group_by(sample) %&gt;%\n    summarize(sample_mean = mean(X)) %&gt;%\n    ggplot(aes(x=sample_mean)) + geom_histogram(aes(y = after_stat(count / sum(count)))) + theme_minimal() + ylab(\"frequency\")"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#population-vs-sample-1",
+    "href": "lectures/Intro-2-ProbabilityStats.html#population-vs-sample-1",
+    "title": "Probability and Stats Review",
+    "section": "Population vs Sample",
+    "text": "Population vs Sample\nIn general, let \\(X\\sim\\text{Binomial}(K,p)\\) and \\(Z\\sim\\mc{N}(\\mu_{Z},\\sigma^2_{Z})\\).\n\n\nPopulation parameters of \\(F_{X}\\) are \\(p\\) and \\(K\\) (prob. of success and number of flips).\nPopulation parameters of \\(F_{Z}\\) are \\(\\mu_{Z}\\) and \\(\\sigma^2_{Z}\\).\nThese are (potentially unknown) constants that govern completely the RV.\nStatistics is all about using the sample to make probabilistic statements about population.\nAn estimator is a statistic designed to provide an estimate of some population parameter.\nThe key is deriving the sampling distribution of the estimator which allows us to quantify uncertainty."
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#the-sample-mean",
+    "href": "lectures/Intro-2-ProbabilityStats.html#the-sample-mean",
+    "title": "Probability and Stats Review",
+    "section": "The Sample Mean",
+    "text": "The Sample Mean\nWhy is the sample mean a good estimator of the population mean?\n\nThis matters because lots of estimators are (basically) sample means\n\n\nUnbiased\n\nConsistent (LLN)\nAsymptotically normal (CLT)"
+  },
+  {
+    "objectID": "lectures/Intro-2-ProbabilityStats.html#the-power-of-the-clt",
+    "href": "lectures/Intro-2-ProbabilityStats.html#the-power-of-the-clt",
+    "title": "Probability and Stats Review",
+    "section": "The Power of the CLT",
+    "text": "The Power of the CLT\n\n\nThe CLT says that we can approximate the sampling distribution of \\(\\ov{X}_{N}\\) without knowing \\(F_{X}\\).\n\nWhy is knowing the sampling distribution useful?\n\nConfidence intervals.\nHypothesis testing.\n\nExercise: define and derive a \\((1-\\alpha)\\times100\\%\\) confidence interval"
   }
 ]
