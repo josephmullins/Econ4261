@@ -71,6 +71,13 @@ If you are struggling to come up with questions for your research project, here 
 - What effect do increases in minimum wages have on wages/employment?
 - What is the effect of mergers on industrial concentration, prices, and wages?
 - What are the effects of job polarization on wages/earnings/employment/education decisions?
+- What are the impacts of $x$ in early life on skill outcomes and/or future outcomes where $x$ could be:
+   - Cash transfers to poor households
+   - Pollution
+   - Lead exposure
+   - Provision of high qulity childcare
+   - Access to affordable health care
+   - School quality
 
 ## Finding Data and Replication Materials
 
