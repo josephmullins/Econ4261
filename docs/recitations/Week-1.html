@@ -269,11 +269,11 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3163469</code></pre>
+<pre><code>[1] 0.2104895</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my_mean</span>(x1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3163469</code></pre>
+<pre><code>[1] 0.2104895</code></pre>
 </div>
 </div>
 <p>The function we wrote appears to successfully mimic R’s default <em>mean</em> function.</p>
@@ -381,7 +381,7 @@ window.Quarto = {
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">=</span> <span class="fu">mean</span>(ci[,<span class="dv">1</span>]<span class="sc">&lt;</span><span class="fl">0.5</span> <span class="sc">&amp;</span> ci[,<span class="dv">2</span>]<span class="sc">&gt;</span><span class="fl">0.5</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(coverage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.869</code></pre>
+<pre><code>[1] 0.88</code></pre>
 </div>
 </div>
 <p>So we see that the approximation is not working well for this small sample size, and the confidence interval does not contain the mean 95% of the time. Let’s see how it does now as we increase the sample size:</p>
@@ -392,11 +392,11 @@ window.Quarto = {
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"For sample size "</span>,N,<span class="st">" coverage is "</span>,coverage))</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "For sample size  5  coverage is  0.887"
-[1] "For sample size  10  coverage is  0.912"
-[1] "For sample size  50  coverage is  0.942"
-[1] "For sample size  100  coverage is  0.944"
-[1] "For sample size  1000  coverage is  0.945"</code></pre>
+<pre><code>[1] "For sample size  5  coverage is  0.864"
+[1] "For sample size  10  coverage is  0.922"
+[1] "For sample size  50  coverage is  0.948"
+[1] "For sample size  100  coverage is  0.956"
+[1] "For sample size  1000  coverage is  0.943"</code></pre>
 </div>
 </div>
 </section>
