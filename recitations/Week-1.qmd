@@ -6,9 +6,8 @@ format:
 ---
 
 This note has been written as a [quarto]() notebook. You can intersperse your code with comments, and format math. You will find it useful for submitting your assignments!! I *very strongly*. For more details, you can open (in RStudio) the example notebook on Canvas.
-    
-## Writing Functions
 
+## Writing Functions
 
 The formula for the mean of a data series, $x_1,x_2,...,x_N$ is
 
@@ -33,13 +32,14 @@ my_mean(x0)
 mean(x1)
 my_mean(x1)
 ```
+
 The function we wrote appears to successfully mimic R's default *mean* function.
 
 If you're new to writing functions, try writing your own for the sample variance:
 
 $$ s^2 = \sum_{i=1}^N\frac{(x_i-\overline{x})^2}{N-1} $$
 
-## Simulation 
+## Simulation
 
 One useful way to use R is to explore the basic theoretical predictions of statistics. For example, recall that if a sequence random variables $X_{1},...,X_{N}$ is drawn **iid** with finite variance, then as $N$ goes to infinity, the central limit theorem gives a formula for the **sampling distribution** of the sample mean:
 
@@ -54,6 +54,7 @@ sample_X = runif(1000) #<-
 ```
 
 To check this works, let's look at this histogram:
+
 ```{r}
 hist(sample_X)
 ```
@@ -86,6 +87,7 @@ for (N in c(2,5,10,50,100)) {
 }
 
 ```
+
 We can see this distribution of the sample mean getting more and more "bell-shaped" while also getting more tightly distributed around the true mean (0.5 in this case).
 
 ## Testing a confidence interval
@@ -116,6 +118,7 @@ ci = montecarlo_ci(1000,5)
 coverage = mean(ci[,1]<0.5 & ci[,2]>0.5)
 print(coverage)
 ```
+
 So we see that the approximation is not working well for this small sample size, and the confidence interval does not contain the mean 95% of the time. Let's see how it does now as we increase the sample size:
 
 ```{r}
@@ -128,8 +131,6 @@ for (N in c(5,10,50,100,1000)) {
 
 ```
 
-
-## Exercise 
+## Exercise
 
 Repeat the exercise above to evaluate a hypothesis test of size 0.05 where the null is $E[X]=0.5$ against a two-sided alternative, using the CLT to approximate the sampling distribution of the test statistic.
-

@@ -3,29 +3,29 @@
     "objectID": "lectures/Intro-3-LinearModels.html#the-main-theme-so-far",
     "href": "lectures/Intro-3-LinearModels.html#the-main-theme-so-far",
     "title": "Stats Review: Linear Models",
-    "section": "The main theme so far:",
-    "text": "The main theme so far:\nEverything we do boils down to population and sample mean\n\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)"
+    "section": "",
+    "text": "Everything we do boils down to population and sample mean\n. . .\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#next-steps",
     "href": "lectures/Intro-3-LinearModels.html#next-steps",
     "title": "Stats Review: Linear Models",
-    "section": "Next Steps",
-    "text": "Next Steps\n\nShow how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
+    "section": "",
+    "text": "Show how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#the-linear-model-1",
     "href": "lectures/Intro-3-LinearModels.html#the-linear-model-1",
     "title": "Stats Review: Linear Models",
     "section": "The Linear Model",
-    "text": "The Linear Model\n\\((y_{i},x_{i,1},x_{i,2},...,x_{i,K})\\) is random vector for \\(i\\)th observation from sample of size \\(N\\)\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] = \\sum_{k=1}^{K}x_{i,k}\\beta_{k}\n\\end{equation*}\\]\n\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\\left[\\begin{array}{c}\\beta_{1}\\\\\\beta_{2}\\\\\\vdots\\\\\\beta_{K}\\end{array}\\right] = \\mathbf{x}_{i}{\\beta}\n\\end{equation*}\\]"
+    "text": "The Linear Model\n\\((y_{i},x_{i,1},x_{i,2},...,x_{i,K})\\) is random vector for \\(i\\)th observation from sample of size \\(N\\)\n. . .\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] = \\sum_{k=1}^{K}x_{i,k}\\beta_{k}\n\\end{equation*}\\]\n. . .\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\\left[\\begin{array}{c}\\beta_{1}\\\\\\beta_{2}\\\\\\vdots\\\\\\beta_{K}\\end{array}\\right] = \\mathbf{x}_{i}{\\beta}\n\\end{equation*}\\]"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#the-law-of-large-numbers",
     "href": "lectures/Intro-3-LinearModels.html#the-law-of-large-numbers",
     "title": "Stats Review: Linear Models",
     "section": "The Law of Large Numbers",
-    "text": "The Law of Large Numbers"
+    "text": "The Law of Large Numbers\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(gganimate)\n# set the initial data\nd &lt;- data.frame(x = rnorm(1))\nd$y = d$x + 0.7*rnorm(1)\nD &lt;- d %&gt;%\n  mutate(n = 1)\nfor (t in 2:100) {\n  # add one more row to the data\n  dn &lt;- data.frame(x = rnorm(1))\n  dn$y = dn$x + 0.7*rnorm(1)\n  d &lt;- rbind(d,dn)\n  # now add this dataset to D\n  D &lt;- d %&gt;%\n    mutate(n = t) %&gt;%\n    rbind(D)\n}\n\n# D %&gt;%\n#   ggplot(aes(x,y,group=n)) + geom_point() + geom_smooth(method=\"lm\",se=FALSE) + transition_states(n)"
   },
   {
     "objectID": "Lectures.html",
@@ -44,14 +44,14 @@
   {
     "objectID": "recitations/Week-2.html",
     "href": "recitations/Week-2.html",
-    "title": "Recitation 2 - Working with Data in R and the Tidyverse",
+    "title": "Working with Data in R and the Tidyverse",
     "section": "",
     "text": "We are going to make use of a library called tidyverse which is very popular and can simplify working with and depicting data. If you are comfortable using R and prefer not to use these libraries that is totally fine."
   },
   {
     "objectID": "recitations/Week-2.html#piping",
     "href": "recitations/Week-2.html#piping",
-    "title": "Recitation 2 - Working with Data in R and the Tidyverse",
+    "title": "Working with Data in R and the Tidyverse",
     "section": "Piping",
     "text": "Piping\nTaking stock, so far we did the following:\n\nRead in the data.\nDropped observations from before 1994\nRe-coded specific values of some variables as missing.\nCoded a wage variable that depends on whether the worker is paid by the hour.\n\nWe can do all this more succinctly using something called “piping”. The operator %&gt;% tells R to send the output of a function as the first argument of a function call on the next line. Since everything we did here was a modification to the dataframe D, we can pipe the operations in a sequence as:\n\nD &lt;- read.csv(\"../data/cps-econ-4261.csv\") %&gt;%\n  filter(YEAR&gt;=1994) %&gt;%\n  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),\n         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),\n         HOURWAGE = na_if(HOURWAGE,999.99)) %&gt;%\n  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %&gt;%\n  filter(!is.na(Wage))\n\nIn the last two lines, we also dropped all observations where the new variable Wage is missing."
   },
@@ -107,35 +107,35 @@
   {
     "objectID": "recitations/Week-1.html",
     "href": "recitations/Week-1.html",
-    "title": "Recitation 1 - Introduction to R and Monte Carlo Simulation",
+    "title": "Introduction to R and Monte Carlo Simulation",
     "section": "",
-    "text": "This is an example of a quarto Notebook. You can intersperse your code with comments, and format math. You will find it useful for submitting your assignments!! I very strongly recommend this. For more details, you can open (in RStudio) the example notebook on Canvas."
+    "text": "This note has been written as a quarto notebook. You can intersperse your code with comments, and format math. You will find it useful for submitting your assignments!! I very strongly. For more details, you can open (in RStudio) the example notebook on Canvas."
   },
   {
     "objectID": "recitations/Week-1.html#writing-functions",
     "href": "recitations/Week-1.html#writing-functions",
-    "title": "Recitation 1 - Introduction to R and Monte Carlo Simulation",
+    "title": "Introduction to R and Monte Carlo Simulation",
     "section": "Writing Functions",
-    "text": "Writing Functions\nThe formula for the mean of a data series, \\(x_1,x_2,...,x_N\\) is\n\\[ \\overline{x} = \\sum_{i=1}^N\\frac{x_i}{N} \\]\nNow, let’s try writing our own function that takes an array of values and returns the mean.\n\nmy_mean &lt;- function(x) {\n  N &lt;- length(x)\n  sum(x)/N\n}\n\nNotice that the last line is the return value. Since R has it’s own collection of functions, mean included, we often won’t need to write our own functions, but it’s good practice. Let’s create a vector and test our function:\n\nx0 &lt;- c(2,3,2,4,5,2,3,4)\nx1 &lt;- rnorm(10) # this generates 10 random numbers from a normal distribution\nmean(x0)\n\n[1] 3.125\n\nmy_mean(x0)\n\n[1] 3.125\n\nmean(x1)\n\n[1] -0.1362182\n\nmy_mean(x1)\n\n[1] -0.1362182\n\n\nThe function we wrote appears to successfully mimic R’s default mean function.\nIf you’re new to writing functions, try writing your own for the sample variance:\n\\[ s^2 = \\sum_{i=1}^N\\frac{(x_i-\\overline{x})^2}{N-1} \\]"
+    "text": "Writing Functions\nThe formula for the mean of a data series, \\(x_1,x_2,...,x_N\\) is\n\\[ \\overline{x} = \\sum_{i=1}^N\\frac{x_i}{N} \\]\nNow, let’s try writing our own function that takes an array of values and returns the mean.\n\nmy_mean &lt;- function(x) {\n  N &lt;- length(x)\n  sum(x)/N\n}\n\nNotice that the last line is the return value. Since R has it’s own collection of functions, mean included, we often won’t need to write our own functions, but it’s good practice. Let’s create a vector and test our function:\n\nx0 &lt;- c(2,3,2,4,5,2,3,4)\nx1 &lt;- rnorm(10) # this generates 10 random numbers from a normal distribution\nmean(x0)\n\n[1] 3.125\n\nmy_mean(x0)\n\n[1] 3.125\n\nmean(x1)\n\n[1] 0.3163469\n\nmy_mean(x1)\n\n[1] 0.3163469\n\n\nThe function we wrote appears to successfully mimic R’s default mean function.\nIf you’re new to writing functions, try writing your own for the sample variance:\n\\[ s^2 = \\sum_{i=1}^N\\frac{(x_i-\\overline{x})^2}{N-1} \\]"
   },
   {
     "objectID": "recitations/Week-1.html#simulation",
     "href": "recitations/Week-1.html#simulation",
-    "title": "Recitation 1 - Introduction to R and Monte Carlo Simulation",
+    "title": "Introduction to R and Monte Carlo Simulation",
     "section": "Simulation",
     "text": "Simulation\nOne useful way to use R is to explore the basic theoretical predictions of statistics. For example, recall that if a sequence random variables \\(X_{1},...,X_{N}\\) is drawn iid with finite variance, then as \\(N\\) goes to infinity, the central limit theorem gives a formula for the sampling distribution of the sample mean:\n\\[ \\frac{(\\overline{X}_{N} - \\mu)}{\\frac{\\sigma}{\\sqrt{N}}} \\rightarrow_{d} \\mathcal{N}(0,1) \\]\nwhere \\(\\mu\\) is the population mean of \\(X\\) and \\(\\sigma^2\\) is the population variance.\nGiven a distribution for \\(X\\), we can easily draw a sample of size \\(N\\). For example, if \\(X\\) is uniform on the interval \\([0,1]\\), the function runif will simulate \\(N\\) draws from this distribution:\n\nsample_X = runif(1000) #&lt;- \n\nTo check this works, let’s look at this histogram:\n\nhist(sample_X)\n\n\n\n\n\n\n\n\nSee? Uniform! We will learn more plotting tricks next week.\nRemember, the CLT only tells us about the distribution of the sample mean from a sample of size \\(N\\), which we can only mimic by repeatedly drawing different samples of size \\(N\\). Here is a function to do that when X is uniform.\n\nmontecarlo_u &lt;- function(N,B) {\n  sample_mean = matrix(0,B) #&lt;- the realization for each sample of size N will be stored in this vector\n  for (b in 1:B) {\n    X = runif(N)\n    sample_mean[b] = mean(X)\n  }\n  sample_mean\n}\n\nThis function will take \\(B\\) draws of the sample mean from a sample of size \\(N\\). It uses a for loop, which is a nice way to repeat the same task over and over again. Here we can use is to “simulate” draws from the sampling distribution of the sample mean. The law of large numbers tells us that if we want to know the properties of this sampling distribution, we can learn them arbitrarily well as \\(B\\rightarrow\\infty\\). This is known as a “monte-carlo” simulation. In practice, a value of \\(B=1000\\) (i.e. 200 draws of the sample of size \\(N\\)) will be enough to see what we want to see.\nTo see the central limit theorem at work, let’s look at the sampling distribution of the sample mean when \\(N=2,5,10,50,100\\):\n\nfor (N in c(2,5,10,50,100)) {\n  mc &lt;- montecarlo_u(N,1000)\n  hist(mc,breaks=30)\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe can see this distribution of the sample mean getting more and more “bell-shaped” while also getting more tightly distributed around the true mean (0.5 in this case)."
   },
   {
     "objectID": "recitations/Week-1.html#testing-a-confidence-interval",
     "href": "recitations/Week-1.html#testing-a-confidence-interval",
-    "title": "Recitation 1 - Introduction to R and Monte Carlo Simulation",
+    "title": "Introduction to R and Monte Carlo Simulation",
     "section": "Testing a confidence interval",
-    "text": "Testing a confidence interval\nRecall that a confidence interval is designed to “contain” the estimand of interest with a fixed probability. We can test whether a confidence interval has the desired properties using monte-carlo simulation. Taking our previous assumptions on \\(X\\) as given, the following code constructs a 95% confidence interval for the population mean of \\(X\\) for each of \\(B\\) samples of size \\(N\\). To get the critical value \\(z_{0.025}\\) we use the function \\(qnorm\\) which gives the quantiles of the normal.\n\nzcrit = qnorm(0.975)\n\nmontecarlo_ci &lt;- function(B,N) {\n  ci = matrix(0,B,2) #&lt;- we will store the lower bound for the CI in the first column, and the upper bound in the second column\n  for (b in 1:B) {\n    X = runif(N)\n    mX = mean(X) #&lt;- sample mean\n    sX = sd(X) #&lt;- sample standard deviation\n    ci[b,1] = mX - zcrit*sX/sqrt(N)\n    ci[b,2] = mX + zcrit*sX/sqrt(N)\n  }\n  ci\n}\n\nHow well does the confidence interval work when \\(N=5\\)? We can run a monte-carlo simulation with \\(B=1000\\) to see how often the confidence interval contains the population mean (remenber that \\(E[X]=0.5\\) if \\(X\\) is uniform on \\([0,1]\\).)\n\nci = montecarlo_ci(1000,5)\ncoverage = mean(ci[,1]&lt;0.5 & ci[,2]&gt;0.5)\nprint(coverage)\n\n[1] 0.869\n\n\nSo we see that the approximation is not working well for this small sample size, and the confidence interval does not contain the mean 95% of the time. Let’s see how it does now as we increase the sample size:\n\nfor (N in c(5,10,50,100,1000)) {\n  ci = montecarlo_ci(1000,N)\n  coverage = mean(ci[,1]&lt;0.5 & ci[,2]&gt;0.5)\n  print(paste(\"For sample size \",N,\" coverage is \",coverage))\n}\n\n[1] \"For sample size  5  coverage is  0.881\"\n[1] \"For sample size  10  coverage is  0.91\"\n[1] \"For sample size  50  coverage is  0.95\"\n[1] \"For sample size  100  coverage is  0.932\"\n[1] \"For sample size  1000  coverage is  0.957\""
+    "text": "Testing a confidence interval\nRecall that a confidence interval is designed to “contain” the estimand of interest with a fixed probability. We can test whether a confidence interval has the desired properties using monte-carlo simulation. Taking our previous assumptions on \\(X\\) as given, the following code constructs a 95% confidence interval for the population mean of \\(X\\) for each of \\(B\\) samples of size \\(N\\). To get the critical value \\(z_{0.025}\\) we use the function \\(qnorm\\) which gives the quantiles of the normal.\n\nzcrit = qnorm(0.975)\n\nmontecarlo_ci &lt;- function(B,N) {\n  ci = matrix(0,B,2) #&lt;- we will store the lower bound for the CI in the first column, and the upper bound in the second column\n  for (b in 1:B) {\n    X = runif(N)\n    mX = mean(X) #&lt;- sample mean\n    sX = sd(X) #&lt;- sample standard deviation\n    ci[b,1] = mX - zcrit*sX/sqrt(N)\n    ci[b,2] = mX + zcrit*sX/sqrt(N)\n  }\n  ci\n}\n\nHow well does the confidence interval work when \\(N=5\\)? We can run a monte-carlo simulation with \\(B=1000\\) to see how often the confidence interval contains the population mean (remenber that \\(E[X]=0.5\\) if \\(X\\) is uniform on \\([0,1]\\).)\n\nci = montecarlo_ci(1000,5)\ncoverage = mean(ci[,1]&lt;0.5 & ci[,2]&gt;0.5)\nprint(coverage)\n\n[1] 0.869\n\n\nSo we see that the approximation is not working well for this small sample size, and the confidence interval does not contain the mean 95% of the time. Let’s see how it does now as we increase the sample size:\n\nfor (N in c(5,10,50,100,1000)) {\n  ci = montecarlo_ci(1000,N)\n  coverage = mean(ci[,1]&lt;0.5 & ci[,2]&gt;0.5)\n  print(paste(\"For sample size \",N,\" coverage is \",coverage))\n}\n\n[1] \"For sample size  5  coverage is  0.887\"\n[1] \"For sample size  10  coverage is  0.912\"\n[1] \"For sample size  50  coverage is  0.942\"\n[1] \"For sample size  100  coverage is  0.944\"\n[1] \"For sample size  1000  coverage is  0.945\""
   },
   {
     "objectID": "recitations/Week-1.html#exercise",
     "href": "recitations/Week-1.html#exercise",
-    "title": "Recitation 1 - Introduction to R and Monte Carlo Simulation",
+    "title": "Introduction to R and Monte Carlo Simulation",
     "section": "Exercise",
     "text": "Exercise\nRepeat the exercise above to evaluate a hypothesis test of size 0.05 where the null is \\(E[X]=0.5\\) against a two-sided alternative, using the CLT to approximate the sampling distribution of the test statistic."
   },
@@ -157,8 +157,8 @@
     "objectID": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
     "href": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
     "title": "Syllabus and Course Overview",
-    "section": "This Course - What is Econometrics?",
-    "text": "This Course - What is Econometrics?\n\n\n\nEconomics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
+    "section": "",
+    "text": "Economics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#assessment-plan",
@@ -500,8 +500,8 @@
     "objectID": "lectures/Intro-1-Applications.html#overview",
     "href": "lectures/Intro-1-Applications.html#overview",
     "title": "Course Overview: Applications",
-    "section": "Overview",
-    "text": "Overview\nWe have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
+    "section": "",
+    "text": "We have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
@@ -544,5 +544,26 @@
     "title": "Course Overview: Applications",
     "section": "Application 2: Teacher Incentives in Rural India",
     "text": "Application 2: Teacher Incentives in Rural India\n\n\n\n\n\n\n\n\nHow to interpret this table?\n\n\n\n\nHow are standard errors calculated? \\(R^2\\)?\n\n\n\n\nFixed Effects? Clustering?\n\n\n\n\nWill learn how to replicate and interpret this graph."
+  },
+  {
+    "objectID": "lectures/Intro-1-Applications.html",
+    "href": "lectures/Intro-1-Applications.html",
+    "title": "Course Overview: Applications",
+    "section": "",
+    "text": "We have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
+  },
+  {
+    "objectID": "lectures/Intro-SyllabusOverview.html",
+    "href": "lectures/Intro-SyllabusOverview.html",
+    "title": "Syllabus and Course Overview",
+    "section": "",
+    "text": "About me:\n\nI’m an Assistant Professor in the econ dept. \nMy research is on the development of skills (“human capital”) in early childhood and how it can be shaped by policy\nI also study labor markets and the determinants of income inequality. \nEmail: mullinsj@umn.edu (use ECON4621 in subject)\n\n\n\n\n\n\nEconomics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html",
+    "href": "lectures/Intro-3-LinearModels.html",
+    "title": "Stats Review: Linear Models",
+    "section": "",
+    "text": "Everything we do boils down to population and sample mean\n. . .\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)\n\n\n\n\n\n\nShow how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
   }
 ]
