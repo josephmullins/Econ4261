@@ -13,8 +13,27 @@ format:
 # Introduction
 
 ## The main theme so far:
+::: {.hidden}
+$$
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+\newcommand\bfp{\mathbf{p}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+$$
 
-Everything we do boils down to `population` and `sample` mean
+:::
+
+Everything we do boils down to **population** and **sample** mean
 
 . . .
 
@@ -29,11 +48,11 @@ Everything we do boils down to `population` and `sample` mean
 -   Show how to estimate a **linear conditional mean**
 -   Show it inherits same nice properties
 -   Get into some technicalities
--   Review applications
+-   Revisit our applications
 
 # The Linear Model
 
-## The Linear Model {chalkboard-buttons="true"}
+## The Linear Model {.smaller}
 
 $(y_{i},x_{i,1},x_{i,2},...,x_{i,K})$ is random vector for $i$th observation from sample of size $N$
 
@@ -50,7 +69,66 @@ $(y_{i},x_{i,1},x_{i,2},...,x_{i,K})$ is random vector for $i$th observation fro
 \begin{equation*}
   \mathbb{E}\left[y_{i}\big|\{x_{i,k}\}_{k=1}^{K}\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\left[\begin{array}{c}\beta_{1}\\\beta_{2}\\\vdots\\\beta_{K}\end{array}\right] = \mathbf{x}_{i}{\beta}
 \end{equation*}
+
+
 ```
+
+## In vector notation
+
+$$\EE\left[\left[\begin{array}{c}y_{1}\\\vdots\\y_{N}\end{array}\right]\Big| \left[\begin{array}{c}\mathbf{x}_{1}\\\vdots\\\mathbf{x}_{N}\end{array}\right] \right] = \left[\begin{array}{c}\mathbf{x}_{1}\mathbf{\beta}\\\vdots\\\mathbf{x}_{N}\mathbf{\beta}\end{array}\right]$$ 
+
+  . . . 
+
+$$ \EE[\mathbf{Y}|\mathbf{X}] = \mathbf{X}\mathbf{\beta} $$
+
+## With prediction error
+
+Define
+$$ \epsilon_{i} = y_{i} - \EE[y_{i}|\mathbf{x}_{i}] $$ 
+
+. . .
+
+then by definition:
+$$ y_{i} = \mathbf{x}_{i}\beta + \epsilon_{i}$$
+
+. . .
+
+and
+$$ \EE[\epsilon_{i}|\mathbf{x}_{i}] = 0 $$
+
+# The OLS Estimator
+
+## Two ways to derive it
+
+:::{.incremental}
+1. $\EE[\mathbf{x}^{T}_{i}\epsilon_{i}] = \mathbf{0}$ 
+2. As the solution to a prediction problem:
+   1. The population mean ($\mu_{X}$) minimizes prediction error in the population ($\mu_{X}=\arg\min_{\mu}\EE[(X-\mu)^2]$)
+   2. The sample mean ($\ov{X}$) minimizes prediction error in the sample ($\ov{X}=\arg\min_{\mu}\sum(X_{i}-\mu)^2$)
+:::
+
+## Core Assumptions
+
+:::{.incremental}
+1. Model is linear.
+2. Sample is iid
+3. $\mathbf{X}$ is full column rank
+:::
+
+## Properties of OLS
+
+Let's prove:
+
+:::{.incremental}
+- $\EE\left[\widehat{\beta}\right] = \beta$
+- $\sqrt{N}(\hat{\beta}-\beta) \rightarrow_{d} \mc{N}(0,V_{\hat{\beta}})$ 
+  - $V_{\hat{\beta}} = \Sigma_{X}^{-1}\EE[\mathbf{x}^\prime\mathbf{x}\epsilon^2] \Sigma_{X}^{-1}$
+  - $\Sigma_{X} = \EE[\mathbf{x}^\prime\mathbf{x}]$
+- $V_{\hat{\beta}} = \Sigma_{X}^{-1}\sigma^2$ when $\EE[\epsilon^2|\mathbf{x}] = \sigma^2$ (**homoskedasticity**)
+:::
+
+
+
 ## The Law of Large Numbers
 
 ```{R}

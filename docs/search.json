@@ -3,29 +3,29 @@
     "objectID": "lectures/Intro-3-LinearModels.html#the-main-theme-so-far",
     "href": "lectures/Intro-3-LinearModels.html#the-main-theme-so-far",
     "title": "Stats Review: Linear Models",
-    "section": "",
-    "text": "Everything we do boils down to population and sample mean\n. . .\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)"
+    "section": "The main theme so far:",
+    "text": "The main theme so far:\n\n\\[\n\\newcommand\\ov{\\overline}\n\\newcommand\\un{\\underline}\n\\newcommand\\BB{\\mathbb}\n\\newcommand\\EE{\\mathbb{E}}\n\\newcommand\\mc{\\mathcal}\n\\newcommand\\ti{\\tilde}\n\\newcommand\\h{\\hat}\n\\newcommand\\beq{\\begin{equation}}\n\\newcommand\\eeq{\\end{equation}}\n\\newcommand\\barr{\\begin{array}}\n\\newcommand\\earr{\\end{array}}\n\\newcommand\\bfp{\\mathbf{p}}\n\\newcommand\\independent{\\protect\\mathpalette{\\protect\\independenT}{\\perp}}\n\\def\\independenT#1#2{\\mathrel{\\rlap{$#1#2$}\\mkern2mu{#1#2}}}\n\\]\n\nEverything we do boils down to population and sample mean\n\n\n\niid sample mean distributed around population mean\nuse for hypothesis tests, confidence intervals\nvery flexible (lots of things are a population mean)"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#next-steps",
     "href": "lectures/Intro-3-LinearModels.html#next-steps",
     "title": "Stats Review: Linear Models",
-    "section": "",
-    "text": "Show how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nReview applications"
+    "section": "Next Steps",
+    "text": "Next Steps\n\nShow how to estimate a linear conditional mean\nShow it inherits same nice properties\nGet into some technicalities\nRevisit our applications"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#the-linear-model-1",
     "href": "lectures/Intro-3-LinearModels.html#the-linear-model-1",
     "title": "Stats Review: Linear Models",
     "section": "The Linear Model",
-    "text": "The Linear Model\n\\((y_{i},x_{i,1},x_{i,2},...,x_{i,K})\\) is random vector for \\(i\\)th observation from sample of size \\(N\\)\n. . .\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] = \\sum_{k=1}^{K}x_{i,k}\\beta_{k}\n\\end{equation*}\\]\n. . .\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\\left[\\begin{array}{c}\\beta_{1}\\\\\\beta_{2}\\\\\\vdots\\\\\\beta_{K}\\end{array}\\right] = \\mathbf{x}_{i}{\\beta}\n\\end{equation*}\\]"
+    "text": "The Linear Model\n\\((y_{i},x_{i,1},x_{i,2},...,x_{i,K})\\) is random vector for \\(i\\)th observation from sample of size \\(N\\)\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] = \\sum_{k=1}^{K}x_{i,k}\\beta_{k}\n\\end{equation*}\\]\n\n\n\\[\\begin{equation*}\n  \\mathbb{E}\\left[y_{i}\\big|\\{x_{i,k}\\}_{k=1}^{K}\\right] =[x_{i,1}, x_{i,2}, ..., x_{K}]\\left[\\begin{array}{c}\\beta_{1}\\\\\\beta_{2}\\\\\\vdots\\\\\\beta_{K}\\end{array}\\right] = \\mathbf{x}_{i}{\\beta}\n\\end{equation*}\n\n\\]"
   },
   {
     "objectID": "lectures/Intro-3-LinearModels.html#the-law-of-large-numbers",
     "href": "lectures/Intro-3-LinearModels.html#the-law-of-large-numbers",
     "title": "Stats Review: Linear Models",
     "section": "The Law of Large Numbers",
-    "text": "The Law of Large Numbers\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\nlibrary(gganimate)\n# set the initial data\nd &lt;- data.frame(x = rnorm(1))\nd$y = d$x + 0.7*rnorm(1)\nD &lt;- d %&gt;%\n  mutate(n = 1)\nfor (t in 2:100) {\n  # add one more row to the data\n  dn &lt;- data.frame(x = rnorm(1))\n  dn$y = dn$x + 0.7*rnorm(1)\n  d &lt;- rbind(d,dn)\n  # now add this dataset to D\n  D &lt;- d %&gt;%\n    mutate(n = t) %&gt;%\n    rbind(D)\n}\n\n# D %&gt;%\n#   ggplot(aes(x,y,group=n)) + geom_point() + geom_smooth(method=\"lm\",se=FALSE) + transition_states(n)"
+    "text": "The Law of Large Numbers"
   },
   {
     "objectID": "Lectures.html",
@@ -768,5 +768,40 @@
     "title": "Probability and Stats Review",
     "section": "A Hypothesis Test for Duflo, Hanna, & Ryan (2012)",
     "text": "A Hypothesis Test for Duflo, Hanna, & Ryan (2012)\n\n\nNull: There is no jump in work attendance at the beginning of the month for teachers who are “out of the money” at the end of the month.\nAlternative: There is a positive jump in attendance.\nInference: Any jump in attendance is the effect of financial incentives. (assuming what?)"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#in-vector-notation",
+    "href": "lectures/Intro-3-LinearModels.html#in-vector-notation",
+    "title": "Stats Review: Linear Models",
+    "section": "In vector notation",
+    "text": "In vector notation\n\\[\\EE\\left[\\left[\\begin{array}{c}y_{1}\\\\\\vdots\\\\y_{N}\\end{array}\\right]\\Big| \\left[\\begin{array}{c}\\mathbf{x}_{1}\\\\\\vdots\\\\\\mathbf{x}_{N}\\end{array}\\right] \\right] = \\left[\\begin{array}{c}\\mathbf{x}_{1}\\mathbf{\\beta}\\\\\\vdots\\\\\\mathbf{x}_{N}\\mathbf{\\beta}\\end{array}\\right]\\]\n\n\\[ \\EE[\\mathbf{Y}|\\mathbf{X}] = \\mathbf{X}\\mathbf{\\beta} \\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#with-prediction-error",
+    "href": "lectures/Intro-3-LinearModels.html#with-prediction-error",
+    "title": "Stats Review: Linear Models",
+    "section": "With prediction error",
+    "text": "With prediction error\nDefine \\[ \\epsilon_{i} = y_{i} - \\EE[y_{i}|\\mathbf{x}_{i}] \\]\n\nthen by definition: \\[ y_{i} = \\mathbf{x}_{i}\\beta + \\epsilon_{i}\\]\n\n\nand \\[ \\EE[\\epsilon_{i}|\\mathbf{x}_{i}] = 0 \\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#two-ways-to-derive-it",
+    "href": "lectures/Intro-3-LinearModels.html#two-ways-to-derive-it",
+    "title": "Stats Review: Linear Models",
+    "section": "Two ways to derive it",
+    "text": "Two ways to derive it\n\n\n\\(\\EE[\\mathbf{x}^{T}_{i}\\epsilon_{i}] = \\mathbf{0}\\)\nAs the solution to a prediction problem:\n\nThe population mean (\\(\\mu_{X}\\)) minimizes prediction error in the population (\\(\\mu_{X}=\\arg\\min_{\\mu}\\EE[(X-\\mu)^2]\\))\nThe sample mean (\\(\\ov{X}\\)) minimizes prediction error in the sample (\\(\\ov{X}=\\arg\\min_{\\mu}\\sum(X_{i}-\\mu)^2\\))"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#core-assumptions",
+    "href": "lectures/Intro-3-LinearModels.html#core-assumptions",
+    "title": "Stats Review: Linear Models",
+    "section": "Core Assumptions",
+    "text": "Core Assumptions\n\n\nModel is linear.\nSample is iid\n\\(\\mathbf{X}\\) is full column rank"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#properties-of-ols",
+    "href": "lectures/Intro-3-LinearModels.html#properties-of-ols",
+    "title": "Stats Review: Linear Models",
+    "section": "Properties of OLS",
+    "text": "Properties of OLS\nLet’s prove:\n\n\n\\(\\EE\\left[\\widehat{\\beta}\\right] = \\beta\\)\n\\(\\sqrt{N}(\\hat{\\beta}-\\beta) \\rightarrow_{d} \\mc{N}(0,V_{\\hat{\\beta}})\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\EE[\\mathbf{x}^\\prime\\mathbf{x}\\epsilon^2] \\Sigma_{X}^{-1}\\)\n\\(\\Sigma_{X} = \\EE[\\mathbf{x}^\\prime\\mathbf{x}]\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\sigma^2\\) when \\(\\EE[\\epsilon^2|\\mathbf{x}] = \\sigma^2\\) (homoskedasticity)"
   }
 ]
