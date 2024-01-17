@@ -10,6 +10,8 @@ format:
         chalk-width: 6
 ---
 
+## Overview
+
 ::: {.hidden}
 $$
 \newcommand\ov{\overline}
@@ -30,16 +32,15 @@ $$
 
 :::
 
-## Overview
-  We have to review some **core tools/ideas** in statistics:
+ We have to review some **core tools/ideas** in statistics:
 
+:::{.incremental}
 - Basics of distributions, populations vs sample. Mean, variance, etc
 - Sample mean $\rightarrow$ large sample theory $\rightarrow$ population mean (estimation)
 - Hypothesis testing and confidence intervals
 - Linear models and linear regression
-
-We already looked at some research to motivate us.
-
+- You may find [this cheat sheet](/supplementary/Stats-CheatSheet.pdf) very helpful for the course.
+:::
 
 ## Random Variables
 
@@ -47,7 +48,7 @@ We already looked at some research to motivate us.
 - Two kinds: **discrete** and **continuous**
 - **Q**: What is the most complete description of a RV? 
     - **A**: the distribution, $F_{X}(x)=P[X\leq x]$.
-- **Q**: If $U$ is uniform on the interval $[0,1]$, what is $P[U=0.5]?$ 
+- **Q**: If $U$ is uniform on the interval $[0,1]$, what is $P[U=0.5]$? 
   - **A**: 0. Need density for continuous RVs.
 - Examples: coin flip, binomial, uniform, normal.
 :::
@@ -89,7 +90,8 @@ To make things concrete, let's code up a simulation.
 
 ```{r }
 #| echo: true
-#| code-line-numbers: "|5|6-7"
+#| code-line-numbers: 5|6-7|4,8
+
 N <- 5 # <- sample size
 d <- data.frame()
 
@@ -163,5 +165,257 @@ This matters because lots of estimators are (basically) sample means
     1. Confidence intervals.
     2. Hypothesis testing.
 - **Exercise**: define and derive a $(1-\alpha)\times100\%$ confidence interval
+:::
+
+# Example: Human Capital and Credit Constraints
+```{r}
+library(tidyverse)
+```
+
+## Loading the Data {.scrollable}
+
+::: panel-tabset
+### Code to read in data
+```{r}
+#| echo: true
+#| code-line-numbers: 1,6|2,7|3|4,8
+d79 <- read.csv("../data/LM_nlsy79.csv") %>%
+    select(mfinc1617q,afqtq,Dhgacoll2122) %>%
+    rename(hhinccat = mfinc1617q) %>%
+    mutate(cohort = "79")
+
+d97 <- read.csv("../data/LM_nlsy97.csv") %>%
+    select(hhinccat,afqtq,Dhgacoll2122) %>%
+    mutate(cohort = "97")
+```
+
+### Data
+```{r}
+knitr::kable(d79)
+```
+
+:::
+
+## Compute summary statistics {.scrollable .smaller}
+
+```{r}
+#| echo: true
+
+d_summary <- d79 %>%
+    rbind(d97) %>% #<- bind the two cohort data sets together
+    filter(!is.na(Dhgacoll2122),!is.na(hhinccat)) %>% #<- drop missing data
+    group_by(cohort,afqtq,hhinccat) %>% #< define the cells to calc stats for
+    summarize(attendance = mean(Dhgacoll2122), #<- mean college attendance by cell
+              se = sqrt(attendance*(1-attendance)/n()), #<- standard deviation of sample mean
+              N=n()) #<- number of obs per cell
+
+knitr::kable(d_summary)
+```
+
+## Replicating analysis {.smaller}
+
+::: panel-tabset
+
+### As in paper 
+```{r}
+#| echo: true
+#| code-fold: true
+
+d_summary %>%
+    ggplot(aes(x=afqtq,y=attendance)) + geom_col() + facet_grid(cohort ~ hhinccat) + theme_minimal()
+```
+
+### With confidence intervals
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+d_summary %>%
+    ggplot(aes(x=afqtq,y=attendance,ymin=attendance-1.96*se,ymax=attendance+1.96*se)) + geom_point() + 
+    geom_errorbar() + facet_grid(cohort ~ hhinccat) + theme_minimal()
+```
+
+:::
+
+## Hypothesis Testing
+
+:::{.incremental}
+- Define Type I/II error
+- Review logic of hypothesis test, define **size** and **power**.
+- Hypothesis test on population means, normal distribution.
+- **Excercise**
+  - Null: Within an AFQT quartile, the relationship between college attendance and parental income has remained the same.
+  - Alternative: the relationship has gotten steeper
+- **Exercise**: Why one-sided test? **Power**.
+:::
+
+## Has family income become more important for college attendance? {.smaller}
+
+::: panel-tabset
+### Calculating
+```{r}
+#| echo: true
+# First calculate the differences between top and bottom quartile of income
+diff <- d_summary %>%
+    group_by(cohort,afqtq) %>%
+    summarize(diff = attendance[4]-attendance[1],se = sqrt(se[1]^2 + se[4]^2))
+diff    
+```
+
+### Plotting
+```{r}
+diff %>%
+    ggplot(aes(x=cohort,y=diff,ymin=diff-1.96*se,ymax=diff+1.96*se)) + geom_point() + geom_errorbar() + facet_grid(. ~ afqtq)
+```
+
+:::
+
+## Has family income become more important for college attendance? {.smaller}
+
+```{r}
+#| echo: true
+# first calculate
+g_diff <- diff %>%
+    group_by(afqtq) %>%
+    summarize(g_diff = diff[2]-diff[1],se = sqrt(se[1]^2+se[2]^2))
+knitr::kable(g_diff)
+
+```
+
+## Has family income become more important for college attendance? {.smaller}
+
+```{r}
+#| echo: true
+
+z_crit=qnorm(0.95)
+results <- g_diff %>%
+    mutate(test_stat = g_diff/se) %>%
+    mutate(reject = test_stat>z_crit) %>% #<- the one-side 95% test
+    mutate(pval = 1-pnorm(test_stat)) #<- calculate the p-value
+knitr::kable(results)
+```
+
+# Example: do incentives improve teacher attendance?
+
+## A Hypothesis Test for Duflo, Hanna, \& Ryan (2012)
+
+::: {.incremental}
+- Null: There is no jump in work attendance at the beginning of the month for teachers who are "out of the money" at the end of the month.
+- Alternative: There is a positive jump in attendance.
+- Inference: Any jump in attendance is the effect of financial incentives. (assuming what?)
+:::
+
+## Hypothesis Test in Duflo, Hanna, \& Ryan (2012) {.smaller}
+Looking at the data:
+```{r}
+#| echo: true
+#| code-fold: true
+
+d <- read.csv("~/Dropbox/Teaching/Econ4261/1-IntroAndReview/data/DufloHannaRyan.csv") %>%
+  filter(!is.na(inthemoney)) %>%
+  mutate(InTheMoney = inthemoney==1,FirstDay=t==1)
+d %>%
+  select(schid,t,InTheMoney,worked,year,month,day) %>%
+  filter(t==-1 | t==1) %>%
+  arrange(schid,year,month,day) %>%
+  knitr::kable()
+
+```
+
+. . .
+
+It's a panel! We see the same teacher multiple times. Why could this be an issue?
+
+## Replicating the figure {.smaller}
+
+::: panel-tabset
+
+### Calculating means
+```{r}
+#| echo: true
+d_mean <- d %>%
+  group_by(t,InTheMoney) %>%
+  summarize(work = mean(worked),se = sd(worked)/sqrt(n())) # the function n() returns the number of observations for each pair
+knitr::kable(d_mean)
+```
+
+### Plot
+
+```{r}
+#| echo: true
+#| code-fold: true
+d_mean %>%
+  ggplot(aes(x=t,y=work,color=InTheMoney)) + geom_point() + theme_minimal() + 
+  ylab("Average Attendance") + geom_vline(xintercept=0,linetype="dashed")
+```
+:::
+
+## Technical Aside
+
+::: {.incremental}
+- How to calculate standard errors when data is "clustered"?
+- Let data be $X_{cn}$ where $c\in{1,2,..,C}$ indexes a "cluster"
+- $X_{cn} \perp X_{dm}$ **only if** $c\neq d$
+- Calculate $\BB{V}[\ov{X}]$ in this case.
+- In our case, $c$ indexes individuals and $n$ different time periods
+:::
+
+## Replicating DHR (2012) {.scrollable}
+The authors examine the effect by first creating a dataset of matched pairs:
+```{r}
+#| echo: true
+#| output-location: slide
+#| code-line-numbers: 1-2|3|4|6-9|
+last_day <- d %>%
+  filter(t==-1,!InTheMoney) %>%
+  mutate(month_index = year*12 + month,worked_last = worked) %>%
+  select(schid,month_index,InTheMoney,worked_last)
+
+matched_pairs <- d %>%
+  filter(t==1) %>%
+  mutate(month_index = year*12 + month - 1) %>% #<- for the merge
+  inner_join(last_day) %>%
+  select(schid,year,month,worked,worked_last,InTheMoney) %>%
+  arrange(schid,year,month)
+
+knitr::kable(matched_pairs)
+```
+
+## Calculating estimates
+```{r}
+#| echo: true
+#| code-line-numbers: 2|7-12
+# estimate the average effect
+est <- mean(matched_pairs$worked - matched_pairs$worked_last) 
+
+N = nrow(matched_pairs)
+
+# estimate the standard errors (with clustering)
+se <- matched_pairs %>%
+  mutate(diff = worked - worked_last) %>%
+  group_by(schid) %>%
+  summarize(ssq = sum(diff - est)^2) %>%
+  ungroup() %>%
+  summarize(se = sqrt(sum(ssq)/N^2))
+```
+
+## Do incentives affect teacher attendance?
+With an estimate and a standard error we can do our hypothesis test.
+```{r}
+#| echo: true
+pval = 1-pnorm(est/se$se)
+pval
+```
+
+Under the null, accounting for clustering, we would expect to see an estimate as large as 0.152 only 0.002% of the time. Thus at all conventional significance levels we would reject the null of no difference.
+
+## Testing assumptions
+
+::: {.incremental}
+- **Key assumption**: absent incentivces, should be no change going from last day to first day
+- We could control for this using individuals still in the money at end of last month
+- In general, how could we control for day-of-month type effects?
+- **Answer**: OLS
 :::
 

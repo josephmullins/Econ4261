@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+%\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+%\usepackage{titlesec}
+%\usepackage{titling}
+%\usepackage{cancel}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+
+\begin{document}
+\section*{Basic Stats/Probability}
+Some definitions for everything below:
+\begin{itemize}
+  \item $X$, $Y$, and $Z$ are random variables
+  \item $a,b,c,d$ are constants
+  \item Whenever you see $\mu_{X}$ or $\sigma^2_{X}$, know that this is the mean and variance (respectively) of the random variable $X$
+  \item $\ov{X}_{N}$ is a sample mean from a sample of random variables $X_{n}$ drawn from the same distribution.
+  \item $s^2_{X}$ is the sample variance calculated from a sample of $X$.
+\end{itemize}
+Most of the rules follow almost immediately from the basic definitions, so you should test yourself by trying to prove each of them. It will also help you a lot if you know these rules like the back of your hand.
+\begin{itemize}
+  \item $\EE[aX + bY] = a\EE[X] + b\EE[Y]$
+  \item $\BB{C}(X,Y) = \EE[(X-\mu_{X})(Y-\mu_{Y})] = \BB{C}(Y,X)$
+  \item $\BB{C}(a + bX,Y) = a\BB{C}(X,Y)$ 
+   \begin{itemize}\item[] $\Rightarrow$ $\BB{C}(a+bX,c+dY) = ad\BB{C}(X,Y)$. \end{itemize}
+  \item $\BB{C}(aX + bY,Z) = a\BB{C}(X,Z) + b\BB{C}(Y,Z)$
+  \item $X \independent{Y} \Rightarrow \BB{C}(X,Y) = 0$
+  \item $\BB{V}[X+Y] = X + Y + 2\BB{C}(X,Y)$
+  \item $\Rightarrow\ \BB{V}\left[\sum_{n}X_{n}\right] = \sum_{n}\BB[X_{n}]$ if $X_{1}\independent X_{2}...\independent X_{N}$
+  \item $\EE[\ov{X}_{N}] = \mu_{X}$
+  \item $\BB{V}[\ov{X}_{N}] = \frac{1}{N}\BB{V}[X]$ if $X_{1}\independent X_{2}...\independent X_{N}$ (i.e. iid sample)
+  \item $\EE[\EE[X|Y]] = \EE[X]$ (Law of Iterated Expectations)
+  \item $\EE[X|Y]=0\ \Rightarrow \EE[XY] = 0$
+  \item $\EE[X|Y] = a\ \Rightarrow \BB{C}(X,Y)=0$
+  \item If $X\sim\mc{N}(\mu_{X},\sigma^2_{X})$, $Y\sim\mc{N}(\mu_{Y},\sigma^2_{Y})$ and $Z = X+Y$, then $Z\sim\mc{N}(\mu_{X}+\mu_{Y},\sigma^2_{X}+\sigma^2_{Z}+2\sigma_{XY})$ where $\sigma_{XY}=\BB{C}(X,Y)$.
+  \item When $\ov{X}_{N}$ comes from an iid sample and $\BB{V}[X]<\infty$, $\lim_{N\rightarrow\infty}P\left[\frac{\ov{X}_{N}-\mu_{X}}{s_{X}}\leq z_{\alpha}\right] = 1-\alpha$ where $z_{\alpha}$ solves $P[Z\leq z_{\alpha}] = 1-\alpha$ where $Z\sim\mc{N}(0,1)$.
+  \end{itemize}
+    Now, let $X$ be a random column vector, and let $X_1,X_2,....,X_{N}$ be an iid sample of size $N$. Let $\mu_{X}=\EE[X]$ and $\Sigma_{X} = \BB{V}[X] = \EE[(X-\mu_{X})(X-\mu_{X})^T]$. Let $C$ be a constant matrix.
+  \begin{itemize}
+  \item $\BB{V}[CX] = C\Sigma_{X}C^{T}$.
+  \item $\ov{X}\rightarrow_{p} \mu_{X}$ (law of large numbers)
+  \item $\sqrt{N}(\ov{X} - \mu_{X}) \rightarrow_{d} \mc(0,\Sigma_{X})$ (central limit theorem)
+  \end{itemize}
+
+  \section*{OLS}
+  Let $\EE[Y_{n}|\bm{x}_{n}] = \bm{x}_{n}\beta$ where $\bm{x}_{n}$ is a row vector. Let $\bm{X}$ be $N$ iid observations of $\bm{x}_{n}$ stacked vertically and the same for $\bm{Y}$.
+  \begin{itemize}
+  \item OLS estimator: $\hat{\beta} = (\bm{X}^{T}\bm{X})^{-1}\bm{X}^{T}\bm{Y}$
+  \item Variance for $\hat{\beta}$:
+    \[ \BB{V}[\hat{\beta}] =  \frac{1}{N}\EE[\bm{x}_{n}^{T}\bm{x}_n]^{-1}\EE[\bm{x}^{T}_{n}\bm{x}_{n}\epsilon^2_{n}]\EE[\bm{x}_{n}^{T}\bm{x}_n]^{-1} \]
+  \item And if $\EE[\epsilon^2_{n}|\bm{x}_{n}] = \sigma^2$,
+        \[ \BB{V}[\hat{\beta}] =  \frac{1}{N}\EE[\bm{x}_{n}^{T}\bm{x}_n]^{-1}\sigma^2 \]
+      \item  To estimate $\BB{V}[\hat{\beta}]$ in general:
+        \[ \hat{V}_{\beta} = (\bm{X}^{T}\bm{X})^{-1}\sum_{n}\bm{x}^{T}_{n}\bm{x}\hat{\epsilon}_{n}^2(\bm{X}^{T}\bm{X})^{-1} \]
+        
+      \item And if $\EE[\epsilon^2_{n}|\bm{x}_{n}] = \sigma^2$:
+        \[\hat{V}_{\hat{\beta}} = \frac{1}{N}(\bm{X}^{T}\bm{X})^{-1}\sum_{n}\hat{\epsilon}_{n}^2 \]
+  \end{itemize}
+  
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
