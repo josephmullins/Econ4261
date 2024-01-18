@@ -8,7 +8,7 @@ Materials here will be uploaded as we continue through the course.
 | ----- | ------ |
 | Introduction and Syllabus | [Slides](lectures/Intro-SyllabusOverview.qmd) |
 | Introduction: Overview of Applications | [Slides](lectures/Intro-1-Applications.qmd) |
-| Review: Probability and Statistics | |
+| Review: Probability and Statistics | [Slides](lectures/Intro-2-ProbabilityStats.qmd) |
 | Review: Linear Models | |
 | Causality | |
 | Experiments and Applications | |

@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\n\n\n\nReview: Linear Models\n\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\n\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -157,8 +157,8 @@
     "objectID": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
     "href": "lectures/Intro-SyllabusOverview.html#this-course---what-is-econometrics",
     "title": "Syllabus and Course Overview",
-    "section": "",
-    "text": "Economics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
+    "section": "This Course - What is Econometrics?",
+    "text": "This Course - What is Econometrics?\n\n\n\nEconomics\n\nProvides normative and positive theories of social phenomena\nMarkets are everywhere\nMore broadly: choice behavior under constraints\n\n\n\n\nEconometrics\n\nTools for mapping theory \\(\\rightarrow\\) data\nData/world fundamentally uncertain\nMust make probabilistic statements about theories, parameters\nModel + Data \\(\\rightarrow\\) Policy\n\n\n\nWill learn tools rigorously analyse data and map data to policy"
   },
   {
     "objectID": "lectures/Intro-SyllabusOverview.html#assessment-plan",
@@ -500,8 +500,8 @@
     "objectID": "lectures/Intro-1-Applications.html#overview",
     "href": "lectures/Intro-1-Applications.html#overview",
     "title": "Course Overview: Applications",
-    "section": "",
-    "text": "We have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
+    "section": "Overview",
+    "text": "Overview\nWe have to review some core tools/ideas in statistics:\n\nBasics of distributions, populations vs sample. Mean, variance, etc\nSample mean \\(\\rightarrow\\) large sample theory \\(\\rightarrow\\) population mean (estimation)\nHypothesis testing and confidence intervals\nLinear models and linear regression\n\n\nFirst, some research to motivate us."
   },
   {
     "objectID": "lectures/Intro-1-Applications.html#application-1-credit-constraints-and-human-capital",
