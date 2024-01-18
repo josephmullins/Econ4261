@@ -802,6 +802,6 @@
     "href": "lectures/Intro-3-LinearModels.html#properties-of-ols",
     "title": "Stats Review: Linear Models",
     "section": "Properties of OLS",
-    "text": "Properties of OLS\nLet’s prove:\n\n\n\\(\\EE\\left[\\widehat{\\beta}\\right] = \\beta\\)\n\\(\\sqrt{N}(\\hat{\\beta}-\\beta) \\rightarrow_{d} \\mc{N}(0,V_{\\hat{\\beta}})\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\EE[\\mathbf{x}^\\prime\\mathbf{x}\\epsilon^2] \\Sigma_{X}^{-1}\\)\n\\(\\Sigma_{X} = \\EE[\\mathbf{x}^\\prime\\mathbf{x}]\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\sigma^2\\) when \\(\\EE[\\epsilon^2|\\mathbf{x}] = \\sigma^2\\) (homoskedasticity)"
+    "text": "Properties of OLS\nLet’s prove:\n\n\nunbiased: \\(\\EE\\left[\\hat{\\beta}\\right] = \\beta\\)\nconsistent: \\(\\text{plim}_{N\\rightarrow\\infty}(\\hat{\\beta}) = \\beta\\)\nasymptotically normal \\(\\sqrt{N}(\\hat{\\beta}-\\beta) \\rightarrow_{d} \\mc{N}(0,V_{\\hat{\\beta}})\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\EE[\\mathbf{x}^\\prime\\mathbf{x}\\epsilon^2] \\Sigma_{X}^{-1}\\)\n\\(\\Sigma_{X} = \\EE[\\mathbf{x}^\\prime\\mathbf{x}]\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\sigma^2\\) when \\(\\EE[\\epsilon^2|\\mathbf{x}] = \\sigma^2\\) (homoskedasticity)"
   }
 ]

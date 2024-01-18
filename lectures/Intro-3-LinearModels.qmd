@@ -120,8 +120,9 @@ $$ \EE[\epsilon_{i}|\mathbf{x}_{i}] = 0 $$
 Let's prove:
 
 :::{.incremental}
-- $\EE\left[\widehat{\beta}\right] = \beta$
-- $\sqrt{N}(\hat{\beta}-\beta) \rightarrow_{d} \mc{N}(0,V_{\hat{\beta}})$ 
+- **unbiased**: $\EE\left[\hat{\beta}\right] = \beta$
+- **consistent**: $\text{plim}_{N\rightarrow\infty}(\hat{\beta}) = \beta$
+- **asymptotically normal** $\sqrt{N}(\hat{\beta}-\beta) \rightarrow_{d} \mc{N}(0,V_{\hat{\beta}})$ 
   - $V_{\hat{\beta}} = \Sigma_{X}^{-1}\EE[\mathbf{x}^\prime\mathbf{x}\epsilon^2] \Sigma_{X}^{-1}$
   - $\Sigma_{X} = \EE[\mathbf{x}^\prime\mathbf{x}]$
 - $V_{\hat{\beta}} = \Sigma_{X}^{-1}\sigma^2$ when $\EE[\epsilon^2|\mathbf{x}] = \sigma^2$ (**homoskedasticity**)
