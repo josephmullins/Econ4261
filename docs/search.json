@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\n\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -803,5 +803,257 @@
     "title": "Stats Review: Linear Models",
     "section": "Properties of OLS",
     "text": "Properties of OLS\nLet’s prove:\n\n\nunbiased: \\(\\EE\\left[\\hat{\\beta}\\right] = \\beta\\)\nconsistent: \\(\\text{plim}_{N\\rightarrow\\infty}(\\hat{\\beta}) = \\beta\\)\nasymptotically normal \\(\\sqrt{N}(\\hat{\\beta}-\\beta) \\rightarrow_{d} \\mc{N}(0,V_{\\hat{\\beta}})\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\EE[\\mathbf{x}^\\prime\\mathbf{x}\\epsilon^2] \\Sigma_{X}^{-1}\\)\n\\(\\Sigma_{X} = \\EE[\\mathbf{x}^\\prime\\mathbf{x}]\\)\n\n\\(V_{\\hat{\\beta}} = \\Sigma_{X}^{-1}\\sigma^2\\) when \\(\\EE[\\epsilon^2|\\mathbf{x}] = \\sigma^2\\) (homoskedasticity)"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#ols-in-r-using-lm",
+    "href": "lectures/Intro-3-LinearModels.html#ols-in-r-using-lm",
+    "title": "Stats Review: Linear Models",
+    "section": "OLS in R using lm",
+    "text": "OLS in R using lm\n\n\n\n\n\nCode\nN &lt;- 10\nd = data.frame(x = runif(N))\nd$y &lt;- 1 + d$x + 0.1*rnorm(N)\nggplot(d,aes(x=x,y=y)) + geom_point(size=3) + theme_minimal() \n\n\n\n\n\n\n\n\n\n\n\n\n\nlm(y ~ x,d) %&gt;%\n  summary()\n\n\nCall:\nlm(formula = y ~ x, data = d)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.16941 -0.09998  0.04211  0.09441  0.10608 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   0.9199     0.1046   8.795 2.19e-05 ***\nx             1.2767     0.2463   5.182  0.00084 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.1143 on 8 degrees of freedom\nMultiple R-squared:  0.7705,    Adjusted R-squared:  0.7418 \nF-statistic: 26.86 on 1 and 8 DF,  p-value: 0.0008402"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#verify-the-formula",
+    "href": "lectures/Intro-3-LinearModels.html#verify-the-formula",
+    "title": "Stats Review: Linear Models",
+    "section": "Verify the formula",
+    "text": "Verify the formula\nLet’s verify that this uses the OLS formula\n\nXmat &lt;- matrix(1,N,2)\nXmat[,2] &lt;- d$x\nb_est &lt;- solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%d$y\nresids &lt;- d$y -  Xmat %*% b_est \nvar_est &lt;- solve(t(Xmat) %*% Xmat) * sum(resids^2) / (N-2) #&lt;- \nse &lt;- sqrt(diag(var_est))\n\nb_est[,1]\n\n[1] 0.9198791 1.2766881\n\nse\n\n[1] 0.1045926 0.2463488"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#properties-of-ols-summary",
+    "href": "lectures/Intro-3-LinearModels.html#properties-of-ols-summary",
+    "title": "Stats Review: Linear Models",
+    "section": "Properties of OLS: Summary",
+    "text": "Properties of OLS: Summary\n\\[\\EE\\left[\\hat{{\\beta}}\\right] = {\\beta}\\]\n\\[ \\BB{V}\\left[\\hat{{\\beta}}\\right] = \\frac{1}{N}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\epsilon^2_{i}\\right]\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1} \\]\nHomoskedasticity (\\(\\EE[\\epsilon^2|\\mathbf{x}]=\\sigma_{\\epsilon}^2\\)):\n\\[\\BB{V}\\left[\\hat{{\\beta}}\\right] = \\frac{1}{N}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1}\\sigma^2_{\\epsilon} \\]\n\\[\\hat{{\\beta}} \\rightarrow_{d} \\mc{N}\\left({\\beta},\\BB{V}\\left(\\hat{{\\beta}}\\right)\\right)\\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#properties-of-ols-summary-1",
+    "href": "lectures/Intro-3-LinearModels.html#properties-of-ols-summary-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Properties of OLS: Summary",
+    "text": "Properties of OLS: Summary\n\\[\\hat{{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1}\\mathbf{X}^{T}\\mathbf{Y}\\] \\[\\widehat{\\BB{V}[\\hat{{\\beta}}]} = \\frac{1}{N}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\hat{\\epsilon}^2_{i}\\right)\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1} \\]\nHomoskedasticity (\\(\\EE[\\epsilon^2|\\mathbf{x}]=\\sigma_{\\epsilon}^2\\)):\n\\[\\widehat{\\BB{V}[\\hat{{\\beta}}]} = \\frac{1}{N}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1}\\sum\\frac{1}{N}\\hat{\\epsilon}_{i}^2 = (\\mathbf{X}^{T}\\mathbf{X})^{-1}\\mathbf{\\hat{\\epsilon}}^{T}\\mathbf{\\hat{\\epsilon}} \\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#real-data-is-messy",
+    "href": "lectures/Intro-3-LinearModels.html#real-data-is-messy",
+    "title": "Stats Review: Linear Models",
+    "section": "Real Data is Messy",
+    "text": "Real Data is Messy\n\nd79f &lt;- read.csv(\"../data/LM_nlsy79.csv\") \nd79f %&gt;%\n    ggplot(aes(x=log(mfinc1617),y=afqtrev)) + geom_point() + theme_minimal() + xlab(\"log(Parent's Income)\") + ylab(\"AFQT\") + geom_smooth(method=\"lm\",se=FALSE)"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#nevertheless",
+    "href": "lectures/Intro-3-LinearModels.html#nevertheless",
+    "title": "Stats Review: Linear Models",
+    "section": "Nevertheless",
+    "text": "Nevertheless\n\n\nCode\nd79f %&gt;%\n    mutate(inc_bin = cut_number(log(mfinc1617),10)) %&gt;%\n    group_by(inc_bin) %&gt;%\n    summarize(mean_loginc = mean(log(mfinc1617)),mean_afqt = mean(afqtrev)) %&gt;%\n    ggplot(aes(x=mean_loginc,y=mean_afqt)) + geom_point() + geom_line() + theme_minimal()"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#the-variance-of-hatbeta",
+    "href": "lectures/Intro-3-LinearModels.html#the-variance-of-hatbeta",
+    "title": "Stats Review: Linear Models",
+    "section": "The variance of \\(\\hat{\\beta}\\)",
+    "text": "The variance of \\(\\hat{\\beta}\\)"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#the-variance-of-hatbeta-for-two-dgps",
+    "href": "lectures/Intro-3-LinearModels.html#the-variance-of-hatbeta-for-two-dgps",
+    "title": "Stats Review: Linear Models",
+    "section": "The variance of \\(\\hat{\\beta}\\) for two DGPs",
+    "text": "The variance of \\(\\hat{\\beta}\\) for two DGPs"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#robust-standard-errors",
+    "href": "lectures/Intro-3-LinearModels.html#robust-standard-errors",
+    "title": "Stats Review: Linear Models",
+    "section": "Robust Standard Errors",
+    "text": "Robust Standard Errors\n\n\nNon-robust:\n\nmod &lt;- d79f %&gt;%\n    filter(mfinc1617&gt;0) %&gt;%\n    lm(afqtrev ~ log(mfinc1617),data=.)\nsummary(mod)\n\n\nCall:\nlm(formula = afqtrev ~ log(mfinc1617), data = .)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-54.42 -20.79  -2.43  19.32  88.43 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     18.4768     1.2319    15.0   &lt;2e-16 ***\nlog(mfinc1617)  17.3188     0.7631    22.7   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 25.58 on 2479 degrees of freedom\nMultiple R-squared:  0.172, Adjusted R-squared:  0.1717 \nF-statistic: 515.1 on 1 and 2479 DF,  p-value: &lt; 2.2e-16\n\n\n\nRobust:\n\nlibrary(sandwich)\nlibrary(lmtest)\ncoeftest(mod,vcov=vcovHC(mod))\n\n\nt test of coefficients:\n\n               Estimate Std. Error t value  Pr(&gt;|t|)    \n(Intercept)    18.47680    1.13311  16.306 &lt; 2.2e-16 ***\nlog(mfinc1617) 17.31878    0.70523  24.558 &lt; 2.2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#technical-aside-r2",
+    "href": "lectures/Intro-3-LinearModels.html#technical-aside-r2",
+    "title": "Stats Review: Linear Models",
+    "section": "Technical Aside: \\(R^2\\)",
+    "text": "Technical Aside: \\(R^2\\)\n\n\\(R^2\\): ``coefficient of determination’’\n\nHow of much of variation in \\(y\\) can \\(\\mathbf{x}\\) explain: \\[ R^2 = 1 - \\frac{\\sum_{n}\\hat{\\epsilon}_{n}^2}{\\sum_{n}(y_{i}-\\ov{y})^2} \\]\n\nDoes not determine the success of a regression or policy relevance of a variable.\n\nGenetic factors explain most of the variation in eyesight, does this mean eyeglasses don’t matter?\nNatural causes explain 100% of the variation in rainfall. Umbrellas don’t matter?"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#understanding-the-rank-assumption-example",
+    "href": "lectures/Intro-3-LinearModels.html#understanding-the-rank-assumption-example",
+    "title": "Stats Review: Linear Models",
+    "section": "Understanding the rank assumption: example",
+    "text": "Understanding the rank assumption: example\nModel: \\[ \\log(W_{i}) = \\beta_{1} + \\beta_{2}M_{i} + \\beta_{3}F_{i} + \\epsilon_{i} \\] where \\(M_{i}\\in\\{0,1\\}\\) indicates male and \\(F_{i}\\in\\{0,1\\}\\) indicates female.\n\nWhat’s wrong with this model?"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#dummy-variables",
+    "href": "lectures/Intro-3-LinearModels.html#dummy-variables",
+    "title": "Stats Review: Linear Models",
+    "section": "Dummy Variables",
+    "text": "Dummy Variables\n\n\nSuppose that \\(X\\) is a discrete random variable that we want to treat as categorical.\n\nExample: \\(gender\\in\\{\\text{Male},\\text{Female}\\}\\)\nExample: \\(occupation \\in\\{\\text{Managerial},\\text{Manual},\\text{Clerical}\\}\\)\nExample: \\(age category \\in\\{21-30,31-40,41-50\\}\\)\n\nA dummy variable is a binary variable that indicates whether a categorical variable takes a particular value."
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#dummy-variables-1",
+    "href": "lectures/Intro-3-LinearModels.html#dummy-variables-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Dummy Variables",
+    "text": "Dummy Variables\nThe data:\n\n\n\n\n\nsex\noccupation\nage\n\n\n\n\nMale\nClerical\n21-30\n\n\nFemale\nManager\n31-40\n\n\nFemale\nManual\n21-30\n\n\nMale\nManual\n41-50"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#dummy-variables-2",
+    "href": "lectures/Intro-3-LinearModels.html#dummy-variables-2",
+    "title": "Stats Review: Linear Models",
+    "section": "Dummy Variables",
+    "text": "Dummy Variables\nThe dummies\n\nSexOccupationAge\n\n\n\n\n\n\n\nsex\nsex_Male\nsex_Female\n\n\n\n\nMale\n1\n0\n\n\nFemale\n0\n1\n\n\nFemale\n0\n1\n\n\nMale\n1\n0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\noccupation\noccupation_Clerical\noccupation_Manager\noccupation_Manual\n\n\n\n\nClerical\n1\n0\n0\n\n\nManager\n0\n1\n0\n\n\nManual\n0\n0\n1\n\n\nManual\n0\n0\n1\n\n\n\n\n\n\n\n\n\n\n\n\nage\nage_21-30\nage_31-40\nage_41-50\n\n\n\n\n21-30\n1\n0\n0\n\n\n31-40\n0\n1\n0\n\n\n21-30\n1\n0\n0\n\n\n41-50\n0\n0\n1"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#dummies-in-r",
+    "href": "lectures/Intro-3-LinearModels.html#dummies-in-r",
+    "title": "Stats Review: Linear Models",
+    "section": "Dummies in R",
+    "text": "Dummies in R\nAn example using wage data:\n\nD &lt;- read.csv(\"../data/cps-econ-4261.csv\") %&gt;%\n  filter(YEAR&gt;=2011) %&gt;%\n  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),\n         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),\n         HOURWAGE = na_if(HOURWAGE,999.99),\n         OCCsimple = case_when(OCC&lt;500 ~ \"Managerial\", OCC&gt;=500 & OCC&lt;6000 ~ \"Other\", OCC&gt;6000 ~ \"Manual\"), #&lt;- very broad and slightly wrong occupation codes\n         AGECAT = floor((AGE-1)/10)) %&gt;% #&lt;- create an age category\n  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %&gt;%\n  filter(!is.na(Wage),OCC&gt;0,AGE&gt;=21,AGE&lt;=60) %&gt;% #&lt;- keep only people with non-missing wages and occupations, aged between 21 and 60\n  select(CPSIDP,AGECAT,OCCsimple,SEX,Wage)\nknitr::kable(head(D))\n\n\n\n\nCPSIDP\nAGECAT\nOCCsimple\nSEX\nWage\n\n\n\n\n2.00912e+13\n3\nOther\n2\n12.00\n\n\n2.00912e+13\n3\nManual\n1\n14.50\n\n\n2.01012e+13\n3\nManual\n1\n16.50\n\n\n2.01012e+13\n3\nOther\n2\n32.00\n\n\n2.01012e+13\n3\nManual\n1\n15.45\n\n\n2.01012e+13\n4\nOther\n1\n24.05"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#dummies-in-r-1",
+    "href": "lectures/Intro-3-LinearModels.html#dummies-in-r-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Dummies in R",
+    "text": "Dummies in R\nAn example using wage data:"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-1",
+    "href": "lectures/Intro-3-LinearModels.html#example-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Example 1:",
+    "text": "Example 1:\n\nlm(log(Wage) ~ as.factor(SEX) + as.factor(OCCsimple) + as.factor(AGECAT),data=D) %&gt;%\n  summary()\n\n\nCall:\nlm(formula = log(Wage) ~ as.factor(SEX) + as.factor(OCCsimple) + \n    as.factor(AGECAT), data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                 3.312504   0.003752  882.86   &lt;2e-16 ***\nas.factor(SEX)2            -0.208918   0.002148  -97.27   &lt;2e-16 ***\nas.factor(OCCsimple)Manual -0.525808   0.003760 -139.84   &lt;2e-16 ***\nas.factor(OCCsimple)Other  -0.313654   0.003272  -95.86   &lt;2e-16 ***\nas.factor(AGECAT)3          0.256600   0.002819   91.03   &lt;2e-16 ***\nas.factor(AGECAT)4          0.300951   0.002872  104.79   &lt;2e-16 ***\nas.factor(AGECAT)5          0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.1141,    Adjusted R-squared:  0.1141 \nF-statistic:  7056 on 6 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-1-1",
+    "href": "lectures/Intro-3-LinearModels.html#example-1-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Example 1:",
+    "text": "Example 1:\n\n\n\nCall:\nlm(formula = log(Wage) ~ SEX + as.factor(OCCsimple) + AGECAT, \n    data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                 3.312504   0.003752  882.86   &lt;2e-16 ***\nSEXFemale                  -0.208918   0.002148  -97.27   &lt;2e-16 ***\nas.factor(OCCsimple)Manual -0.525808   0.003760 -139.84   &lt;2e-16 ***\nas.factor(OCCsimple)Other  -0.313654   0.003272  -95.86   &lt;2e-16 ***\nAGECAT31-40                 0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50                 0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60                 0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.1141,    Adjusted R-squared:  0.1141 \nF-statistic:  7056 on 6 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-1-2",
+    "href": "lectures/Intro-3-LinearModels.html#example-1-2",
+    "title": "Stats Review: Linear Models",
+    "section": "Example 1:",
+    "text": "Example 1:\n\n\n\nCall:\nlm(formula = log(Wage) ~ 0 + SEX + as.factor(OCCsimple) + AGECAT, \n    data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \nSEXMale                     3.312504   0.003752  882.86   &lt;2e-16 ***\nSEXFemale                   3.103586   0.003820  812.38   &lt;2e-16 ***\nas.factor(OCCsimple)Manual -0.525808   0.003760 -139.84   &lt;2e-16 ***\nas.factor(OCCsimple)Other  -0.313654   0.003272  -95.86   &lt;2e-16 ***\nAGECAT31-40                 0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50                 0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60                 0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 \nF-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16\n\n\nAnd try changing the order of the variables in the formula:\n\n\n\nCall:\nlm(formula = log(Wage) ~ 0 + as.factor(OCCsimple) + SEX + AGECAT, \n    data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                                Estimate Std. Error t value Pr(&gt;|t|)    \nas.factor(OCCsimple)Managerial  3.312504   0.003752  882.86   &lt;2e-16 ***\nas.factor(OCCsimple)Manual      2.786696   0.002815  989.99   &lt;2e-16 ***\nas.factor(OCCsimple)Other       2.998850   0.002484 1207.41   &lt;2e-16 ***\nSEXFemale                      -0.208918   0.002148  -97.27   &lt;2e-16 ***\nAGECAT31-40                     0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50                     0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60                     0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 \nF-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#review-of-ols-population",
+    "href": "lectures/Intro-3-LinearModels.html#review-of-ols-population",
+    "title": "Stats Review: Linear Models",
+    "section": "Review of OLS: Population",
+    "text": "Review of OLS: Population\n\\[\\EE\\left[\\hat{{\\beta}}\\right] = {\\beta}\\]\n\\[ \\BB{V}\\left[\\hat{{\\beta}}\\right] = \\frac{1}{N}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\epsilon^2_{i}\\right]\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1} \\]\nHomoskedasticity (\\(\\EE[\\epsilon^2|\\mathbf{x}]=\\sigma_{\\epsilon}^2\\)):\n\\[\\BB{V}\\left[\\hat{{\\beta}}\\right] = \\frac{1}{N}\\EE\\left[\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right]^{-1}\\sigma^2_{\\epsilon} \\]\n\\[\\hat{{\\beta}} \\rightarrow_{d} \\mc{N}\\left({\\beta},\\BB{V}\\left(\\hat{{\\beta}}\\right)\\right)\\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#review-of-ols-sample",
+    "href": "lectures/Intro-3-LinearModels.html#review-of-ols-sample",
+    "title": "Stats Review: Linear Models",
+    "section": "Review of OLS: Sample",
+    "text": "Review of OLS: Sample\n\\[\\hat{{\\beta}} = (\\mathbf{X}^{T}\\mathbf{X})^{-1}\\mathbf{X}^{T}\\mathbf{Y}\\] \\[\\widehat{\\BB{V}[\\hat{{\\beta}}]} = \\frac{1}{N}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\hat{\\epsilon}^2_{i}\\right)\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1} \\]\nHomoskedasticity (\\(\\EE[\\epsilon^2|\\mathbf{x}]=\\sigma_{\\epsilon}^2\\)):\n\\[\\widehat{\\BB{V}[\\hat{{\\beta}}]} = \\frac{1}{N}\\left(\\frac{1}{N}\\sum\\mathbf{x}_{i}^{T}\\mathbf{x}_{i}\\right)^{-1}\\sum\\frac{1}{N}\\hat{\\epsilon}_{i}^2 = (\\mathbf{X}^{T}\\mathbf{X})^{-1}\\mathbf{\\hat{\\epsilon}}^{T}\\mathbf{\\hat{\\epsilon}} \\]"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-how-to-interpret",
+    "href": "lectures/Intro-3-LinearModels.html#example-how-to-interpret",
+    "title": "Stats Review: Linear Models",
+    "section": "Example: How to interpret?",
+    "text": "Example: How to interpret?\nClean output by pre-defining factors.\n\n\nCode\nD &lt;- D %&gt;%\n  mutate(AGECAT = factor(AGECAT,levels = c(2,3,4,5),labels=c(\"21-30\",\"31-40\",\"41-50\",\"51-60\"))) %&gt;%\n  mutate(SEX = factor(SEX,levels=c(1,2),labels=c(\"Male\",\"Female\"))) %&gt;%\n  mutate(OCCsimple = as.factor(OCCsimple))\n\n\n\nlm(log(Wage) ~ SEX + OCCsimple + AGECAT,data=D) %&gt;%\n  summary()\n\n\nCall:\nlm(formula = log(Wage) ~ SEX + OCCsimple + AGECAT, data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)      3.312504   0.003752  882.86   &lt;2e-16 ***\nSEXFemale       -0.208918   0.002148  -97.27   &lt;2e-16 ***\nOCCsimpleManual -0.525808   0.003760 -139.84   &lt;2e-16 ***\nOCCsimpleOther  -0.313654   0.003272  -95.86   &lt;2e-16 ***\nAGECAT31-40      0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50      0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60      0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.1141,    Adjusted R-squared:  0.1141 \nF-statistic:  7056 on 6 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-remove-intercept",
+    "href": "lectures/Intro-3-LinearModels.html#example-remove-intercept",
+    "title": "Stats Review: Linear Models",
+    "section": "Example: Remove intercept",
+    "text": "Example: Remove intercept\n\nlm(log(Wage) ~ 0 + SEX + OCCsimple + AGECAT,data=D) %&gt;%\n  summary()\n\n\nCall:\nlm(formula = log(Wage) ~ 0 + SEX + OCCsimple + AGECAT, data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \nSEXMale          3.312504   0.003752  882.86   &lt;2e-16 ***\nSEXFemale        3.103586   0.003820  812.38   &lt;2e-16 ***\nOCCsimpleManual -0.525808   0.003760 -139.84   &lt;2e-16 ***\nOCCsimpleOther  -0.313654   0.003272  -95.86   &lt;2e-16 ***\nAGECAT31-40      0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50      0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60      0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 \nF-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-change-the-ordering",
+    "href": "lectures/Intro-3-LinearModels.html#example-change-the-ordering",
+    "title": "Stats Review: Linear Models",
+    "section": "Example: Change the ordering",
+    "text": "Example: Change the ordering\nAnd try changing the order of the variables in the formula:\n\n\n\nCall:\nlm(formula = log(Wage) ~ 0 + OCCsimple + SEX + AGECAT, data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                     Estimate Std. Error t value Pr(&gt;|t|)    \nOCCsimpleManagerial  3.312504   0.003752  882.86   &lt;2e-16 ***\nOCCsimpleManual      2.786696   0.002815  989.99   &lt;2e-16 ***\nOCCsimpleOther       2.998850   0.002484 1207.41   &lt;2e-16 ***\nSEXFemale           -0.208918   0.002148  -97.27   &lt;2e-16 ***\nAGECAT31-40          0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50          0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60          0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 \nF-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#example-change-the-ordering-of-variables",
+    "href": "lectures/Intro-3-LinearModels.html#example-change-the-ordering-of-variables",
+    "title": "Stats Review: Linear Models",
+    "section": "Example: Change the ordering of variables",
+    "text": "Example: Change the ordering of variables\n\nlm(log(Wage) ~ 0 +  OCCsimple + SEX + AGECAT,data=D) %&gt;%\n  summary()\n\n\nCall:\nlm(formula = log(Wage) ~ 0 + OCCsimple + SEX + AGECAT, data = D)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-11.9217  -0.3495  -0.0166   0.3649   4.2964 \n\nCoefficients:\n                     Estimate Std. Error t value Pr(&gt;|t|)    \nOCCsimpleManagerial  3.312504   0.003752  882.86   &lt;2e-16 ***\nOCCsimpleManual      2.786696   0.002815  989.99   &lt;2e-16 ***\nOCCsimpleOther       2.998850   0.002484 1207.41   &lt;2e-16 ***\nSEXFemale           -0.208918   0.002148  -97.27   &lt;2e-16 ***\nAGECAT31-40          0.256600   0.002819   91.03   &lt;2e-16 ***\nAGECAT41-50          0.300951   0.002872  104.79   &lt;2e-16 ***\nAGECAT51-60          0.290471   0.002910   99.81   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.5758 on 328775 degrees of freedom\nMultiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 \nF-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#a-regression-approach",
+    "href": "lectures/Intro-3-LinearModels.html#a-regression-approach",
+    "title": "Stats Review: Linear Models",
+    "section": "A Regression Approach",
+    "text": "A Regression Approach\n\n\nRecall the question: “Has family income become more important for college attendance”\n\nImplication: credit constraints more binding\n\nHow to set up in a linear model?\n\nGoal: estimate change in slope wrt family income"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#replicating-prior-analysis-with-ols",
+    "href": "lectures/Intro-3-LinearModels.html#replicating-prior-analysis-with-ols",
+    "title": "Stats Review: Linear Models",
+    "section": "Replicating prior analysis with OLS",
+    "text": "Replicating prior analysis with OLS\n\nd79 %&gt;%\n    rbind(d97) %&gt;% \n    filter(hhinccat==1 | hhinccat==4) %&gt;%\n    lm(Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort*as.factor(hhinccat)),data=.) %&gt;%\n    summary()\n\n\nCall:\nlm(formula = Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort * as.factor(hhinccat)), \n    data = .)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.96519 -0.18855  0.03481  0.32161  0.84026 \n\nCoefficients:\n                                                 Estimate Std. Error t value\nas.factor(afqtq)1:cohort79                       0.159744   0.022882   6.981\nas.factor(afqtq)2:cohort79                       0.397436   0.032411  12.262\nas.factor(afqtq)3:cohort79                       0.423529   0.043909   9.646\nas.factor(afqtq)4:cohort79                       0.733333   0.052262  14.032\nas.factor(afqtq)1:cohort97                       0.188552   0.023490   8.027\nas.factor(afqtq)2:cohort97                       0.401042   0.029215  13.727\nas.factor(afqtq)3:cohort97                       0.571429   0.036064  15.845\nas.factor(afqtq)4:cohort97                       0.790698   0.043652  18.113\nas.factor(afqtq)1:as.factor(hhinccat)4           0.143827   0.058736   2.449\nas.factor(afqtq)2:as.factor(hhinccat)4           0.002564   0.049754   0.052\nas.factor(afqtq)3:as.factor(hhinccat)4           0.254863   0.052454   4.859\nas.factor(afqtq)4:as.factor(hhinccat)4           0.190667   0.058196   3.276\nas.factor(afqtq)1:cohort97:as.factor(hhinccat)4  0.146494   0.079434   1.844\nas.factor(afqtq)2:cohort97:as.factor(hhinccat)4  0.237113   0.065653   3.612\nas.factor(afqtq)3:cohort97:as.factor(hhinccat)4  0.035778   0.068981   0.519\nas.factor(afqtq)4:cohort97:as.factor(hhinccat)4 -0.016174   0.076229  -0.212\n                                                Pr(&gt;|t|)    \nas.factor(afqtq)1:cohort79                      3.66e-12 ***\nas.factor(afqtq)2:cohort79                       &lt; 2e-16 ***\nas.factor(afqtq)3:cohort79                       &lt; 2e-16 ***\nas.factor(afqtq)4:cohort79                       &lt; 2e-16 ***\nas.factor(afqtq)1:cohort97                      1.47e-15 ***\nas.factor(afqtq)2:cohort97                       &lt; 2e-16 ***\nas.factor(afqtq)3:cohort97                       &lt; 2e-16 ***\nas.factor(afqtq)4:cohort97                       &lt; 2e-16 ***\nas.factor(afqtq)1:as.factor(hhinccat)4           0.01440 *  \nas.factor(afqtq)2:as.factor(hhinccat)4           0.95890    \nas.factor(afqtq)3:as.factor(hhinccat)4          1.25e-06 ***\nas.factor(afqtq)4:as.factor(hhinccat)4           0.00107 ** \nas.factor(afqtq)1:cohort97:as.factor(hhinccat)4  0.06526 .  \nas.factor(afqtq)2:cohort97:as.factor(hhinccat)4  0.00031 ***\nas.factor(afqtq)3:cohort97:as.factor(hhinccat)4  0.60404    \nas.factor(afqtq)4:cohort97:as.factor(hhinccat)4  0.83198    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.4048 on 2705 degrees of freedom\n  (614 observations deleted due to missingness)\nMultiple R-squared:  0.7122,    Adjusted R-squared:  0.7104 \nF-statistic: 418.3 on 16 and 2705 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#four-observations",
+    "href": "lectures/Intro-3-LinearModels.html#four-observations",
+    "title": "Stats Review: Linear Models",
+    "section": "Four observations",
+    "text": "Four observations\n\n\nNote use of : and * in specification\nHow to interpret coefficients?\nWhich are coefficients of interest? Why are they identical to differences in sample means?\nNotice standard errors are different. Why?"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#treating-income-quartile-as-cardinal",
+    "href": "lectures/Intro-3-LinearModels.html#treating-income-quartile-as-cardinal",
+    "title": "Stats Review: Linear Models",
+    "section": "Treating income quartile as cardinal",
+    "text": "Treating income quartile as cardinal\n\nd79 %&gt;%\n    rbind(d97) %&gt;% \n    lm(Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort*hhinccat),data=.) %&gt;%\n    summary()\n\n\nCall:\nlm(formula = Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort * hhinccat), \n    data = .)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.95689 -0.34255  0.08548  0.32329  0.84252 \n\nCoefficients:\n                                     Estimate Std. Error t value Pr(&gt;|t|)    \nas.factor(afqtq)1:cohort79           0.125741   0.035273   3.565 0.000367 ***\nas.factor(afqtq)2:cohort79           0.367893   0.041989   8.762  &lt; 2e-16 ***\nas.factor(afqtq)3:cohort79           0.333952   0.048407   6.899 5.85e-12 ***\nas.factor(afqtq)4:cohort79           0.683555   0.053213  12.846  &lt; 2e-16 ***\nas.factor(afqtq)1:cohort97           0.072403   0.034848   2.078 0.037784 *  \nas.factor(afqtq)2:cohort97           0.336904   0.037585   8.964  &lt; 2e-16 ***\nas.factor(afqtq)3:cohort97           0.491145   0.042026  11.687  &lt; 2e-16 ***\nas.factor(afqtq)4:cohort97           0.738950   0.045892  16.102  &lt; 2e-16 ***\nas.factor(afqtq)1:hhinccat           0.031735   0.016935   1.874 0.060996 .  \nas.factor(afqtq)2:hhinccat          -0.006814   0.016017  -0.425 0.670542    \nas.factor(afqtq)3:hhinccat           0.085690   0.016226   5.281 1.33e-07 ***\nas.factor(afqtq)4:hhinccat           0.057740   0.016835   3.430 0.000609 ***\nas.factor(afqtq)1:cohort97:hhinccat  0.058315   0.023164   2.517 0.011848 *  \nas.factor(afqtq)2:cohort97:hhinccat  0.088921   0.021262   4.182 2.93e-05 ***\nas.factor(afqtq)3:cohort97:hhinccat  0.006719   0.021626   0.311 0.756055    \nas.factor(afqtq)4:cohort97:hhinccat -0.003255   0.022292  -0.146 0.883916    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.4195 on 5417 degrees of freedom\n  (2504 observations deleted due to missingness)\nMultiple R-squared:  0.6887,    Adjusted R-squared:  0.6878 \nF-statistic: 749.1 on 16 and 5417 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#the-effect-of-financial-incentives-on-teacher-attendance",
+    "href": "lectures/Intro-3-LinearModels.html#the-effect-of-financial-incentives-on-teacher-attendance",
+    "title": "Stats Review: Linear Models",
+    "section": "The Effect of Financial Incentives on Teacher Attendance",
+    "text": "The Effect of Financial Incentives on Teacher Attendance\nSpecification from the paper: \\[ Work_{itm} = \\alpha + \\beta 1_{im}\\{day&gt;10\\} + \\gamma FirstDay_{t} + \\lambda 1_{im}\\{day&gt;10\\}\\times FirstDay_{t} + \\nu_{i} + \\mu_{m} + \\epsilon_{itm}  \\]\n\n\n\\(i\\): teacher, \\(t\\in\\{1,2\\}\\) indicates end or beginning of month, \\(m\\) is comparison pair\n\\(1_{im}\\{day&gt;10\\}\\): dummy for “in the money” at the end of month for pair \\(m\\).\n\\(FirstDay_{t}\\): dummy indicating beginning of new month.\nWhich coefficient reflects the effect of financial incentives?\nWhat else is the regression doing that our simple version didn’t do?"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#technical-aside",
+    "href": "lectures/Intro-3-LinearModels.html#technical-aside",
+    "title": "Stats Review: Linear Models",
+    "section": "Technical Aside",
+    "text": "Technical Aside\nFrom the paper:\n\nWe estimate this equation treating \\(\\nu_{i}\\) and \\(\\mu_{m}\\) as fixed effects or random effects.\n\nWhat does this mean?\n\n\n\nFixed Effects:\n\nEquivalent to putting dummy variables for each \\(i\\) and \\(m\\) in regression.\nCan be calculated by de-meaning by each unit\n\nexercise: show using Frisch-Waugh-Lovell (more in recitation)\n\nWill use package fixest for convenient FE\n\n\n\n\nRandom Effects:\n\n\\(\\nu_{i}\\) and \\(\\mu_{m}\\) are treated as part of the residual\niid assumption then violated\ncommon correction: clustered standard errors\nMore later on this"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#technical-aside-1",
+    "href": "lectures/Intro-3-LinearModels.html#technical-aside-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Technical Aside",
+    "text": "Technical Aside\n\n\n\nFixed Effects:\n\nEquivalent to putting dummy variables for each \\(i\\) and \\(m\\) in regression.\nCan be calculated by de-meaning by each unit\n\nexercise: show using Frisch-Waugh-Lovell (more in recitation)\n\nWill use package fixest for convenient FE\n\n\n\n\nRandom Effects:\n\n\\(\\nu_{i}\\) and \\(\\mu_{m}\\) are treated as part of the residual\niid assumption then violated\ncommon correction: clustered standard errors\nMore later on this"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#replicating-column-1",
+    "href": "lectures/Intro-3-LinearModels.html#replicating-column-1",
+    "title": "Stats Review: Linear Models",
+    "section": "Replicating Column 1",
+    "text": "Replicating Column 1\n\n\nOLS estimation, Dep. Var.: worked\nObservations: 2,807 \nStandard-errors: Clustered (schid) \n                         Estimate Std. Error  t value   Pr(&gt;|t|)    \n(Intercept)              0.158416   0.038544  4.10997 0.00011647 ***\nFirstDayTRUE             0.188119   0.054532  3.44967 0.00100655 ** \ninthemoney               0.523612   0.042631 12.28247  &lt; 2.2e-16 ***\nFirstDayTRUE:inthemoney -0.193247   0.059220 -3.26318 0.00178179 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 0.463745   Adj. R2: 0.055243"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#replicating-column-2",
+    "href": "lectures/Intro-3-LinearModels.html#replicating-column-2",
+    "title": "Stats Review: Linear Models",
+    "section": "Replicating Column 2",
+    "text": "Replicating Column 2\n\nd %&gt;%\n  filter(t==-1 | t==1) %&gt;%\n  feols(worked ~ FirstDay*inthemoney | schid + time,data=.) %&gt;%\n  summary(vcov=\"iid\")\n\nOLS estimation, Dep. Var.: worked\nObservations: 2,807 \nFixed-effects: schid: 64,  time: 27\nStandard-errors: IID \n                         Estimate Std. Error  t value   Pr(&gt;|t|)    \nFirstDayTRUE             0.121975   0.060723  2.00871 4.4667e-02 *  \ninthemoney               0.367959   0.046230  7.95933 2.5180e-15 ***\nFirstDayTRUE:inthemoney -0.120609   0.063067 -1.91239 5.5932e-02 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 0.421323     Adj. R2: 0.19461 \n                 Within R2: 0.031146"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#replicating-column-3-and-4",
+    "href": "lectures/Intro-3-LinearModels.html#replicating-column-3-and-4",
+    "title": "Stats Review: Linear Models",
+    "section": "Replicating Column 3 and 4",
+    "text": "Replicating Column 3 and 4\n\nColumn 3Column 4\n\n\n\nd %&gt;%\n  mutate(First = t&gt;0) %&gt;%\n  feols(worked ~ First*inthemoney + First:poly(abs(t),3),cluster=\"schid\",data=.) %&gt;%\n  summary()\n\nOLS estimation, Dep. Var.: worked\nObservations: 27,501 \nStandard-errors: Clustered (schid) \n                             Estimate Std. Error  t value   Pr(&gt;|t|)    \n(Intercept)                  0.141982   0.024889  5.70459 3.3524e-07 ***\nFirstTRUE                    0.326991   0.039271  8.32658 9.5900e-12 ***\ninthemoney                   0.602585   0.025751 23.40034  &lt; 2.2e-16 ***\nFirstTRUE:inthemoney        -0.334370   0.039360 -8.49512 4.8747e-12 ***\nFirstFALSE:poly(abs(t), 3)1  2.200169   0.619532  3.55134 7.3176e-04 ***\nFirstTRUE:poly(abs(t), 3)1   5.668366   0.524961 10.79769 5.7563e-16 ***\nFirstFALSE:poly(abs(t), 3)2 -1.940820   0.592261 -3.27697 1.7092e-03 ** \nFirstTRUE:poly(abs(t), 3)2  -3.503322   0.575382 -6.08869 7.4959e-08 ***\nFirstFALSE:poly(abs(t), 3)3  3.008277   0.426481  7.05372 1.6108e-09 ***\nFirstTRUE:poly(abs(t), 3)3  -3.072773   0.534769 -5.74598 2.8560e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 0.436042   Adj. R2: 0.079048\n\n\n\n\n\nd %&gt;%\n  mutate(First = t&gt;0) %&gt;%\n  feols(worked ~ First*inthemoney + First:poly(abs(t),3) | schid + time,data=.) %&gt;%\n  summary(vcov=\"iid\")\n\nOLS estimation, Dep. Var.: worked\nObservations: 27,501 \nFixed-effects: schid: 64,  time: 27\nStandard-errors: IID \n                             Estimate Std. Error   t value   Pr(&gt;|t|)    \nFirstTRUE                    0.290120   0.018564  15.62847  &lt; 2.2e-16 ***\ninthemoney                   0.482583   0.014169  34.05955  &lt; 2.2e-16 ***\nFirstTRUE:inthemoney        -0.297801   0.019305 -15.42614  &lt; 2.2e-16 ***\nFirstFALSE:poly(abs(t), 3)1  2.590093   0.600071   4.31631 1.5921e-05 ***\nFirstTRUE:poly(abs(t), 3)1   5.640014   0.583933   9.65867  &lt; 2.2e-16 ***\nFirstFALSE:poly(abs(t), 3)2 -1.986118   0.598125  -3.32057 8.9950e-04 ***\nFirstTRUE:poly(abs(t), 3)2  -3.507714   0.583831  -6.00810 1.9008e-09 ***\nFirstFALSE:poly(abs(t), 3)3  2.836065   0.597929   4.74314 2.1149e-06 ***\nFirstTRUE:poly(abs(t), 3)3  -3.082534   0.583915  -5.27908 1.3082e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nRMSE: 0.416896     Adj. R2: 0.155411\n                 Within R2: 0.05171"
+  },
+  {
+    "objectID": "lectures/Intro-3-LinearModels.html#accounting-for-fixed-effects-when-estimating-a-slope",
+    "href": "lectures/Intro-3-LinearModels.html#accounting-for-fixed-effects-when-estimating-a-slope",
+    "title": "Stats Review: Linear Models",
+    "section": "Accounting for fixed effects when estimating a slope",
+    "text": "Accounting for fixed effects when estimating a slope\n\\[ Y = 2 + 0.5X - c + \\epsilon,\\qquad X \\sim \\mc{N}(c-2,1)\\]"
   }
 ]

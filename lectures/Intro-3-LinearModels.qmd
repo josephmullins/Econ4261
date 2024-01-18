@@ -128,12 +128,57 @@ Let's prove:
 - $V_{\hat{\beta}} = \Sigma_{X}^{-1}\sigma^2$ when $\EE[\epsilon^2|\mathbf{x}] = \sigma^2$ (**homoskedasticity**)
 :::
 
+## OLS in `R` using  `lm` {.smaller}
+```{r}
+library(tidyverse)
+```
 
+::::{.columns}
+
+:::{.column width="50%"}
+:::{.fragment .fade-right}
+```{r}
+#| echo: true
+#| code-fold: true
+N <- 10
+d = data.frame(x = runif(N))
+d$y <- 1 + d$x + 0.1*rnorm(N)
+ggplot(d,aes(x=x,y=y)) + geom_point(size=3) + theme_minimal() 
+```
+:::
+:::
+
+:::{.column width="50%"}
+:::{.fragment .fade-left}
+```{r}
+#| echo: true
+
+lm(y ~ x,d) %>%
+  summary()
+```
+:::
+:::
+::::
+
+## Verify the formula
+Let's verify that this uses the OLS formula
+```{r}
+#| echo: true
+#| 
+Xmat <- matrix(1,N,2)
+Xmat[,2] <- d$x
+b_est <- solve(t(Xmat)%*%Xmat)%*%t(Xmat)%*%d$y
+resids <- d$y -  Xmat %*% b_est 
+var_est <- solve(t(Xmat) %*% Xmat) * sum(resids^2) / (N-2) #<- 
+se <- sqrt(diag(var_est))
+
+b_est[,1]
+se
+```
 
 ## The Law of Large Numbers
 
 ```{R}
-library(tidyverse)
 library(gganimate)
 # set the initial data
 d <- data.frame(x = rnorm(1))
@@ -151,6 +196,410 @@ for (t in 2:100) {
     rbind(D)
 }
 
-# D %>%
-#   ggplot(aes(x,y,group=n)) + geom_point() + geom_smooth(method="lm",se=FALSE) + transition_states(n)
+D %>%
+   ggplot(aes(x,y,group=n)) + geom_point() + geom_abline(intercept=0,slope=1,color="black") + geom_smooth(method="lm",se=FALSE) + transition_states(n) + theme_minimal()
 ```
+
+## The variance of $\hat{\beta}$ for two DGPs
+```{R}
+N <- 20
+D <- data.frame()
+for (r in 1:200) {
+  x <- runif(N)
+  y1 <- 1 + x + 2*rnorm(N)
+  y2 <- 1 + x + 0.5*rnorm(N)
+  D <- rbind(D,data.frame(r=r,x=x,y=y1,case="DGP 1"),
+    data.frame(r=r,x=x,y=y2,case="DGP 2"))
+}
+D %>%
+  filter(r<=15) %>%
+  ggplot(aes(x,y,group=r)) + geom_point() + geom_smooth(method="lm",se=FALSE) + facet_grid(. ~ case) + transition_states(r) + geom_abline(intercept=1,slope=1,color="black") + theme_minimal()
+```
+
+## Review of OLS: Population
+$$\EE\left[\hat{{\beta}}\right] = {\beta}$$
+
+$$ \BB{V}\left[\hat{{\beta}}\right] = \frac{1}{N}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\epsilon^2_{i}\right]\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1} $$
+
+Homoskedasticity ($\EE[\epsilon^2|\mathbf{x}]=\sigma_{\epsilon}^2$): 
+
+$$\BB{V}\left[\hat{{\beta}}\right] = \frac{1}{N}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1}\sigma^2_{\epsilon} $$
+
+$$\hat{{\beta}} \rightarrow_{d} \mc{N}\left({\beta},\BB{V}\left(\hat{{\beta}}\right)\right)$$
+
+## Review of OLS: Sample
+$$\hat{{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{Y}$$
+$$\widehat{\BB{V}[\hat{{\beta}}]} = \frac{1}{N}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\hat{\epsilon}^2_{i}\right)\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1} $$
+
+Homoskedasticity ($\EE[\epsilon^2|\mathbf{x}]=\sigma_{\epsilon}^2$): 
+
+$$\widehat{\BB{V}[\hat{{\beta}}]} = \frac{1}{N}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1}\sum\frac{1}{N}\hat{\epsilon}_{i}^2 = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{\hat{\epsilon}}^{T}\mathbf{\hat{\epsilon}} $$
+
+
+## Real Data is Messy
+```{r}
+#| echo: true
+d79f <- read.csv("../data/LM_nlsy79.csv") 
+d79f %>%
+    ggplot(aes(x=log(mfinc1617),y=afqtrev)) + geom_point() + theme_minimal() + xlab("log(Parent's Income)") + ylab("AFQT") + geom_smooth(method="lm",se=FALSE)
+
+```
+
+## Nevertheless
+
+```{r}
+#| echo: true
+#| code-fold: true
+d79f %>%
+    mutate(inc_bin = cut_number(log(mfinc1617),10)) %>%
+    group_by(inc_bin) %>%
+    summarize(mean_loginc = mean(log(mfinc1617)),mean_afqt = mean(afqtrev)) %>%
+    ggplot(aes(x=mean_loginc,y=mean_afqt)) + geom_point() + geom_line() + theme_minimal()
+
+```
+
+## Robust Standard Errors {.smaller}
+
+::::{.columns}
+:::{.column width="50%"}
+Non-robust:
+```{r}
+#| echo: true
+mod <- d79f %>%
+    filter(mfinc1617>0) %>%
+    lm(afqtrev ~ log(mfinc1617),data=.)
+summary(mod)
+```
+:::
+:::{.column width="50%"}
+Robust:
+```{r}
+#| echo: true
+library(sandwich)
+library(lmtest)
+coeftest(mod,vcov=vcovHC(mod))
+```
+:::
+
+::::
+
+## Technical Aside: $R^2$ {.smaller}
+- $R^2$: ``coefficient of determination''
+  - How of much of variation in $y$ can $\mathbf{x}$ explain:
+ $$ R^2 = 1 - \frac{\sum_{n}\hat{\epsilon}_{n}^2}{\sum_{n}(y_{i}-\ov{y})^2} $$
+- Does not determine the success of a regression or policy relevance of a variable.
+  - Genetic factors explain most of the variation in eyesight, does this mean eyeglasses don't matter?
+  - Natural causes explain 100\% of the variation in rainfall. Umbrellas don't matter?
+
+
+## Understanding the rank assumption: example
+Model:
+$$ \log(W_{i}) = \beta_{1} + \beta_{2}M_{i} + \beta_{3}F_{i} + \epsilon_{i} $$
+where $M_{i}\in\{0,1\}$ indicates male and $F_{i}\in\{0,1\}$ indicates female. 
+
+. . .
+
+**What's wrong with this model?**
+
+## Dummy Variables
+
+:::{.incremental}
+- Suppose that $X$ is a discrete random variable that we want to treat as **categorical**.
+  - Example: $gender\in\{\text{Male},\text{Female}\}$
+  - Example: $occupation \in\{\text{Managerial},\text{Manual},\text{Clerical}\}$
+  - Example: $age category \in\{21-30,31-40,41-50\}$
+- A **dummy variable** is a binary variable that indicates whether a categorical variable takes a particular value.
+:::
+
+## Dummy Variables {.smaller}
+The data:
+```{r}
+d <- data.frame(sex = c("Male","Female","Female","Male"),occupation = c("Clerical","Manager","Manual","Manual"),age = c("21-30","31-40","21-30","41-50"))
+knitr::kable(d)
+```
+
+## Dummy Variables {.smaller}
+The dummies
+```{r}
+make_dummy <- function(d,vname) {
+  for (s in unique(d[,vname])) {
+    d[,paste(vname,s,sep="_")] <- as.integer(d[,vname]==s)
+  }
+  return(d)
+}
+d <- make_dummy(d,"sex")
+d <- make_dummy(d,"occupation")
+d <- make_dummy(d,"age")
+```
+:::{.panel-tabset}
+### Sex
+```{r}
+d %>%
+  select(starts_with("sex")) %>%
+  knitr::kable()
+```
+
+### Occupation
+```{r}
+d %>%
+  select(starts_with("occupation")) %>%
+  knitr::kable()
+```
+
+### Age
+```{r}
+d %>%
+  select(starts_with("age")) %>%
+  knitr::kable()
+```
+
+:::
+
+
+## Dummies in `R` {.smaller}
+An example using wage data:
+```{r}
+#| echo: true
+#| code-line-numbers: 1-10|6|7|8|10
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR>=2011) %>%
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99),
+         OCCsimple = case_when(OCC<500 ~ "Managerial", OCC>=500 & OCC<6000 ~ "Other", OCC>6000 ~ "Manual"), #<- very broad and slightly wrong occupation codes
+         AGECAT = floor((AGE-1)/10)) %>% #<- create an age category
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  filter(!is.na(Wage),OCC>0,AGE>=21,AGE<=60) %>% #<- keep only people with non-missing wages and occupations, aged between 21 and 60
+  select(CPSIDP,AGECAT,OCCsimple,SEX,Wage)
+knitr::kable(head(D))
+```
+
+## Example 1: {.smaller}
+```{r}
+#| echo: true
+lm(log(Wage) ~ as.factor(SEX) + as.factor(OCCsimple) + as.factor(AGECAT),data=D) %>%
+  summary()
+
+```
+
+## Example: How to interpret? {.smaller}
+
+Clean output by pre-defining factors.
+```{r}
+#| echo: true
+#| code-fold: true
+D <- D %>%
+  mutate(AGECAT = factor(AGECAT,levels = c(2,3,4,5),labels=c("21-30","31-40","41-50","51-60"))) %>%
+  mutate(SEX = factor(SEX,levels=c(1,2),labels=c("Male","Female"))) %>%
+  mutate(OCCsimple = as.factor(OCCsimple))
+
+```
+```{r}
+#| echo: true
+lm(log(Wage) ~ SEX + OCCsimple + AGECAT,data=D) %>%
+  summary()
+
+```
+
+## Example: Remove intercept {.smaller}
+```{r}
+#| echo: true
+lm(log(Wage) ~ 0 + SEX + OCCsimple + AGECAT,data=D) %>%
+  summary()
+
+```
+
+## Example: Change the ordering of variables {.smaller}
+```{r}
+#| echo: true
+lm(log(Wage) ~ 0 +  OCCsimple + SEX + AGECAT,data=D) %>%
+  summary()
+
+```
+
+# Application: College Attendance and Borrowing Constraints
+
+## A Regression Approach
+```{r}
+d79 <- read.csv("~/Dropbox/Teaching/Econ4261/1-IntroAndReview/data/LM_nlsy79.csv") %>%
+    select(mfinc1617q,afqtq,Dhgacoll2122) %>%
+    rename(hhinccat = mfinc1617q) %>%
+    mutate(cohort = "79")
+
+d97 <- read.csv("~/Dropbox/Teaching/Econ4261/1-IntroAndReview/data/LM_nlsy97.csv") %>%
+    select(hhinccat,afqtq,Dhgacoll2122) %>%
+    mutate(cohort = "97")
+```
+
+:::{.incremental}
+- Recall the question: "Has family income become more important for college attendance"
+  - Implication: credit constraints more binding
+- How to set up in a linear model?
+  - Goal: estimate change in slope wrt family income
+:::
+
+## Replicating prior analysis with OLS {.smaller}
+
+```{r}
+#| echo: true
+
+d79 %>%
+    rbind(d97) %>% 
+    filter(hhinccat==1 | hhinccat==4) %>%
+    lm(Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort*as.factor(hhinccat)),data=.) %>%
+    summary()
+
+```
+
+## Four observations
+
+:::{.incremental}
+1. Note use of `:` and `*` in specification
+2. How to interpret coefficients?
+3. Which are coefficients of interest? Why are they identical to differences in sample means?
+4. Notice standard errors are different. Why?
+:::
+
+## Treating income quartile as cardinal {.smaller}
+
+```{r}
+#| echo: true
+d79 %>%
+    rbind(d97) %>% 
+    lm(Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort*hhinccat),data=.) %>%
+    summary()
+
+```
+
+# Financial Incentives and Teacher attendance 
+
+
+## The Effect of Financial Incentives on Teacher Attendance {.smaller}
+Specification from the paper:
+  $$ Work_{itm} = \alpha + \beta 1_{im}\{day>10\} + \gamma FirstDay_{t} + \lambda 1_{im}\{day>10\}\times FirstDay_{t} + \nu_{i} + \mu_{m} + \epsilon_{itm}  $$
+
+:::{.incremental}
+- $i$: teacher, $t\in\{1,2\}$ indicates end or beginning of month, $m$ is comparison pair
+- $1_{im}\{day>10\}$: dummy for "in the money" at the end of month for pair $m$.
+- $FirstDay_{t}$: dummy indicating beginning of new month. 
+- Which coefficient reflects the effect of financial incentives? 
+- What else is the regression doing that our simple version didn't do?
+:::
+
+## Technical Aside {.smaller}
+
+From the paper:
+
+> We estimate this equation treating $\nu_{i}$ and $\mu_{m}$ as fixed effects or random effects.
+
+What does this mean?
+
+::::{.columns}
+:::{.column width="50%"}
+:::{.fragment .fade-right}
+Fixed Effects:
+
+- Equivalent to putting dummy variables for each $i$ and $m$ in regression.
+- Can be calculated by de-meaning by each unit
+  - **exercise**: show using Frisch-Waugh-Lovell (more in recitation)
+- Will use package `fixest` for convenient FE
+:::
+:::
+:::{.column width="50%"}
+:::{.fragment .fade-left}
+Random Effects:
+
+- $\nu_{i}$ and $\mu_{m}$ are treated as part of the residual
+- iid assumption then violated
+- common correction: **clustered standard errors**
+- More later on this
+:::
+:::
+::::
+
+## Accounting for fixed effects when estimating a slope
+$$ Y = 2 + 0.5X - c + \epsilon,\qquad X \sim \mc{N}(c-2,1)$$
+
+```{r}
+N <- 100
+c <- sample(1:4,N,replace=T)
+x <- rnorm(N) + c - 2
+y <- 2 + 0.5*x - c + 0.4*rnorm(N)
+d <- data.frame(x=x,y=y,c=as.factor(c))
+d$state <- 1
+
+d1 <- d %>%
+  group_by(c) %>%
+  mutate(y=y - mean(y),state = 2) %>%
+  as.data.frame()
+
+d2 <- d1 %>%
+  group_by(c) %>%
+  mutate(x=x - mean(x),state = 3) %>%
+  as.data.frame()
+
+library(gganimate)
+d %>%
+  rbind(d1) %>%
+  rbind(d2) %>%
+  ggplot(aes(x,y,color=c)) + geom_point() + geom_smooth(aes(x,y),method="lm",se=FALSE,inherit.aes=FALSE) + theme_minimal() + transition_states(state)
+
+```
+
+## Replicating Column 1
+```{r}
+d <- read.csv("../data/DufloHannaRyan.csv") %>%
+  filter(!is.na(inthemoney)) %>%
+  mutate(InTheMoney = inthemoney==1,FirstDay=t==1)
+
+```
+
+```{r}
+library(fixest)
+#| echo: true
+
+d %>%
+  filter(t==-1 | t==1) %>%
+  feols(worked ~ FirstDay*inthemoney,cluster="schid",data=.) %>%
+  summary()
+
+```
+
+
+## Replicating Column 2
+
+```{r}
+#| echo: true
+
+d %>%
+  filter(t==-1 | t==1) %>%
+  feols(worked ~ FirstDay*inthemoney | schid + time,data=.) %>%
+  summary(vcov="iid")
+
+```
+
+
+## Replicating Column 3 and 4 {.smaller}
+
+:::{.panel-tabset}
+### Column 3
+
+```{r}
+#| echo: true
+d %>%
+  mutate(First = t>0) %>%
+  feols(worked ~ First*inthemoney + First:poly(abs(t),3),cluster="schid",data=.) %>%
+  summary()
+```
+
+### Column 4
+```{r}
+#| echo: true
+
+d %>%
+  mutate(First = t>0) %>%
+  feols(worked ~ First*inthemoney + First:poly(abs(t),3) | schid + time,data=.) %>%
+  summary(vcov="iid")
+```
+:::
+

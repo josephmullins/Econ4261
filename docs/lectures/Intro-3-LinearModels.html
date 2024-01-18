@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.539">
 
   <title>Econ4261 - Stats Review: Linear Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -460,8 +525,896 @@
 </ul>
 </div>
 </section>
+<section id="ols-in-r-using-lm" class="slide level2 smaller">
+<h2>OLS in <code>R</code> using <code>lm</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment fade-right">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-2"><a></a>d <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">runif</span>(N))</span>
+<span id="cb1-3"><a></a>d<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> d<span class="sc">$</span>x <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(N)</span>
+<span id="cb1-4"><a></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-left">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">lm</span>(y <span class="sc">~</span> x,d) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = d)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.16941 -0.09998  0.04211  0.09441  0.10608 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   0.9199     0.1046   8.795 2.19e-05 ***
+x             1.2767     0.2463   5.182  0.00084 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1143 on 8 degrees of freedom
+Multiple R-squared:  0.7705,    Adjusted R-squared:  0.7418 
+F-statistic: 26.86 on 1 and 8 DF,  p-value: 0.0008402</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="verify-the-formula" class="slide level2">
+<h2>Verify the formula</h2>
+<p>Let’s verify that this uses the OLS formula</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>Xmat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span>,N,<span class="dv">2</span>)</span>
+<span id="cb4-2"><a></a>Xmat[,<span class="dv">2</span>] <span class="ot">&lt;-</span> d<span class="sc">$</span>x</span>
+<span id="cb4-3"><a></a>b_est <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xmat)<span class="sc">%*%</span>Xmat)<span class="sc">%*%</span><span class="fu">t</span>(Xmat)<span class="sc">%*%</span>d<span class="sc">$</span>y</span>
+<span id="cb4-4"><a></a>resids <span class="ot">&lt;-</span> d<span class="sc">$</span>y <span class="sc">-</span>  Xmat <span class="sc">%*%</span> b_est </span>
+<span id="cb4-5"><a></a>var_est <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(Xmat) <span class="sc">%*%</span> Xmat) <span class="sc">*</span> <span class="fu">sum</span>(resids<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (N<span class="dv">-2</span>) <span class="co">#&lt;- </span></span>
+<span id="cb4-6"><a></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(var_est))</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a>b_est[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9198791 1.2766881</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>se</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1045926 0.2463488</code></pre>
+</div>
+</div>
+</section>
 <section id="the-law-of-large-numbers" class="slide level2">
 <h2>The Law of Large Numbers</h2>
+
+<img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-10-1.gif" class="r-stretch"></section>
+<section id="the-variance-of-hatbeta-for-two-dgps" class="slide level2">
+<h2>The variance of <span class="math inline">\(\hat{\beta}\)</span> for two DGPs</h2>
+
+<img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-12-1.gif" class="r-stretch"></section>
+<section id="review-of-ols-population" class="slide level2">
+<h2>Review of OLS: Population</h2>
+<p><span class="math display">\[\EE\left[\hat{{\beta}}\right] = {\beta}\]</span></p>
+<p><span class="math display">\[ \BB{V}\left[\hat{{\beta}}\right] = \frac{1}{N}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\epsilon^2_{i}\right]\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1} \]</span></p>
+<p>Homoskedasticity (<span class="math inline">\(\EE[\epsilon^2|\mathbf{x}]=\sigma_{\epsilon}^2\)</span>):</p>
+<p><span class="math display">\[\BB{V}\left[\hat{{\beta}}\right] = \frac{1}{N}\EE\left[\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right]^{-1}\sigma^2_{\epsilon} \]</span></p>
+<p><span class="math display">\[\hat{{\beta}} \rightarrow_{d} \mc{N}\left({\beta},\BB{V}\left(\hat{{\beta}}\right)\right)\]</span></p>
+</section>
+<section id="review-of-ols-sample" class="slide level2">
+<h2>Review of OLS: Sample</h2>
+<p><span class="math display">\[\hat{{\beta}} = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{Y}\]</span> <span class="math display">\[\widehat{\BB{V}[\hat{{\beta}}]} = \frac{1}{N}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\hat{\epsilon}^2_{i}\right)\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1} \]</span></p>
+<p>Homoskedasticity (<span class="math inline">\(\EE[\epsilon^2|\mathbf{x}]=\sigma_{\epsilon}^2\)</span>):</p>
+<p><span class="math display">\[\widehat{\BB{V}[\hat{{\beta}}]} = \frac{1}{N}\left(\frac{1}{N}\sum\mathbf{x}_{i}^{T}\mathbf{x}_{i}\right)^{-1}\sum\frac{1}{N}\hat{\epsilon}_{i}^2 = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{\hat{\epsilon}}^{T}\mathbf{\hat{\epsilon}} \]</span></p>
+</section>
+<section id="real-data-is-messy" class="slide level2">
+<h2>Real Data is Messy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>d79f <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/LM_nlsy79.csv"</span>) </span>
+<span id="cb8-2"><a></a>d79f <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(mfinc1617),<span class="at">y=</span>afqtrev)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"log(Parent's Income)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"AFQT"</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="nevertheless" class="slide level2">
+<h2>Nevertheless</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>d79f <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a></a>    <span class="fu">mutate</span>(<span class="at">inc_bin =</span> <span class="fu">cut_number</span>(<span class="fu">log</span>(mfinc1617),<span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a></a>    <span class="fu">group_by</span>(inc_bin) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a></a>    <span class="fu">summarize</span>(<span class="at">mean_loginc =</span> <span class="fu">mean</span>(<span class="fu">log</span>(mfinc1617)),<span class="at">mean_afqt =</span> <span class="fu">mean</span>(afqtrev)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>mean_loginc,<span class="at">y=</span>mean_afqt)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="robust-standard-errors" class="slide level2 smaller">
+<h2>Robust Standard Errors</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Non-robust:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mod <span class="ot">&lt;-</span> d79f <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a></a>    <span class="fu">filter</span>(mfinc1617<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a></a>    <span class="fu">lm</span>(afqtrev <span class="sc">~</span> <span class="fu">log</span>(mfinc1617),<span class="at">data=</span>.)</span>
+<span id="cb10-4"><a></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = afqtrev ~ log(mfinc1617), data = .)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-54.42 -20.79  -2.43  19.32  88.43 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     18.4768     1.2319    15.0   &lt;2e-16 ***
+log(mfinc1617)  17.3188     0.7631    22.7   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 25.58 on 2479 degrees of freedom
+Multiple R-squared:  0.172, Adjusted R-squared:  0.1717 
+F-statistic: 515.1 on 1 and 2479 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Robust:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb12-2"><a></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb12-3"><a></a><span class="fu">coeftest</span>(mod,<span class="at">vcov=</span><span class="fu">vcovHC</span>(mod))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+               Estimate Std. Error t value  Pr(&gt;|t|)    
+(Intercept)    18.47680    1.13311  16.306 &lt; 2.2e-16 ***
+log(mfinc1617) 17.31878    0.70523  24.558 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="technical-aside-r2" class="slide level2 smaller">
+<h2>Technical Aside: <span class="math inline">\(R^2\)</span></h2>
+<ul>
+<li><span class="math inline">\(R^2\)</span>: ``coefficient of determination’’
+<ul>
+<li>How of much of variation in <span class="math inline">\(y\)</span> can <span class="math inline">\(\mathbf{x}\)</span> explain: <span class="math display">\[ R^2 = 1 - \frac{\sum_{n}\hat{\epsilon}_{n}^2}{\sum_{n}(y_{i}-\ov{y})^2} \]</span></li>
+</ul></li>
+<li>Does not determine the success of a regression or policy relevance of a variable.
+<ul>
+<li>Genetic factors explain most of the variation in eyesight, does this mean eyeglasses don’t matter?</li>
+<li>Natural causes explain 100% of the variation in rainfall. Umbrellas don’t matter?</li>
+</ul></li>
+</ul>
+</section>
+<section id="understanding-the-rank-assumption-example" class="slide level2">
+<h2>Understanding the rank assumption: example</h2>
+<p>Model: <span class="math display">\[ \log(W_{i}) = \beta_{1} + \beta_{2}M_{i} + \beta_{3}F_{i} + \epsilon_{i} \]</span> where <span class="math inline">\(M_{i}\in\{0,1\}\)</span> indicates male and <span class="math inline">\(F_{i}\in\{0,1\}\)</span> indicates female.</p>
+<div class="fragment">
+<p><strong>What’s wrong with this model?</strong></p>
+</div>
+</section>
+<section id="dummy-variables" class="slide level2">
+<h2>Dummy Variables</h2>
+<div>
+<ul>
+<li class="fragment">Suppose that <span class="math inline">\(X\)</span> is a discrete random variable that we want to treat as <strong>categorical</strong>.
+<ul>
+<li class="fragment">Example: <span class="math inline">\(gender\in\{\text{Male},\text{Female}\}\)</span></li>
+<li class="fragment">Example: <span class="math inline">\(occupation \in\{\text{Managerial},\text{Manual},\text{Clerical}\}\)</span></li>
+<li class="fragment">Example: <span class="math inline">\(age category \in\{21-30,31-40,41-50\}\)</span></li>
+</ul></li>
+<li class="fragment">A <strong>dummy variable</strong> is a binary variable that indicates whether a categorical variable takes a particular value.</li>
+</ul>
+</div>
+</section>
+<section id="dummy-variables-1" class="slide level2 smaller">
+<h2>Dummy Variables</h2>
+<p>The data:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">occupation</th>
+<th style="text-align: left;">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Clerical</td>
+<td style="text-align: left;">21-30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Manager</td>
+<td style="text-align: left;">31-40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: left;">21-30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: left;">41-50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="dummy-variables-2" class="slide level2 smaller">
+<h2>Dummy Variables</h2>
+<p>The dummies</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Sex</a></li><li><a href="#tabset-1-2">Occupation</a></li><li><a href="#tabset-1-3">Age</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">sex_Male</th>
+<th style="text-align: right;">sex_Female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 29%">
+<col style="width: 27%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">occupation</th>
+<th style="text-align: right;">occupation_Clerical</th>
+<th style="text-align: right;">occupation_Manager</th>
+<th style="text-align: right;">occupation_Manual</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Clerical</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manager</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">age</th>
+<th style="text-align: right;">age_21-30</th>
+<th style="text-align: right;">age_31-40</th>
+<th style="text-align: right;">age_41-50</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">21-30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">31-40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">21-30</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">41-50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="dummies-in-r" class="slide level2 smaller">
+<h2>Dummies in <code>R</code></h2>
+<p>An example using wage data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="1-10|6|7|8|10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2011</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb14-4"><a></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb14-5"><a></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>),</span>
+<span id="cb14-6"><a></a>         <span class="at">OCCsimple =</span> <span class="fu">case_when</span>(OCC<span class="sc">&lt;</span><span class="dv">500</span> <span class="sc">~</span> <span class="st">"Managerial"</span>, OCC<span class="sc">&gt;=</span><span class="dv">500</span> <span class="sc">&amp;</span> OCC<span class="sc">&lt;</span><span class="dv">6000</span> <span class="sc">~</span> <span class="st">"Other"</span>, OCC<span class="sc">&gt;</span><span class="dv">6000</span> <span class="sc">~</span> <span class="st">"Manual"</span>), <span class="co">#&lt;- very broad and slightly wrong occupation codes</span></span>
+<span id="cb14-7"><a></a>         <span class="at">AGECAT =</span> <span class="fu">floor</span>((AGE<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span> <span class="co">#&lt;- create an age category</span></span>
+<span id="cb14-8"><a></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage),OCC<span class="sc">&gt;</span><span class="dv">0</span>,AGE<span class="sc">&gt;=</span><span class="dv">21</span>,AGE<span class="sc">&lt;=</span><span class="dv">60</span>) <span class="sc">%&gt;%</span> <span class="co">#&lt;- keep only people with non-missing wages and occupations, aged between 21 and 60</span></span>
+<span id="cb14-10"><a></a>  <span class="fu">select</span>(CPSIDP,AGECAT,OCCsimple,SEX,Wage)</span>
+<span id="cb14-11"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(D))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">CPSIDP</th>
+<th style="text-align: right;">AGECAT</th>
+<th style="text-align: left;">OCCsimple</th>
+<th style="text-align: right;">SEX</th>
+<th style="text-align: right;">Wage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.00912e+13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.00912e+13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14.50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.01012e+13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.01012e+13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">32.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.01012e+13</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15.45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2.01012e+13</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">24.05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="example-1" class="slide level2 smaller">
+<h2>Example 1:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="fu">as.factor</span>(SEX) <span class="sc">+</span> <span class="fu">as.factor</span>(OCCsimple) <span class="sc">+</span> <span class="fu">as.factor</span>(AGECAT),<span class="at">data=</span>D) <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(Wage) ~ as.factor(SEX) + as.factor(OCCsimple) + 
+    as.factor(AGECAT), data = D)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.9217  -0.3495  -0.0166   0.3649   4.2964 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                 3.312504   0.003752  882.86   &lt;2e-16 ***
+as.factor(SEX)2            -0.208918   0.002148  -97.27   &lt;2e-16 ***
+as.factor(OCCsimple)Manual -0.525808   0.003760 -139.84   &lt;2e-16 ***
+as.factor(OCCsimple)Other  -0.313654   0.003272  -95.86   &lt;2e-16 ***
+as.factor(AGECAT)3          0.256600   0.002819   91.03   &lt;2e-16 ***
+as.factor(AGECAT)4          0.300951   0.002872  104.79   &lt;2e-16 ***
+as.factor(AGECAT)5          0.290471   0.002910   99.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5758 on 328775 degrees of freedom
+Multiple R-squared:  0.1141,    Adjusted R-squared:  0.1141 
+F-statistic:  7056 on 6 and 328775 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="example-how-to-interpret" class="slide level2 smaller">
+<h2>Example: How to interpret?</h2>
+<p>Clean output by pre-defining factors.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>D <span class="ot">&lt;-</span> D <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">mutate</span>(<span class="at">AGECAT =</span> <span class="fu">factor</span>(AGECAT,<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"21-30"</span>,<span class="st">"31-40"</span>,<span class="st">"41-50"</span>,<span class="st">"51-60"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">mutate</span>(<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a></a>  <span class="fu">mutate</span>(<span class="at">OCCsimple =</span> <span class="fu">as.factor</span>(OCCsimple))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> SEX <span class="sc">+</span> OCCsimple <span class="sc">+</span> AGECAT,<span class="at">data=</span>D) <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(Wage) ~ SEX + OCCsimple + AGECAT, data = D)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.9217  -0.3495  -0.0166   0.3649   4.2964 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      3.312504   0.003752  882.86   &lt;2e-16 ***
+SEXFemale       -0.208918   0.002148  -97.27   &lt;2e-16 ***
+OCCsimpleManual -0.525808   0.003760 -139.84   &lt;2e-16 ***
+OCCsimpleOther  -0.313654   0.003272  -95.86   &lt;2e-16 ***
+AGECAT31-40      0.256600   0.002819   91.03   &lt;2e-16 ***
+AGECAT41-50      0.300951   0.002872  104.79   &lt;2e-16 ***
+AGECAT51-60      0.290471   0.002910   99.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5758 on 328775 degrees of freedom
+Multiple R-squared:  0.1141,    Adjusted R-squared:  0.1141 
+F-statistic:  7056 on 6 and 328775 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="example-remove-intercept" class="slide level2 smaller">
+<h2>Example: Remove intercept</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> SEX <span class="sc">+</span> OCCsimple <span class="sc">+</span> AGECAT,<span class="at">data=</span>D) <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(Wage) ~ 0 + SEX + OCCsimple + AGECAT, data = D)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.9217  -0.3495  -0.0166   0.3649   4.2964 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+SEXMale          3.312504   0.003752  882.86   &lt;2e-16 ***
+SEXFemale        3.103586   0.003820  812.38   &lt;2e-16 ***
+OCCsimpleManual -0.525808   0.003760 -139.84   &lt;2e-16 ***
+OCCsimpleOther  -0.313654   0.003272  -95.86   &lt;2e-16 ***
+AGECAT31-40      0.256600   0.002819   91.03   &lt;2e-16 ***
+AGECAT41-50      0.300951   0.002872  104.79   &lt;2e-16 ***
+AGECAT51-60      0.290471   0.002910   99.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5758 on 328775 degrees of freedom
+Multiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 
+F-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="example-change-the-ordering-of-variables" class="slide level2 smaller">
+<h2>Example: Change the ordering of variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span>  OCCsimple <span class="sc">+</span> SEX <span class="sc">+</span> AGECAT,<span class="at">data=</span>D) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(Wage) ~ 0 + OCCsimple + SEX + AGECAT, data = D)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.9217  -0.3495  -0.0166   0.3649   4.2964 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+OCCsimpleManagerial  3.312504   0.003752  882.86   &lt;2e-16 ***
+OCCsimpleManual      2.786696   0.002815  989.99   &lt;2e-16 ***
+OCCsimpleOther       2.998850   0.002484 1207.41   &lt;2e-16 ***
+SEXFemale           -0.208918   0.002148  -97.27   &lt;2e-16 ***
+AGECAT31-40          0.256600   0.002819   91.03   &lt;2e-16 ***
+AGECAT41-50          0.300951   0.002872  104.79   &lt;2e-16 ***
+AGECAT51-60          0.290471   0.002910   99.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.5758 on 328775 degrees of freedom
+Multiple R-squared:  0.9668,    Adjusted R-squared:  0.9668 
+F-statistic: 1.367e+06 on 7 and 328775 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="application-college-attendance-and-borrowing-constraints" class="title-slide slide level1 center">
+<h1>Application: College Attendance and Borrowing Constraints</h1>
+
+</section>
+<section id="a-regression-approach" class="slide level2">
+<h2>A Regression Approach</h2>
+<div>
+<ul>
+<li class="fragment">Recall the question: “Has family income become more important for college attendance”
+<ul>
+<li class="fragment">Implication: credit constraints more binding</li>
+</ul></li>
+<li class="fragment">How to set up in a linear model?
+<ul>
+<li class="fragment">Goal: estimate change in slope wrt family income</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="replicating-prior-analysis-with-ols" class="slide level2 smaller">
+<h2>Replicating prior analysis with OLS</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>d79 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a></a>    <span class="fu">rbind</span>(d97) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a></a>    <span class="fu">filter</span>(hhinccat<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> hhinccat<span class="sc">==</span><span class="dv">4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a></a>    <span class="fu">lm</span>(Dhgacoll2122 <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fu">as.factor</span>(afqtq)<span class="sc">:</span>(cohort<span class="sc">*</span><span class="fu">as.factor</span>(hhinccat)),<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a></a>    <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort * as.factor(hhinccat)), 
+    data = .)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.96519 -0.18855  0.03481  0.32161  0.84026 
+
+Coefficients:
+                                                 Estimate Std. Error t value
+as.factor(afqtq)1:cohort79                       0.159744   0.022882   6.981
+as.factor(afqtq)2:cohort79                       0.397436   0.032411  12.262
+as.factor(afqtq)3:cohort79                       0.423529   0.043909   9.646
+as.factor(afqtq)4:cohort79                       0.733333   0.052262  14.032
+as.factor(afqtq)1:cohort97                       0.188552   0.023490   8.027
+as.factor(afqtq)2:cohort97                       0.401042   0.029215  13.727
+as.factor(afqtq)3:cohort97                       0.571429   0.036064  15.845
+as.factor(afqtq)4:cohort97                       0.790698   0.043652  18.113
+as.factor(afqtq)1:as.factor(hhinccat)4           0.143827   0.058736   2.449
+as.factor(afqtq)2:as.factor(hhinccat)4           0.002564   0.049754   0.052
+as.factor(afqtq)3:as.factor(hhinccat)4           0.254863   0.052454   4.859
+as.factor(afqtq)4:as.factor(hhinccat)4           0.190667   0.058196   3.276
+as.factor(afqtq)1:cohort97:as.factor(hhinccat)4  0.146494   0.079434   1.844
+as.factor(afqtq)2:cohort97:as.factor(hhinccat)4  0.237113   0.065653   3.612
+as.factor(afqtq)3:cohort97:as.factor(hhinccat)4  0.035778   0.068981   0.519
+as.factor(afqtq)4:cohort97:as.factor(hhinccat)4 -0.016174   0.076229  -0.212
+                                                Pr(&gt;|t|)    
+as.factor(afqtq)1:cohort79                      3.66e-12 ***
+as.factor(afqtq)2:cohort79                       &lt; 2e-16 ***
+as.factor(afqtq)3:cohort79                       &lt; 2e-16 ***
+as.factor(afqtq)4:cohort79                       &lt; 2e-16 ***
+as.factor(afqtq)1:cohort97                      1.47e-15 ***
+as.factor(afqtq)2:cohort97                       &lt; 2e-16 ***
+as.factor(afqtq)3:cohort97                       &lt; 2e-16 ***
+as.factor(afqtq)4:cohort97                       &lt; 2e-16 ***
+as.factor(afqtq)1:as.factor(hhinccat)4           0.01440 *  
+as.factor(afqtq)2:as.factor(hhinccat)4           0.95890    
+as.factor(afqtq)3:as.factor(hhinccat)4          1.25e-06 ***
+as.factor(afqtq)4:as.factor(hhinccat)4           0.00107 ** 
+as.factor(afqtq)1:cohort97:as.factor(hhinccat)4  0.06526 .  
+as.factor(afqtq)2:cohort97:as.factor(hhinccat)4  0.00031 ***
+as.factor(afqtq)3:cohort97:as.factor(hhinccat)4  0.60404    
+as.factor(afqtq)4:cohort97:as.factor(hhinccat)4  0.83198    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4048 on 2705 degrees of freedom
+  (614 observations deleted due to missingness)
+Multiple R-squared:  0.7122,    Adjusted R-squared:  0.7104 
+F-statistic: 418.3 on 16 and 2705 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="four-observations" class="slide level2">
+<h2>Four observations</h2>
+<div>
+<ol type="1">
+<li class="fragment">Note use of <code>:</code> and <code>*</code> in specification</li>
+<li class="fragment">How to interpret coefficients?</li>
+<li class="fragment">Which are coefficients of interest? Why are they identical to differences in sample means?</li>
+<li class="fragment">Notice standard errors are different. Why?</li>
+</ol>
+</div>
+</section>
+<section id="treating-income-quartile-as-cardinal" class="slide level2 smaller">
+<h2>Treating income quartile as cardinal</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>d79 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a></a>    <span class="fu">rbind</span>(d97) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a></a>    <span class="fu">lm</span>(Dhgacoll2122 <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> <span class="fu">as.factor</span>(afqtq)<span class="sc">:</span>(cohort<span class="sc">*</span>hhinccat),<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a></a>    <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Dhgacoll2122 ~ 0 + as.factor(afqtq):(cohort * hhinccat), 
+    data = .)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.95689 -0.34255  0.08548  0.32329  0.84252 
+
+Coefficients:
+                                     Estimate Std. Error t value Pr(&gt;|t|)    
+as.factor(afqtq)1:cohort79           0.125741   0.035273   3.565 0.000367 ***
+as.factor(afqtq)2:cohort79           0.367893   0.041989   8.762  &lt; 2e-16 ***
+as.factor(afqtq)3:cohort79           0.333952   0.048407   6.899 5.85e-12 ***
+as.factor(afqtq)4:cohort79           0.683555   0.053213  12.846  &lt; 2e-16 ***
+as.factor(afqtq)1:cohort97           0.072403   0.034848   2.078 0.037784 *  
+as.factor(afqtq)2:cohort97           0.336904   0.037585   8.964  &lt; 2e-16 ***
+as.factor(afqtq)3:cohort97           0.491145   0.042026  11.687  &lt; 2e-16 ***
+as.factor(afqtq)4:cohort97           0.738950   0.045892  16.102  &lt; 2e-16 ***
+as.factor(afqtq)1:hhinccat           0.031735   0.016935   1.874 0.060996 .  
+as.factor(afqtq)2:hhinccat          -0.006814   0.016017  -0.425 0.670542    
+as.factor(afqtq)3:hhinccat           0.085690   0.016226   5.281 1.33e-07 ***
+as.factor(afqtq)4:hhinccat           0.057740   0.016835   3.430 0.000609 ***
+as.factor(afqtq)1:cohort97:hhinccat  0.058315   0.023164   2.517 0.011848 *  
+as.factor(afqtq)2:cohort97:hhinccat  0.088921   0.021262   4.182 2.93e-05 ***
+as.factor(afqtq)3:cohort97:hhinccat  0.006719   0.021626   0.311 0.756055    
+as.factor(afqtq)4:cohort97:hhinccat -0.003255   0.022292  -0.146 0.883916    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4195 on 5417 degrees of freedom
+  (2504 observations deleted due to missingness)
+Multiple R-squared:  0.6887,    Adjusted R-squared:  0.6878 
+F-statistic: 749.1 on 16 and 5417 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="financial-incentives-and-teacher-attendance" class="title-slide slide level1 center">
+<h1>Financial Incentives and Teacher attendance</h1>
+
+</section>
+<section id="the-effect-of-financial-incentives-on-teacher-attendance" class="slide level2 smaller">
+<h2>The Effect of Financial Incentives on Teacher Attendance</h2>
+<p>Specification from the paper: <span class="math display">\[ Work_{itm} = \alpha + \beta 1_{im}\{day&gt;10\} + \gamma FirstDay_{t} + \lambda 1_{im}\{day&gt;10\}\times FirstDay_{t} + \nu_{i} + \mu_{m} + \epsilon_{itm}  \]</span></p>
+<div>
+<ul>
+<li class="fragment"><span class="math inline">\(i\)</span>: teacher, <span class="math inline">\(t\in\{1,2\}\)</span> indicates end or beginning of month, <span class="math inline">\(m\)</span> is comparison pair</li>
+<li class="fragment"><span class="math inline">\(1_{im}\{day&gt;10\}\)</span>: dummy for “in the money” at the end of month for pair <span class="math inline">\(m\)</span>.</li>
+<li class="fragment"><span class="math inline">\(FirstDay_{t}\)</span>: dummy indicating beginning of new month.</li>
+<li class="fragment">Which coefficient reflects the effect of financial incentives?</li>
+<li class="fragment">What else is the regression doing that our simple version didn’t do?</li>
+</ul>
+</div>
+</section>
+<section id="technical-aside" class="slide level2 smaller">
+<h2>Technical Aside</h2>
+<p>From the paper:</p>
+<blockquote>
+<p>We estimate this equation treating <span class="math inline">\(\nu_{i}\)</span> and <span class="math inline">\(\mu_{m}\)</span> as fixed effects or random effects.</p>
+</blockquote>
+<p>What does this mean?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment fade-right">
+<p>Fixed Effects:</p>
+<ul>
+<li>Equivalent to putting dummy variables for each <span class="math inline">\(i\)</span> and <span class="math inline">\(m\)</span> in regression.</li>
+<li>Can be calculated by de-meaning by each unit
+<ul>
+<li><strong>exercise</strong>: show using Frisch-Waugh-Lovell (more in recitation)</li>
+</ul></li>
+<li>Will use package <code>fixest</code> for convenient FE</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-left">
+<p>Random Effects:</p>
+<ul>
+<li><span class="math inline">\(\nu_{i}\)</span> and <span class="math inline">\(\mu_{m}\)</span> are treated as part of the residual</li>
+<li>iid assumption then violated</li>
+<li>common correction: <strong>clustered standard errors</strong></li>
+<li>More later on this</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="accounting-for-fixed-effects-when-estimating-a-slope" class="slide level2">
+<h2>Accounting for fixed effects when estimating a slope</h2>
+<p><span class="math display">\[ Y = 2 + 0.5X - c + \epsilon,\qquad X \sim \mc{N}(c-2,1)\]</span></p>
+
+<img data-src="Intro-3-LinearModels_files/figure-revealjs/unnamed-chunk-50-1.gif" class="r-stretch"></section>
+<section id="replicating-column-1" class="slide level2">
+<h2>Replicating Column 1</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: worked
+Observations: 2,807 
+Standard-errors: Clustered (schid) 
+                         Estimate Std. Error  t value   Pr(&gt;|t|)    
+(Intercept)              0.158416   0.038544  4.10997 0.00011647 ***
+FirstDayTRUE             0.188119   0.054532  3.44967 0.00100655 ** 
+inthemoney               0.523612   0.042631 12.28247  &lt; 2.2e-16 ***
+FirstDayTRUE:inthemoney -0.193247   0.059220 -3.26318 0.00178179 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.463745   Adj. R2: 0.055243</code></pre>
+</div>
+</div>
+</section>
+<section id="replicating-column-2" class="slide level2">
+<h2>Replicating Column 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a></a>  <span class="fu">filter</span>(t<span class="sc">==-</span><span class="dv">1</span> <span class="sc">|</span> t<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a></a>  <span class="fu">feols</span>(worked <span class="sc">~</span> FirstDay<span class="sc">*</span>inthemoney <span class="sc">|</span> schid <span class="sc">+</span> time,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a></a>  <span class="fu">summary</span>(<span class="at">vcov=</span><span class="st">"iid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: worked
+Observations: 2,807 
+Fixed-effects: schid: 64,  time: 27
+Standard-errors: IID 
+                         Estimate Std. Error  t value   Pr(&gt;|t|)    
+FirstDayTRUE             0.121975   0.060723  2.00871 4.4667e-02 *  
+inthemoney               0.367959   0.046230  7.95933 2.5180e-15 ***
+FirstDayTRUE:inthemoney -0.120609   0.063067 -1.91239 5.5932e-02 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.421323     Adj. R2: 0.19461 
+                 Within R2: 0.031146</code></pre>
+</div>
+</div>
+</section>
+<section id="replicating-column-3-and-4" class="slide level2 smaller">
+<h2>Replicating Column 3 and 4</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Column 3</a></li><li><a href="#tabset-2-2">Column 4</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a></a>  <span class="fu">mutate</span>(<span class="at">First =</span> t<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a></a>  <span class="fu">feols</span>(worked <span class="sc">~</span> First<span class="sc">*</span>inthemoney <span class="sc">+</span> First<span class="sc">:</span><span class="fu">poly</span>(<span class="fu">abs</span>(t),<span class="dv">3</span>),<span class="at">cluster=</span><span class="st">"schid"</span>,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: worked
+Observations: 27,501 
+Standard-errors: Clustered (schid) 
+                             Estimate Std. Error  t value   Pr(&gt;|t|)    
+(Intercept)                  0.141982   0.024889  5.70459 3.3524e-07 ***
+FirstTRUE                    0.326991   0.039271  8.32658 9.5900e-12 ***
+inthemoney                   0.602585   0.025751 23.40034  &lt; 2.2e-16 ***
+FirstTRUE:inthemoney        -0.334370   0.039360 -8.49512 4.8747e-12 ***
+FirstFALSE:poly(abs(t), 3)1  2.200169   0.619532  3.55134 7.3176e-04 ***
+FirstTRUE:poly(abs(t), 3)1   5.668366   0.524961 10.79769 5.7563e-16 ***
+FirstFALSE:poly(abs(t), 3)2 -1.940820   0.592261 -3.27697 1.7092e-03 ** 
+FirstTRUE:poly(abs(t), 3)2  -3.503322   0.575382 -6.08869 7.4959e-08 ***
+FirstFALSE:poly(abs(t), 3)3  3.008277   0.426481  7.05372 1.6108e-09 ***
+FirstTRUE:poly(abs(t), 3)3  -3.072773   0.534769 -5.74598 2.8560e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.436042   Adj. R2: 0.079048</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a></a>  <span class="fu">mutate</span>(<span class="at">First =</span> t<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a></a>  <span class="fu">feols</span>(worked <span class="sc">~</span> First<span class="sc">*</span>inthemoney <span class="sc">+</span> First<span class="sc">:</span><span class="fu">poly</span>(<span class="fu">abs</span>(t),<span class="dv">3</span>) <span class="sc">|</span> schid <span class="sc">+</span> time,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a></a>  <span class="fu">summary</span>(<span class="at">vcov=</span><span class="st">"iid"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OLS estimation, Dep. Var.: worked
+Observations: 27,501 
+Fixed-effects: schid: 64,  time: 27
+Standard-errors: IID 
+                             Estimate Std. Error   t value   Pr(&gt;|t|)    
+FirstTRUE                    0.290120   0.018564  15.62847  &lt; 2.2e-16 ***
+inthemoney                   0.482583   0.014169  34.05955  &lt; 2.2e-16 ***
+FirstTRUE:inthemoney        -0.297801   0.019305 -15.42614  &lt; 2.2e-16 ***
+FirstFALSE:poly(abs(t), 3)1  2.590093   0.600071   4.31631 1.5921e-05 ***
+FirstTRUE:poly(abs(t), 3)1   5.640014   0.583933   9.65867  &lt; 2.2e-16 ***
+FirstFALSE:poly(abs(t), 3)2 -1.986118   0.598125  -3.32057 8.9950e-04 ***
+FirstTRUE:poly(abs(t), 3)2  -3.507714   0.583831  -6.00810 1.9008e-09 ***
+FirstFALSE:poly(abs(t), 3)3  2.836065   0.597929   4.74314 2.1149e-06 ***
+FirstTRUE:poly(abs(t), 3)3  -3.082534   0.583915  -5.27908 1.3082e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.416896     Adj. R2: 0.155411
+                 Within R2: 0.05171 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
