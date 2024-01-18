@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.539">
 
   <title>Econ4261 - Probability and Stats Review</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -506,26 +506,22 @@
 </section>
 <section id="simulation-example-1" class="slide level2">
 <h2>Simulation example</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
-</div>
-</div>
-</section>
+
+<img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
 <section id="simulation-example-2" class="slide level2">
 <h2>Simulation Example</h2>
 <p>Now let’s look at the sampling distribution of the sample mean <span class="math inline">\(\ov{X}_{5}\)</span> from these 100 trials:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a></a>    <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a></a>    <span class="fu">summarize</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(X)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sample_mean)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count)))) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a></a>    <span class="fu">group_by</span>(sample) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a></a>    <span class="fu">summarize</span>(<span class="at">sample_mean =</span> <span class="fu">mean</span>(X)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>sample_mean)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count <span class="sc">/</span> <span class="fu">sum</span>(count)))) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="population-vs-sample-1" class="slide level2 smaller">
 <h2>Population vs Sample</h2>
 <p>In general, let <span class="math inline">\(X\sim\text{Binomial}(K,p)\)</span> and <span class="math inline">\(Z\sim\mc{N}(\mu_{Z},\sigma^2_{Z})\)</span>.</p>
@@ -582,14 +578,14 @@
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="1,6|2,7|3|4,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>d79 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/LM_nlsy79.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a></a>    <span class="fu">select</span>(mfinc1617q,afqtq,Dhgacoll2122) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a></a>    <span class="fu">rename</span>(<span class="at">hhinccat =</span> mfinc1617q) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a></a>    <span class="fu">mutate</span>(<span class="at">cohort =</span> <span class="st">"79"</span>)</span>
-<span id="cb4-5"><a></a></span>
-<span id="cb4-6"><a></a>d97 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/LM_nlsy97.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a></a>    <span class="fu">select</span>(hhinccat,afqtq,Dhgacoll2122) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a></a>    <span class="fu">mutate</span>(<span class="at">cohort =</span> <span class="st">"97"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="1,6|2,7|3|4,8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>d79 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/LM_nlsy79.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a></a>    <span class="fu">select</span>(mfinc1617q,afqtq,Dhgacoll2122) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a></a>    <span class="fu">rename</span>(<span class="at">hhinccat =</span> mfinc1617q) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a></a>    <span class="fu">mutate</span>(<span class="at">cohort =</span> <span class="st">"79"</span>)</span>
+<span id="cb3-5"><a></a></span>
+<span id="cb3-6"><a></a>d97 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/LM_nlsy97.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a></a>    <span class="fu">select</span>(hhinccat,afqtq,Dhgacoll2122) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a></a>    <span class="fu">mutate</span>(<span class="at">cohort =</span> <span class="st">"97"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-2">
@@ -15784,15 +15780,15 @@
 <section id="compute-summary-statistics" class="slide level2 scrollable smaller">
 <h2>Compute summary statistics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>d_summary <span class="ot">&lt;-</span> d79 <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a></a>    <span class="fu">rbind</span>(d97) <span class="sc">%&gt;%</span> <span class="co">#&lt;- bind the two cohort data sets together</span></span>
-<span id="cb5-3"><a></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Dhgacoll2122),<span class="sc">!</span><span class="fu">is.na</span>(hhinccat)) <span class="sc">%&gt;%</span> <span class="co">#&lt;- drop missing data</span></span>
-<span id="cb5-4"><a></a>    <span class="fu">group_by</span>(cohort,afqtq,hhinccat) <span class="sc">%&gt;%</span> <span class="co">#&lt; define the cells to calc stats for</span></span>
-<span id="cb5-5"><a></a>    <span class="fu">summarize</span>(<span class="at">attendance =</span> <span class="fu">mean</span>(Dhgacoll2122), <span class="co">#&lt;- mean college attendance by cell</span></span>
-<span id="cb5-6"><a></a>              <span class="at">se =</span> <span class="fu">sqrt</span>(attendance<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>attendance)<span class="sc">/</span><span class="fu">n</span>()), <span class="co">#&lt;- standard deviation of sample mean</span></span>
-<span id="cb5-7"><a></a>              <span class="at">N=</span><span class="fu">n</span>()) <span class="co">#&lt;- number of obs per cell</span></span>
-<span id="cb5-8"><a></a></span>
-<span id="cb5-9"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>d_summary <span class="ot">&lt;-</span> d79 <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a></a>    <span class="fu">rbind</span>(d97) <span class="sc">%&gt;%</span> <span class="co">#&lt;- bind the two cohort data sets together</span></span>
+<span id="cb4-3"><a></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Dhgacoll2122),<span class="sc">!</span><span class="fu">is.na</span>(hhinccat)) <span class="sc">%&gt;%</span> <span class="co">#&lt;- drop missing data</span></span>
+<span id="cb4-4"><a></a>    <span class="fu">group_by</span>(cohort,afqtq,hhinccat) <span class="sc">%&gt;%</span> <span class="co">#&lt; define the cells to calc stats for</span></span>
+<span id="cb4-5"><a></a>    <span class="fu">summarize</span>(<span class="at">attendance =</span> <span class="fu">mean</span>(Dhgacoll2122), <span class="co">#&lt;- mean college attendance by cell</span></span>
+<span id="cb4-6"><a></a>              <span class="at">se =</span> <span class="fu">sqrt</span>(attendance<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>attendance)<span class="sc">/</span><span class="fu">n</span>()), <span class="co">#&lt;- standard deviation of sample mean</span></span>
+<span id="cb4-7"><a></a>              <span class="at">N=</span><span class="fu">n</span>()) <span class="co">#&lt;- number of obs per cell</span></span>
+<span id="cb4-8"><a></a></span>
+<span id="cb4-9"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <thead>
@@ -16076,13 +16072,13 @@
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>d_summary <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>afqtq,<span class="at">y=</span>attendance)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(cohort <span class="sc">~</span> hhinccat) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>d_summary <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>afqtq,<span class="at">y=</span>attendance)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(cohort <span class="sc">~</span> hhinccat) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -16092,14 +16088,14 @@
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>d_summary <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>afqtq,<span class="at">y=</span>attendance,<span class="at">ymin=</span>attendance<span class="fl">-1.96</span><span class="sc">*</span>se,<span class="at">ymax=</span>attendance<span class="fl">+1.96</span><span class="sc">*</span>se)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb7-3"><a></a>    <span class="fu">geom_errorbar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(cohort <span class="sc">~</span> hhinccat) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>d_summary <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>afqtq,<span class="at">y=</span>attendance,<span class="at">ymin=</span>attendance<span class="fl">-1.96</span><span class="sc">*</span>se,<span class="at">ymax=</span>attendance<span class="fl">+1.96</span><span class="sc">*</span>se)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb6-3"><a></a>    <span class="fu">geom_errorbar</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(cohort <span class="sc">~</span> hhinccat) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -16131,11 +16127,11 @@
 <div class="tab-content">
 <div id="tabset-3-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># First calculate the differences between top and bottom quartile of income</span></span>
-<span id="cb8-2"><a></a>diff <span class="ot">&lt;-</span> d_summary <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a></a>    <span class="fu">group_by</span>(cohort,afqtq) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a></a>    <span class="fu">summarize</span>(<span class="at">diff =</span> attendance[<span class="dv">4</span>]<span class="sc">-</span>attendance[<span class="dv">1</span>],<span class="at">se =</span> <span class="fu">sqrt</span>(se[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se[<span class="dv">4</span>]<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb8-5"><a></a>diff    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># First calculate the differences between top and bottom quartile of income</span></span>
+<span id="cb7-2"><a></a>diff <span class="ot">&lt;-</span> d_summary <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a></a>    <span class="fu">group_by</span>(cohort,afqtq) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a></a>    <span class="fu">summarize</span>(<span class="at">diff =</span> attendance[<span class="dv">4</span>]<span class="sc">-</span>attendance[<span class="dv">1</span>],<span class="at">se =</span> <span class="fu">sqrt</span>(se[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> se[<span class="dv">4</span>]<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb7-5"><a></a>diff    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
 # Groups:   cohort [2]
@@ -16157,7 +16153,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -16169,11 +16165,11 @@
 <section id="has-family-income-become-more-important-for-college-attendance-1" class="slide level2 smaller">
 <h2>Has family income become more important for college attendance?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># first calculate</span></span>
-<span id="cb10-2"><a></a>g_diff <span class="ot">&lt;-</span> diff <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a></a>    <span class="fu">group_by</span>(afqtq) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a></a>    <span class="fu">summarize</span>(<span class="at">g_diff =</span> diff[<span class="dv">2</span>]<span class="sc">-</span>diff[<span class="dv">1</span>],<span class="at">se =</span> <span class="fu">sqrt</span>(se[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>se[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb10-5"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(g_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># first calculate</span></span>
+<span id="cb9-2"><a></a>g_diff <span class="ot">&lt;-</span> diff <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a></a>    <span class="fu">group_by</span>(afqtq) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a></a>    <span class="fu">summarize</span>(<span class="at">g_diff =</span> diff[<span class="dv">2</span>]<span class="sc">-</span>diff[<span class="dv">1</span>],<span class="at">se =</span> <span class="fu">sqrt</span>(se[<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span>se[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb9-5"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(g_diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <thead>
@@ -16212,12 +16208,12 @@
 <section id="has-family-income-become-more-important-for-college-attendance-2" class="slide level2 smaller">
 <h2>Has family income become more important for college attendance?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>z_crit<span class="ot">=</span><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span>
-<span id="cb11-2"><a></a>results <span class="ot">&lt;-</span> g_diff <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a></a>    <span class="fu">mutate</span>(<span class="at">test_stat =</span> g_diff<span class="sc">/</span>se) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a></a>    <span class="fu">mutate</span>(<span class="at">reject =</span> test_stat<span class="sc">&gt;</span>z_crit) <span class="sc">%&gt;%</span> <span class="co">#&lt;- the one-side 95% test</span></span>
-<span id="cb11-5"><a></a>    <span class="fu">mutate</span>(<span class="at">pval =</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(test_stat)) <span class="co">#&lt;- calculate the p-value</span></span>
-<span id="cb11-6"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>z_crit<span class="ot">=</span><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span>
+<span id="cb10-2"><a></a>results <span class="ot">&lt;-</span> g_diff <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a></a>    <span class="fu">mutate</span>(<span class="at">test_stat =</span> g_diff<span class="sc">/</span>se) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a></a>    <span class="fu">mutate</span>(<span class="at">reject =</span> test_stat<span class="sc">&gt;</span>z_crit) <span class="sc">%&gt;%</span> <span class="co">#&lt;- the one-side 95% test</span></span>
+<span id="cb10-5"><a></a>    <span class="fu">mutate</span>(<span class="at">pval =</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(test_stat)) <span class="co">#&lt;- calculate the p-value</span></span>
+<span id="cb10-6"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <thead>
@@ -16289,14 +16285,14 @@
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Dropbox/Teaching/Econ4261/1-IntroAndReview/data/DufloHannaRyan.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(inthemoney)) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">mutate</span>(<span class="at">InTheMoney =</span> inthemoney<span class="sc">==</span><span class="dv">1</span>,<span class="at">FirstDay=</span>t<span class="sc">==</span><span class="dv">1</span>)</span>
-<span id="cb12-4"><a></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a></a>  <span class="fu">select</span>(schid,t,InTheMoney,worked,year,month,day) <span class="sc">%&gt;%</span></span>
-<span id="cb12-6"><a></a>  <span class="fu">filter</span>(t<span class="sc">==-</span><span class="dv">1</span> <span class="sc">|</span> t<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-7"><a></a>  <span class="fu">arrange</span>(schid,year,month,day) <span class="sc">%&gt;%</span></span>
-<span id="cb12-8"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>d <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"~/Dropbox/Teaching/Econ4261/1-IntroAndReview/data/DufloHannaRyan.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(inthemoney)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">mutate</span>(<span class="at">InTheMoney =</span> inthemoney<span class="sc">==</span><span class="dv">1</span>,<span class="at">FirstDay=</span>t<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb11-4"><a></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a></a>  <span class="fu">select</span>(schid,t,InTheMoney,worked,year,month,day) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a></a>  <span class="fu">filter</span>(t<span class="sc">==-</span><span class="dv">1</span> <span class="sc">|</span> t<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a></a>  <span class="fu">arrange</span>(schid,year,month,day) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table>
@@ -41590,10 +41586,10 @@
 <div class="tab-content">
 <div id="tabset-4-1">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>d_mean <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a></a>  <span class="fu">group_by</span>(t,InTheMoney) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a></a>  <span class="fu">summarize</span>(<span class="at">work =</span> <span class="fu">mean</span>(worked),<span class="at">se =</span> <span class="fu">sd</span>(worked)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>())) <span class="co"># the function n() returns the number of observations for each pair</span></span>
-<span id="cb13-4"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>d_mean <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">group_by</span>(t,InTheMoney) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">summarize</span>(<span class="at">work =</span> <span class="fu">mean</span>(worked),<span class="at">se =</span> <span class="fu">sd</span>(worked)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>())) <span class="co"># the function n() returns the number of observations for each pair</span></span>
+<span id="cb12-4"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(d_mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table>
 <thead>
@@ -41854,14 +41850,14 @@
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>d_mean <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>t,<span class="at">y=</span>work,<span class="at">color=</span>InTheMoney)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
-<span id="cb14-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Average Attendance"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>,<span class="at">linetype=</span><span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>d_mean <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>t,<span class="at">y=</span>work,<span class="at">color=</span>InTheMoney)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb13-3"><a></a>  <span class="fu">ylab</span>(<span class="st">"Average Attendance"</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>,<span class="at">linetype=</span><span class="st">"dashed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="Intro-2-ProbabilityStats_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -41886,19 +41882,19 @@
 <h2>Replicating DHR (2012)</h2>
 <p>The authors examine the effect by first creating a dataset of matched pairs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="1-2|3|4|6-9|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>last_day <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a></a>  <span class="fu">filter</span>(t<span class="sc">==-</span><span class="dv">1</span>,<span class="sc">!</span>InTheMoney) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a></a>  <span class="fu">mutate</span>(<span class="at">month_index =</span> year<span class="sc">*</span><span class="dv">12</span> <span class="sc">+</span> month,<span class="at">worked_last =</span> worked) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a></a>  <span class="fu">select</span>(schid,month_index,InTheMoney,worked_last)</span>
-<span id="cb15-5"><a></a></span>
-<span id="cb15-6"><a></a>matched_pairs <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb15-7"><a></a>  <span class="fu">filter</span>(t<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a></a>  <span class="fu">mutate</span>(<span class="at">month_index =</span> year<span class="sc">*</span><span class="dv">12</span> <span class="sc">+</span> month <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co">#&lt;- for the merge</span></span>
-<span id="cb15-9"><a></a>  <span class="fu">inner_join</span>(last_day) <span class="sc">%&gt;%</span></span>
-<span id="cb15-10"><a></a>  <span class="fu">select</span>(schid,year,month,worked,worked_last,InTheMoney) <span class="sc">%&gt;%</span></span>
-<span id="cb15-11"><a></a>  <span class="fu">arrange</span>(schid,year,month)</span>
-<span id="cb15-12"><a></a></span>
-<span id="cb15-13"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(matched_pairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="1-2|3|4|6-9|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>last_day <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">filter</span>(t<span class="sc">==-</span><span class="dv">1</span>,<span class="sc">!</span>InTheMoney) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a></a>  <span class="fu">mutate</span>(<span class="at">month_index =</span> year<span class="sc">*</span><span class="dv">12</span> <span class="sc">+</span> month,<span class="at">worked_last =</span> worked) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a></a>  <span class="fu">select</span>(schid,month_index,InTheMoney,worked_last)</span>
+<span id="cb14-5"><a></a></span>
+<span id="cb14-6"><a></a>matched_pairs <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a></a>  <span class="fu">filter</span>(t<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a></a>  <span class="fu">mutate</span>(<span class="at">month_index =</span> year<span class="sc">*</span><span class="dv">12</span> <span class="sc">+</span> month <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co">#&lt;- for the merge</span></span>
+<span id="cb14-9"><a></a>  <span class="fu">inner_join</span>(last_day) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10"><a></a>  <span class="fu">select</span>(schid,year,month,worked,worked_last,InTheMoney) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11"><a></a>  <span class="fu">arrange</span>(schid,year,month)</span>
+<span id="cb14-12"><a></a></span>
+<span id="cb14-13"><a></a>knitr<span class="sc">::</span><span class="fu">kable</span>(matched_pairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -42658,26 +42654,26 @@
 </div></section><section id="calculating-estimates" class="slide level2">
 <h2>Calculating estimates</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="2|7-12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># estimate the average effect</span></span>
-<span id="cb16-2"><a></a>est <span class="ot">&lt;-</span> <span class="fu">mean</span>(matched_pairs<span class="sc">$</span>worked <span class="sc">-</span> matched_pairs<span class="sc">$</span>worked_last) </span>
-<span id="cb16-3"><a></a></span>
-<span id="cb16-4"><a></a>N <span class="ot">=</span> <span class="fu">nrow</span>(matched_pairs)</span>
-<span id="cb16-5"><a></a></span>
-<span id="cb16-6"><a></a><span class="co"># estimate the standard errors (with clustering)</span></span>
-<span id="cb16-7"><a></a>se <span class="ot">&lt;-</span> matched_pairs <span class="sc">%&gt;%</span></span>
-<span id="cb16-8"><a></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> worked <span class="sc">-</span> worked_last) <span class="sc">%&gt;%</span></span>
-<span id="cb16-9"><a></a>  <span class="fu">group_by</span>(schid) <span class="sc">%&gt;%</span></span>
-<span id="cb16-10"><a></a>  <span class="fu">summarize</span>(<span class="at">ssq =</span> <span class="fu">sum</span>(diff <span class="sc">-</span> est)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb16-12"><a></a>  <span class="fu">summarize</span>(<span class="at">se =</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(ssq)<span class="sc">/</span>N<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="2|7-12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># estimate the average effect</span></span>
+<span id="cb15-2"><a></a>est <span class="ot">&lt;-</span> <span class="fu">mean</span>(matched_pairs<span class="sc">$</span>worked <span class="sc">-</span> matched_pairs<span class="sc">$</span>worked_last) </span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a>N <span class="ot">=</span> <span class="fu">nrow</span>(matched_pairs)</span>
+<span id="cb15-5"><a></a></span>
+<span id="cb15-6"><a></a><span class="co"># estimate the standard errors (with clustering)</span></span>
+<span id="cb15-7"><a></a>se <span class="ot">&lt;-</span> matched_pairs <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> worked <span class="sc">-</span> worked_last) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a></a>  <span class="fu">group_by</span>(schid) <span class="sc">%&gt;%</span></span>
+<span id="cb15-10"><a></a>  <span class="fu">summarize</span>(<span class="at">ssq =</span> <span class="fu">sum</span>(diff <span class="sc">-</span> est)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-11"><a></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-12"><a></a>  <span class="fu">summarize</span>(<span class="at">se =</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(ssq)<span class="sc">/</span>N<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="do-incentives-affect-teacher-attendance" class="slide level2">
 <h2>Do incentives affect teacher attendance?</h2>
 <p>With an estimate and a standard error we can do our hypothesis test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>pval <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(est<span class="sc">/</span>se<span class="sc">$</span>se)</span>
-<span id="cb17-2"><a></a>pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>pval <span class="ot">=</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(est<span class="sc">/</span>se<span class="sc">$</span>se)</span>
+<span id="cb16-2"><a></a>pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.002004044</code></pre>
 </div>
