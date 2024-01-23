@@ -19,15 +19,15 @@ install.packages("tidyverse")
 
 Then:
 ```{r}
-#| echo: false
-
+#| warning: false
 library(tidyverse)
 ```
 
+to load the package.
 
 Next, we want to load the data into memory. These data on wages comes from the Current Population Survey, administered by the Census Bureau and the Bureau of Labor Statistics. Learn more about the CPS [here](https://www.census.gov/programs-surveys/cps.html).
 
-One convenient way to get this data is through [IPUMS](https://www.ipums.org/). Actually run here at the Minnesota Population Center. *NOTE*: if you want to know more about any of the variables we are using here, you can look them up on the IPUMS website, or consult the codebook which is also on canvas.
+One convenient way to get this data is through [IPUMS](https://www.ipums.org/). Actually run here at the Minnesota Population Center. *NOTE*: if you want to know more about any of the variables we are using here, you can look them up on the IPUMS website, or consult the [codebook](/data/cps-econ-4262.xml).
 
 Since the data is stored as a .csv file, we will use the command `read.csv`. Note that the file path below is written assuming that the data is stored in an adjacent folder called `data`. **If you want to run this code, you have to make sure you are pointing to the directory where you have saved this data**.
 
