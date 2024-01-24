@@ -1,0 +1,203 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\begin{document}
+\paragraph{1)} If two events, $A$ and $B$, are \emph{statistically independent}, is there any sense in using observations of $B$ to forecast or predict $A$? Why or why not? Use conditional probabilities to support your answer.
+
+\paragraph{2)} Suppose you flip two coins and roll a fair die. Every ``random experiment'' here is independent of the others. What is the probability that the number of heads you get is greater than or equal to the number from the dice roll?
+
+\paragraph{3)} $X$ can take the values $\{1,2,3\}$ with probabilities $\{0.6,0.2,0.2\}$. Compute $\EE[X]$ and $\BB{V}[X]$.
+
+
+\paragraph{4)} Your friends, Rihanna and Beyonce, take turns giving you gifts for your birthday. You enjoy 30\% of the gifts Rihanna gives you, and 50\% of Beyonce's gifts. This year, they flip a fair coin to decide who will buy you two presents. Let $B\in\{0,1\}$ indicate whether Beyonce bought your presents this year, and let $Y$ be the number of gifts you enjoy.
+\begin{enumerate}
+\item Write down the joint distribution (as a table or a formula, whichever you prefer) of $Y$ and $B$
+\item Calculate $\EE[Y|B=0]$, $\EE[Y|B=1]$, and $\EE[Y]$.
+\item What is the distribution of the number of gifts you enjoy, \emph{given} that Beyonce gave you the gifts ($B=1$).
+\item You enjoyed both gifts this year, would you reject the Null Hypothesis that Rihanna chose the gifts when conducting a test of size 10\%. What do you notice about this case that is different from the usual set up of Hypothesis Testing?
+\end{enumerate}
+
+\paragraph{5)} Define the following jointly distributed random variables $X$ and $Y$ according to the joint distribution:
+\[ P(x,y) = \left\{\barr{ll} 1/3 &\text{ for } (x,y)=(-1,1) \\ 1/3 &\text{ for } (x,y)=(0,0) \\ 1/3 &\text{ for } (x,y)=(1,1) \earr\right. \]
+Part (a): show that $\BB{C}(X,Y)=0$. Part (b): show that $X$ and $Y$ are not independent.
+
+\paragraph{6)} Beyonce runs a Lemonade stand in Houston, where her revenue every hour (in dollars) is distributed as a normal with mean 20 and variance 16.
+\begin{itemize}
+\item What is the probability that her revenue is greater than \$18?
+\item What is the probability that her revenue is between \$19 and \$24?
+\item If she sells glasses at 50c per glass, what is her expected number of glass sold in an hour? Remember that $revenue = price\times{items\ sold}$. Is the number of glasses sold in an hour also normal? Explain.
+\end{itemize}
+CDF values for a standard normal, $Z$:
+\begin{center}
+\begin{tabular}{ccccccc}
+$z$ & .0 & 0.25 & 0.5 & 0.75 & 1.0 \\ \hline
+$F(z)$ &  0.5 & 0.598 & 0.691 & 0.773 & 0.841
+\end{tabular}
+\end{center}
+
+\paragraph{7)} Let some data $X_1,X_2,...,X_N$ be drawn from a normal distribution with mean $\mu_{X}$ and variance $\sigma^2_{X}$.
+\begin{enumerate}
+\item How is the sample mean, $\ov{X}_{N}$, distributed?
+\item Define $S = X_1+X_2$. Is $S$ a statistic? How is $S$ distributed?
+\item Define $U = X_1+X_2+X_3$. Is $U$ a statistic? How is $U$ distributed?
+\item Suppose that the observations, $X_i$, are not drawn from a normal distribution. What idea can we use to approximate the distribution of $\ov{X}_N$? What will this approximation be?
+\end{enumerate}
+
+\paragraph{8)} Let each observation of some dataset, $X_1,X_2,...,X_N$, be drawn from a uniform distribution with lower bound 10 and upper bound 20. Remember that when $X$ is a uniform distribution on the interval $[a,b]$, $\EE[X] = (a+b)/2$ and $\BB{V}[X] = (b-a)^2/12$
+\begin{enumerate}
+\item For each observation $X_i$, what is $\EE[X_i]$? What is $\BB{V}[X_i]$?
+\item Based on your answer above, what is $\EE[\ov{X}_N]$? What is $\BB{V}[\ov{X}_N]$?
+\item If $N$ was from a large sample, how could you approximate the distribution of $\ov{X}_N$?
+\end{enumerate}
+
+\paragraph{9)} Let $X_1,X_2,...,X_N$ be data drawn from a normal distribution with mean $10$ and standard deviation $4$.
+\begin{enumerate}
+\item Define $T = X_1+X_2+X_3$. Is $T$ a statistic? What is the distribution of $T$?
+\item Write a formula for two numbers, $a$ and $b$, such that  $P[a\leq T \leq b] = 0.95$. Use that $P[Z\leq-1.96]=0.025$, where $Z$ is a standard normal (i.e. $z_{.025}=1.96$).
+\end{enumerate}
+
+\paragraph{10) (hard)} Let $X_1,X_2,...,X_8$ be data drawn from a normal distribution with mean $5$ and standard deviation $1$. Define the following:
+\[T_8 = X_1-X_2+X_3-X_4+X_5-X_6+X_7-X_8 \]
+\begin{enumerate}
+\item Is $T_8$ a statistic? What is its sampling distribution?
+\item Following the above logic, for a sample of size $N$, where $N$ is any even number, define:
+\[T_N = \sum_{i \text{ is odd}}X_i - \sum_{i\text{ is even}}X_i = X_1-X_2+X_3-...+X_{N-1}-X_{N} \]
+What is the sampling distribution of $T_N$?
+\end{enumerate}
+
+\paragraph{11)} The length of Taylor Swift's grudges follows an exponential\footnote{The cdf of the exponential distribution is $F(x)=1-\exp(-\lambda x)$, and $\EE[X]=\frac{1}{\lambda}$.} distribution, and her average (i.e. mean) grudge lasts 5 years.
+\begin{enumerate}
+\item Exactly 3 years ago, at a \emph{Taylor's Version} listening party, she overhears you making fun of her cats. What is the probability that she still holds a grudge against you?
+\item You are going to collect a dataset consisting of each of her 1000 grudges, and the length of time each grudge lasts. Given this large sample size, what distribution will the sample mean from this dataset approximately follow? (Hint: the variance of the exponential is $\frac{1}{\lambda^2}$).
+\end{enumerate}
+
+
+\paragraph{12)} You are asked to estimate the population mean and variance ($\mu,\sigma^2$) of workers' wages given a random sample of wages, $W_1,W_2,...,W_N$, from the population. You have $N=50$ observations. Suppose you get that $\ov{W}=\$10/hour$, with $s^2=9$.
+\begin{enumerate}
+\item Write a 95\% confidence interval for $\mu$ that can be computed from this information (one of the critical values below).
+\item Test the null hypothesis that $\mu=12$ against the alternative that it is smaller than 12. Use size $\alpha=0.05$, and use one of: $z_{0.025}=1.96$ ,$z_{0.05}=1.64$.
+\end{enumerate}
+
+\paragraph{13} You are asked to estimate the unemployment rate, using a sample of $N=100$ workers, who report their employment status (either employed or unemployed).
+\begin{enumerate}
+\item Describe how you would use this data to estimate the unemployment rate. Describe how you would compute a $(1-\alpha)\times100\%$ confidence interval.
+\item You estimate a sample proportion of unemployed workers of 7.6\%. Give the 95\% confidence interval for the true unemployment rate.
+\end{enumerate}
+
+\paragraph{14)} Suppose you have data on the annual earnings of $N=500$ households, $E_1,E_2,...,E_{500}$. This is a random sample from the population. The policy group you work for deems a household to be living in poverty if their earnings fall below the poverty line, \$10,000/year. Describe how you would use this data to estimate the poverty rate (i.e. the population proportion of households living in poverty). Give an estimate as well as a formula for the $(1-\alpha)\times100\%$ confidence interval.
+
+
+\paragraph{15)} Calculate the bias and the variance of the following estimators.
+\begin{enumerate}
+\item $\theta=\ov{X}+a$ where $a$ is a constant, as an estimator for $\mu$.
+\item $\theta=\ov{X}+\epsilon$ where $\epsilon$ is independent of $\ov{X}$ and $\EE[\epsilon]=0$, as an estimator for $\mu$.
+\end{enumerate}
+
+\paragraph{16)} You have data from a random sample of firms in the market for widgets. In particular, you have output $Y_i$, and costs $C_i$ for each firm $i$. Your data contains this information for a random sample of $N$ firms. You know that every firm sells their widgets at the market price of $\$2$, and so profit for each firm can be defined as:
+\[\Pi_i = 2 Y_i - C_i\]
+Assume that $Y_i$ and $C_i$ are each \emph{normally distributed}, with \emph{unknown} variance.
+\begin{enumerate}
+\item What kind of distribution will $\Pi$ have? Use the parameters $\EE[\Pi] = \mu_\pi$ and $\BB{V}[\Pi]=\sigma^2_\pi$ to describe this distribution.
+\item How would you estimate a 95\% confidence interval for $\mu_\pi$?
+\item Do you need to assume that $Y_i$ and $C_i$ are independent at any given firm $i$ for this to work?
+\end{enumerate}
+
+\paragraph{17)} Two sample means $\ov{X}_1$ and $\ov{X}_2$ are calculated from random samples from the \emph{same} population. The only difference is the sample size $N_1<N_2$. Which is the more efficient estimator (i.e. which estimator has smaller variance) of the population mean, $\mu$? Why?
+
+\paragraph{18)} Two sample means $\ov{X}_1$ and $\ov{X}_2$ are calculated from random samples from \emph{different} populations with the \emph{same} population mean, $\mu$. The population variances are different, though, with $\sigma^2_1<\sigma^2_2$. Which sample mean is a more efficient estimator for $\mu$? Why?
+
+\paragraph{19)} Let $X$ and $Y$ both be \emph{independent} random variables. Both are \emph{normally distributed} with means $\mu_X,\mu_Y$ and variances $\sigma^2_X,\sigma^2_Y$. Let $\ov{X}$ and $\ov{Y}$ be \emph{sample means} of these random variables, from samples of size $N_X$ and $N_Y$. Your task is to write down the \emph{sampling distribution} of the following statistics.
+\begin{enumerate}
+\item $\ov{X}$ and $\ov{Y}$
+\item $T=X+a$ where $a$ is a constant.
+\item $T=\ov{X}+Y$
+\item $T=\ov{Y}+X$
+\item $T=aX + bY$ where $a$ and $b$ are constants.
+\item $T=\ov{X}-\ov{Y}$
+\end{enumerate}
+
+\paragraph{20)} Suppose we are interested in estimating the mean wage, $\mu$, for a population. We collect a random sample of wages, $W_1,W_2,...,W_n$ from this population. \textbf{However}, suppose that people who earn less than \$8/hour do not report their earnings, and are dropped from the sample.
+\begin{enumerate}
+\item What is the \emph{effective} probability distribution we are drawing from, if we cannot observe wages of $w<8$? (Hint: the answer involves a conditional distribution).
+\item Given this new distribution, what is the expected value of a single (non-missing) observation $W$ taken from the population?
+\item What is the expected value of $\ov{W}$, the sample mean from this truncated sample?
+\item Consider the following rule: $\EE[X|X>c]>\EE[X]$ for any constant $c$. What does this imply for $\ov{W}$ from this sample as an estimator for $\mu$?
+\end{enumerate}
+
+\paragraph{21)} Suppose that unemployment durations (in weeks) are distributed according to an exponential (that is, the wait times until the arrival of a job offer are exponentially distributed) with a rate parameter $\lambda$. Let $T$ be the unemployment duration of one individual. Recall that:
+\[\EE[T] = \frac{1}{\lambda},\ \BB{V}[T]=\frac{1}{\lambda^2}\]
+\begin{enumerate}
+\item Let $\ov{T}$ be the sample mean from a random sample of the population of unemployed workers. Calculate $\EE[\ov{T}]$ and $\BB{V}[\ov{T}]$.
+\item What does the central limit theorem say about $\ov{T}$ as our sample size grows?
+\item Propose an estimator for $\lambda$ based on your answer to part (a).
+\item Combine parts (2) and (3) to propose an approximate 95\% confidence interval for $\lambda$.
+\end{enumerate}
+
+\paragraph{22)} Let $p$ be the true proportion of UMN students who like pineapple on pizza. Let $\ov{p}$ be the fraction of students from a random, iid, sample of size $N$ that report that they like pineapple on pizza.
+\begin{enumerate}
+\item What is the approximate sampling distribution of $\h{p}$?
+\item Construct a two-sided hypothesis test (with size $\alpha$) of the null hypothesis that $p=p_0$, where $p$ is the unknown population proportion.
+\end{enumerate}
+
+\paragraph{23)} Suppose that you have the data on some health measure, $Y$, for a group of treated individuals and a group of untreated individuals. Let $\ov{Y}_T$ be the sample mean of the treated, and let $\ov{Y}_N$ be the sample mean of the untreated. The \emph{effectiveness} of the drug in the population can be written as $\mu=\EE[Y_T]-\EE[Y_N]$. When the population variance across the two populations is \emph{equal, but unknown}, describe how you would construct a hypothesis test (with significance $\alpha$) of the following:
+\begin{enumerate}
+\item The null that the drug has \emph{no effect} against the alternative that it has \emph{some effect}
+\item The null that the drug has \emph{no effect} against the alternative that it has a \emph{positive effect}
+\end{enumerate}
+
+\paragraph{24)} Suppose that a statistic (it could be anything) is distributed such that:
+\[P[-\frac{a_\alpha}{\sqrt{N}} < T-\gamma < \frac{a_\alpha}{\sqrt{N}}]=1-\alpha\]
+Where $\gamma$ is a population parameter of interest. Use this fact to:
+\begin{itemize}
+\item Write a hypothesis test, with Type I error probability $\alpha$, of the Null hypothesis that $\gamma=0$ against the alternative $\gamma\neq 0$
+\item Write a hypothesis test, with Type I error probability $\alpha$, of the Null hypothesis that $\gamma=2$ against the alternative $\gamma\neq 2$
+\item Calculate the power of your first test above to correctly reject the Null when $\gamma = 2$. Write your answer in terms of the CDF of $T$ (i.e. in terms of a function $F$ such that $P[T\leq t] = F(t)$)
+\item What happens to the power of your test as $N$ increases? Why?
+\end{itemize}
+
+\end{document}

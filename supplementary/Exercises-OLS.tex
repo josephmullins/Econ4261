@@ -1,0 +1,140 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{cancel}
+\newfontfamily\headingfont[]{Futura}
+\titleformat*{\section}{\LARGE\headingfont}
+\titleformat*{\subsection}{\Large\headingfont}
+\titleformat*{\subsubsection}{\headingfont}
+\renewcommand{\maketitlehooka}{\headingfont}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\begin{document}
+
+\paragraph{1)} Recall the assumptions introduced with the linear model:
+\begin{itemize}
+\item[A0] The data $(Y_i,X_i)_{i=1}^N$ is iid
+\item[A1] The data has linear representation: $Y_i = X_i\beta + \eps_i$
+\item[A2] Strict exogeneity: $E[\eps_i|X_i]=0$.
+\item[A3] Rank: if $\text{dim}(X)=K$, then the data $X$ has $K$ linearly independent columns ($\text{Rank}(X)=K$)
+\item[A4] Spherical errors/Homoskedasticity: $\BB{V}[\eps_i|X_i] = \sigma^2$.
+\end{itemize}
+\begin{enumerate}
+\item State the assumptions necessary to prove that the OLS estimator $\h\beta$ is a consistent estimator of the relationship between $X$ and $Y$ in \emph{conditional expectation} $\mathbb{E}[Y|X]$
+\item State the assumptions necessary to prove that the OLS estimator $\h\beta$ is a consistent estimator of the \emph{causal effect} of each variable $X$ on $Y$.
+\item State which assumptions are necessary to derive the following expression for the asymptotic variance of $\h{\beta}$, $\mathbb{V}(\h\beta)$:
+  \[ \BB{V}[\h\beta] = \EE[X'_iX_i]^{-1}\frac{\sigma^2}{N} \]
+\end{enumerate}
+
+
+\paragraph{2)} Suppose you have iid data $(C_i,I_i)$ where $C_i\in\{0,1\}$ indicates whether an individual attends college, and $I_i$ is a measure of parental income. You want to estimate the relationship:
+\[ \EE[C|I] = \beta_0 + \beta_1 I \]
+\begin{enumerate}
+\item Describe your estimator $\h\beta$ for $\beta=(\beta_0,\beta_1)$. State the formula you will use.
+\item Describe the asymptotic distribution  of $\h\beta$.
+\item Propose a way to estimate this asymptotic distribution, and use this to construct a $(1-\alpha)\times100\%$ confidence interval for $\beta_1$.
+\item Are you comfortable with concluding that your estimate of $\beta_1$ is also an estimate if the causal effect of parental income on college attendance? Why or why not?
+\end{enumerate}
+
+\paragraph{3)} Consider the model:
+\[ Y_i = \alpha + X_i\beta + \eps_i.\]
+Notice that $\alpha$ is now the constant term, and so $X_i$ does not contain a 1 in the first column. Further assume that assumptions A0-A4 still hold.
+\begin{enumerate}
+\item Let $\mu_X = \EE[X]$ and $\hat{X}_i = X_i-\mu_X$. Write $Y_i$ in terms of $\h{X}_i$ and $\eps_i$.
+\item Does the equation you wrote above still satisfy A0-A4?
+\item Based on this, do you expect any difference between estimating $\beta$ using $X$ compared to $\h{X}$?
+\end{enumerate}
+
+\paragraph{4)} Consider the linear model:
+\[ Y_i = \beta_0 + X_{1,i}\beta_1 + X_{2,i}\beta_2 + \eps^*_i \]
+Suppose that $\EE[\eps^*_i|X_{1,i},X_{2,i}] = 0$ and that $X_{1,i}$ and $X_{2,i}$ are independent. Let $\EE[X_{1,i}]=\mu_1$ and $\EE[X_{2,i}]=\mu_2$.
+\begin{enumerate}
+\item Calculate $\EE[Y_i|X_{1,i}]$
+\item Define $\eps_i = Y_i-\EE[Y_i|X_{1,i}]$ and write $Y_i$ in terms of $X_{1,i}$ and $\eps_{i}$.
+\item Use the above two steps to argue that if we run a regression of $Y$ on $X_{1,i}$ without $X_{2,i}$, we still recover a consistent estimator of $\beta_1$.
+\end{enumerate}
+
+\paragraph{5)} Let:
+\[Y_i = X_i\beta + Z_i\gamma + \eps_i \]
+where $X_i$ and $Z_i$ are scalar variables, with $\EE[X_i]=\EE[Z_j]=0$.\footnote{Note that based on question 3, you can always make this true by applying the logic of question (3).}
+Suppose that $\BB{V}[X] = \sigma^2_X$, $\BB{V}[Z]=\sigma^2_Z$, and $\BB{C}(X,Z)=\sigma_{XZ}$.
+\begin{enumerate}
+\item Let $W_i=[X_i, Z_i]$. Write the matrix $\EE[W_i'W_i]$ in terms of $\sigma^2_X,\sigma^2_Z,\sigma^2_{XZ}$.
+\item Use the matrix inverse formula\footnote{$\left[\begin{array}{cc}a & b \\c & d \end{array}\right]^{-1}=\frac{1}{ab-cd}\left[\begin{array}{cc}d & -b \\-c & a \end{array}\right]$} to calculate $\EE[W_i'W_i]^{-1}$.
+\item Suppose that $X_i$ and $Z_i$ are \emph{independent}, and calculate (a) the variance of the estimator $\hat{\beta}$ when $Z_i$ is excluded from the regression; (b) the variance of the estimator $\tilde{\beta}$ when $Z_i$ is included in the regression. Which estimator is more efficient? One hint: what is the value of $\sigma_{XZ}$ when $X$ and $Z$ are independent.
+\item Suppose that $X_i$ and $Z_i$ are \emph{not} independent, but that $\gamma=0$. Calculate (a) the variance of the estimator $\hat{\beta}$ when $Z_i$ is excluded from the regression; (b) the variance of the estimator $\tilde{\beta}$ when $Z_i$ is included in the regression. Which estimator is more efficient?
+\end{enumerate}
+
+\paragraph{6)} Consider the regression $Y_i = \beta_0 + \beta_1X_i + \eps_i$ when $X_i$ is a single variable and A0-A4 are satisfied. Suppose that $\BB{V}[X_i] = 2$, $\sigma^2_\eps=1$, $N=50$, and $\beta_1 = 0.5$.
+For the questions below, you will use some of the following facts about $Z$, a standard normal random variable.
+\[P[Z>-3.36] = 0.9996,\ P[Z>-1.36] = 0.913, \ P[Z>0.64] = 0.261,\ P[Z>|1.24] = 0.107 \]
+\begin{itemize}
+\item Calculate $\BB{V}[\h{\beta}_1]$ when $\h{\beta}_1$ is estimated by OLS.
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0$ with size 95\% ($z_{0.05}=1.64$). What is the power of this test?
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0.2$. What is the power of this test?
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0.4$. What is the power of this test?
+\end{itemize}
+
+\paragraph{7)} Consider the linear model:
+\[Y_i = X_i\beta + \eps_i\]
+where assumptions A0-A4 hold. Suppose that $\dim(\beta)=4$.
+\begin{enumerate}
+\item Derive a test of the Null hypothesis that $\beta_1+\beta_2=1$. Describe exactly how you would conduct the test with significance $\alpha\times100\%$.
+\item Derive a test of the joint Null hypotheses that $\beta_1+\beta_2=1$ and $\beta_3=\beta_4$. Describe exactly how you would conduct the test with significance $\alpha\times100\%$.
+\end{enumerate}
+
+\paragraph{8)} For the below examples, write the correspoding $R$ matrix and vector $c$ in order to write each set of restrictions as $R\beta-c=0$.
+\begin{enumerate}
+\item $\dim(\beta)=4$, $\beta_1=0$, $\beta_2-\beta_3=0$, $\beta_4=4$. \\
+\item $\dim(\beta)=5$, $\beta_1=1$, $\beta_3 = 4$.
+\item $\dim(\beta) = 3$, $\beta_1 = 1.1$, $\beta_2 + 2\beta_3 = 1$.
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,12 @@
+---
+title: "Practice Exercises"
+---
+
+You can find some practice questions for the theory part of this class here. Don't waste them! Each one is an opportunity to test your understanding. Memorizing the solutions to these problems is not a formula for success in the exams.
+
+| Topic | Solutions | 
+| ----- | --------- | 
+| [Probability and Stats Review](/supplementary/PracticeQuestions.pdf) | [Solutions](/supplementary/PracticeQuestionsSolutions.pdf) |
+| [Linear Models and OLS](/supplementary/Exercises-OLS.pdf) | [Solutions](supplementary/Exercises-OLS-Solutions.pdf) | 
+| [Causality and Experiments](/supplementary/Exercises-Experiments.pdf) | [Solutions](/supplementary/Exercises-Experiments-Solutions.pdf) | 
+| [Diff-in-Diff and IV](/supplementary/Exercises-QuasiExperiments.pdf) | [Solutions](supplementary/QuasiExperiments%20-%20Solutions.pdf) (handwritten) | 

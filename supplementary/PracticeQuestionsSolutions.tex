@@ -1,0 +1,385 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\begin{document}
+\paragraph{1)} If two events, $A$ and $B$, are \emph{statistically independent}, is there any sense in using observations of $B$ to forecast or predict $A$? Why or why not? Use conditional probabilities to support your answer. \\
+{\color{blue} When $A$ and $B$ are independent, we have that $P[A|B] = P[A]$, and the conditional probability is equal to the unconditional. Thus, it is pointless to try and use $B$ to help forecast $A$.}
+
+\paragraph{2)} Suppose you flip two coins and roll a fair die. Every ``random experiment'' here is independent of the others. What is the probability that the number of heads you get is greater than or equal to the number from the dice roll? \\
+{\color{blue} Let $N_{H}$ be the number of heads and $D$ be the dice roll. Now:
+\begin{align*}
+P[N_{H}\geq D] &= P[N_{H}=0]\cdot P[D\leq0] + P[N_{H}=1]\cdot P[D\leq1] + P[N_{H}=2]\cdot P[D\leq2] \\
+&= \frac{1}{4}\times0 + \frac{1}{2}\times\frac{1}{6} + \frac{1}{4}\times\frac{2}{6} \\
+&= \frac{1}{6}
+\end{align*}
+}
+
+\paragraph{3)} $X$ can take the values $\{1,2,3\}$ with probabilities $\{0.6,0.2,0.2\}$. Compute $\EE[X]$ and $\BB{V}[X]$.
+{\color{blue}
+\[\EE[X] = 1\times 0.6 + 2\times 0.2 + 3\times0.2 = 1.6\]
+\[\BB{V}[X] = 1\times0.6 + 4\times 0.2 + 9\times 0.2 - 1.6^2 = 3.2-1.6^2 = 0.64 \]}
+
+
+\paragraph{4)} Your friends, Rihanna and Beyonce, take turns giving you gifts for your birthday. You enjoy 30\% of the gifts Rihanna gives you, and 50\% of Beyonce's gifts. This year, they flip a fair coin to decide who will buy you two presents. Let $B\in\{0,1\}$ indicate whether Beyonce bought your presents this year, and let $Y$ be the number of gifts you enjoy.
+\begin{enumerate}
+\item Write down the joint distribution (as a table or a formula, whichever you prefer) of $Y$ and $B$
+{\color{blue} When $B=0$, $Y$ is distributed as a binomial with $p=0.3$, $N=2$. When $B=1$, $Y$ is binomial with $p=0.5$,$N=2$. We can write the joint probabilities in the following table:
+\begin{center}
+\begin{tabular}{c|ccc}
+ & Y=0 & Y=1 & Y=2 \\\hline
+B = 0 & $0.49\times 0.5$ & $0.42 \times 0.5$  & $0.09 \times 0.5$ \\
+B = 1 & $0.25\times 0.5$ & $0.5 \times 0.5$ & $0.25 \times 0.5$
+\end{tabular}
+\begin{center}
+$=$
+\begin{tabular}{c|ccc}
+ & Y=0 & Y=1 & Y=2 \\\hline
+B = 0 & 0.245 & 0.21  & 0.045 \\
+B = 1 & 0.125 & 0.25 & 0.125
+\end{tabular}
+\end{center}
+\end{center}
+}
+
+\item Calculate $\EE[Y|B=0]$, $\EE[Y|B=1]$, and $\EE[Y]$.
+{\color{blue} The conditional distributions are both binomials. Recall that the mean of a binomial is $Np$, so we get $\EE[Y|B=0] = 0.6$ and $\EE[Y|B=1]=1$. Further, you can either note that the \emph{marginal distribution} of $Y$ is also binomial, with $p = 0.5\times 0.3 + 0.5\times0.5 = 0.4$ which gives $\EE[Y] = 0.8$, OR you can use the formula $\EE[Y] = \EE[Y|B=0]P[B=0] + \EE[Y|B=1]P[B=1]$ to get the same answer. OR, you can compute the marginal $P(y)$ and calculate the mean directly using the formula for expectation:
+\begin{align*}
+\EE[Y] &= 0\times (P(0,0)+P(1,0)) + 1\times(P(0,1) + P(1,1)) + 2\times(P(0,2) + P(1,2)) \\
+& = 0 + 0.21+0.25 + 2\times(0.045+0.125) \\
+& = 0.46 + 0.34 = 0.8
+\end{align*}
+}
+
+\item What is the distribution of the number of gifts you enjoy, \emph{given} that Beyonce gave you the gifts ($B=1$).
+{\color{blue} Given that $B=1$, $Y$ is binomial with $p=0.5$, $N=2$.}
+
+\item You enjoyed both gifts this year, would you reject the Null Hypothesis that Rihanna chose the gifts when conducting a test of size 10\%. What do you notice about this case that is different from the usual set up of Hypothesis Testing?
+{\color{blue} The probability that you enjoy both gifts from Rihanna is 0.09. If my decision rule was to reject the Null whenever I enjoy both gifts, then I would only commit Type I error with probability 0.09. Since this is less than 0.1, such a test test satisfies my requirements on size, and I would reject the Null in this case. Usually, hypothesis testing is conducted without any notion of probabilities over the truthfulness of the hypotheses. Here, the initial probability of the null being true is 0.5 (coming from the coin flip), so it's a bit weird to conduct a hypothesis test in this setting.}
+\end{enumerate}
+
+\paragraph{5)} Define the following jointly distributed random variables $X$ and $Y$ according to the joint distribution:
+\[ P(x,y) = \left\{\barr{ll} 1/3 &\text{ for } (x,y)=(-1,1) \\ 1/3 &\text{ for } (x,y)=(0,0) \\ 1/3 &\text{ for } (x,y)=(1,1) \earr\right. \]
+Part (a): show that $\BB{C}(X,Y)=0$. Part (b): show that $X$ and $Y$ are not independent. \\
+{\color{blue} Part (a): First we work out that $\EE[X] = 0$ and $\EE[Y] = 2/3$. Then, calculate the covariance:
+\[\BB{C}(X,Y) = (-1-0)\times(1-2/3)\times1/3 + 0\times(0-2/3)\times1/3 + (1-0)\times(1-2/3)\times1/3 = -1/9 + 0 + 1/9 = 0\]
+Part (b): notice that $P[Y=0] = P[X=0] = 1/3$, so $P(0,0) = 1/3 \neq P[X=0]\times P[Y=0]$.}
+
+
+\paragraph{6)} Beyonce runs a Lemonade stand in Houston, where her revenue every hour (in dollars) is distributed as a normal with mean 20 and variance 16.
+\begin{itemize}
+\item What is the probability that her revenue is greater than \$18?
+{\color{blue} \[P[R\geq 18] = P[Z\geq (18-20)/4] = P[Z\geq -0.5] = P[Z\leq 0.5] \approx 0.691\]}
+\item What is the probability that her revenue is between \$19 and \$24?
+{\color{blue} \[P[19\leq R\leq 24] = P[-0.25 \leq Z \leq 1] = P[Z\leq 1] - P[Z\leq -0.25] = 0.841-(1-0.598) = 0.439 \]}
+\item If she sells glasses at 50c per glass, what is her expected number of glass sold in an hour? Remember that $revenue = price\times{items\ sold}$. Is the number of glasses sold in an hour also normal? Explain.
+{\color{blue} Let $X$ be no. of items sold. We have $R = 0.5\times X$ so $X = 2R$. Since $R$ is normal, we know that $X$ is normal also with $\EE[X] = 2\EE[R] = 40$. }
+\end{itemize}
+CDF values for a standard normal, $Z$:
+\begin{center}
+\begin{tabular}{ccccccc}
+$z$ & .0 & 0.25 & 0.5 & 0.75 & 1.0 \\ \hline
+$F(z)$ &  0.5 & 0.598 & 0.691 & 0.773 & 0.841
+\end{tabular}
+\end{center}
+
+\paragraph{7)} Let some data $X_1,X_2,...,X_N$ be drawn from a normal distribution with mean $\mu_{X}$ and variance $\sigma^2_{X}$.
+\begin{enumerate}
+\item How is the sample mean, $\ov{X}_{N}$, distributed? \\
+{\color{blue} See your notes}
+\item Define $S = X_1+X_2$. Is $S$ a statistic? How is $S$ distributed? \\
+{\color{blue} In class we saw that the sum of two normals is normal. Here, $\EE[X_1+X_2] = \EE[X_1]+\EE[X_2] = 2\mu_{X}$, and since the observations are independent of each other, $\BB{V}[X_1+X_2]=\BB{V}[X_1]+\BB{V}[X_2] = 2\sigma_{X}^2$. Thus, $S$ is normal with mean $2\mu_{X}$ and variance $2\sigma^2_{X}$.}
+\item Define $U = X_1+X_2+X_3$. Is $U$ a statistic? How is $U$ distributed? \\
+{\color{blue} Similar to above, we have that $U$ is normal with mean $3\mu_{X}$ and variance $3\sigma^2_{X}$.}
+\item Suppose that the observations, $X_i$, are not drawn from a normal distribution. What idea can we use to approximate the distribution of $\ov{X}_N$? What will this approximation be?
+{\color{blue} We can use the central limit theorem and use a normal with mean $\mu_{X}$ and variance $\sigma^2_{X}/N$ to approximate the distribution of $\ov{X}_N$.}
+\end{enumerate}
+
+\paragraph{8)} Let each observation of some dataset, $X_1,X_2,...,X_N$, be drawn from a uniform distribution with lower bound 10 and upper bound 20.
+\begin{enumerate}
+\item For each observation $X_i$, what is $\EE[X_i]$? What is $\BB{V}[X_i]$? You may refer to your lecture notes for the right formulae. \\
+{\color{blue} $\EE[X_i] = (a+b)/2 = (10+20)/2 = 15$ and $\BB{V} = (b-a)^2/12 = (20-10)^2/12 = 100/12 (\approx 8.33)$}
+\item Based on your answer above, what is $\EE[\ov{X}_N]$? What is $\BB{V}[\ov{X}_N]$? \\
+{\color{blue} We have that $\EE[\ov{X}_N] = \EE[X_i] = 15$, and $\BB{V}[\ov{X}_N] = \BB{V}[X_i]/N \approx 8.33/N$}
+\item If $N$ was from a large sample, how could you approximate the distribution of $\ov{X}_N$? \\
+{\color{blue}$\ov{X}_N$ would be approximately normal with mean and variance given by the previous question}
+\end{enumerate}
+
+
+\paragraph{9)} Let $X_1,X_2,...,X_N$ be data drawn from a normal distribution with mean $10$ and standard deviation $4$.
+\begin{enumerate}
+\item Define $T = X_1+X_2+X_3$. Is $T$ a statistic? What is the distribution of $T$? \\
+{\color{blue} $T$ is a function of the data, so it is a statistic. Since the sum of two normal random variables is a normal random variable, and so it goes for three, four, etc, $T$ is a normal random variable with mean $\mu_{T}=3\mu_{X}=30$ and variance $\sigma^2_{T}=3\sigma^2_{X}=3\times 4^2=48$.}
+\item Write the lower and upper bounds of a 95\% acceptance interval for $T$, using that $P[Z\leq-1.96]=0.025$, where $Z$ is a standard normal (i.e. $z_{.025}=1.96$). \\
+{\color{blue} The acceptance interval is:
+  \[\mu_{T}\pm\sigma_{T}\times1.96 = [30-\sqrt{48}\times1.96,30+\sqrt{48}\times1.96] = [16.42,43.58]\]}
+\end{enumerate}
+
+
+\paragraph{10) (hard)} Let $X_1,X_2,...,X_8$ be data drawn from a normal distribution with mean $5$ and standard deviation $1$. Define the following:
+\[T_8 = X_1-X_2+X_3-X_4+X_5-X_6+X_7-X_8 \]
+\begin{enumerate}
+\item Is $T_8$ a statistic? What is its sampling distribution? \\
+{\color{blue} $T_{8}$ is a function of the data and therefore a statistic. First, note that if $X$ is normal with mean $\mu_{X}$ and standard deviation $\sigma_{X}$, then $-X$ is also normal with mean $-\mu_{X}$ and standard deviation $\sigma_{X}$.
+Separating $T_{8}$ into added and subtracted variables, gives:
+\[T_{8}=\underbrace{X_1+X_3+X_5+X_7}_{=Y_1}-\underbrace{(X_2+X_4+X_6+X_8)}_{=Y_2} = Y_1-Y_2\]
+
+Using the same logic as we used in Question 1, it must be that $Y_1$ is normal with mean $20$ and variance $4$, and $Y_2$ is also normal with mean 20 and variance $4$. To finish then, $T_{8}$ must itself be normal with mean 0 and variance $8$.}
+
+\item Following the above logic, for a sample of size $N$, where $N$ is any even number, define:
+\[T_N = \sum_{i \text{ is odd}}X_i - \sum_{i\text{ is even}}X_i = X_1-X_2+X_3-...X_{N-1}-X_{N} \]
+What is the sampling distribution of $T_N$? \\
+{\color{blue} If $N$ is even, there are $N/2$ odd variables and $N/2$ even variables. Following the logic of above and of question 1, let us say that:
+\[T_N = \sum_{i \text{ is odd}}X_i - \sum_{i\text{ is even}}X_i = Y_{\text{odd}} - Y_{\text{even}}\]
+As before, the sum of the odd observations, $Y_{\text{odd}}$ must be normal with mean $5\times N/2$ and variance $N/2$. The sum of the even observations, $Y_{\text{even}}$ must be normal with mean $5\times N/2$ and variance $N/2$. Therefore $T_N=Y_{\text{odd}}-Y_{\text{even}}$ must also be normal with mean 0 and variance $N$.}
+\end{enumerate}
+
+\paragraph{11)} The length of Taylor Swift's grudges follows an exponential distribution, and her average grudge lasts 5 years.
+\begin{enumerate}
+\item Exactly 3 years ago, at a \emph{Taylor's Version} listening party, she overhears you making fun of her cats. What is the probability that she still holds a grudge against you? \\
+{\color{blue} Let $T$ be the length of her grudge, which is an exponential with $\lambda=1/5$. Thus $P[T\geq 3] = \exp(-1/5\times 3) \approx 0.548$}
+\item You are going to collect a dataset consisting of each of her 1000 grudges, and the length of time each grudge lasts. Given this large sample size, what distribution will the sample mean from this dataset approximately follow? (Hint: the variance of the exponential is $\frac{1}{\lambda^2}$). \\
+{\color{blue} Let $\ov{T}_{1000}$ be the sample mean. Since $\EE[T] = 5$, we know that $\EE[\ov{T}_{1000}] = 5$. Similary, since $\BB{V}[T] = 1/\lambda^2 = 25$, we know that $\BB{V}[\ov{T}_{1000}] = \BB{V}[T]/N = 25/1000 = 0.025$. Finally, the central limit theorem tells us that the distribution will be approximately normal, so $\ov{T}\sim\mc{N}(5,0.025)$ approximately.}
+\end{enumerate}
+
+
+\paragraph{12)} You are asked to estimate the population mean and variance ($\mu,\sigma^2$) of workers' wages given a random sample of wages, $W_1,W_2,...,W_N$, from the population. You have $N=50$ observations. Suppose you get that $\ov{W}=\$10/hour$, with $s^2=9$.
+\begin{enumerate}
+\item Write a 95\% confidence interval for $\mu$ that can be computed from this information (one of the critical values below). \\
+  {\color{blue} Though $N=50$ seems small, let's go ahead and use the central limit theorem. The confidence interval is:
+\[\ov{X}\pm z_{0.025}\times s/\sqrt{50} = 10 \pm 1.96 \times 3/\sqrt{50} = [9.17,10.83]\]}
+
+\item Test the null hypothesis that $\mu=12$ against the alternative that it is smaller than 12. Use size $\alpha=0.05$, and use one of: $z_{0.025}=1.96$ ,$z_{0.05}=1.64$. \\
+  {\color{blue} This is a one-sided test. We reject the null here if \[\frac{\ov{X}-12}{\sqrt{s^2/50}}< -z_{0.05}\]. We get a value $\approx -4.71$ so we reject the null.}
+\end{enumerate}
+
+
+\paragraph{13)} You are asked to estimate the unemployment rate, using a sample of $N=100$ workers, who report their employment status (either employed or unemployed).
+\begin{enumerate}
+\item Describe how you would use this data to estimate the unemployment rate. Describe how you would compute a $(1-\alpha)\times100\%$ confidence interval. \\
+  {\color{blue} Let $U_i\in\{0,1\}$ indicate whether the worker is unemployed. Note that the population unemployment rate is $\EE[U_i]$. The sample mean is simply the proportion of workers who report being unemployed, $\h{p}$. If $\EE[U_i]=p$, then $\BB{V}[U_i]=p(1-p)]$ and the sample variance will turn out to be $\h{p}(1-\h{p})$.
+Now we can use the confidence interval formula:
+\[\h{p} \pm z_{\alpha/2} \times \sqrt{\h{p}(1-\h{p})/N}\]}
+\item You estimate a sample proportion of unemployed workers of 7.6\%. Give the 95\% confidence interval for the true unemployment rate. \\
+{\color{blue} Since $z_{0.025} = 1.96$, we use the formula to get a confidence interval $[0.024,0.128]$.}
+\end{enumerate}
+
+\paragraph{14)} Suppose you have data on the annual earnings of $N=500$ households, $E_1,E_2,...,E_{500}$. This is a random sample from the population. The policy group you work for deems a household to be living in poverty if their earnings fall below the poverty line, \$10,000/year. Describe how you would use this data to estimate the poverty rate (i.e. the population proportion of households living in poverty). Give an estimate as well as a formula for the $(1-\alpha)\times100\%$ confidence interval. \\
+{\color{blue} Define $p$ to be the population poverty rate, and let $\h{p}$, the sample proportion, be our proposed estimator. Define $Y_i = 1$ if $E_i\leq10,000$ and 0 otherwise. Our estimate of the poverty rate is the sample proportion of households earnings less than 10,000, $\h{p}$. If you want to use the data $Y$, we know that $\h{p}=\ov{Y}$. The confidence interval is given by:
+\[\h{p} \pm z_{\alpha/2} \times \sqrt{\h{p}(1-\h{p})/N}\]}
+
+
+\paragraph{15)} Calculate the bias and the variance of the following estimators.
+\begin{enumerate}
+\item $\theta=\ov{X}+a$ where $a$ is a constant, as an estimator for $\mu$.
+{\color{blue} $\EE[\theta] = \EE[\ov{X}+a] = \mu + a$ so the bias is $a$. We can also calculate
+\[ \EE[(\theta-\mu-a)^2] = \EE[(\ov{X}-\mu)^2] = \BB{V}(\ov{X}) = \sigma^2/N.\]
+The variance is $\sigma^2/N$.}
+\item $\theta=\ov{X}+\epsilon$ where $\epsilon$ is independent of $\ov{X}$ and $\EE[\epsilon]=0$, as an estimator for $\mu$.
+{\color{blue} $\EE[\theta] = \EE[\ov{X}] + \EE[\eps] = \mu$, so the estimator is unbiased. Also:
+\[\EE[(\theta-\mu)^2] = \EE[(\ov{X}+\eps-\mu)^2] = \sigma^2/N + \BB{V}(\eps)\]}
+\end{enumerate}
+
+\paragraph{16)}You have data from a random sample of firms in the market for widgets. In particular, you have output $Y_i$, and costs $C_i$ for each firm $i$. Your data contains this information for a random sample of $N$ firms. You know that every firm sells their widgets at the market price of $\$2$, and so profit for each firm can be defined as:
+\[\Pi_i = 2 Y_i - C_i\]
+Assume that $Y_i$ and $C_i$ are each \emph{normally distributed}, with \emph{unknown} variance.
+\begin{enumerate}
+\item What kind of distribution will $\Pi$ have? You can use the parameters $\EE[\Pi] = \mu_\pi$ and $\BB{V}[\Pi]=\sigma^2_\pi$ to describe this distribution.\\
+{\color{blue} $\Pi$ will be distributed normally with mean $\mu_\pi$ and variance $\sigma^2_\pi$.}
+\item How would you estimate a 95\% confidence interval for $\mu_\pi$? \\
+{\color{blue} Since we don't know $\sigma^2_\pi$, we can calculate the sample variance $s^2_\pi$ and use the t-distribution:
+\[\ov{\Pi} \pm t_{N-1,\alpha/2}s_\pi/\sqrt{N} \]}
+\item Do you need to assume that $Y_i$ and $C_i$ are independent at a given firm for this to work? \\
+{\color{blue} Nope! As long as $\Pi$ is normal, this method will work. Of course, we still need observations of the data \emph{across} firms to be independent, otherwise our sampling distributions won't be correct.}
+\end{enumerate}
+\paragraph{17)} Two sample means $\ov{X}_1$ and $\ov{X}_2$ are calculated from random samples from the \emph{same} population. The only difference is the sample size $N_1<N_2$. Which is the more efficient estimator (i.e. which estimator has smaller variance) of the population mean, $\mu$? Why? \\
+{\color{blue} We will get variances of the sample mean equal to $\sigma^2/N_1>\sigma^2/N_2$ so $\ov{X}_2$ is more efficient. Greater sample size gives more precision.}
+
+\paragraph{18)} Two sample means $\ov{X}_1$ and $\ov{X}_2$ are calculated from random samples from \emph{different} populations with the \emph{same} population mean, $\mu$. The population variances are different, though, with $\sigma^2_1<\sigma^2_2$. Which sample mean is a more efficient estimator for $\mu$? Why? \\
+{\color{blue} We will get variances of the sample mean equal to $\sigma_1^2/N<\sigma_2^2/N$ so $\ov{X}_1$ is more efficient.}
+
+\paragraph{19)} Let $X$ and $Y$ both be \emph{independent} random variables. Both are \emph{normally distributed} with means $\mu_X,\mu_Y$ and variances $\sigma^2_X,\sigma^2_Y$. Let $\ov{X}$ and $\ov{Y}$ be \emph{sample means} of these random variables, from samples of size $N_X$ and $N_Y$. Your task is to write down the \emph{sampling distribution} of the following statistics.
+\begin{enumerate}
+\item $\ov{X}$ and $\ov{Y}$ \\
+{\color{blue} $\ov{X}\sim\mc{N}(\mu_X,\sigma^2/N_X)$, $\ov{Y}\sim\mc{N}(\mu_Y,\sigma^2/N_Y)$}
+\item $T=X+a$ where $a$ is a constant. \\
+{\color{blue} $\EE[T]=\mu_X+a$, $\BB{V}[T] = \sigma^2_X$, $T\sim\mc{N}(\mu_X+a,\sigma^2_X)$ (since $a$ is constant)}
+\item $T=\ov{X}+Y$ \\
+{\color{blue} $T$ will be normal with mean $\EE[T]=\EE[\ov{X}+Y] = \mu_X+\mu_Y$, and variance $\BB{V}[T]=\BB{V}[\ov{X}+Y] = \sigma^2_X/N_X + \sigma^2_Y$}
+\item $T=\ov{Y}+X$ \\
+{\color{blue} $T$ will be normal with mean $\EE[T]=\EE[\ov{Y}+X] = \mu_Y+\mu_X$, and variance $\BB{V}[T]=\BB{V}[\ov{Y}+X] = \sigma^2_Y/N_Y + \sigma^2_X$}
+\item $T=aX + bY$ where $a$ and $b$ are constants. \\
+{\color{blue} $T$ will be normal with mean $\EE[T]=\EE[aX+bY] = a\mu_X+b\mu_Y$, and variance $\BB{V}[T]=\BB{V}[aX+bY] = a^2\sigma^2_X + b^2\sigma^2_Y$}
+\item $T=\ov{X}-\ov{Y}$ \\
+{\color{blue} $T$ will be normal with mean $\EE[T]=\EE[\ov{X}-\ov{Y}] = \mu_X-\mu_Y$, and variance $\BB{V}[T]=\BB{V}[aX+bY] = \sigma^2_X/N_X + \sigma^2_Y/N_Y$}
+\end{enumerate}
+
+\paragraph{20)} Suppose we are interested in estimating the mean wage, $\mu$, for a population. We collect a random sample of wages, $W_1,W_2,...,W_n$ from this population. \textbf{However}, suppose that people who earn less than \$8/hour do not report their earnings, and are dropped from the sample.
+\begin{enumerate}
+\item What is the \emph{effective} probability distribution we are drawing from, if we cannot observe wages of $w<8$? (Hint: the answer involves a conditional distribution). \\
+{\color{blue}
+Since we are discarding all the observations $W<8$, an otherwise random sample will be drawn from the distribution: \\
+\[P[W\ |\ W\geq8]\]
+Similarly, we can say that this distribution has a density $f(w|w\geq8)$.
+}
+
+\item Given this new distribution, what is the expected value of a single (non-missing) observation $W$ taken from the population? \\
+{\color{blue}
+We can compute the expectation as:
+\[\EE[W\ |\ W\geq 8] = \int wf(w|w>8)dw\]
+Since we know that obersvations are now drawn from this truncated distribution.
+}
+
+\item What is the expected value of $\ov{W}$, the sample mean from this truncated sample?\\
+{\color{blue}
+Our logic is identical to when we derived the expectation of the sample mean from the proper random sample:
+\[\EE[\ov{W}|\underbrace{W_1,W_2,...,W_N>8}_{\text{truncated sample}}] = N\times \EE[W|\ W>8]/N = \EE[W|W>8]\]
+}
+
+\item Consider the following rule: $\EE[X|X>c]>\EE[X]$ for any constant $c$. What does this imply for $\ov{W}$ from this sample as an estimator for $\mu$?\\
+{\color{blue} If this holds, then we know that $\EE[\ov{W}\ |\ \text{truncated sample}] = \EE[W\ |\ W>8]>\EE[W]$. Thus, the sample mean from the truncated sample is a \emph{biased} estimator of the population mean of wages.
+}
+\end{enumerate}
+
+\paragraph{21)} Suppose that unemployment durations (in weeks) are distributed according to an exponential (that is, the wait times until the arrival of a job offer are exponentially distributed) with a rate parameter $\lambda$. Let $T$ be the unemployment duration of one individual. Recall that:
+\[\EE[T] = \frac{1}{\lambda},\ \BB{V}[T]=\frac{1}{\lambda^2}\]
+\begin{enumerate}
+\item Let $\ov{T}$ be the sample mean from a random sample of the population of unemployed workers. Calculate $\EE[\ov{T}]$ and $\BB{V}[\ov{T}]$. \\
+\\
+{\color{blue}
+We know that:
+\[\EE[\ov{T}] = N\times \EE[T]/N = \frac{1}{\lambda}\]
+And
+\[\BB{V}[\ov{T}] = N\times\BB{V}[T/N] = N\times\BB{V}[T]/N^2 = \frac{1}{\lambda^2 N}\]
+}
+\item What does the central limit theorem say about $\ov{T}$ as our sample size grows? \\
+{\color{blue}
+The CLT says that
+\[\ov{T}\sim \mc{N}(\EE[T],\BB{V}[T]/N) = \mc{N}\left(\frac{1}{\lambda},\frac{1}{\lambda^2 N}\right)\]
+}
+\item Propose an estimator for $\lambda$ based on your answer to part (a). \\
+{\color{blue}
+Since $\ov{T}$ converges around $\frac{1}{\lambda}$ with smaller and smaller variance, I propose:
+\[\h\lambda = \frac{1}{\ov{T}}\]
+as an estimator for $\lambda$. Remember that $\ov{T}$ is the sample mean of all the unemployment durations we observe in the data.}
+
+\item Combine parts (2) and (3) to propose an approximate 95\% confidence interval for $\lambda$. \\
+{\color{blue}We know, by the CLT, that:
+\[\frac{\ov{T}-\frac{1}{\lambda}}{1/(\lambda\sqrt{N})} \sim \mc{N}(0,1)\]
+So this means that:
+\[P\left[-z_{\alpha/2}<\frac{\ov{T}-\frac{1}{\lambda}}{1/(\lambda\sqrt{N})}<z_{\alpha/2}\right] = 1-\alpha \]
+We can rearrange this to:
+\[P[-z_{\alpha/2} < \sqrt{N}\lambda\ov{T} - \sqrt{N} < z_{\alpha/2}] = (1-\alpha)\]
+And from there get to:
+\[P\left[\frac{1}{\ov{T}} - z_{\alpha/2}\frac{1}{\sqrt{N}\ov{T}}<\lambda<\frac{1}{\ov{T}}+z_{\alpha/2}\frac{1}{\sqrt{N}\ov{T}}\right]
+= P\left[\h{\lambda} - z_{\alpha/2}\frac{1}{\sqrt{N}\ov{T}}<\lambda<\h\lambda+z_{\alpha/2}\frac{1}{\sqrt{N}\ov{T}}\right] = 1-\alpha
+\]
+Notice the similarity to previous confidence intervals. This one is also centered around our estimator, $\h\lambda$.
+}
+\end{enumerate}
+
+\paragraph{22)} Let $p$ be the true proportion of UMN students who like pineapple on pizza. Let $\ov{p}$ be the fraction of students from a random, iid, sample of size $N$ that report that they like pineapple on pizza.
+\begin{enumerate}
+\item What is the approximate sampling distribution of $\ov{p}$? {\color{blue} First, Let $X_i\in\{0,1\}$ be the data for person $i$, equal to 1 if they report liking pineapple on pizza. The fraction $\ov{p}$ is the sample mean of $X$. Since $X_i$ satisfies $\EE[X_i] = p$ and $\BB{V}[X] = p(1-p)$, we have that $\h{p}\sim\mathcal{N}(p,p(1-p)/N)$ approximately by the central limit theorem.
+}
+\item Construct a two-sided hypothesis test (with size $\alpha$) of the null hypothesis that $p=p_0$, where $p$ is the unknown population proportion.
+{\color{blue}
+Accept the null only if:
+\[-z_{\alpha/2}<\frac{\h{p}-p_0}{\sqrt{\h{p}/(1-\h{p})}}<z_{\alpha/2}\qquad \text{OR}\qquad p_0-z_{\alpha/2}\sqrt{\h{p}(1-\h{p})/N}<\h{p}<p_0+z_{\alpha/2}\sqrt{\h{p}(1-\h{p})/N}\]
+(these rules are the same) and reject otherwise.
+}
+\end{enumerate}
+
+\paragraph{23)}  Suppose that you have the data on some health measure, $Y$, for a group of treated individuals and a group of untreated individuals. Let $\ov{Y}_T$ be the sample mean of the treated, and let $\ov{Y}_N$ be the sample mean of the untreated. The \emph{effectiveness} of the drug in the population can be written as $\mu=\EE[Y_T]-\EE[Y_N]$. When the population variance across the two populations is \emph{equal, but unknown}, describe how you would construct a hypothesis test (with significance $\alpha$) of the following:
+\begin{enumerate}
+\item The null that the drug has \emph{no effect} agains the alternative that it has \emph{some effect} \\
+{\color{blue} $H_0: \mu=0$, $H_1: \mu\neq 0$. Let $s^2$ be the pooled variance from the data. We do this because we are assuming the variances are equal. If $\mu=0$ then we know that:
+\[P[-z_{\alpha/2} < \frac{\ov{Y}_T-\ov{Y}_N}{\sqrt{s^2/N_T+s^2/N_N}} < z_{\alpha/2}]=1-\alpha\]
+So we reject the null if $\frac{\ov{Y}_T-\ov{Y}_N}{\sqrt{s^2/N_T+s^2/N_N}}$ lies outside the critical values. Equivalently we know
+\[P[-z_{\alpha/2}\sqrt{s^2/N_T+s^2/N_N} < \ov{Y}_T-\ov{Y}_N < z_{\alpha/2}\sqrt{s^2/N_T+s^2/N_N}]=1-\alpha\]
+so we reject the null if the difference in sample means lies outside the above critical values.
+
+}
+\item The null that the drug has \emph{no effect} agains the alternative that it has a \emph{positive effect}
+{\color{blue} $H_0: \mu=0$, $H_1: \mu> 0$. We reject the null if:
+\[z_{\alpha}<\frac{\ov{Y}_T-\ov{Y}_N}{\sqrt{s^2/N_T+s^2/N_N}}\qquad\text{OR}\qquad z_{\alpha}\sqrt{s^2/N_T+s^2/N_N} < \ov{Y}_T-\ov{Y}_N\]
+}
+\end{enumerate}
+
+\paragraph{24)} Suppose that a statistic (it could be anything) is distributed such that:
+\[P[-\frac{a_\alpha}{\sqrt{N}} < T-\gamma < \frac{a_\alpha}{\sqrt{N}}]=1-\alpha\]
+Where $\gamma$ is a population parameter of interest. Use this fact to:
+\begin{itemize}
+\item Write a hypothesis test, with Type I error probability $1-\alpha$, of the Null hypothesis that $\gamma=0$ against the alternative $\gamma\neq 0$ \\
+{\color{blue}
+If $\gamma=0$,
+\[P[-\frac{a_\alpha}{\sqrt{N}} < T < \frac{a_\alpha}{\sqrt{N}}]=1-\alpha\]
+So reject the null if we observe a value of $T$ outside of this range.
+}
+\item Write a hypothesis test, with Type I error probability $1-\alpha$, of the Null hypothesis that $\gamma=2$ against the alternative $\gamma\neq 2$
+{\color{blue} Similarly to before, we accept the null only if:
+\[2-\frac{a_\alpha}{\sqrt{N}} < T < 2+\frac{a_\alpha}{\sqrt{N}} \]
+}
+\item Calculate the power of your first test above to correctly reject the Null when $\gamma = 2$. Write your answer in terms of the CDF of $T$ (i.e. in terms of a function $F$ such that $P[T\leq t] = F(t)$)
+{\color{blue} We accept the null (and hence commit type II error) if we see:
+\[-\frac{a_\alpha}{\sqrt{N}} < T < \frac{a_\alpha}{\sqrt{N}}\]
+This occurs with probability $\beta = F(a_{\alpha}/\sqrt{N})-F(-a_{\alpha}/\sqrt{N})$ so we get
+\[\text{Power} = 1- F(a_{\alpha}/\sqrt{N})+F(-a_{\alpha}/\sqrt{N})\]
+}
+\item What happens to the power of your test as $N$ increases? Why? \\
+{\color{blue}
+As $\sqrt{N}$ gets larger and larger, the critical values ($a_\alpha/\sqrt{N}$) of the test get smaller and smaller, and there is less chance that $T$ lies between them. Thus, the probability of type II error decreases and power increases.
+}
+\end{itemize}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

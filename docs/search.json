@@ -1055,5 +1055,40 @@
     "title": "Stats Review: Linear Models",
     "section": "Accounting for fixed effects when estimating a slope",
     "text": "Accounting for fixed effects when estimating a slope\n\\[ Y = 2 + 0.5X - c + \\epsilon,\\qquad X \\sim \\mc{N}(c-2,1)\\]"
+  },
+  {
+    "objectID": "supplementary/render_example.html",
+    "href": "supplementary/render_example.html",
+    "title": "Rendering example",
+    "section": "",
+    "text": "Text where I say something, then I show you some code with ggplot output:\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndata.frame(x=rnorm(10),y=rnorm(10)) %&gt;%\n  ggplot(aes(x,y)) + geom_point()"
+  },
+  {
+    "objectID": "supplementary/render_example.html#heading",
+    "href": "supplementary/render_example.html#heading",
+    "title": "Rendering example",
+    "section": "",
+    "text": "Text where I say something, then I show you some code with ggplot output:\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndata.frame(x=rnorm(10),y=rnorm(10)) %&gt;%\n  ggplot(aes(x,y)) + geom_point()"
+  },
+  {
+    "objectID": "supplementary/render_example3.html",
+    "href": "supplementary/render_example3.html",
+    "title": "Rendering example",
+    "section": "",
+    "text": "Text where I say something, then I show you some code with ggplot output:\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndata.frame(x=rnorm(10),y=rnorm(10)) %&gt;%\n  ggplot(aes(x,y)) + geom_point()"
+  },
+  {
+    "objectID": "supplementary/render_example3.html#heading",
+    "href": "supplementary/render_example3.html#heading",
+    "title": "Rendering example",
+    "section": "",
+    "text": "Text where I say something, then I show you some code with ggplot output:\n\nlibrary(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n\ndata.frame(x=rnorm(10),y=rnorm(10)) %&gt;%\n  ggplot(aes(x,y)) + geom_point()"
+  },
+  {
+    "objectID": "Exercises.html",
+    "href": "Exercises.html",
+    "title": "Practice Exercises",
+    "section": "",
+    "text": "You can find some practice questions for the theory part of this class here. Don’t waste them! Each one is an opportunity to test your understanding. Memorizing the solutions to these problems is not a formula for success in the exams.\n\n\n\nTopic\nSolutions\n\n\n\n\nProbability and Stats Review\nSolutions\n\n\nLinear Models and OLS\nSolutions\n\n\nCausality and Experiments\nSolutions\n\n\nDiff-in-Diff and IV\nSolutions (handwritten)"
   }
 ]

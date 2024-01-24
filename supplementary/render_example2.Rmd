@@ -1,0 +1,16 @@
+---
+title: "Rendering example"
+output: html_notebook
+---
+
+## Heading
+
+Text where I say something, then I show you some code with ggplot output:
+
+```{r}
+library(tidyverse)
+data.frame(x=rnorm(10),y=rnorm(10)) %>%
+  ggplot(aes(x,y)) + geom_point()
+
+```
+

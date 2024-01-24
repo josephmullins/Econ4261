@@ -1,0 +1,202 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{cancel}
+\newfontfamily\headingfont[]{Futura}
+\titleformat*{\section}{\LARGE\headingfont}
+\titleformat*{\subsection}{\Large\headingfont}
+\titleformat*{\subsubsection}{\headingfont}
+\renewcommand{\maketitlehooka}{\headingfont}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\begin{document}
+
+\paragraph{1)} Recall the assumptions introduced with the linear model:
+\begin{itemize}
+\item[A0] The data $(Y_i,X_i)_{i=1}^N$ is iid
+\item[A1] The data has linear representation: $Y_i = X_i\beta + \eps_i$
+\item[A2] Strict exogeneity: $E[\eps_i|X_i]=0$.
+\item[A3] Rank: if $\text{dim}(X)=K$, then the data $X$ has $K$ linearly independent columns ($\text{Rank}(X)=K$)
+\item[A4] Spherical errors/Homoskedasticity: $\BB{V}[\eps_i|X_i] = \sigma^2$.
+\end{itemize}
+\begin{enumerate}
+\item State the assumptions necessary to prove that the OLS estimator $\h\beta$ is a consistent estimator of the relationship between $X$ and $Y$ in \emph{conditional expectation} $\mathbb{E}[Y|X]$
+\item State the assumptions necessary to prove that the OLS estimator $\h\beta$ is a consistent estimator of the \emph{causal effect} of each variable $X$ on $Y$.
+\item State which assumptions are necessary to derive the following expression for the asymptotic variance of $\h{\beta}$, $\mathbb{V}(\h\beta)$:
+  \[ \BB{V}[\h\beta] = \EE[X'_iX_i]^{-1}\frac{\sigma^2}{N} \]
+\end{enumerate}
+{\color{blue} Review your notes for answers to these questions.}
+
+
+\paragraph{2)} Suppose you have iid data $(C_i,I_i)$ where $C_i\in\{0,1\}$ indicates whether an individual attends college, and $I_i$ is a measure of parental income. You want to estimate the relationship:
+\[ \EE[C|I] = \beta_0 + \beta_1 I \]
+\begin{enumerate}
+\item Describe your estimator $\h\beta$ for $\beta=(\beta_0,\beta_1)$. State the formula you will use. \\
+  {\color{blue} Check your notes!}
+\item Describe the asymptotic distribution  of $\h\beta$. \\
+  {\color{blue} Check your notes!}
+\item Propose a way to estimate this asymptotic distribution, and use this to construct a $(1-\alpha)\times100\%$ confidence interval for $\beta_1$. \\
+  {\color{blue} Check your notes!}
+\item Are you comfortable with concluding that your estimate of $\beta_1$ is also an estimate if the causal effect of parental income on college attendance? Why or why not? \\
+  {\color{blue} You probably shouldn't be.  To the extent that parental income is associated with ability and preferences, and that these traits may also determine the decision to attend college, the relationship we have estimated will include those causal pathways also, and does not isolate the causal effect of parental income alone.}
+\end{enumerate}
+
+\paragraph{3)} Consider the model:
+\[ Y_i = \alpha + X_i\beta + \eps_i.\]
+Notice that $\alpha$ is now the constant term, and so $X_i$ does not contain a 1 in the first column. Further assume that assumptions A0-A4 still hold.
+\begin{enumerate}
+\item Let $\mu_X = \EE[X]$ and $\hat{X}_i = X_i-\mu_X$. Write $Y_i$ in terms of $\h{X}_i$ and $\eps_i$. \\
+  {\color{blue} $Y_i = \alpha + \mu_X\beta + \hat{X}_i\beta + \eps_i$ }
+\item Does the equation you wrote above still satisfy A0-A4? \\
+  {\color{blue} Yes.}
+\item Based on this, do you expect any difference between estimating $\beta$ using $X$ compared to $\h{X}$? \\
+  {\color{blue} No. Given that A0-A4 still hold, OLS using $\h{X}$ will be a consistent and asymptotically normal estimator of $\beta$.}
+\end{enumerate}
+
+\paragraph{4)} Consider the linear model:
+\[ Y_i = \beta_0 + X_{1,i}\beta_1 + X_{2,i}\beta_2 + \eps^*_i \]
+Suppose that $\EE[\eps^*_i|X_{1,i},X_{2,i}] = 0$ and that $X_{1,i}$ and $X_{2,i}$ are independent. Let $\EE[X_{1,i}]=\mu_1$ and $\EE[X_{2,i}]=\mu_2$.
+\begin{enumerate}
+\item Calculate $\EE[Y_i|X_{1,i}]$ {\color{blue}
+  \begin{align*}
+    \EE[Y_i|X_{1,i}] &= \EE[\beta_0 + X_{1,i}\beta_1 + X_{2,i}\beta_2 + \eps^*_i|X_{1,i}] \\
+                     &= \beta_0 + X_{1,i}\beta_1 + \EE[X_{2,i}\beta_2|X_{1,i}] + \EE[\eps^*_i|X_{1,i}] \\
+                     &=  \beta_0 + X_{1,i}\beta_1 + \mu_2\beta_2 + \EE[\EE[\eps^*_i|X_{2,i},X_{1,i}]|X_{1,i}] \\
+                     &= \beta_0 + X_{1,i}\beta_1 + \mu_2\beta_2
+  \end{align*}
+  where the third line uses that $X_{1,i}$ and $X_{2,i}$ are independent, and the law of iterated expectations.}
+\item Define $\eps_i = Y_i-\EE[Y_i|X_{1,i}]$ and write $Y_i$ in terms of $X_{1,i}$ and $\eps_{i}$. \\
+  {\color{blue} Given the above working we get
+    \[Y_{i} = \beta_0 + \mu_2\beta_2 + X_{1,i}\beta_1 + \eps_i \]
+    }
+  \item Use the above two steps to argue that if we run a regression of $Y$ on $X_{1,i}$ without $X_{2,i}$, we still recover a consistent estimator of $\beta_1$. \\
+    {\color{blue} The above two steps imply that $\EE[\eps_i|X_{1,i}]=0$, and hence if the data is iid, the OLS coefficient $\h{\beta}_1$ is consistent.}
+\end{enumerate}
+
+\paragraph{5)} Let:
+\[Y_i = X_i\beta + Z_i\gamma + \eps_i \]
+where $X_i$ and $Z_i$ are scalar variables, with $\EE[X_i]=\EE[Z_j]=0$.\footnote{Note that based on question 3, you can always make this true by applying the logic of question (3).}
+Suppose that $\BB{V}[X] = \sigma^2_X$, $\BB{V}[Z]=\sigma^2_Z$, and $\BB{C}(X,Z)=\sigma_{XZ}$.
+\begin{enumerate}
+\item Let $W_i=[X_i, Z_i]$. Write the matrix $\EE[W_i'W_i]$ in terms of $\sigma^2_X,\sigma^2_Z,\sigma^2_{XZ}$. 
+{\color{blue} \[\EE[W_iW_i'] = \left[\barr{cc}\sigma^2_X & \sigma_{XZ} \\ \sigma_{XZ} & \sigma^2_Z \earr\right] \]}
+
+\item Use the matrix inverse formula\footnote{$\left[\begin{array}{cc}a & b \\c & d \end{array}\right]^{-1}=\frac{1}{ab-cd}\left[\begin{array}{cc}d & -b \\-c & a \end{array}\right]$} to calculate $\EE[W_i'W_i]^{-1}$.
+{\color{blue}\[ \EE[W_i'W_i]^{-1} = \frac{1}{\sigma^2_{X}\sigma^2_Z - \sigma_{XZ}^2} \left[\barr{cc} \sigma^2_Z & -\sigma_{XZ} \\-\sigma_{XZ} & \sigma^2_X  \earr\right] \]}
+\item Suppose that $X_i$ and $Z_i$ are \emph{independent}, and calculate (a) the variance of the estimator $\hat{\beta}$ when $Z_i$ is excluded from the regression; (b) the variance of the estimator $\tilde{\beta}$ when $Z_i$ is included in the regression. Which estimator is more efficient? One hint: what is the value of $\sigma_{XZ}$ when $X$ and $Z$ are independent.
+{\color{blue}
+\[\BB{V}[\hat{\beta}] = \frac{1}{N}\frac{\sigma^2_\eps + \gamma^2\sigma^2_Z }{\sigma^2_X},\qquad \BB{V}[\tilde{\beta}] = \frac{1}{N}\frac{\sigma^2_\eps}{\sigma^2_X} \]
+so $\tilde{\beta}$ is more efficient. }
+\item Suppose that $X_i$ and $Z_i$ are \emph{not} independent, but that $\gamma=0$. Calculate (a) the variance of the estimator $\hat{\beta}$ when $Z_i$ is excluded from the regression; (b) the variance of the estimator $\tilde{\beta}$ when $Z_i$ is included in the regression. Which estimator is more efficient?
+{\color{blue}
+\[ \BB{V}[\hat{\beta}] = \frac{1}{N}\frac{\sigma^2_\eps}{\sigma^2_X},\qquad \BB{V}[\tilde{\beta}] = \frac{1}{N}\frac{\sigma^2_\eps}{\sigma^2_{X}-\sigma^2_{XZ}/\sigma^2_{Z}} \]
+So in this case, $\BB{V}[\hat{\beta}]$ is more efficient.}
+\end{enumerate}
+
+\paragraph{6)} Consider the regression $Y_i = \beta_0 + \beta_1X_i + \eps_i$ when $X_i$ is a single variable and A0-A4 are satisfied. Suppose that $\BB{V}[X_i] = 2$, $\sigma^2_\eps=1$, $N=50$, and $\beta_1 = 0.5$.
+For the questions below, you will use some of the following facts about $Z$, a standard normal random variable.
+\[P[Z>-3.36] = 0.9996,\ P[Z>-1.36] = 0.913, \ P[Z>0.64] = 0.261,\ P[Z>|1.24] = 0.107 \]
+\begin{itemize}
+\item Calculate $\BB{V}[\h{\beta}_1]$ when $\h{\beta}_1$ is estimated by OLS.
+{\color{blue} \[\BB{V}[\h{\beta}_1] = \frac{1}{50}\frac{1}{2} = \frac{1}{100} \]}
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0$ with size 95\% ($z_{0.05}=1.64$). What is the power of this test?\\
+{\color{blue} Since $\beta_1=0.5$, $(\h{\beta}_1-0.5)/0.1$ is distributed as a standard normal. In this case reject the null if $\hat{\beta}/0.1>1.64$ and so:
+\[\text{Power} = P[\hat{\beta}/0.1>1.64] = P[(\hat{\beta}-0.5)/0.1 > 1.64 - 5] = P[Z>-3.36] = 0.9996\]}
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0.2$. What is the power of this test? \\
+{\color{blue} Same procedure gives that power is $P[(\hat{\beta}-0.2)/0.1>1.64] = P[Z>-1.36] = 0.913$}
+\item Suppose you conduct a test of the Null hypothesis that $\beta_1\leq 0.4$. What is the power of this test? \\
+  {\color{blue} Same procedure gives that power is $P[Z>0.64] =0.261$}
+
+\end{itemize}
+
+\paragraph{7)} Consider the linear model:
+\[Y_i = X_i\beta + \eps_i\]
+where assumptions A0-A4 hold. Suppose that $\dim(\beta)=4$.
+\begin{enumerate}
+\item Derive a test of the Null hypothesis that $\beta_1+\beta_2=1$. Describe exactly how you would conduct the test with significance $\alpha\times100\%$.
+{\color{blue}
+\begin{itemize}
+\item Run regression and get $\hat{\beta}$.
+\item Compute an estimate of $\BB{V}[\hat{\beta}]$ as $\widehat{\BB{V}[\hat{\beta}]} = (X'X)^{-1}s^2_\eps$ where $s^2_\eps$ is the sample variance of the residuals from the regression.
+\item Under the null: $\h{\beta}_1+\hat{\beta}_2 - 1$ is normal with mean zero and variance $\BB{V}[\hat{\beta}_1] + \BB{V}[\hat{\beta}_2] + 2\BB{C}[\hat{\beta}_1,\hat{\beta}_2]$. Read the estimates of these from the matrix $\widehat{\BB{V}[\hat{\beta}]}$ and call this $V$.
+\item Reject the null if $\left|\frac{\h{\beta}_1+\h{\beta}_2-1}{\sqrt{V}}\right|>z_{\alpha/2}$
+\end{itemize}
+}
+\item Derive a test of the joint Null hypotheses that $\beta_1+\beta_2=1$ and $\beta_3=\beta_4$. Describe exactly how you would conduct the test with significance $\alpha\times100\%$. \\
+{\color{blue}
+We use the fact that under the Null that $R\beta - c = 0$, then:
+\[ (R\hat{\beta}-c)'(R'\BB{V}[\hat{\beta}]R)^{-1}(R\hat{\beta}-c) \sim \chi^2_{K} \]
+where $K$ is the number of rows in the R matrix. Here we define:
+\[ R = \left[\barr{cccc}1 & 1 & 0 & 0 \\ 0 & 0 & 1 & -1 \earr\right],\qquad c=\left[\barr{c}1 \\ 0\earr\right] \]
+We choose the critical value $\chi^2_{2,\alpha}$ which gives $P[\chi^2_2 >\chi^2_{2,\alpha}] = \alpha$ and we reject the null if:
+\[ (R\hat{\beta}-c)'(R'\widehat{\BB{V}[\hat{\beta}]}R)^{-1}(R\hat{\beta}-c) > \chi^2_{2,\alpha}.\]
+where we have replaced the variance of $\hat{\beta}$ with our estimate of the variance.
+}
+
+\end{enumerate}
+
+\paragraph{8)} For the below examples, write the correspoding $R$ matrix and vector $c$ in order to write each set of restrictions as $R\beta-c=0$.
+\begin{enumerate}
+\item $\dim(\beta)=4$, $\beta_1=0$, $\beta_2-\beta_3=0$, $\beta_4=4$. \\
+  {\color{blue} 
+    \[c = [1,\ 0,\ 0,4]',\qquad R=\left[\barr{cccc} 1 & 0 & 0 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 1 \earr\right]\]
+    }
+\item $\dim(\beta)=5$, $\beta_1=1$, $\beta_3 = 4$.
+  {\color{blue} 
+    \[c = [1,\ 4]',\qquad R=\left[\barr{ccccc} 1 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 \earr\right]\]
+    }
+\item $\dim(\beta) = 3$, $\beta_1 = 1.1$, $\beta_2 + 2\beta_3 = 1$.
+  {\color{blue} 
+    \[c = [1.1,\ 1]',\qquad R=\left[\barr{ccc} 1 & 0 & 0 \\ 0 & 1 & 2 \earr\right]\]
+    }
+
+\end{enumerate}
+
+
+\end{document}

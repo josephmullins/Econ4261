@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+%\linespread{1.4}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{multirow}
+%\usepackage{fullpage}
+\usepackage[letterpaper, margin=0.6in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{float}
+\usepackage{natbib}
+%\usepackage{harvard}
+%\usepackage{bbm}
+\usepackage{subfigure}
+\usepackage{caption}
+\captionsetup[table]{belowskip=10pt}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=True,linkcolor=black,citecolor=black,urlcolor=blue}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}{Proposition}%[section]
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+\newtheorem{hypo}{Hypothesis}
+\newtheorem{clm}{Claim}
+\newtheorem{ass}{A -}
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\eps{\epsilon}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+%\newcommand{\indic}[1]{\mathbbm{1}_{\left\{ {#1} \right\} }}
+\newcommand{\indic}[1]{\mathbf{1}_{\left\{ {#1} \right\} }}
+\newcommand{\bmat}{\begin{matrix}}
+\newcommand{\emat}{\end{matrix}}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{cancel}
+\newfontfamily\headingfont[]{Futura}
+\titleformat*{\section}{\LARGE\headingfont}
+\titleformat*{\subsection}{\Large\headingfont}
+\titleformat*{\subsubsection}{\headingfont}
+\renewcommand{\maketitlehooka}{\headingfont}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\begin{document}
+
+\paragraph{1)} In this question we are going to solve a generalized version of the selection model we saw in class. Suppose that utility from the college decision $d$ is given, for individual $i$, by:
+\[U_i(d) = (1-d)\gamma_0 + d(\gamma_1 + u_i)\]
+where $u_i$ is distributed as a \emph{standard normal random variable}. Thus, the individual chooses college $(D_i=1)$ if
+\[u_i > \gamma_0-\gamma_1.\]
+Suppose that potential wages $W_{D,i}$ for $D=0,1$ can be written as
+\[ W_{D,i} = \mu_D + \eta_{D,i} \]
+where $\EE[\eta_{D,i}]=0$. In addition, assume that the pair of error terms $\eta_{1,i},\eta_{0,i}$ are \emph{independent} of each other, but each is \emph{not} independent of $u_i$. Suppose that $\BB{C}(\eta_{1,i},u_i)=\sigma_{u1}$, $\BB{C}(\eta_{0,i},u_i)=\sigma_{u0}$, and $\BB{V}[\eta_{D,i}]=\sigma^2_D$ for $D=0,1$.
+
+\begin{enumerate}
+\item What is the average treatment effect of college attendance on earnings? \\
+  {\color{blue}ATE is $\EE[W_{1,i}]-\EE[W_{0,i}] = \mu_1-\mu_0$}
+\item Suppose you observe wages, $W_i$, and college choice, $D_i$, for an iid sample of individuals. Calculate $\EE[W_i|D_i=d]$ for $d=0,1$. You may use the following fact: if $Z$ is a standard normal, and $X$ is normal with $\BB{V}[X]=\sigma^2_{X}$, $\BB{C}(X,Z)=\sigma_{XZ}$, and $\EE[X]=0$:
+  \[\EE[X|Z>c] = \frac{\sigma_{XZ}}{\sigma_X}\frac{\phi(c)}{1-\Phi(c)},\qquad \EE[X|Z<c] = -\frac{\sigma_{XZ}}{\sigma_X}\frac{\phi(c)}{\Phi(c)} \]
+  where $\Phi$ is the cdf of the standard normal and $\phi$ is the pdf.
+\item Suppose I take a sample mean of wages for college workers, $\ov{W}_1$, what is $\EE[\ov{W}_1]$? What will the sample mean converge to? \\
+  {\color{blue}  It will converge to
+    \[\EE[W_{1,i}|u_i>\gamma_0-\gamma_1] = \mu_{1} + \EE[\eta_{1,i}|u_i>\gamma_0-\gamma_1] = \mu_1 + \frac{\sigma_{1u}}{\sigma_1}\frac{\phi(\mu_0-\mu_1)}{1-\Phi(\mu_0-\mu_1)}\]
+  }
+\item Suppose I take a sample mean of wages for non-college workers, $\ov{W}_0$, what is $\EE[\ov{W}_0]$? What will the sample mean converge to? \\
+  {\color{blue}  It will converge to
+    \[\EE[W_{0,i}|u_i<\gamma_0-\gamma_1] = \mu_{0} + \EE[\eta_{0,i}|u_i<\gamma_0-\gamma_1] = \mu_0 - \frac{\sigma_{0u}}{\sigma_0}\frac{\phi(\mu_0-\mu_1)}{\Phi(\mu_0-\mu_1)}\]
+  }
+
+\item What will $\ov{W}_1-\ov{W}_0$ converge to? Will this in general be equal to the average treatment effect? \\
+  {\color{blue}  Putting together the two answers above, it will converge to:
+    \[ \mu_1 - \mu_{0} + \underbrace{\frac{\sigma_{1u}}{\sigma_1}\frac{\phi(\mu_0-\mu_1)}{1-\Phi(\mu_0-\mu_1)}  + \frac{\sigma_{0u}}{\sigma_0}\frac{\phi(\mu_0-\mu_1)}{\Phi(\mu_0-\mu_1)}}_{\text{Bias}}\]
+    In general, since $\phi>0$ and $\Phi>0$, the terms involving the truncated expectation will not be equal to zero, and so the difference in sample means will not converge to the ATE.
+  }
+
+\item Under what restrictions on the parameters $\sigma_{1u},\sigma_{0u},\mu_1,\mu_0$ will the $\ov{W}_1-\ov{W}_0$ converge to the ATE? \\
+  {\color{blue}  Based on the above analysis, if $\sigma_{1u}=\sigma_{0u}=0$, then the bias term above is equal to zero, and we can recover the ATE. This is the case in which the decision to attend college is \emph{independent} of potential wages, $W_{1,i},W_{0,i}$ (hence there is no selection). Another interesting case is when the ATE is zero, i.e. $\mu_1-\mu_0=0$, and $\frac{\sigma_{1u}}{\sigma^2_1}=\frac{\sigma_{0u}}{\sigma^2_0}$. In this case, we would have selection, but the parameters are such that the selection bias on each population mean exactly cancels out. 
+    }
+  \item Suppose $\sigma_{1u}>0$ and $\sigma_{0u}>0$. If we used $\ov{W}_1-\ov{W}_0$ as an estimate for the ATE, would we over or under-estimate the ATE? \\
+    {\color{blue} If both covariances are positive, then the bias term must be positive since all other terms in the equation are positive by definition. We would therefore over-estimate the ATE.}
+\end{enumerate}
+
+\paragraph{2)} Suppose that you are evaluating the effect of a treatment, $T$, on the outcomes of children. However, the treatment allocation is clustered at the family level, so outcomes for child $i$ in family $f$ can be written as:
+\[Y_{fi} = \alpha_0 + \alpha_1 T_{f} + \eps_{fi} \]
+You can assume that the experiment has been properly run and there are no issues with selection. Suppose that you assign $N_F$ families the treatment, $N_F$ families  are assigned to the control group, with two children in every family, so $N=2N_F$ for each group. Assume that families are sampled iid, $\BB{V}[\eps_{fi}]=\sigma^2_\eps$ and $\BB{C}(\eps_{f1},\eps_{f2})=\sigma_{12}$ (i.e. error terms for children within the same family are not independent).
+\begin{enumerate}
+\item Propose an estimator for the average treatment effect. Is this estimator unbiased? \\
+  {\color{blue} Use the difference in sample means: $\h{\alpha}=\ov{Y}_1-\ov{Y}_0$. Note:
+    \[\EE[\ov{Y}_1] = \EE[\frac{1}{N}\sum_{f=1}^{N_F}\sum_{i=1,2}Y_{if}] = \frac{1}{N}N\EE[Y_{if}] = \alpha_0+\alpha_1 \]
+    similar logic for the sample of control families gives that $\EE[\h{\alpha}] = \alpha$.}
+\item What is the problem with the typical variance formula? \\
+  {\color{blue} The data are not iid because of the correlation across children within families.}
+\item Define $Y_f = Y_{f1}+Y_{f2}$. Compute $\BB{V}[Y_f]$. \\
+  {\color{blue} $\BB{V}[Y_{f1}+Y_{f2}] = 2\sigma^2_\eps + 2\sigma_{12}$}
+\item Use the fact that $Y_f$ is independent across families to compute $\BB{V}[\sum_{f=1}^{N_F}Y_f]$ for all the families in one group. \\
+  {\color{blue} Since the $Y_f$ are independent, $\BB{V}[\sum_{f=1}^{N_F}Y_f] = N_f\BB{V}[Y_f] = 2N_f(\sigma^2_\eps +\sigma_{12})$}
+\item Noting that the sample mean for each group can be written as $\frac{1}{N}\sum_{f=1}^{N_F}(Y_{1f} + Y_{2f})$, calculate the variance of $\ov{Y}_1$ and $\ov{Y}_0$, the sample means from each group.
+  {\color{blue}
+    \begin{align*}
+     \BB{V}[\ov{Y}_0]= \BB{V}[\ov{Y}_1] &= \BB{V}\left[\frac{1}{N}\sum_{f=1}^{N_F}(Y_{1f} + Y_{2f})\right] \\
+                       &= \frac{1}{N^2}\times 2N_f(\sigma^2_\eps+\sigma_{12}) \\
+                       &= \frac{\sigma^2_\eps+\sigma_{12}}{N}
+    \end{align*}}
+\item Use your answer above to derive the asymptotic distribution of your estimator for the average treatment effect, and describe how you would estimate the variance of this distribution. \\
+  {\color{blue}
+    Since we have assumed here that the variances and covariances of $\eps_{fi}$ are constant in both groups, we get that:
+    \[\BB{V}[\h{\alpha}] = \BB{V}[\ov{Y}_1-\ov{Y}_0] = 2\frac{\sigma^2_\eps+\sigma_{12}}{N} = \frac{\sigma^2_\eps+\sigma_{12}}{N_F} \]
+We can estimate the variance by calculating the sample variance of $Y_{f1}+Y_{f2}$ from each group and substituting this into the expression above. Our work has shown that $\hat{\alpha}$ should be asymptotically normal with mean $\alpha$ and variance given above.
+  }
+\item How does the variance of your estimator compare to the case in which the treatment is assigned randomly to individual children, and only one child per family is chosen for the sample. \\
+  {\color{blue} In this case the variance of the estimator would simply be $\frac{\sigma^2_\eps}{N}$. If $\sigma_{12}>0$, then the estimator from this sample would be more efficient. However if $\sigma_{12}<0$ and sufficiently close in magnitude to $\sigma^2_\eps$, then it is possible for the estimator using the sample above to be more efficient.
+    }
+
+\end{enumerate}
+
+
+
+\end{document}

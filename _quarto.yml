@@ -19,6 +19,7 @@ website:
           - assignments/Homework-3.qmd
           - assignments/Homework-4.qmd
           - assignments/Homework-5.qmd
+      - Exercises.qmd
 
 format:
   html:
