@@ -10,4 +10,13 @@ These recitations have been rendered using [Quarto](https://quarto.org) notebook
 | ----- | -------- | ---- |
 | Introduction to `R` and Monte Carlo Simulation | [notebook](recitations/Week-1.qmd) | |
 | Working with data in `R` and the Tidyverse packages | [notebook](recitations/Week-2.qmd) | [cps data](data/cps-econ-4261.csv) |
+| OLS in `R` | [notebook](recitations/Week-3.qmd) | cps data |
+| Saturated Models and Testing | [notebook](recitations/Week-4.qmd) | cps data |
+| Measurement Error and Frisch-Waugh-Lovell  | [notebook](recitations/Week-5.qmd) | simulations only |
+| Clustered Standard Errors | [notebook](recitations/Week-6.qmd) | simulations only |
+| Replicating Card and Krueger | [notebook](recitations/Week-7.qmd) | [data](/data/cps-CardKrueger.csv) |
+| The Child Penalty | [notebook](recitations/Week-8.qmd) | [data](data/nlsy79_clean_all.RData) |
+| Import Competition and Local Labor Markets | [notebook](recitations/Week-9.qmd) | [data](data/workfile_china.dta) |
+| Monotonicity and IV | [notebook](recitations/Week-10.qmd) | simulations only |
+
 
