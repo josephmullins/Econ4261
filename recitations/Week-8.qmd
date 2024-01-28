@@ -1,0 +1,120 @@
+---
+title: "Week 8 - The Child Penalty"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+# 1 - Intro
+
+Following our discussion in class, we are going to estimate the "child penalty", i.e. the effect of child birth on employment and earnings using data from the NLSY79. A brief summary of the variables we want to use:
+
+- `id`: the id variable of the individual
+- `earn_ly`: a dummy indicating if the individual is employed last year
+- `earnings_ly`: reported earnings for the individual last year
+- `female`: a factor variable equal to "Women" if female and "Men" if male
+- `t_es_ly`: an index of "event study time" for variables measured last year. It measures the years since the birth of the first child.
+
+You can verify that `t_es_ly` is equal to the year that the variable is measured (`doiy`-1, the year of interview minus one) minus the year of birth for the first child (`ch1yob`).
+
+Letting $t$ index time relative to the event, the event-study specification for outcome $Y_{nt}$ is:
+
+$$ Y_{nt} = \mu_{a(n,t)} + \gamma_{y(n,t)} + \sum_{s=-5}^{10}\alpha_{s}\mathbf{1}\{s=t\} + \epsilon_{n,t} $$
+
+where $a(n,t)$ is the age of the person at time $t$, $y(n,t)$ is the calendar year, and $\mu$ and $\gamma$ are vectors of age and year fixed effects.
+
+In order to make a comparison of the child penalty across genders, we will estimate this model separately for men and women.
+
+Notice that this model is not identified without also assuming an "excluded category". We would like to use the year before birth of the first child as the relative year, which requires the normalization $\alpha_{-1}=0$, and so each $\alpha_{t}$ measures the effect relative to the year before the event.
+
+# 2 - Loading the Data
+
+The code below loads cleaned NLSY79 data that we will use.
+```{r}
+load("../data/nlsy79_clean_all.RData")
+head(nlsy)
+```
+
+# 3 - Estimating Specifications
+
+The code below estimates the model separately for men and women. To account for correlations in the error term within individuals, we cluster standard errors at the individual level.
+
+```{r}
+library(fixest)
+
+
+mod_w <- nlsy %>%
+    filter(female=="Women",t_es_ly>=-5,t_es_ly<=10) %>%
+    feols(earn_ly ~ as.factor(t_es_ly) | age + doiy,data =.,cluster="id")
+
+mod_m <- nlsy %>%
+    filter(female=="Men",t_es_ly>=-5,t_es_ly<=10) %>%
+    feols(earn_ly ~ as.factor(t_es_ly) | age + doiy,data =.,cluster="id")
+
+summary(mod_m)
+summary(mod_w)
+
+```
+
+If we look at the model summaries above, we notice a problem. By default, the function *feols* does not use $t=-1$ as the excluded category, but rather $t=-5$. We can transform these estimates to our preferred normalization by applying:
+$$\hat{\alpha}_{t} = \hat{\tilde{\alpha}}_{t} - \hat{\tilde{\alpha}}_{-1} $$
+with $\hat{\tilde{\alpha}}_{-5}=0$. More on this in the next section.
+
+# 4 - Transforming the Estimates
+
+Notice that the vector of coefficients $\tilde{\alpha}$ has 15 elements (with $\tilde{\alpha}_{-5}$ excluded), which we would like to translate into a 16 element vector using the translation above, which is linear. We can write this in vector notation as:
+$$ \alpha = R\tilde{\alpha} $$
+where $R$ is a $16\times 15$ matrix constructed as below:
+
+```{r}
+R = matrix(0,16,15)
+R[1,4] = -1
+for (i in 2:16) {
+    R[i,i-1] = 1
+    R[i,4] = R[i,4] - 1
+}
+R
+```
+
+Now finally note that if $V_{\tilde{\alpha}}$ is the covariance matrix for $\hat{\tilde{\alpha}}$, then we must have:
+
+$$ V_{\alpha} = RV_{\tilde{\alpha}}R^{T}.$$
+
+Putting this altogether, we can write a function that takes the model estimates, re-normalizes the coefficients, calculates new standard errors, and returns a dataframe.
+
+```{r}
+t_index = seq(-5,10)
+
+make_df <- function(R,mod,group) {
+    # calculate the transformed coefficients
+    new_coefs = R%*%mod$coefficients
+    # calculate the new standard errors
+    v =  R%*%mod$cov.unscaled%*%t(R)
+    se = sqrt(diag(v))
+    data.frame(est = new_coefs,t = t_index,se = se,group = group)
+}
+
+
+# using the function here:
+women_est <- make_df(R,mod_w,"Women")
+
+men_est <- make_df(R,mod_m,"Men")
+
+```
+
+
+# 5 - Making a nice graph
+
+With our nice transformed estimates we can make a pretty event study graph like we have seen in class.
+
+```{r}
+men_est %>%
+    rbind(women_est) %>%
+    ggplot(aes(x=t,y=est,ymin=est-1.96*se,ymax=est+1.96*se,color=group,fill=group)) + geom_point() + geom_line() + geom_ribbon(alpha=0.4,color=NA) + theme_minimal() + geom_vline(xintercept = -0.5,color="red")
+
+
+```
+
+Can you extend this to estimate the child penalty for annual earnings instead of employment?

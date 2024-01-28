@@ -1,0 +1,148 @@
+---
+title: "Recitation 3"
+---
+
+## Part 1: Linear Regression
+
+We are going to play around with the data we cleaned last week and test some regression specifications. This is going to be a simple exercise in fitting data by experimenting with different versions of the linear model. Part of the goal is to show how flexible the class of "linear models" really is.
+
+First, let's repeat the code to impute wages from last week. The only twist is that here we'll just look at the year 2018.
+
+
+```{r}
+library(tidyverse)
+
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR==2018) %>%
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99)) %>%
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  filter(!is.na(Wage)) %>%
+  mutate(SEX = factor(SEX,levels= c(1,2),labels=(c("Male","Female"))))
+
+
+```
+
+Suppose we wanted to estimate the conditional expectation of wages given age and sex using a linear model. As a first step, let's try:
+
+```{r}
+mod1 <- lm(log(Wage) ~ AGE + SEX,D)
+summary(mod1)
+```
+
+Clearly, age is a strong predictor of wages (for obvious reasons). How do we know that this linear model works well? Let's try adding $AGE^2$ to the specification:
+
+```{r}
+mod2 <- lm(log(Wage) ~ poly(AGE,2) + SEX,D)
+summary(mod2)
+```
+
+Did this help very much? One way to see this is to look at the $R^2$, which we will go over in class. Informally, you can think of it as the fraction of the overall variation in the outcome variable (log wages) that is explained by the right hand side variables. Notice that when we add $AGE^2$, we increase the amount of variation that we can explain by more than half. 
+
+Often in simple scenarios like this one, we can visualize the fit of the model. Since age is a discrete random variable, this is actually pretty simple in this case. First let's take averages.
+
+```{r}
+mean_wage <- D %>%
+  group_by(AGE,SEX) %>%
+  summarize(meanwage=mean(log(Wage),na.rm = TRUE)) %>%
+  mutate(case="true mean")
+```
+
+Now in the same dataframe let's fill in both models' prediction for mean wages.
+
+```{r}
+mean_wage$mod1 <- predict(mod1,mean_wage)
+mean_wage$mod2 <- predict(mod2,mean_wage)
+```
+
+And now let's plot the prediction against the actual first model:
+
+```{r}
+ggplot(mean_wage,aes(x=AGE,y=meanwage,color=SEX)) + geom_point() + geom_line(aes(x=AGE,y=mod1,color=SEX))
+```
+
+And the second:
+```{r}
+ggplot(mean_wage,aes(x=AGE,y=meanwage,color=SEX)) + geom_point() + geom_line(aes(x=AGE,y=mod2,color=SEX))
+
+```
+
+So it looks like the second model is doing pretty well! One might be tempted to allow for different age trends by sex. This can be done by specifying an interaction between sex and the polynomial like so:
+
+```{r}
+mod3 <- lm(log(Wage) ~ SEX*poly(AGE,2),D)
+summary(mod3)
+```
+
+Note that the gain in model fit (as measured by $R^2$) is much more modest. The visual fit is:
+
+```{r}
+mean_wage$mod3 <- predict(mod3,mean_wage)
+ggplot(mean_wage,aes(x=AGE,y=meanwage,color=SEX)) + geom_point() + geom_line(aes(x=AGE,y=mod3,color=SEX))
+```
+There seems to be a clear improvement in fitting wages for younger ages here.
+
+Of course, the linear model can also perfectly fit the conditional sample means, we just need to include a dummy variable for each combination of age and sex in the data. We have either talked about dummy variables in class already or we will do very soon. More on this in recitation next week. For reference, this can be achieved in lm by interacting AGE dummies with SEX dummies:
+
+```{r}
+mod4 <- lm(log(Wage) ~ as.factor(AGE)*SEX,D)
+summary(mod4)
+mean_wage$mod4 <- predict(mod4,mean_wage)
+ggplot(mean_wage,aes(x=AGE,y=meanwage,color=SEX)) + geom_point() + geom_line(aes(x=AGE,y=mod4,color=SEX))
+
+```
+
+We will show how this works next week.
+
+## Part 2: Theory
+
+Suppose that you have iid data $(X_{n},Y_{n})_{n=1}^{N}$. While each pair indexed by $n$ is independent of each other pair $n'$, we still have:
+
+$$ \mathbb{C}(X_{n},Y_{n}) = \beta.$$
+
+Suppose you want to test the hypothesis that $\mu_{X}=\mu_{Y}$ against a two-sided alternative. 
+
+First, show that:
+
+$$ \mathbb{V}[\overline{X} - \overline{Y}] = \frac{\sigma^2_{X}+\sigma^2_{Y} - 2\beta}{N} $$
+
+Now, suppose that 
+  (1) $\beta>0$; and
+  (2) You incorrectly test the hypothesis under the assumption that $X$ and $Y$ are independent; and
+  (3) The null is true ($\mu_{X}=\mu_{Y}$)
+  
+For a given target size $\alpha$ of the test, is the actual size of the test larger or smaller than what you intended as $N$ grows large? you can use the simulation code below to help you:
+
+```{r}
+monte_carlo_test <- function(B,N,beta,alpha) {
+  zcrit = qnorm(1-alpha/2) #<- two-sided critical value
+  reject <- numeric(B)
+  for (b in 1:B) {
+    x = rnorm(N) #<- draw X as a standard normal with mean 0 and variance 1
+    y = beta*x + rnorm(N) #<- draw Y as a standard normal with mean 0, variance 1+beta and covarariance(x,y) =beta
+    test_stat <- (mean(x)-mean(y))/sqrt((var(x)+var(y))/N) #<- test statistic under incorrect assumption
+    reject[b] <- abs(test_stat)>zcrit
+  }
+  mean(reject) #<- estimate size of test using simulation
+}
+```
+
+This simulation is basically telling you the answer but it's more important that you understand *why*.
+
+```{r}
+monte_carlo_test(5000,50,0.3,0.05)
+monte_carlo_test(5000,100,0.3,0.05)
+monte_carlo_test(5000,1000,0.3,0.05)
+```
+
+Compared to:
+```{r}
+monte_carlo_test(5000,50,0.,0.05)
+monte_carlo_test(5000,100,0.,0.05)
+monte_carlo_test(5000,1000,0.,0.05)
+
+```
+
+
+
