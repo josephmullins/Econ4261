@@ -1,0 +1,294 @@
+---
+title: "Causality and Experiments"
+format: 
+  revealjs:
+    theme: solarized
+    transition: slide
+    chalkboard:
+        theme: whiteboard
+        chalk-effect: 0.0
+        chalk-width: 6
+---
+
+# Introduction
+
+## Overview
+::: {.hidden}
+$$
+\newcommand\ov{\overline}
+\newcommand\un{\underline}
+\newcommand\BB{\mathbb}
+\newcommand\EE{\mathbb{E}}
+\newcommand\mc{\mathcal}
+\newcommand\ti{\tilde}
+\newcommand\h{\hat}
+\newcommand\beq{\begin{equation}}
+\newcommand\eeq{\end{equation}}
+\newcommand\barr{\begin{array}}
+\newcommand\earr{\end{array}}
+\newcommand\bfp{\mathbf{p}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+$$
+
+:::
+In our toolkit so far:
+
+- We know linear models inside and out.
+- We can estimate any linear model.
+- We can derive the approximate distribution of our estimator using the CLT under different assumptions.
+- We can conduct simple tests and estimate confidence intervals.
+
+. . . 
+
+This section:
+
+::: {.incremental}
+- We will define **causality**.
+- We will learn how to **causality** from a conditional expectation.
+- We will look at estimating causal effects using **experiments**.
+- We'll look at some applications of experiments in economics.
+:::
+
+## Causality vs Conditional Means
+
+:::{.incremental}
+- Outcome variable, $Y$ (e.g. earnings)
+- Treatment variable $X$ (e.g. college attendance)
+- Consider this experiment:
+    - Pick someone **randomly** from the population with $X=x_{1}$.
+    - Forcibly change $X$ to $x_{2}$
+- Is the expected effect on $Y$ given by 
+$$ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? $$
+- In general, **no**. We need **more assumptions**.
+:::
+
+## Two Equivalent Definitions of Causality
+
+::::{.columns}
+
+:::{.column width="50%"}
+:::{.fragment .fade-right}
+
+**Ceterus paribus**
+
+- ``all else being equal''
+- The effect on $Y$, when *only* $X$ is changed
+- Notice how our thought experiment replicates
+- Hard to find in data! 
+
+:::
+:::
+
+:::{.column width="50%"}
+:::{.fragment .fade-left}
+
+**Counterfactual**
+
+- For the treatment unit, imagine a world where $X=x_{2}$ had been assigned/chosen instead of $X=x_{1}$.
+- Also replicates thought experiment.
+- Hard to find in data!
+
+:::
+:::
+::::
+
+
+## How to infer causality
+
+Here's the recipe:
+
+::: {.incremental}
+
+1. Start with a {model of the world}: $Y = h_{\theta}(X,W,\eta)$. This is your theory of how the data is generated. $\eta$ is what we call {structural unobservables}. The model $h$ is indexed by population parameters, $\theta$. 
+2. Define a counterfactual of interest. Two (of infinitely many) examples:
+  $$ (1)\ \int h_{\theta}(X+1,W,\eta)dF(X,W,\eta)\qquad (2)\ \int h_{\theta}(0,W,\eta)dF(W,\eta|X=1). $$
+3. State the assumptions under which your counterfactual can be constructed 4. Then we debate the plausibility of your assumptions. That's it.
+
+We'll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics.
+
+## Example 1: Returns to education
+
+  data: $(Y_{n},E_{n})_{n=1}^{N}$, iid sample of individuals. 
+- $Y_{n}$ - hourly wages
+- $E_{n}$ - years of education
+- Model: $$ Y_{n} = \gamma_{0} + \gamma_{1}E_{n} + \eta_{n} $$
+- $\eta_{n}$: unobserved determinants of wages (cognitive ability, grit, connections, resources)
+
+## Returns to Education
+
+- We can estimate $\EE[Y|E] = \beta_{0} + \beta_{1}E_{n}$.
+- When does $\beta_{1} = \gamma_{1}$ (i.e. the causal effect)? 
+    - When $\EE[\eta_{n}|E_{n}] = 0$ **(strict exogeneity)**
+- In this case, an *overly strong* assumption. 
+- **Be careful**: always check how an error term is defined. If it is prediction error (what we have been calling $\epsilon_{n})$ this is conceptually different from a structural error/unobservable. As a prediction error, $\EE[\epsilon_{n}|X_{n}] = 0$ by definition.
+
+## Example 2: Returns to Education (again)}
+
+Now suppose a different data-generating process. Imagine: 
+
+- Model: $Y = \gamma_{0} + \gamma_{1}C_{n} + \eta_{n}$.
+- Every college applicant takes a test, gets a test score $S_{n}$.
+- Test scores are sorted evenly into bins $b\in\{1,2,3\}$, college slots offered to a person in bin $b$ randomly} with probability $p_{b}$. $p_{1}<p_{2}<p_{3}$.
+
+## Example 2: Returns to Education (again)}\vspace{-100pt}
+
+- Does $\EE[Y|C] = \beta_{0} + \beta_{1}C$ work?  Still need same implausible assumption. 
+- What about $\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}$ where $B_{b}$ is a dummy for $S$ being in bin $b$?
+
+
+## Sources of Bias
+
+Three major sources of bias when trying to infer causality.
+
+- Omitted variables:
+- Selection: when unobservables determine whether data is observed or not.
+- Simultaneity: when observables are determined jointly by unobservables in equilibrium.
+
+When the causal variable of interest depends in some way on the unobservables, we say that the determination of $X$ is **endogenous**. You will often then see these biases referred to as problems with  **endogeneity**.
+
+## a diagram for OVB? 
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
+## Omitted Variables
+
+Utility maximization:
+
+$$  U(C,H) = C - \alpha_{n}\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH $$
+$$ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} $$
+**Exercise**: we'll show OVB when trying to estimate $\psi$ using $\EE[\log(H)|\log(W),X]$.
+
+## simulation or gif?
+
+## Selection
+
+Let $\alpha_{n}=\alpha$ (no OVB), but:
+  $$  U(C,H) = C - \alpha\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
+
+**Exercise**: selection bias when trying to estimate $\gamma$ using $\EE[\log(W)|X]$, *even if* $\EE[\zeta_{n}|X_{n}] = 0$.
+
+## Simultaneity
+
+Supply and demand:
+  $$ \log(Q_{m}^{D}) = \alpha_{0} - \alpha_{1}\log(P_{m}) + \eta_{m} $$
+  $$ \log(Q_{m}^{S}) = \gamma_{0} + \gamma_{1}\log(P_{m}) + \upsilon_{m} $$
+  $\eta$ and $\upsilon$ are demand and supply "shocks" across markets.
+
+Exercise: simultaneity bias when trying to estimate $\gamma$.
+
+## simulation or gif?
+
+## The Potential Outcomes Model
+
+The **Potential Outcomes Model** is a very general framework:
+
+- $D\in\{0,1\}$ is treatment variable.
+- Every individual is defined by a triple: $(Y_{0},Y_{1},D)$
+- We only see $Y=Y_{D}$, $Y_{1-D}$ is the { counterfactual}
+- The treatment effect is $Y_{1} - Y_{0}$ is defined to be { heterogeneous.}
+
+## The Potential Outcomes Model
+
+We can write the model this way:
+  $$ Y = \alpha_{0} + \alpha_{1}D + \eta $$
+  where:
+- $Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}$
+- $\eta = (1-D)\eta_{0} + D\eta_{1}$
+- $\EE[\eta_{1}] = \EE[\eta_{0}] = 0$
+- $Y_{1} - Y_{0} = \alpha_{1} + \eta_{1} - \eta_{0}$
+- The **Average Treatment Effect (ATE)** is:
+    $$ \EE[Y_{1}-Y_{0}] = \alpha_{1} $$
+
+
+## Motivating Experiments
+
+:::{.incremental}
+
+- How could we guarantee that $\EE[\eta|D] = 0$?
+- Suppose that the variable $D$ could be {assigned randomly} $\Rightarrow$ $\eta_{0},\eta_{1} \independent D$.
+- Then $\EE[\eta|D] = \EE[\eta] = 0$.
+- How could we estimate and do inference on $\alpha$?
+:::
+
+
+## Regression Framework
+
+- We can extend the model:
+    $$ Y = X\beta + \alpha D + \eta $$
+    and estimate by linear regression.
+- No bias as long as $D$ still randomly assigned.
+
+## Internal Validity
+
+- **Internal validity** is achieved if the experiment and subsequent analysis properly identifies the parameter of interest. 
+- **Example 1**: suppose that $D$ is not properly randomized.
+    - *Balance test*: randomization also implies that $\EE[X|D=1]=\EE[X|D=0]$ which can be tested.
+- **Example 2**: suppose that $D$ can only be offered, and takeup is not 100\%. Can we be sure that $\EE[Y|D=1] - \EE[Y|D=1]$ is equal to $\alpha$?
+
+
+## Internal Validity: Imperfect Takeup
+
+Consider a model of earnings:
+$$ Y_{D} = \alpha_0 + \alpha_{1}D + \eta_{D} $$
+
+where $D\in\{0,1\}$ indicates college attendance, and individuals go to college if the benefits outweigh the costs:
+$$ D = \mathbf{1}\{Y_{1} - Y_{0} \geq C \} $$ 
+
+Now suppose that a tuition subsidy of $\tau$ is randomly offered to some, $Z\in\{0,1\}$, so that:
+$$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - \tau\} $$
+
+
+## simulation/picture
+
+## Exercise
+
+:::{.incremental}
+
+1. Solve for $P_{Z} = P[D=1|Z]$.
+2. Solve for $\EE[Y|Z]$.
+3. Define populations: compliers, always-takers, never takers.
+4. Define the Local Averate Treatment Effect (LATE). Estimate??
+
+:::
+
+## The LATE
+
+:::{.incremental}
+
+- The **LATE** is the Average Treatment Effect of $D$ among the {compliers}, the population of individuals who are moved into treatment by the randomized variable, $Z$.
+- In many experiments, there are not always-takers by definition, and we instead call it the effect of **Treatment on the Treated (TOT)** 
+- The derivation requires that there are no **defiers** (people who are moved in the opposite direction by the randomized variable $Z$).
+
+:::
+
+## Regression Framework
+
+As with complete take-up, there is a regression framework for LATE/TOT:
+$$ Y = X\beta + \alpha D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) $$
+with
+$$ P[D|X,Z] = P_{always-taker} + P_{complier} Z $$
+
+**Exercise**: (1) calculate $\EE[Y|X,Z]$;  (2) Show how the {2SLS} estimator works.
+
+We don't know how to calculate standard errors for this kind of estimator yet. But we will soon.
+
+## External Validity
+
+:::{.incremental}
+
+- **External validity** is achieved if the experiment can be used to forecast a treatment effect outside the population of interest (a moving goalpost) 
+- This is much harder to test or guarantee than internal validity. 
+- *Example 1:* does experiment identify effect of offering tuition subsidy to entire population? Why not? 
+- *Example 2:* Suppose we run a housing voucher experiment, would we expect the same ATE if we run the experiment on high income population? 
+- *Example 3:* if we rename every Jamal in the country to Greg, does the resume study tell us about the effect on callbacks? 
+
+:::
+
+## external validity picture / simulation
