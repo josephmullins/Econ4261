@@ -190,37 +190,30 @@ d %>%
   ggplot(aes(x,y,color=e)) + geom_point() + theme_minimal() + geom_smooth(method = "lm",se = FALSE) + transition_states(state)  + labs(title = "{closest_state}") + guides(color = guide_legend(title = expression(eta)))
 ```
 
-## Selection
+## Selection Bias
+
+```{r}
+d <- data.frame(x = runif(500)) %>%
+  mutate(y = x + 0.4*rnorm(500),state = 0,n = 1:500,observed = TRUE,cutoff = -1)
+d2 <- d %>%
+  mutate(observed = y>-0.5,state=1,cutoff = -0.5) 
+d3 <- d %>%
+  mutate(observed = y>0,state = 2,cutoff = 0)
+d4 <- d %>%
+  mutate(observed = y>0.5,state = 3,cutoff = 0.5)
+
+d <- rbind(d,d2,d3,d4)
+ggplot(d,aes(x,y,group=n)) + geom_point(aes(x,y,alpha=observed)) + geom_smooth(aes(x,y,group=state),data=subset(d,observed),method="lm",se=FALSE) + transition_states(state) + geom_hline(aes(yintercept=cutoff),linetype="dashed") + theme_minimal() + theme(legend.position="none")
+```
+
+
+## Selection Example
 
 Let $\alpha_{n}=\alpha$ (no OVB), but:
   $$  U(C,H) = C - \exp(\alpha)\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
 
 **Exercise**: selection bias when trying to estimate $\gamma$ using $\EE[\log(W)|X]$, *even if* $\EE[\zeta_{n}|X_{n}] = 0$.
 
-## Selection
-
-```{r}
-# get one version of this going, neither looks that good right now
-d <- data.frame(x = runif(500))
-d$y <- d$x + 0.4*rnorm(500)
-d$observe <- d$y > 0
-ggplot(d,aes(x,y)) + geom_point()
-
-ggplot(d,aes(x,y)) + geom_point() + geom_smooth(aes(x,y),method="lm",se=FALSE) + 
-  transition_filter(
-    transition_length = 1,
-    filter_length = 1,
-    No_Selection = TRUE,
-    Selection = observe)
-
-ggplot(d,aes(x,y)) + 
-  geom_point() + 
-  geom_smooth(method="lm",se=FALSE) +
-  geom_point(aes(color=observe)) + 
-  geom_smooth(method="lm",se=FALSE) +
-  transition_layers()
-
-```
 
 
 ## Simultaneity
