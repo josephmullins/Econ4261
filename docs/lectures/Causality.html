@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.539">
+  <meta name="generator" content="quarto-1.4.537">
 
   <title>Econ4261 - Causality and Experiments</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -464,28 +464,33 @@
 <li>What about <span class="math inline">\(\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}\)</span> where <span class="math inline">\(B_{b}\)</span> is a dummy for <span class="math inline">\(S\)</span> being in bin <span class="math inline">\(b\)</span>?</li>
 </ul>
 </section>
-<section id="sources-of-bias" class="slide level2">
+<section id="sources-of-bias" class="slide level2 smaller">
 <h2>Sources of Bias</h2>
 <p>Three major sources of bias when trying to infer causality.</p>
+<div>
 <ul>
-<li>Omitted variables:</li>
-<li>Selection: when unobservables determine whether data is observed or not.</li>
-<li>Simultaneity: when observables are determined jointly by unobservables in equilibrium.</li>
+<li class="fragment">Omitted variables: when unobservables partly determine both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li class="fragment">Selection: when unobservables determine whether data is observed or not.</li>
+<li class="fragment">Simultaneity: when observables are determined jointly by unobservables in equilibrium.</li>
 </ul>
-<p>When the causal variable of interest depends in some way on the unobservables, we say that the determination of <span class="math inline">\(X\)</span> is <strong>endogenous</strong>. You will often then see these biases referred to as problems with <strong>endogeneity</strong>.</p>
+</div>
+<div class="fragment">
+<p>When the causal variable of interest depends in some way on the unobservables, we say that the determination of <span class="math inline">\(X\)</span> is <strong>endogenous</strong>.</p>
+</div>
+<div class="fragment">
+<p>You will often then see these biases referred to as problems with <strong>endogeneity</strong>.</p>
+</div>
 </section>
-<section id="a-diagram-for-ovb" class="slide level2">
-<h2>a diagram for OVB?</h2>
-<div class="cell" data-reveal="true" data-layout-align="default">
+<section id="omitted-variables" class="slide level2">
+<h2>Omitted Variables</h2>
+<div class="cell" data-reveal="true" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart LR
-  A[Hard edge] --&gt; B(Round edge)
-  B --&gt; C{Decision}
-  C --&gt; D[Result one]
-  C --&gt; E[Result two]
+  A(("Variable of Interest" )) &amp; B(("Unobservables")) --&gt; C{"Outcome of Interest"}
+  B --&gt; A
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -493,7 +498,7 @@
 </div>
 </div>
 </section>
-<section id="omitted-variables" class="slide level2">
+<section id="omitted-variables-1" class="slide level2">
 <h2>Omitted Variables</h2>
 <p>Utility maximization:</p>
 <p><span class="math display">\[  U(C,H) = C - \alpha_{n}\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH \]</span> <span class="math display">\[ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} \]</span> <strong>Exercise</strong>: we’ll show OVB when trying to estimate <span class="math inline">\(\psi\)</span> using <span class="math inline">\(\EE[\log(H)|\log(W),X]\)</span>.</p>

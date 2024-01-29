@@ -137,42 +137,91 @@ Now suppose a different data-generating process. Imagine:
 - What about $\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}$ where $B_{b}$ is a dummy for $S$ being in bin $b$?
 
 
-## Sources of Bias
+## Sources of Bias {.smaller}
 
 Three major sources of bias when trying to infer causality.
 
-- Omitted variables:
-- Selection: when unobservables determine whether data is observed or not.
-- Simultaneity: when observables are determined jointly by unobservables in equilibrium.
+:::{.incremental}
+- *Omitted variables*: when unobservables partly determine both $X$ and $Y$
+- *Selection*: when unobservables determine whether data is observed or not.
+- *Simultaneity*: when observables are determined jointly by unobservables in equilibrium.
+:::
 
-When the causal variable of interest depends in some way on the unobservables, we say that the determination of $X$ is **endogenous**. You will often then see these biases referred to as problems with  **endogeneity**.
+. . .
 
-## a diagram for OVB? 
+When the causal variable of interest depends in some way on the unobservables, we say that the determination of $X$ is **endogenous**. 
+
+. . .
+
+You will often then see these biases referred to as problems with  **endogeneity**.
+
+## Omitted Variables 
 
 ```{mermaid}
+%%| fig-align: center
 flowchart LR
-  A[Hard edge] --> B(Round edge)
-  B --> C{Decision}
-  C --> D[Result one]
-  C --> E[Result two]
+  A(("Variable of Interest" )) & B(("Unobservables")) --> C{"Outcome of Interest"}
+  B --> A
 ```
 
 ## Omitted Variables
 
 Utility maximization:
 
-$$  U(C,H) = C - \alpha_{n}\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH $$
+$$  U(C,H) = C - \exp(\alpha_{n})\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH $$
 $$ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} $$
 **Exercise**: we'll show OVB when trying to estimate $\psi$ using $\EE[\log(H)|\log(W),X]$.
 
-## simulation or gif?
+## Example
+```{r}
+d <- data.frame(e = runif(100))
+d$x <- runif(100) + d$e
+d$y <- d$e + d$x + 0.1*rnorm(100)
+d$state <- "Total Relationship"
+
+d2 <- d
+d2$y <- d$y - d$e
+d2$x <- d$x - d$e
+d2$e <- 0
+d2$state <- paste("Causal Relationship")
+
+d %>%
+  rbind(d2) %>%
+  ggplot(aes(x,y,color=e)) + geom_point() + theme_minimal() + geom_smooth(method = "lm",se = FALSE) + transition_states(state)  + labs(title = "{closest_state}") + guides(color = guide_legend(title = expression(eta)))
+```
 
 ## Selection
 
 Let $\alpha_{n}=\alpha$ (no OVB), but:
-  $$  U(C,H) = C - \alpha\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
+  $$  U(C,H) = C - \exp(\alpha)\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
 
 **Exercise**: selection bias when trying to estimate $\gamma$ using $\EE[\log(W)|X]$, *even if* $\EE[\zeta_{n}|X_{n}] = 0$.
+
+## Selection
+
+```{r}
+# get one version of this going, neither looks that good right now
+d <- data.frame(x = runif(500))
+d$y <- d$x + 0.4*rnorm(500)
+d$observe <- d$y > 0
+ggplot(d,aes(x,y)) + geom_point()
+
+ggplot(d,aes(x,y)) + geom_point() + geom_smooth(aes(x,y),method="lm",se=FALSE) + 
+  transition_filter(
+    transition_length = 1,
+    filter_length = 1,
+    No_Selection = TRUE,
+    Selection = observe)
+
+ggplot(d,aes(x,y)) + 
+  geom_point() + 
+  geom_smooth(method="lm",se=FALSE) +
+  geom_point(aes(color=observe)) + 
+  geom_smooth(method="lm",se=FALSE) +
+  transition_layers()
+
+```
+
 
 ## Simultaneity
 
@@ -183,7 +232,17 @@ Supply and demand:
 
 Exercise: simultaneity bias when trying to estimate $\gamma$.
 
-## simulation or gif?
+## Simultaneity
+```{r}
+N <- 5
+d <- data.frame(n = 1:(2*N+1),ed = c(kronecker(rnorm(N),c(1,1)),0),es = c(0,kronecker(rnorm(N),c(1,1))))
+d$p <- (1/2)*(d$ed - d$es)
+d$q <- d$ed - d$p
+ggplot(d,aes(q,p,group=n)) + geom_point(aes(group=n)) + geom_abline(aes(intercept=-es,slope=1)) + geom_abline(aes(intercept=ed,slope=-1)) + transition_reveal(n,keep_last = TRUE)
+
+ggplot(d,aes(q,p)) + geom_point(size=2) + geom_abline(aes(intercept=-es,slope=1),alpha=0.2) + geom_abline(aes(intercept=ed,slope=-1),alpha=0.2) + transition_states(n) + shadow_mark()
+
+```
 
 ## The Potential Outcomes Model
 
