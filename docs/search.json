@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\n\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -1096,7 +1096,7 @@
     "href": "lectures/Causality.html#overview",
     "title": "Causality and Experiments",
     "section": "Overview",
-    "text": "Overview\n\n\\[\n\\newcommand\\ov{\\overline}\n\\newcommand\\un{\\underline}\n\\newcommand\\BB{\\mathbb}\n\\newcommand\\EE{\\mathbb{E}}\n\\newcommand\\mc{\\mathcal}\n\\newcommand\\ti{\\tilde}\n\\newcommand\\h{\\hat}\n\\newcommand\\beq{\\begin{equation}}\n\\newcommand\\eeq{\\end{equation}}\n\\newcommand\\barr{\\begin{array}}\n\\newcommand\\earr{\\end{array}}\n\\newcommand\\bfp{\\mathbf{p}}\n\\newcommand\\independent{\\protect\\mathpalette{\\protect\\independenT}{\\perp}}\n\\def\\independenT#1#2{\\mathrel{\\rlap{$#1#2$}\\mkern2mu{#1#2}}}\n\\]\n\nIn our toolkit so far:\n\nWe know linear models inside and out.\nWe can estimate any linear model.\nWe can derive the approximate distribution of our estimator using the CLT under different assumptions.\nWe can conduct simple tests and estimate confidence intervals.\n\n\nThis section:\n\n\nWe will define causality.\nWe will learn how to causality from a conditional expectation.\nWe will look at estimating causal effects using experiments.\nWe’ll look at some applications of experiments in economics."
+    "text": "Overview\n\n\\[\n\\newcommand\\ov{\\overline}\n\\newcommand\\un{\\underline}\n\\newcommand\\BB{\\mathbb}\n\\newcommand\\EE{\\mathbb{E}}\n\\newcommand\\mc{\\mathcal}\n\\newcommand\\ti{\\tilde}\n\\newcommand\\h{\\hat}\n\\newcommand\\beq{\\begin{equation}}\n\\newcommand\\eeq{\\end{equation}}\n\\newcommand\\barr{\\begin{array}}\n\\newcommand\\earr{\\end{array}}\n\\newcommand\\bfp{\\mathbf{p}}\n\\newcommand\\independent{\\protect\\mathpalette{\\protect\\independenT}{\\perp}}\n\\def\\independenT#1#2{\\mathrel{\\rlap{$#1#2$}\\mkern2mu{#1#2}}}\n\\]\n\nIn our toolkit so far:\n\nWe know linear models inside and out.\nWe can estimate any linear model.\nWe can derive the approximate distribution of our estimator using the CLT under different assumptions.\nWe can conduct simple tests and estimate confidence intervals.\n\n\nThis section:\n\n\nWe will define causality.\nWe will learn how to infer causality from a conditional expectation.\nWe will look at estimating causal effects using experiments.\nWe’ll look at some applications of experiments in economics."
   },
   {
     "objectID": "lectures/Causality.html#causality-vs-conditional-means",
@@ -1110,42 +1110,42 @@
     "href": "lectures/Causality.html#two-equivalent-definitions-of-causality",
     "title": "Causality and Experiments",
     "section": "Two Equivalent Definitions of Causality",
-    "text": "Two Equivalent Definitions of Causality\n\n\n\nCeterus paribus\n\n``all else being equal’’\nThe effect on \\(Y\\), when only \\(X\\) is changed\nNotice how our thought experiment replicates\nHard to find in data!\n\n\n\n\nCounterfactual\n\nFor the treatment unit, imagine a world where \\(X=x_{2}\\) had been assigned/chosen instead of \\(X=x_{1}\\).\nAlso replicates thought experiment.\nHard to find in data!"
+    "text": "Two Equivalent Definitions of Causality\n\n\n\nCeterus paribus\n\n“all else being equal”\nThe effect on \\(Y\\), when only \\(X\\) is changed\nNotice how our thought experiment replicates\nHard to find in data!\n\n\n\n\nCounterfactual\n\nFor the treatment unit, imagine a world where \\(X=x_{2}\\) had been assigned/chosen instead of \\(X=x_{1}\\).\nAlso replicates thought experiment.\nHard to find in data!"
   },
   {
     "objectID": "lectures/Causality.html#how-to-infer-causality",
     "href": "lectures/Causality.html#how-to-infer-causality",
     "title": "Causality and Experiments",
     "section": "How to infer causality",
-    "text": "How to infer causality\nHere’s the recipe:\n::: {.incremental}\n\nStart with a {model of the world}: \\(Y = h_{\\theta}(X,W,\\eta)\\). This is your theory of how the data is generated. \\(\\eta\\) is what we call {structural unobservables}. The model \\(h\\) is indexed by population parameters, \\(\\theta\\).\nDefine a counterfactual of interest. Two (of infinitely many) examples: \\[ (1)\\ \\int h_{\\theta}(X+1,W,\\eta)dF(X,W,\\eta)\\qquad (2)\\ \\int h_{\\theta}(0,W,\\eta)dF(W,\\eta|X=1). \\]\nState the assumptions under which your counterfactual can be constructed 4. Then we debate the plausibility of your assumptions. That’s it.\n\nWe’ll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics."
+    "text": "How to infer causality\nHere’s the recipe:\n\n\nStart with a model of the world: \\(Y = h_{\\theta}(X,W,\\eta)\\). This is your theory of how the data is generated. \\(\\eta\\) is what we call structural unobservable. The model \\(h\\) is indexed by population parameters, \\(\\theta\\).\nDefine a counterfactual of interest. Two (of infinitely many) examples: \\[ (1)\\ \\int h_{\\theta}(X+1,W,\\eta)dF(X,W,\\eta)\\qquad (2)\\ \\int h_{\\theta}(0,W,\\eta)dF(W,\\eta|X=1). \\]\nState the assumptions under which your counterfactual can be constructed\nThen we debate the plausibility of your assumptions. That’s it.\n\n\n\nWe’ll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics."
   },
   {
     "objectID": "lectures/Causality.html#example-1-returns-to-education",
     "href": "lectures/Causality.html#example-1-returns-to-education",
     "title": "Causality and Experiments",
     "section": "Example 1: Returns to education",
-    "text": "Example 1: Returns to education\ndata: \\((Y_{n},E_{n})_{n=1}^{N}\\), iid sample of individuals. - \\(Y_{n}\\) - hourly wages - \\(E_{n}\\) - years of education - Model: \\[ Y_{n} = \\gamma_{0} + \\gamma_{1}E_{n} + \\eta_{n} \\] - \\(\\eta_{n}\\): unobserved determinants of wages (cognitive ability, grit, connections, resources)"
+    "text": "Example 1: Returns to education\ndata: \\((Y_{n},E_{n})_{n=1}^{N}\\), iid sample of individuals.\n\n\\(Y_{n}\\) - hourly wages\n\\(E_{n}\\) - years of education\nModel: \\[ Y_{n} = \\gamma_{0} + \\gamma_{1}E_{n} + \\eta_{n} \\]\n\\(\\eta_{n}\\): unobserved determinants of wages (cognitive ability, grit, connections, resources)"
   },
   {
     "objectID": "lectures/Causality.html#returns-to-education",
     "href": "lectures/Causality.html#returns-to-education",
     "title": "Causality and Experiments",
     "section": "Returns to Education",
-    "text": "Returns to Education\n\nWe can estimate \\(\\EE[Y|E] = \\beta_{0} + \\beta_{1}E_{n}\\).\nWhen does \\(\\beta_{1} = \\gamma_{1}\\) (i.e. the causal effect)?\n\nWhen \\(\\EE[\\eta_{n}|E_{n}] = 0\\) (strict exogeneity)\n\nIn this case, an overly strong assumption.\nBe careful: always check how an error term is defined. If it is prediction error (what we have been calling \\(\\epsilon_{n})\\) this is conceptually different from a structural error/unobservable. As a prediction error, \\(\\EE[\\epsilon_{n}|X_{n}] = 0\\) by definition."
+    "text": "Returns to Education\n\n\nWe can estimate \\(\\EE[Y|E] = \\beta_{0} + \\beta_{1}E_{n}\\).\nWhen does \\(\\beta_{1} = \\gamma_{1}\\) (i.e. the causal effect)?\n\nWhen \\(\\EE[\\eta_{n}|E_{n}] = 0\\) (strict exogeneity)\n\nIn this case, an overly strong assumption.\nBe careful: always check how an error term is defined. If it is prediction error (what we have been calling \\(\\epsilon_{n})\\) this is conceptually different from a structural error/unobservable.\nAs a prediction error, \\(\\EE[\\epsilon_{n}|X_{n}] = 0\\) by definition."
   },
   {
     "objectID": "lectures/Causality.html#example-2-returns-to-education-again",
     "href": "lectures/Causality.html#example-2-returns-to-education-again",
     "title": "Causality and Experiments",
-    "section": "Example 2: Returns to Education (again)}",
-    "text": "Example 2: Returns to Education (again)}\nNow suppose a different data-generating process. Imagine:\n\nModel: \\(Y = \\gamma_{0} + \\gamma_{1}C_{n} + \\eta_{n}\\).\nEvery college applicant takes a test, gets a test score \\(S_{n}\\).\nTest scores are sorted evenly into bins \\(b\\in\\{1,2,3\\}\\), college slots offered to a person in bin \\(b\\) randomly} with probability \\(p_{b}\\). \\(p_{1}&lt;p_{2}&lt;p_{3}\\)."
+    "section": "Example 2: Returns to Education (again)",
+    "text": "Example 2: Returns to Education (again)\nNow suppose a different data-generating process. Imagine:\n\nModel: \\(Y = \\gamma_{0} + \\gamma_{1}C_{n} + \\eta_{n}\\).\nEvery college applicant takes a test, gets a test score \\(S_{n}\\).\nTest scores are sorted evenly into bins \\(b\\in\\{1,2,3\\}\\), college slots offered to a person in bin \\(b\\) randomly with probability \\(p_{b}\\): \\(p_{1}&lt;p_{2}&lt;p_{3}\\).\n\n\nWe can exploit the randomness conditional on \\(b\\) to infer causality."
   },
   {
     "objectID": "lectures/Causality.html#example-2-returns-to-education-again-1",
     "href": "lectures/Causality.html#example-2-returns-to-education-again-1",
     "title": "Causality and Experiments",
-    "section": "Example 2: Returns to Education (again)}",
-    "text": "Example 2: Returns to Education (again)}\n\nDoes \\(\\EE[Y|C] = \\beta_{0} + \\beta_{1}C\\) work? Still need same implausible assumption.\nWhat about \\(\\EE[Y|C,S] = \\beta_{0} + \\beta_{1}C + \\beta_{2}B_{2} + \\beta_{3}B_{3}\\) where \\(B_{b}\\) is a dummy for \\(S\\) being in bin \\(b\\)?"
+    "section": "Example 2: Returns to Education (again)",
+    "text": "Example 2: Returns to Education (again)\n\n\nDoes \\(\\EE[Y|C] = \\beta_{0} + \\beta_{1}C\\) work? Still need same implausible assumption.\nWhat about \\(\\EE[Y|C,S] = \\beta_{0} + \\beta_{1}C + \\beta_{2}B_{2} + \\beta_{3}B_{3}\\) where \\(B_{b}\\) is a dummy for \\(S\\) being in bin \\(b\\)?"
   },
   {
     "objectID": "lectures/Causality.html#sources-of-bias",
@@ -1201,21 +1201,21 @@
     "href": "lectures/Causality.html#the-potential-outcomes-model",
     "title": "Causality and Experiments",
     "section": "The Potential Outcomes Model",
-    "text": "The Potential Outcomes Model\nThe Potential Outcomes Model is a very general framework:\n\n\\(D\\in\\{0,1\\}\\) is treatment variable.\nEvery individual is defined by a triple: \\((Y_{0},Y_{1},D)\\)\nWe only see \\(Y=Y_{D}\\), \\(Y_{1-D}\\) is the { counterfactual}\nThe treatment effect is \\(Y_{1} - Y_{0}\\) is defined to be { heterogeneous.}"
+    "text": "The Potential Outcomes Model\nThe Potential Outcomes Model is a very general framework:\n\n\n\\(D\\in\\{0,1\\}\\) is treatment variable.\nEvery individual is defined by a triple: \\((Y_{0},Y_{1},D)\\)\nWe only see \\(Y=Y_{D}\\), \\(Y_{1-D}\\) is the counterfactual\nThe treatment effect is \\(Y_{1} - Y_{0}\\) is defined to be heterogeneous"
   },
   {
     "objectID": "lectures/Causality.html#the-potential-outcomes-model-1",
     "href": "lectures/Causality.html#the-potential-outcomes-model-1",
     "title": "Causality and Experiments",
     "section": "The Potential Outcomes Model",
-    "text": "The Potential Outcomes Model\nWe can write the model this way: \\[ Y = \\alpha_{0} + \\alpha_{1}D + \\eta \\] where: - \\(Y_{D} = \\alpha_{0} + \\alpha_{1}D + \\eta_{D}\\) - \\(\\eta = (1-D)\\eta_{0} + D\\eta_{1}\\) - \\(\\EE[\\eta_{1}] = \\EE[\\eta_{0}] = 0\\) - \\(Y_{1} - Y_{0} = \\alpha_{1} + \\eta_{1} - \\eta_{0}\\) - The Average Treatment Effect (ATE) is: \\[ \\EE[Y_{1}-Y_{0}] = \\alpha_{1} \\]"
+    "text": "The Potential Outcomes Model\nWe can write the model this way: \\[ Y = \\alpha_{0} + \\alpha_{1}D + \\eta \\] where:\n\n\\(Y_{D} = \\alpha_{0} + \\alpha_{1}D + \\eta_{D}\\)\n\\(\\eta = (1-D)\\eta_{0} + D\\eta_{1}\\)\n\\(\\EE[\\eta_{1}] = \\EE[\\eta_{0}] = 0\\)\n\\(Y_{1} - Y_{0} = \\alpha_{1} + \\eta_{1} - \\eta_{0}\\)\nThe Average Treatment Effect (ATE) is: \\[ \\EE[Y_{1}-Y_{0}] = \\alpha_{1} \\]"
   },
   {
     "objectID": "lectures/Causality.html#motivating-experiments",
     "href": "lectures/Causality.html#motivating-experiments",
     "title": "Causality and Experiments",
     "section": "Motivating Experiments",
-    "text": "Motivating Experiments\n\n\nHow could we guarantee that \\(\\EE[\\eta|D] = 0\\)?\nSuppose that the variable \\(D\\) could be {assigned randomly} \\(\\Rightarrow\\) \\(\\eta_{0},\\eta_{1} \\independent D\\).\nThen \\(\\EE[\\eta|D] = \\EE[\\eta] = 0\\).\nHow could we estimate and do inference on \\(\\alpha\\)?"
+    "text": "Motivating Experiments\n\n\nHow could we guarantee that \\(\\EE[\\eta|D] = 0\\)?\nSuppose that the variable \\(D\\) could be assigned randomly \\(\\Rightarrow\\) \\(\\eta_{0},\\eta_{1} \\perp D\\).\nThen \\(\\EE[\\eta|D] = \\EE[\\eta] = 0\\).\nHow could we estimate and do inference on \\(\\alpha\\)?"
   },
   {
     "objectID": "lectures/Causality.html#regression-framework",
@@ -1229,14 +1229,14 @@
     "href": "lectures/Causality.html#internal-validity",
     "title": "Causality and Experiments",
     "section": "Internal Validity",
-    "text": "Internal Validity\n\nInternal validity is achieved if the experiment and subsequent analysis properly identifies the parameter of interest.\nExample 1: suppose that \\(D\\) is not properly randomized.\n\nBalance test: randomization also implies that \\(\\EE[X|D=1]=\\EE[X|D=0]\\) which can be tested.\n\nExample 2: suppose that \\(D\\) can only be offered, and takeup is not 100%. Can we be sure that \\(\\EE[Y|D=1] - \\EE[Y|D=1]\\) is equal to \\(\\alpha\\)?"
+    "text": "Internal Validity\n\n\nInternal validity is achieved if the experiment and subsequent analysis properly identifies the parameter of interest.\nExample 1: suppose that \\(D\\) is not properly randomized.\n\nBalance test: randomization also implies that \\(\\EE[X|D=1]=\\EE[X|D=0]\\) which can be tested.\n\nExample 2: suppose that \\(D\\) can only be offered, and takeup is not 100%. Can we be sure that \\(\\EE[Y|D=1] - \\EE[Y|D=0]\\) is equal to \\(\\alpha\\)?"
   },
   {
     "objectID": "lectures/Causality.html#internal-validity-imperfect-takeup",
     "href": "lectures/Causality.html#internal-validity-imperfect-takeup",
     "title": "Causality and Experiments",
     "section": "Internal Validity: Imperfect Takeup",
-    "text": "Internal Validity: Imperfect Takeup\nConsider a model of earnings: \\[ Y_{D} = \\alpha_0 + \\alpha_{1}D + \\eta_{D} \\]\nwhere \\(D\\in\\{0,1\\}\\) indicates college attendance, and individuals go to college if the benefits outweigh the costs: \\[ D = \\mathbf{1}\\{Y_{1} - Y_{0} \\geq C \\} \\]\nNow suppose that a tuition subsidy of \\(\\tau\\) is randomly offered to some, \\(Z\\in\\{0,1\\}\\), so that: \\[ D_{Z} = \\mathbf{1}\\{Y_{1} - Y_{0} \\geq C - \\tau\\} \\]"
+    "text": "Internal Validity: Imperfect Takeup"
   },
   {
     "objectID": "lectures/Causality.html#simulationpicture",
@@ -1250,21 +1250,21 @@
     "href": "lectures/Causality.html#exercise",
     "title": "Causality and Experiments",
     "section": "Exercise",
-    "text": "Exercise\n\n\nSolve for \\(P_{Z} = P[D=1|Z]\\).\nSolve for \\(\\EE[Y|Z]\\).\nDefine populations: compliers, always-takers, never takers.\nDefine the Local Averate Treatment Effect (LATE). Estimate??"
+    "text": "Exercise\n\n\nSolve for \\(P_{Z} = P[D=1|Z]\\).\nSolve for \\(\\EE[Y|Z]\\).\nDefine populations: compliers, always-takers, never takers.\nDefine the Local Average Treatment Effect (LATE). Estimate??"
   },
   {
     "objectID": "lectures/Causality.html#the-late",
     "href": "lectures/Causality.html#the-late",
     "title": "Causality and Experiments",
     "section": "The LATE",
-    "text": "The LATE\n\n\nThe LATE is the Average Treatment Effect of \\(D\\) among the {compliers}, the population of individuals who are moved into treatment by the randomized variable, \\(Z\\).\nIn many experiments, there are not always-takers by definition, and we instead call it the effect of Treatment on the Treated (TOT)\nThe derivation requires that there are no defiers (people who are moved in the opposite direction by the randomized variable \\(Z\\))."
+    "text": "The LATE\n\n\nThe LATE is the Average Treatment Effect of \\(D\\) among the compliers, the population of individuals who are moved into treatment by the randomized variable, \\(Z\\).\nIn many experiments, there are not always-takers by definition, and we instead call it the effect of Treatment on the Treated (TOT)\nThe derivation requires that there are no defiers (people who are moved in the opposite direction by the randomized variable \\(Z\\))."
   },
   {
     "objectID": "lectures/Causality.html#regression-framework-1",
     "href": "lectures/Causality.html#regression-framework-1",
     "title": "Causality and Experiments",
     "section": "Regression Framework",
-    "text": "Regression Framework\nAs with complete take-up, there is a regression framework for LATE/TOT: \\[ Y = X\\beta + \\alpha D + \\eta,\\ \\eta = \\eta_{0} + D(\\eta_{1}-\\eta_{0}) \\] with \\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \\]\nExercise: (1) calculate \\(\\EE[Y|X,Z]\\); (2) Show how the {2SLS} estimator works.\nWe don’t know how to calculate standard errors for this kind of estimator yet. But we will soon."
+    "text": "Regression Framework\nAs with complete take-up, there is a regression framework for LATE/TOT: \\[ Y = X\\beta + \\alpha D + \\eta,\\ \\eta = \\eta_{0} + D(\\eta_{1}-\\eta_{0}) \\] with \\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \\]\nExercise: (1) calculate \\(\\EE[Y|X,Z]\\); (2) Show how the 2SLS estimator works.\n\nWe don’t know how to calculate standard errors for this kind of estimator yet. But we will soon."
   },
   {
     "objectID": "lectures/Causality.html#external-validity",
@@ -1285,6 +1285,76 @@
     "href": "lectures/Causality.html#omitted-variables-1",
     "title": "Causality and Experiments",
     "section": "Omitted Variables",
-    "text": "Omitted Variables\nUtility maximization:\n\\[  U(C,H) = C - \\alpha_{n}\\frac{H^{1+1/\\psi}}{1+1/\\psi},\\ C = WH \\] \\[ \\log(W) = X\\gamma + \\zeta_{n},\\qquad \\EE[\\alpha_{n}|\\zeta_{n}] = a + \\kappa\\zeta_{n} \\] Exercise: we’ll show OVB when trying to estimate \\(\\psi\\) using \\(\\EE[\\log(H)|\\log(W),X]\\)."
+    "text": "Omitted Variables\nUtility maximization:\n\\[  U(C,H) = C - \\exp(\\alpha_{n})\\frac{H^{1+1/\\psi}}{1+1/\\psi},\\ C = WH \\] \\[ \\log(W) = X\\gamma + \\zeta_{n},\\qquad \\EE[\\alpha_{n}|\\zeta_{n}] = a + \\kappa\\zeta_{n} \\] Exercise: we’ll show OVB when trying to estimate \\(\\psi\\) using \\(\\EE[\\log(H)|\\log(W),X]\\)."
+  },
+  {
+    "objectID": "lectures/Causality.html#example",
+    "href": "lectures/Causality.html#example",
+    "title": "Causality and Experiments",
+    "section": "Example",
+    "text": "Example"
+  },
+  {
+    "objectID": "lectures/Causality.html#selection-bias",
+    "href": "lectures/Causality.html#selection-bias",
+    "title": "Causality and Experiments",
+    "section": "Selection Bias",
+    "text": "Selection Bias\n\n\nSuppose that \\(Y = X\\gamma + \\eta\\) is the model\nSuppose that some unobservable \\(\\upsilon\\) determines whether data is observed or not\nSuppose \\(\\upsilon\\) and \\(\\eta\\) are not independent\nThen we get selection bias\nSimple example: only see \\(Y\\) if \\(Y&gt;c\\)…"
+  },
+  {
+    "objectID": "lectures/Causality.html#selection-example",
+    "href": "lectures/Causality.html#selection-example",
+    "title": "Causality and Experiments",
+    "section": "Selection Example",
+    "text": "Selection Example\nLet \\(\\alpha_{n}=\\alpha\\) (no OVB), but: \\[  U(C,H) = C - \\exp(\\alpha)\\frac{H^{1+1/\\psi}}{1+1/\\psi} - \\Omega\\mathbf{1}\\{H&gt;0\\} \\]\n\nExercise: selection bias when trying to estimate \\(\\gamma\\) using \\(\\EE[\\log(W)|X]\\), even if \\(\\EE[\\zeta_{n}|X_{n}] = 0\\)."
+  },
+  {
+    "objectID": "lectures/Causality.html#simultaneity-1",
+    "href": "lectures/Causality.html#simultaneity-1",
+    "title": "Causality and Experiments",
+    "section": "Simultaneity",
+    "text": "Simultaneity"
+  },
+  {
+    "objectID": "lectures/Causality.html#internal-validity-imperfect-takeup-1",
+    "href": "lectures/Causality.html#internal-validity-imperfect-takeup-1",
+    "title": "Causality and Experiments",
+    "section": "Internal Validity: Imperfect Takeup",
+    "text": "Internal Validity: Imperfect Takeup\nConsider a model of earnings: \\[ Y_{D} = \\alpha_0 + \\alpha_{1}D + \\eta_{D} \\]\nwhere \\(D\\in\\{0,1\\}\\) indicates college attendance, and individuals go to college if the benefits outweigh the costs: \\[ D = \\mathbf{1}\\{Y_{1} - Y_{0} \\geq C \\} \\]\nNow suppose that a tuition subsidy of \\(\\tau\\) is randomly offered to some, \\(Z\\in\\{0,1\\}\\), so that: \\[ D_{Z} = \\mathbf{1}\\{Y_{1} - Y_{0} \\geq C - Z\\tau\\} \\]"
+  },
+  {
+    "objectID": "lectures/Causality.html#external-validity-exercise",
+    "href": "lectures/Causality.html#external-validity-exercise",
+    "title": "Causality and Experiments",
+    "section": "External Validity Exercise",
+    "text": "External Validity Exercise\n\n\nConsider our college tuition subsidy experiment\nWe can estimate the effect of the subsidy on compliers\nCan we use this to estimate the effect of increasing the subsidy from \\(\\tau\\) to \\(\\tau'\\)?"
+  },
+  {
+    "objectID": "lectures/Causality.html#in-general",
+    "href": "lectures/Causality.html#in-general",
+    "title": "Causality and Experiments",
+    "section": "In general",
+    "text": "In general\nWhen the true model is\n\\[ y = \\gamma_{0} + \\gamma_{1}x + \\eta \\]\nand we estimate\n\\[ \\EE[y|x] = \\beta_{0} + \\beta_{1} \\]\nwe get:\n\\[ \\beta_{1} = \\gamma_{1} + \\underline{\\frac{\\BB{C}(\\eta,x)}{\\BB{V}[x]}}_{\\text{Bias}} \\]"
+  },
+  {
+    "objectID": "lectures/Causality.html#selection-bias-1",
+    "href": "lectures/Causality.html#selection-bias-1",
+    "title": "Causality and Experiments",
+    "section": "Selection Bias",
+    "text": "Selection Bias"
+  },
+  {
+    "objectID": "lectures/Causality.html#simultaneity-2",
+    "href": "lectures/Causality.html#simultaneity-2",
+    "title": "Causality and Experiments",
+    "section": "Simultaneity",
+    "text": "Simultaneity\nNo apparent relationsip between price and quantity"
+  },
+  {
+    "objectID": "lectures/Causality.html#failure-of-late-for-subsidy-expansion",
+    "href": "lectures/Causality.html#failure-of-late-for-subsidy-expansion",
+    "title": "Causality and Experiments",
+    "section": "Failure of LATE for subsidy expansion",
+    "text": "Failure of LATE for subsidy expansion"
   }
 ]

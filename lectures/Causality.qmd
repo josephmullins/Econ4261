@@ -12,7 +12,7 @@ format:
 
 # Introduction
 
-## Overview
+## Overview {.smaller}
 ::: {.hidden}
 $$
 \newcommand\ov{\overline}
@@ -45,9 +45,9 @@ This section:
 
 ::: {.incremental}
 - We will define **causality**.
-- We will learn how to **causality** from a conditional expectation.
+- We will learn how to **infer causality** from a conditional expectation.
 - We will look at estimating causal effects using **experiments**.
-- We'll look at some applications of experiments in economics.
+- We'll look at some *applications of experiments in economics*.
 :::
 
 ## Causality vs Conditional Means
@@ -72,7 +72,7 @@ $$ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? $$
 
 **Ceterus paribus**
 
-- ``all else being equal''
+- "all else being equal"
 - The effect on $Y$, when *only* $X$ is changed
 - Notice how our thought experiment replicates
 - Hard to find in data! 
@@ -94,22 +94,27 @@ $$ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? $$
 ::::
 
 
-## How to infer causality
+## How to infer causality {.smaller}
 
 Here's the recipe:
 
 ::: {.incremental}
 
-1. Start with a {model of the world}: $Y = h_{\theta}(X,W,\eta)$. This is your theory of how the data is generated. $\eta$ is what we call {structural unobservables}. The model $h$ is indexed by population parameters, $\theta$. 
+1. Start with a **model of the world**: $Y = h_{\theta}(X,W,\eta)$. This is your theory of how the data is generated. $\eta$ is what we call **structural unobservable**. The model $h$ is indexed by population parameters, $\theta$. 
 2. Define a counterfactual of interest. Two (of infinitely many) examples:
   $$ (1)\ \int h_{\theta}(X+1,W,\eta)dF(X,W,\eta)\qquad (2)\ \int h_{\theta}(0,W,\eta)dF(W,\eta|X=1). $$
-3. State the assumptions under which your counterfactual can be constructed 4. Then we debate the plausibility of your assumptions. That's it.
+3. State the assumptions under which your counterfactual can be constructed 
+4. Then we debate the plausibility of your assumptions. That's it.
+:::
+
+. . .
 
 We'll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics.
 
 ## Example 1: Returns to education
 
-  data: $(Y_{n},E_{n})_{n=1}^{N}$, iid sample of individuals. 
+data: $(Y_{n},E_{n})_{n=1}^{N}$, iid sample of individuals. 
+
 - $Y_{n}$ - hourly wages
 - $E_{n}$ - years of education
 - Model: $$ Y_{n} = \gamma_{0} + \gamma_{1}E_{n} + \eta_{n} $$
@@ -117,25 +122,33 @@ We'll explore different strategies (i.e. sets of assumptions) that have been use
 
 ## Returns to Education
 
+:::{.incremental}
 - We can estimate $\EE[Y|E] = \beta_{0} + \beta_{1}E_{n}$.
 - When does $\beta_{1} = \gamma_{1}$ (i.e. the causal effect)? 
     - When $\EE[\eta_{n}|E_{n}] = 0$ **(strict exogeneity)**
 - In this case, an *overly strong* assumption. 
-- **Be careful**: always check how an error term is defined. If it is prediction error (what we have been calling $\epsilon_{n})$ this is conceptually different from a structural error/unobservable. As a prediction error, $\EE[\epsilon_{n}|X_{n}] = 0$ by definition.
+- **Be careful**: always check how an error term is defined. If it is prediction error (what we have been calling $\epsilon_{n})$ this is **conceptually different** from a structural error/unobservable. 
+- As a prediction error, $\EE[\epsilon_{n}|X_{n}] = 0$ by definition.
+:::
 
-## Example 2: Returns to Education (again)}
+## Example 2: Returns to Education (again)
 
 Now suppose a different data-generating process. Imagine: 
 
 - Model: $Y = \gamma_{0} + \gamma_{1}C_{n} + \eta_{n}$.
 - Every college applicant takes a test, gets a test score $S_{n}$.
-- Test scores are sorted evenly into bins $b\in\{1,2,3\}$, college slots offered to a person in bin $b$ randomly} with probability $p_{b}$. $p_{1}<p_{2}<p_{3}$.
+- Test scores are sorted evenly into bins $b\in\{1,2,3\}$, college slots offered to a person in bin $b$ *randomly* with probability $p_{b}$: $p_{1}<p_{2}<p_{3}$.
 
-## Example 2: Returns to Education (again)}\vspace{-100pt}
+. . .
 
+We can exploit the **randomness** conditional on $b$ to infer causality.
+
+## Example 2: Returns to Education (again)
+
+:::{.incremental}
 - Does $\EE[Y|C] = \beta_{0} + \beta_{1}C$ work?  Still need same implausible assumption. 
 - What about $\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}$ where $B_{b}$ is a dummy for $S$ being in bin $b$?
-
+:::
 
 ## Sources of Bias {.smaller}
 
@@ -174,6 +187,8 @@ $$ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\z
 
 ## Example
 ```{r}
+library(tidyverse)
+library(gganimate)
 d <- data.frame(e = runif(100))
 d$x <- runif(100) + d$e
 d$y <- d$e + d$x + 0.1*rnorm(100)
@@ -189,6 +204,30 @@ d %>%
   rbind(d2) %>%
   ggplot(aes(x,y,color=e)) + geom_point() + theme_minimal() + geom_smooth(method = "lm",se = FALSE) + transition_states(state)  + labs(title = "{closest_state}") + guides(color = guide_legend(title = expression(eta)))
 ```
+
+## In general
+
+When the true model is
+
+$$ y = \gamma_{0} + \gamma_{1}x + \eta $$
+
+and we estimate
+
+$$ \EE[y|x] = \beta_{0} + \beta_{1} $$
+
+we get:
+
+$$ \beta_{1} = \gamma_{1} + \underline{\frac{\BB{C}(\eta,x)}{\BB{V}[x]}}_{\text{Bias}} $$
+
+## Selection Bias
+
+:::{.incremental}
+- Suppose that $Y = X\gamma + \eta$ is the model
+- Suppose that some unobservable $\upsilon$ determines whether data is observed or not
+- Suppose $\upsilon$ and $\eta$ are not independent
+- Then we get **selection bias**
+- **Simple example**: only see $Y$ if $Y>c$...
+:::
 
 ## Selection Bias
 
@@ -212,6 +251,8 @@ ggplot(d,aes(x,y,group=n)) + geom_point(aes(x,y,alpha=observed)) + geom_smooth(a
 Let $\alpha_{n}=\alpha$ (no OVB), but:
   $$  U(C,H) = C - \exp(\alpha)\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
 
+. . . 
+
 **Exercise**: selection bias when trying to estimate $\gamma$ using $\EE[\log(W)|X]$, *even if* $\EE[\zeta_{n}|X_{n}] = 0$.
 
 
@@ -223,34 +264,45 @@ Supply and demand:
   $$ \log(Q_{m}^{S}) = \gamma_{0} + \gamma_{1}\log(P_{m}) + \upsilon_{m} $$
   $\eta$ and $\upsilon$ are demand and supply "shocks" across markets.
 
-Exercise: simultaneity bias when trying to estimate $\gamma$.
+**Exercise**: simultaneity bias when trying to estimate $\gamma$.
 
 ## Simultaneity
 ```{r}
-N <- 5
+N <- 10
 d <- data.frame(n = 1:(2*N+1),ed = c(kronecker(rnorm(N),c(1,1)),0),es = c(0,kronecker(rnorm(N),c(1,1))))
 d$p <- (1/2)*(d$ed - d$es)
 d$q <- d$ed - d$p
-ggplot(d,aes(q,p,group=n)) + geom_point(aes(group=n)) + geom_abline(aes(intercept=-es,slope=1)) + geom_abline(aes(intercept=ed,slope=-1)) + transition_reveal(n,keep_last = TRUE)
 
-ggplot(d,aes(q,p)) + geom_point(size=2) + geom_abline(aes(intercept=-es,slope=1),alpha=0.2) + geom_abline(aes(intercept=ed,slope=-1),alpha=0.2) + transition_states(n) + shadow_mark()
+ggplot(d,aes(q,p)) + geom_point(size=2) + geom_abline(aes(intercept=-es,slope=1),alpha=0.2) + geom_abline(aes(intercept=ed,slope=-1),alpha=0.2) + transition_states(n) + shadow_mark()+ theme_minimal()
 
 ```
+
+## Simultaneity
+No apparent relationsip between price and quantity
+```{r}
+
+ggplot(d,aes(q,p)) + geom_point(size=2) + theme_minimal()
+
+```
+
 
 ## The Potential Outcomes Model
 
 The **Potential Outcomes Model** is a very general framework:
 
+:::{.incremental}
 - $D\in\{0,1\}$ is treatment variable.
 - Every individual is defined by a triple: $(Y_{0},Y_{1},D)$
-- We only see $Y=Y_{D}$, $Y_{1-D}$ is the { counterfactual}
-- The treatment effect is $Y_{1} - Y_{0}$ is defined to be { heterogeneous.}
+- We only see $Y=Y_{D}$, $Y_{1-D}$ is the *counterfactual*
+- The treatment effect is $Y_{1} - Y_{0}$ is defined to be *heterogeneous*
+:::
 
 ## The Potential Outcomes Model
 
 We can write the model this way:
   $$ Y = \alpha_{0} + \alpha_{1}D + \eta $$
   where:
+
 - $Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}$
 - $\eta = (1-D)\eta_{0} + D\eta_{1}$
 - $\EE[\eta_{1}] = \EE[\eta_{0}] = 0$
@@ -264,7 +316,7 @@ We can write the model this way:
 :::{.incremental}
 
 - How could we guarantee that $\EE[\eta|D] = 0$?
-- Suppose that the variable $D$ could be {assigned randomly} $\Rightarrow$ $\eta_{0},\eta_{1} \independent D$.
+- Suppose that the variable $D$ could be *assigned randomly* $\Rightarrow$ $\eta_{0},\eta_{1} \perp D$.
 - Then $\EE[\eta|D] = \EE[\eta] = 0$.
 - How could we estimate and do inference on $\alpha$?
 :::
@@ -279,11 +331,39 @@ We can write the model this way:
 
 ## Internal Validity
 
+
+:::{.incremental}
 - **Internal validity** is achieved if the experiment and subsequent analysis properly identifies the parameter of interest. 
 - **Example 1**: suppose that $D$ is not properly randomized.
     - *Balance test*: randomization also implies that $\EE[X|D=1]=\EE[X|D=0]$ which can be tested.
-- **Example 2**: suppose that $D$ can only be offered, and takeup is not 100\%. Can we be sure that $\EE[Y|D=1] - \EE[Y|D=1]$ is equal to $\alpha$?
+- **Example 2**: suppose that $D$ can only be offered, and takeup is not 100\%. Can we be sure that $\EE[Y|D=1] - \EE[Y|D=0]$ is equal to $\alpha$?
+:::
 
+## Internal Validity: Imperfect Takeup
+
+```{r}
+N = 500
+d <- data.frame(y0=runif(N),y1=0.3 + runif(N),state="Same Potential Outcomes",treat = 1,n=1:N,intercept=0,slope = 1,case = "Noncompliance")
+d <- d %>%
+  mutate(case = "Full Compliance") %>%
+  rbind(d)
+
+d2 <- d %>%
+  mutate(treat = case_when(y1<y0 & case=="Noncompliance"  ~ 0,.default = 1),state = "Comply only if y1>y0",intercept=0,slope = 1)
+d3 <- d2 %>%
+  mutate(y1 = y1-y0,state="Difference out y0 to get TE",slope=0) %>%
+  group_by(state,treat,case) %>%
+  mutate(intercept = mean(y1)) %>%
+  as.data.frame()
+
+d4 <- d3 %>%
+  mutate(state="Look at the difference in ATEs")
+
+d <- rbind(d,d2,d3,d4)
+
+ggplot(d,aes(y0,y1,group=n)) + geom_point(aes(alpha=treat)) + geom_abline(aes(intercept=intercept,slope=slope),subset(d,treat==1)) + transition_states(state) + theme_minimal() + theme(legend.position = "none") + facet_grid(. ~ case) + labs(title = "{closest_state}")
+
+```
 
 ## Internal Validity: Imperfect Takeup
 
@@ -294,10 +374,8 @@ where $D\in\{0,1\}$ indicates college attendance, and individuals go to college 
 $$ D = \mathbf{1}\{Y_{1} - Y_{0} \geq C \} $$ 
 
 Now suppose that a tuition subsidy of $\tau$ is randomly offered to some, $Z\in\{0,1\}$, so that:
-$$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - \tau\} $$
+$$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - Z\tau\} $$
 
-
-## simulation/picture
 
 ## Exercise
 
@@ -306,7 +384,7 @@ $$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - \tau\} $$
 1. Solve for $P_{Z} = P[D=1|Z]$.
 2. Solve for $\EE[Y|Z]$.
 3. Define populations: compliers, always-takers, never takers.
-4. Define the Local Averate Treatment Effect (LATE). Estimate??
+4. Define the Local Average Treatment Effect (LATE). Estimate??
 
 :::
 
@@ -314,7 +392,7 @@ $$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - \tau\} $$
 
 :::{.incremental}
 
-- The **LATE** is the Average Treatment Effect of $D$ among the {compliers}, the population of individuals who are moved into treatment by the randomized variable, $Z$.
+- The **LATE** is the Average Treatment Effect of $D$ among the **compliers**, the population of individuals who are moved into treatment by the randomized variable, $Z$.
 - In many experiments, there are not always-takers by definition, and we instead call it the effect of **Treatment on the Treated (TOT)** 
 - The derivation requires that there are no **defiers** (people who are moved in the opposite direction by the randomized variable $Z$).
 
@@ -327,11 +405,13 @@ $$ Y = X\beta + \alpha D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) $$
 with
 $$ P[D|X,Z] = P_{always-taker} + P_{complier} Z $$
 
-**Exercise**: (1) calculate $\EE[Y|X,Z]$;  (2) Show how the {2SLS} estimator works.
+**Exercise**: (1) calculate $\EE[Y|X,Z]$;  (2) Show how the **2SLS** estimator works.
+
+. . .
 
 We don't know how to calculate standard errors for this kind of estimator yet. But we will soon.
 
-## External Validity
+## External Validity {.smaller}
 
 :::{.incremental}
 
@@ -343,4 +423,34 @@ We don't know how to calculate standard errors for this kind of estimator yet. B
 
 :::
 
-## external validity picture / simulation
+## External Validity Exercise
+
+:::{.incremental}
+- Consider our college tuition subsidy experiment
+- We can estimate the effect of the subsidy on *compliers*
+- Can we use this to estimate the effect of increasing the subsidy from $\tau$ to $\tau'$?
+:::
+
+## Failure of LATE for subsidy expansion
+```{r}
+N = 500
+d <- data.frame(y0=rnorm(N),y1=0.3 + rnorm(N),state=0,subsidy = 0.5,slope = 1,var = "Potential Outcomes",n=1:N)
+d2 <- d %>%
+  mutate(state = 2, subsidy = 1.)
+d3 <- d %>%
+  mutate(state = 3, subsidy = 1.5)
+d4 <- d %>%
+  mutate(state = 4, subsidy = 2)
+
+d <- rbind(d,d2,d3,d4) %>%
+  mutate(complier = (y1-y0>1-subsidy) & (y1-y0<1))
+
+d <- d %>%
+  mutate(y1 = y1-y0,var="Treatment Effect",slope=0) %>%
+  rbind(d) %>%
+  group_by(state,complier) %>%
+  mutate(m = mean(y1))
+
+ggplot(d,aes(y0,y1,group=n)) + geom_point(aes(alpha=complier)) + geom_abline(aes(intercept=1-subsidy,slope=slope)) + geom_abline(aes(intercept=1,slope=slope)) + transition_states(state) + facet_grid(. ~ var) + geom_hline(aes(yintercept=m),subset(d,complier & var=="Treatment Effect"),color="blue") + theme_minimal()
+
+```

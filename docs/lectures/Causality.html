@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.537">
+  <meta name="generator" content="quarto-1.4.539">
 
   <title>Econ4261 - Causality and Experiments</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -341,7 +341,7 @@
 <h1>Introduction</h1>
 
 </section>
-<section id="overview" class="slide level2">
+<section id="overview" class="slide level2 smaller">
 <h2>Overview</h2>
 <div class="hidden">
 <p><span class="math display">\[
@@ -373,9 +373,9 @@
 <div>
 <ul>
 <li class="fragment">We will define <strong>causality</strong>.</li>
-<li class="fragment">We will learn how to <strong>causality</strong> from a conditional expectation.</li>
+<li class="fragment">We will learn how to <strong>infer causality</strong> from a conditional expectation.</li>
 <li class="fragment">We will look at estimating causal effects using <strong>experiments</strong>.</li>
-<li class="fragment">We’ll look at some applications of experiments in economics.</li>
+<li class="fragment">We’ll look at some <em>applications of experiments in economics</em>.</li>
 </ul>
 </div>
 </div>
@@ -403,7 +403,7 @@
 <div class="fragment fade-right">
 <p><strong>Ceterus paribus</strong></p>
 <ul>
-<li>``all else being equal’’</li>
+<li>“all else being equal”</li>
 <li>The effect on <span class="math inline">\(Y\)</span>, when <em>only</em> <span class="math inline">\(X\)</span> is changed</li>
 <li>Notice how our thought experiment replicates</li>
 <li>Hard to find in data!</li>
@@ -421,57 +421,75 @@
 </div>
 </div>
 </section>
-<section id="how-to-infer-causality" class="slide level2">
+<section id="how-to-infer-causality" class="slide level2 smaller">
 <h2>How to infer causality</h2>
 <p>Here’s the recipe:</p>
-<p>::: {.incremental}</p>
+<div>
 <ol type="1">
-<li>Start with a {model of the world}: <span class="math inline">\(Y = h_{\theta}(X,W,\eta)\)</span>. This is your theory of how the data is generated. <span class="math inline">\(\eta\)</span> is what we call {structural unobservables}. The model <span class="math inline">\(h\)</span> is indexed by population parameters, <span class="math inline">\(\theta\)</span>.</li>
-<li>Define a counterfactual of interest. Two (of infinitely many) examples: <span class="math display">\[ (1)\ \int h_{\theta}(X+1,W,\eta)dF(X,W,\eta)\qquad (2)\ \int h_{\theta}(0,W,\eta)dF(W,\eta|X=1). \]</span></li>
-<li>State the assumptions under which your counterfactual can be constructed 4. Then we debate the plausibility of your assumptions. That’s it.</li>
+<li class="fragment">Start with a <strong>model of the world</strong>: <span class="math inline">\(Y = h_{\theta}(X,W,\eta)\)</span>. This is your theory of how the data is generated. <span class="math inline">\(\eta\)</span> is what we call <strong>structural unobservable</strong>. The model <span class="math inline">\(h\)</span> is indexed by population parameters, <span class="math inline">\(\theta\)</span>.</li>
+<li class="fragment">Define a counterfactual of interest. Two (of infinitely many) examples: <span class="math display">\[ (1)\ \int h_{\theta}(X+1,W,\eta)dF(X,W,\eta)\qquad (2)\ \int h_{\theta}(0,W,\eta)dF(W,\eta|X=1). \]</span></li>
+<li class="fragment">State the assumptions under which your counterfactual can be constructed</li>
+<li class="fragment">Then we debate the plausibility of your assumptions. That’s it.</li>
 </ol>
+</div>
+<div class="fragment">
 <p>We’ll explore different strategies (i.e.&nbsp;sets of assumptions) that have been used a lot in economics.</p>
+</div>
 </section>
 <section id="example-1-returns-to-education" class="slide level2">
 <h2>Example 1: Returns to education</h2>
-<p>data: <span class="math inline">\((Y_{n},E_{n})_{n=1}^{N}\)</span>, iid sample of individuals. - <span class="math inline">\(Y_{n}\)</span> - hourly wages - <span class="math inline">\(E_{n}\)</span> - years of education - Model: <span class="math display">\[ Y_{n} = \gamma_{0} + \gamma_{1}E_{n} + \eta_{n} \]</span> - <span class="math inline">\(\eta_{n}\)</span>: unobserved determinants of wages (cognitive ability, grit, connections, resources)</p>
+<p>data: <span class="math inline">\((Y_{n},E_{n})_{n=1}^{N}\)</span>, iid sample of individuals.</p>
+<ul>
+<li><span class="math inline">\(Y_{n}\)</span> - hourly wages</li>
+<li><span class="math inline">\(E_{n}\)</span> - years of education</li>
+<li>Model: <span class="math display">\[ Y_{n} = \gamma_{0} + \gamma_{1}E_{n} + \eta_{n} \]</span></li>
+<li><span class="math inline">\(\eta_{n}\)</span>: unobserved determinants of wages (cognitive ability, grit, connections, resources)</li>
+</ul>
 </section>
 <section id="returns-to-education" class="slide level2">
 <h2>Returns to Education</h2>
+<div>
 <ul>
-<li>We can estimate <span class="math inline">\(\EE[Y|E] = \beta_{0} + \beta_{1}E_{n}\)</span>.</li>
-<li>When does <span class="math inline">\(\beta_{1} = \gamma_{1}\)</span> (i.e.&nbsp;the causal effect)?
+<li class="fragment">We can estimate <span class="math inline">\(\EE[Y|E] = \beta_{0} + \beta_{1}E_{n}\)</span>.</li>
+<li class="fragment">When does <span class="math inline">\(\beta_{1} = \gamma_{1}\)</span> (i.e.&nbsp;the causal effect)?
 <ul>
-<li>When <span class="math inline">\(\EE[\eta_{n}|E_{n}] = 0\)</span> <strong>(strict exogeneity)</strong></li>
+<li class="fragment">When <span class="math inline">\(\EE[\eta_{n}|E_{n}] = 0\)</span> <strong>(strict exogeneity)</strong></li>
 </ul></li>
-<li>In this case, an <em>overly strong</em> assumption.</li>
-<li><strong>Be careful</strong>: always check how an error term is defined. If it is prediction error (what we have been calling <span class="math inline">\(\epsilon_{n})\)</span> this is conceptually different from a structural error/unobservable. As a prediction error, <span class="math inline">\(\EE[\epsilon_{n}|X_{n}] = 0\)</span> by definition.</li>
+<li class="fragment">In this case, an <em>overly strong</em> assumption.</li>
+<li class="fragment"><strong>Be careful</strong>: always check how an error term is defined. If it is prediction error (what we have been calling <span class="math inline">\(\epsilon_{n})\)</span> this is <strong>conceptually different</strong> from a structural error/unobservable.</li>
+<li class="fragment">As a prediction error, <span class="math inline">\(\EE[\epsilon_{n}|X_{n}] = 0\)</span> by definition.</li>
 </ul>
+</div>
 </section>
 <section id="example-2-returns-to-education-again" class="slide level2">
-<h2>Example 2: Returns to Education (again)}</h2>
+<h2>Example 2: Returns to Education (again)</h2>
 <p>Now suppose a different data-generating process. Imagine:</p>
 <ul>
 <li>Model: <span class="math inline">\(Y = \gamma_{0} + \gamma_{1}C_{n} + \eta_{n}\)</span>.</li>
 <li>Every college applicant takes a test, gets a test score <span class="math inline">\(S_{n}\)</span>.</li>
-<li>Test scores are sorted evenly into bins <span class="math inline">\(b\in\{1,2,3\}\)</span>, college slots offered to a person in bin <span class="math inline">\(b\)</span> randomly} with probability <span class="math inline">\(p_{b}\)</span>. <span class="math inline">\(p_{1}&lt;p_{2}&lt;p_{3}\)</span>.</li>
+<li>Test scores are sorted evenly into bins <span class="math inline">\(b\in\{1,2,3\}\)</span>, college slots offered to a person in bin <span class="math inline">\(b\)</span> <em>randomly</em> with probability <span class="math inline">\(p_{b}\)</span>: <span class="math inline">\(p_{1}&lt;p_{2}&lt;p_{3}\)</span>.</li>
 </ul>
+<div class="fragment">
+<p>We can exploit the <strong>randomness</strong> conditional on <span class="math inline">\(b\)</span> to infer causality.</p>
+</div>
 </section>
 <section id="example-2-returns-to-education-again-1" class="slide level2">
-<h2>Example 2: Returns to Education (again)}</h2>
+<h2>Example 2: Returns to Education (again)</h2>
+<div>
 <ul>
-<li>Does <span class="math inline">\(\EE[Y|C] = \beta_{0} + \beta_{1}C\)</span> work? Still need same implausible assumption.</li>
-<li>What about <span class="math inline">\(\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}\)</span> where <span class="math inline">\(B_{b}\)</span> is a dummy for <span class="math inline">\(S\)</span> being in bin <span class="math inline">\(b\)</span>?</li>
+<li class="fragment">Does <span class="math inline">\(\EE[Y|C] = \beta_{0} + \beta_{1}C\)</span> work? Still need same implausible assumption.</li>
+<li class="fragment">What about <span class="math inline">\(\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}\)</span> where <span class="math inline">\(B_{b}\)</span> is a dummy for <span class="math inline">\(S\)</span> being in bin <span class="math inline">\(b\)</span>?</li>
 </ul>
+</div>
 </section>
 <section id="sources-of-bias" class="slide level2 smaller">
 <h2>Sources of Bias</h2>
 <p>Three major sources of bias when trying to infer causality.</p>
 <div>
 <ul>
-<li class="fragment">Omitted variables: when unobservables partly determine both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li class="fragment">Selection: when unobservables determine whether data is observed or not.</li>
-<li class="fragment">Simultaneity: when observables are determined jointly by unobservables in equilibrium.</li>
+<li class="fragment"><em>Omitted variables</em>: when unobservables partly determine both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
+<li class="fragment"><em>Selection</em>: when unobservables determine whether data is observed or not.</li>
+<li class="fragment"><em>Simultaneity</em>: when observables are determined jointly by unobservables in equilibrium.</li>
 </ul>
 </div>
 <div class="fragment">
@@ -501,44 +519,87 @@
 <section id="omitted-variables-1" class="slide level2">
 <h2>Omitted Variables</h2>
 <p>Utility maximization:</p>
-<p><span class="math display">\[  U(C,H) = C - \alpha_{n}\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH \]</span> <span class="math display">\[ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} \]</span> <strong>Exercise</strong>: we’ll show OVB when trying to estimate <span class="math inline">\(\psi\)</span> using <span class="math inline">\(\EE[\log(H)|\log(W),X]\)</span>.</p>
+<p><span class="math display">\[  U(C,H) = C - \exp(\alpha_{n})\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH \]</span> <span class="math display">\[ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} \]</span> <strong>Exercise</strong>: we’ll show OVB when trying to estimate <span class="math inline">\(\psi\)</span> using <span class="math inline">\(\EE[\log(H)|\log(W),X]\)</span>.</p>
 </section>
-<section id="simulation-or-gif" class="slide level2">
-<h2>simulation or gif?</h2>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
+<section id="in-general" class="slide level2">
+<h2>In general</h2>
+<p>When the true model is</p>
+<p><span class="math display">\[ y = \gamma_{0} + \gamma_{1}x + \eta \]</span></p>
+<p>and we estimate</p>
+<p><span class="math display">\[ \EE[y|x] = \beta_{0} + \beta_{1} \]</span></p>
+<p>we get:</p>
+<p><span class="math display">\[ \beta_{1} = \gamma_{1} + \underline{\frac{\BB{C}(\eta,x)}{\BB{V}[x]}}_{\text{Bias}} \]</span></p>
 </section>
-<section id="selection" class="slide level2">
-<h2>Selection</h2>
-<p>Let <span class="math inline">\(\alpha_{n}=\alpha\)</span> (no OVB), but: <span class="math display">\[  U(C,H) = C - \alpha\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H&gt;0\} \]</span></p>
+<section id="selection-bias" class="slide level2">
+<h2>Selection Bias</h2>
+<div>
+<ul>
+<li class="fragment">Suppose that <span class="math inline">\(Y = X\gamma + \eta\)</span> is the model</li>
+<li class="fragment">Suppose that some unobservable <span class="math inline">\(\upsilon\)</span> determines whether data is observed or not</li>
+<li class="fragment">Suppose <span class="math inline">\(\upsilon\)</span> and <span class="math inline">\(\eta\)</span> are not independent</li>
+<li class="fragment">Then we get <strong>selection bias</strong></li>
+<li class="fragment"><strong>Simple example</strong>: only see <span class="math inline">\(Y\)</span> if <span class="math inline">\(Y&gt;c\)</span>…</li>
+</ul>
+</div>
+</section>
+<section id="selection-bias-1" class="slide level2">
+<h2>Selection Bias</h2>
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-6-1.gif" class="r-stretch"></section>
+<section id="selection-example" class="slide level2">
+<h2>Selection Example</h2>
+<p>Let <span class="math inline">\(\alpha_{n}=\alpha\)</span> (no OVB), but: <span class="math display">\[  U(C,H) = C - \exp(\alpha)\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H&gt;0\} \]</span></p>
+<div class="fragment">
 <p><strong>Exercise</strong>: selection bias when trying to estimate <span class="math inline">\(\gamma\)</span> using <span class="math inline">\(\EE[\log(W)|X]\)</span>, <em>even if</em> <span class="math inline">\(\EE[\zeta_{n}|X_{n}] = 0\)</span>.</p>
+</div>
 </section>
 <section id="simultaneity" class="slide level2">
 <h2>Simultaneity</h2>
 <p>Supply and demand: <span class="math display">\[ \log(Q_{m}^{D}) = \alpha_{0} - \alpha_{1}\log(P_{m}) + \eta_{m} \]</span> <span class="math display">\[ \log(Q_{m}^{S}) = \gamma_{0} + \gamma_{1}\log(P_{m}) + \upsilon_{m} \]</span> <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\upsilon\)</span> are demand and supply “shocks” across markets.</p>
-<p>Exercise: simultaneity bias when trying to estimate <span class="math inline">\(\gamma\)</span>.</p>
+<p><strong>Exercise</strong>: simultaneity bias when trying to estimate <span class="math inline">\(\gamma\)</span>.</p>
 </section>
-<section id="simulation-or-gif-1" class="slide level2">
-<h2>simulation or gif?</h2>
-</section>
+<section id="simultaneity-1" class="slide level2">
+<h2>Simultaneity</h2>
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-8-1.gif" class="r-stretch"></section>
+<section id="simultaneity-2" class="slide level2">
+<h2>Simultaneity</h2>
+<p>No apparent relationsip between price and quantity</p>
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="the-potential-outcomes-model" class="slide level2">
 <h2>The Potential Outcomes Model</h2>
 <p>The <strong>Potential Outcomes Model</strong> is a very general framework:</p>
+<div>
 <ul>
-<li><span class="math inline">\(D\in\{0,1\}\)</span> is treatment variable.</li>
-<li>Every individual is defined by a triple: <span class="math inline">\((Y_{0},Y_{1},D)\)</span></li>
-<li>We only see <span class="math inline">\(Y=Y_{D}\)</span>, <span class="math inline">\(Y_{1-D}\)</span> is the { counterfactual}</li>
-<li>The treatment effect is <span class="math inline">\(Y_{1} - Y_{0}\)</span> is defined to be { heterogeneous.}</li>
+<li class="fragment"><span class="math inline">\(D\in\{0,1\}\)</span> is treatment variable.</li>
+<li class="fragment">Every individual is defined by a triple: <span class="math inline">\((Y_{0},Y_{1},D)\)</span></li>
+<li class="fragment">We only see <span class="math inline">\(Y=Y_{D}\)</span>, <span class="math inline">\(Y_{1-D}\)</span> is the <em>counterfactual</em></li>
+<li class="fragment">The treatment effect is <span class="math inline">\(Y_{1} - Y_{0}\)</span> is defined to be <em>heterogeneous</em></li>
 </ul>
+</div>
 </section>
 <section id="the-potential-outcomes-model-1" class="slide level2">
 <h2>The Potential Outcomes Model</h2>
-<p>We can write the model this way: <span class="math display">\[ Y = \alpha_{0} + \alpha_{1}D + \eta \]</span> where: - <span class="math inline">\(Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}\)</span> - <span class="math inline">\(\eta = (1-D)\eta_{0} + D\eta_{1}\)</span> - <span class="math inline">\(\EE[\eta_{1}] = \EE[\eta_{0}] = 0\)</span> - <span class="math inline">\(Y_{1} - Y_{0} = \alpha_{1} + \eta_{1} - \eta_{0}\)</span> - The <strong>Average Treatment Effect (ATE)</strong> is: <span class="math display">\[ \EE[Y_{1}-Y_{0}] = \alpha_{1} \]</span></p>
+<p>We can write the model this way: <span class="math display">\[ Y = \alpha_{0} + \alpha_{1}D + \eta \]</span> where:</p>
+<ul>
+<li><span class="math inline">\(Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}\)</span></li>
+<li><span class="math inline">\(\eta = (1-D)\eta_{0} + D\eta_{1}\)</span></li>
+<li><span class="math inline">\(\EE[\eta_{1}] = \EE[\eta_{0}] = 0\)</span></li>
+<li><span class="math inline">\(Y_{1} - Y_{0} = \alpha_{1} + \eta_{1} - \eta_{0}\)</span></li>
+<li>The <strong>Average Treatment Effect (ATE)</strong> is: <span class="math display">\[ \EE[Y_{1}-Y_{0}] = \alpha_{1} \]</span></li>
+</ul>
 </section>
 <section id="motivating-experiments" class="slide level2">
 <h2>Motivating Experiments</h2>
 <div>
 <ul>
 <li class="fragment">How could we guarantee that <span class="math inline">\(\EE[\eta|D] = 0\)</span>?</li>
-<li class="fragment">Suppose that the variable <span class="math inline">\(D\)</span> could be {assigned randomly} <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\eta_{0},\eta_{1} \independent D\)</span>.</li>
+<li class="fragment">Suppose that the variable <span class="math inline">\(D\)</span> could be <em>assigned randomly</em> <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\eta_{0},\eta_{1} \perp D\)</span>.</li>
 <li class="fragment">Then <span class="math inline">\(\EE[\eta|D] = \EE[\eta] = 0\)</span>.</li>
 <li class="fragment">How could we estimate and do inference on <span class="math inline">\(\alpha\)</span>?</li>
 </ul>
@@ -553,23 +614,26 @@
 </section>
 <section id="internal-validity" class="slide level2">
 <h2>Internal Validity</h2>
+<div>
 <ul>
-<li><strong>Internal validity</strong> is achieved if the experiment and subsequent analysis properly identifies the parameter of interest.</li>
-<li><strong>Example 1</strong>: suppose that <span class="math inline">\(D\)</span> is not properly randomized.
+<li class="fragment"><strong>Internal validity</strong> is achieved if the experiment and subsequent analysis properly identifies the parameter of interest.</li>
+<li class="fragment"><strong>Example 1</strong>: suppose that <span class="math inline">\(D\)</span> is not properly randomized.
 <ul>
-<li><em>Balance test</em>: randomization also implies that <span class="math inline">\(\EE[X|D=1]=\EE[X|D=0]\)</span> which can be tested.</li>
+<li class="fragment"><em>Balance test</em>: randomization also implies that <span class="math inline">\(\EE[X|D=1]=\EE[X|D=0]\)</span> which can be tested.</li>
 </ul></li>
-<li><strong>Example 2</strong>: suppose that <span class="math inline">\(D\)</span> can only be offered, and takeup is not 100%. Can we be sure that <span class="math inline">\(\EE[Y|D=1] - \EE[Y|D=1]\)</span> is equal to <span class="math inline">\(\alpha\)</span>?</li>
+<li class="fragment"><strong>Example 2</strong>: suppose that <span class="math inline">\(D\)</span> can only be offered, and takeup is not 100%. Can we be sure that <span class="math inline">\(\EE[Y|D=1] - \EE[Y|D=0]\)</span> is equal to <span class="math inline">\(\alpha\)</span>?</li>
 </ul>
+</div>
 </section>
 <section id="internal-validity-imperfect-takeup" class="slide level2">
 <h2>Internal Validity: Imperfect Takeup</h2>
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-12-1.gif" class="r-stretch"></section>
+<section id="internal-validity-imperfect-takeup-1" class="slide level2">
+<h2>Internal Validity: Imperfect Takeup</h2>
 <p>Consider a model of earnings: <span class="math display">\[ Y_{D} = \alpha_0 + \alpha_{1}D + \eta_{D} \]</span></p>
 <p>where <span class="math inline">\(D\in\{0,1\}\)</span> indicates college attendance, and individuals go to college if the benefits outweigh the costs: <span class="math display">\[ D = \mathbf{1}\{Y_{1} - Y_{0} \geq C \} \]</span></p>
-<p>Now suppose that a tuition subsidy of <span class="math inline">\(\tau\)</span> is randomly offered to some, <span class="math inline">\(Z\in\{0,1\}\)</span>, so that: <span class="math display">\[ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - \tau\} \]</span></p>
-</section>
-<section id="simulationpicture" class="slide level2">
-<h2>simulation/picture</h2>
+<p>Now suppose that a tuition subsidy of <span class="math inline">\(\tau\)</span> is randomly offered to some, <span class="math inline">\(Z\in\{0,1\}\)</span>, so that: <span class="math display">\[ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - Z\tau\} \]</span></p>
 </section>
 <section id="exercise" class="slide level2">
 <h2>Exercise</h2>
@@ -578,7 +642,7 @@
 <li class="fragment">Solve for <span class="math inline">\(P_{Z} = P[D=1|Z]\)</span>.</li>
 <li class="fragment">Solve for <span class="math inline">\(\EE[Y|Z]\)</span>.</li>
 <li class="fragment">Define populations: compliers, always-takers, never takers.</li>
-<li class="fragment">Define the Local Averate Treatment Effect (LATE). Estimate??</li>
+<li class="fragment">Define the Local Average Treatment Effect (LATE). Estimate??</li>
 </ol>
 </div>
 </section>
@@ -586,7 +650,7 @@
 <h2>The LATE</h2>
 <div>
 <ul>
-<li class="fragment">The <strong>LATE</strong> is the Average Treatment Effect of <span class="math inline">\(D\)</span> among the {compliers}, the population of individuals who are moved into treatment by the randomized variable, <span class="math inline">\(Z\)</span>.</li>
+<li class="fragment">The <strong>LATE</strong> is the Average Treatment Effect of <span class="math inline">\(D\)</span> among the <strong>compliers</strong>, the population of individuals who are moved into treatment by the randomized variable, <span class="math inline">\(Z\)</span>.</li>
 <li class="fragment">In many experiments, there are not always-takers by definition, and we instead call it the effect of <strong>Treatment on the Treated (TOT)</strong></li>
 <li class="fragment">The derivation requires that there are no <strong>defiers</strong> (people who are moved in the opposite direction by the randomized variable <span class="math inline">\(Z\)</span>).</li>
 </ul>
@@ -595,10 +659,12 @@
 <section id="regression-framework-1" class="slide level2">
 <h2>Regression Framework</h2>
 <p>As with complete take-up, there is a regression framework for LATE/TOT: <span class="math display">\[ Y = X\beta + \alpha D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) \]</span> with <span class="math display">\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \]</span></p>
-<p><strong>Exercise</strong>: (1) calculate <span class="math inline">\(\EE[Y|X,Z]\)</span>; (2) Show how the {2SLS} estimator works.</p>
+<p><strong>Exercise</strong>: (1) calculate <span class="math inline">\(\EE[Y|X,Z]\)</span>; (2) Show how the <strong>2SLS</strong> estimator works.</p>
+<div class="fragment">
 <p>We don’t know how to calculate standard errors for this kind of estimator yet. But we will soon.</p>
+</div>
 </section>
-<section id="external-validity" class="slide level2">
+<section id="external-validity" class="slide level2 smaller">
 <h2>External Validity</h2>
 <div>
 <ul>
@@ -610,10 +676,21 @@
 </ul>
 </div>
 </section>
-<section id="external-validity-picture-simulation" class="slide level2">
-<h2>external validity picture / simulation</h2>
+<section id="external-validity-exercise" class="slide level2">
+<h2>External Validity Exercise</h2>
+<div>
+<ul>
+<li class="fragment">Consider our college tuition subsidy experiment</li>
+<li class="fragment">We can estimate the effect of the subsidy on <em>compliers</em></li>
+<li class="fragment">Can we use this to estimate the effect of increasing the subsidy from <span class="math inline">\(\tau\)</span> to <span class="math inline">\(\tau'\)</span>?</li>
+</ul>
+</div>
+</section>
+<section id="failure-of-late-for-subsidy-expansion" class="slide level2">
+<h2>Failure of LATE for subsidy expansion</h2>
 
-<div class="quarto-auto-generated-content">
+
+<img data-src="Causality_files/figure-revealjs/unnamed-chunk-14-1.gif" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
@@ -831,6 +908,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
