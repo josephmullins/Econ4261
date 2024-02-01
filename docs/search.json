@@ -1356,5 +1356,61 @@
     "title": "Causality and Experiments",
     "section": "Failure of LATE for subsidy expansion",
     "text": "Failure of LATE for subsidy expansion"
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html",
+    "href": "assignments/Homework-1-solutions.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "library(tidyverse)\n\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──\n\n\n✔ ggplot2 3.3.5     ✔ purrr   0.3.4\n✔ tibble  3.2.1     ✔ dplyr   1.1.1\n✔ tidyr   1.1.3     ✔ stringr 1.4.0\n✔ readr   2.0.0     ✔ forcats 0.5.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()"
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-1",
+    "href": "assignments/Homework-1-solutions.html#question-1",
+    "title": "Homework 1",
+    "section": "Question 1:",
+    "text": "Question 1:\nSuppose we were to treat each observation of \\(X_{n,j}\\) as taken from an iid sample of size 2\\(N\\). In this case the best estimator of \\(\\mu\\) would be the sample mean: \\[ \\hat{\\mu} = \\frac{\\sum_{n=1}^{N}\\sum_{j=1,2}X_{n,j}}{2N}  \\] What value of \\(\\rho\\) would be necessary for the iid assumption to be true? When \\(\\rho=0\\), write a formula for the variance (i.e. \\(E[(\\hat{\\mu}-\\mu)^2]\\)) of \\(\\hat{\\mu}\\) in terms of \\(\\sigma\\) and \\(N\\).\nThe observations are all mutually independent when \\(\\rho=0\\), since \\(\\epsilon_{n,1}\\) and \\(\\epsilon_{n,2}\\) are independent of each other. Under this assumption we have \\[ \\mathbb{V}[X_{n,1}] = \\mathbb{V}[X_{n,2}] = \\sigma^2 . \\] When this is the case, we are effectively taking a sample mean of iid observations of sample size \\(2N\\). We know from class then that \\[ \\mathbb{V}[\\hat{\\mu}] = \\frac{\\sigma^2}{2N}. \\]"
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-2",
+    "href": "assignments/Homework-1-solutions.html#question-2",
+    "title": "Homework 1",
+    "section": "Question 2:",
+    "text": "Question 2:\nBelow is code that “tests” the estimator by repeatedly drawing a sample of size \\(N\\) and calculating the estimator on that sample. Effectively, we are simulating draws from the sampling distribution of \\(\\hat{\\mu}\\). The argument \\(B\\) is the number of times to repeat the test.\n\nmontecarlo &lt;- function(mu,sig,rho,N,B) {\n  mu_hat = matrix(0,B) #&lt;- this will store an estimate from each trial\n  for (b in 1:B) {\n    xb = draw_data(mu,sig,rho,N) #&lt;- simulate a sample of size N\n    mu_hat[b] = sum(xb) / (2*N) #&lt;- store the estimator for this trial\n  }\n  mu_hat\n}\n\nAssuming that \\(\\mu=2\\), \\(\\sigma=1\\) and \\(N=100\\) (and \\(\\rho=0\\)), use this function to calculate the variance of \\(\\hat{\\mu}\\) for \\(B=10,50,100,1000\\) repetitions of the test. Show that the sample variance of \\(\\hat{\\mu}\\) converges to what your formula in Question (1) predicts.\nOur formula predicts that the variance of our estimator is 1/200=0.005. Here we use the function above for the number of trials:\n\nv1 = var(montecarlo(2,1,0,100,10))\nv2 = var(montecarlo(2,1,0,100,50))\nv3 = var(montecarlo(2,1,0,100,100))\nv4 = var(montecarlo(2,1,0,100,1000))\nprint(c(v1,v2,v3,v4))\n\n[1] 0.004323121 0.004585852 0.005223333 0.005343269\n\n\nAs predicted, the variance of \\(\\hat{\\mu}\\) converges on .005."
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-3",
+    "href": "assignments/Homework-1-solutions.html#question-3",
+    "title": "Homework 1",
+    "section": "Question 3:",
+    "text": "Question 3:\nRepeat the above exercise using \\(\\rho=0.5\\) instead. What do you notice about the sample variance of \\(\\hat{\\mu}\\) relative to your formula? Explain what is happening here.\n\nv1 = var(montecarlo(2,1,0.5,100,10))\nv2 = var(montecarlo(2,1,0.5,100,50))\nv3 = var(montecarlo(2,1,0.5,100,100))\nv4 = var(montecarlo(2,1,0.5,100,1000))\nprint(c(v1,v2,v3,v4))\n\n[1] 0.017465178 0.007021642 0.006719492 0.007763833\n\n\nWe don’t seem to be getting closer to 0.05 anymore. This is because our variance formula is no longer correct (it was derived under the assumption that all of our observations were independent). This is a enough of an answer. If you are curious, the formula could be derived as:\n\\[ \\mathbb{V}[\\hat{\\mu}] = \\frac{1}{(2N)^2}\\times N \\times \\mathbb{V}[X_{n,1}+X_{n,2}] = \\frac{\\sigma^2[(1+\\rho)^2+1]}{4N}  \\]\nThis formula implies for the parameters above that \\(\\mathbb{V}[\\hat{\\mu}] = 0.008125\\) which makes sense given our simulation results."
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-4",
+    "href": "assignments/Homework-1-solutions.html#question-4",
+    "title": "Homework 1",
+    "section": "Question 4:",
+    "text": "Question 4:\nUpdate the simulation function above to instead calculate a confidence interval for \\(\\mu\\). Using a value of \\(B=1000\\), show that the confidence interval works as it is intended when \\(\\rho=0\\). Repeat the exercise for \\(\\rho=0.5\\). Does the confidence interval still work as intended? Why or why not?\nRecall that the confidence interval is going to be: \\[ \\hat{\\mu} \\pm z_{0.025}\\times\\sqrt{\\frac{s^2_{X}}{2N}}. \\]\nwhere, following question (1), under the iid assumption we can estimate the variance using the sample variance of \\(X_{n,j}\\) divided by \\(2N\\). Accordingly we update the code:\n\nmontecarlo2 &lt;- function(mu,sig,rho,N,B) {\n  ci = matrix(0,B,2)\n  for (b in 1:B) {\n    xb = draw_data(mu,sig,rho,N) #&lt;- simulate a sample of size N\n    mu_hat = sum(xb) / (2*N) #&lt;- store the estimator for this trial\n    var_x = sum((xb - mu_hat)^2)/(2*N) #&lt;- calculate the sample variance of X\n    se = sqrt(var_x/(2*N)) #&lt;- the standard error of the sample mean\n    ci[b,1] = mu_hat - 1.96*se # - lower bound of confidence interval\n    ci[b,2] = mu_hat + 1.96*se # - upper bound\n  }\n  contains_pop_mu &lt;- (ci[,1] &lt; mu) & (ci[,2]&gt;mu) #&lt;- a boolean vector that returns a TRUE value when each ci contains mu\n}\n\nmontecarlo3 &lt;- function(mu,sig,rho,N,B) {\n  mu_hat = matrix(0,B)\n  for (b in 1:B) {\n    xb = draw_data(mu,sig,rho,N) #&lt;- simulate a sample of size N\n    mu_hat[b] = sum(xb) / (2*N) #&lt;- store the estimator for this trial\n  }\n  z = (mu_hat - mu)/sqrt(sig^2/(2*N))\n  z\n}\n\nNow we run the test:\n\nci_test &lt;- mean(montecarlo2(2,1,0,100,1000))\nprint(ci_test)\n\n[1] 0.949\n\n\nWe see that the confidence interval works as intended. You may find that with \\(B=1000\\) that there is still some small variation around 95%. You can always try increasing \\(B\\) in that case:\n\nci_test &lt;- mean(montecarlo2(2,1,0,100,10000))\nprint(ci_test)\n\n[1] 0.9442"
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-1-1",
+    "href": "assignments/Homework-1-solutions.html#question-1-1",
+    "title": "Homework 1",
+    "section": "Question 1:",
+    "text": "Question 1:\nFollowing the example from recitation, load the csv file cps-econ-4261.csv and replicate the steps for cleaning the data and creating the Wage variable, with one key difference: keep only observations between 2014 and 2018.\nCopying and pasting code, but changing the filter command:\n\nD &lt;- read.csv(\"../data/cps-econ-4261.csv\") %&gt;%\n  filter(YEAR&gt;=2014,YEAR&lt;=2018) %&gt;%\n  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),\n         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),\n         HOURWAGE = na_if(HOURWAGE,999.99)) %&gt;%\n  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %&gt;%\n  filter(!is.na(Wage))"
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-2-1",
+    "href": "assignments/Homework-1-solutions.html#question-2-1",
+    "title": "Homework 1",
+    "section": "Question 2:",
+    "text": "Question 2:\nWrite code to calculate mean wages separately by age (variable AGE), sex, and fertility status (hint: in recitation you did this by year, sex, and fertility status).\nMany ways to do this, here’s one that uses piping and tidyverse tricks:\n\nd &lt;- D %&gt;%\n  mutate(kids = NCHILD&gt;0,SEX = factor(SEX,levels=c(1,2),labels=c(\"Male\",\"Female\"))) %&gt;%\n  group_by(AGE,SEX,kids) %&gt;%\n  summarize(meanwage = mean(Wage),meanlogwage = mean(log(Wage)))\n\n`summarise()` has grouped output by 'AGE', 'SEX'. You can override using the\n`.groups` argument."
+  },
+  {
+    "objectID": "assignments/Homework-1-solutions.html#question-3-1",
+    "href": "assignments/Homework-1-solutions.html#question-3-1",
+    "title": "Homework 1",
+    "section": "Question 3:",
+    "text": "Question 3:\nWrite code to plot mean wages by age, sex, and fertility status. You can present the plot in whichever way makes the patterns most clear. Offer a brief interpretation of what the evolution of wage gaps by age and fertility status tell us about one potential source of gender gaps in wages.\nOne way:\n\nd %&gt;%\n  ggplot(aes(x=AGE,y=meanlogwage,color=SEX,linetype=kids)) + geom_line() + theme_minimal()\n\n\n\n\n\n\n\n\nBut to be honest this doesn’t let us see very clearly the difference between men and women in each fertility class. Let’s try faceting instead:\n\nd %&gt;%\n  ggplot(aes(x=AGE,y=meanwage,color=SEX)) + geom_line() + facet_grid(. ~ kids) + theme_minimal()\n\n\n\n\n\n\n\n\nNotice that the gap at the beginning of the life-cycle is much smaller for men and women without children. It suggests that the gender-specific career costs of childbearing could be playing an important role in determining the wage gap between men and women.\nAlthough the gap does start opening up from age 40, we are only using a measure of current children in the household, so as we look at women and men of older ages, it is increasingly likely that we are seeing people who have had children in the past that no longer live with them. So our measure of “fertility” in this sense is not particularly good."
   }
 ]

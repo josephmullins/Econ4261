@@ -1,0 +1,201 @@
+---
+title: "Homework 1"
+format:
+  html:
+    embed-resources: true
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+# Part 1: Introduction to for Loops and Simulation
+
+In this section you are going to write a *for* loop to help with simulation.  I have written an example below that you can use to help you.
+
+Assume the following data generating process. $X_{n,1}$ is a normal random variable that can be written as:
+$$ X_{n,1} = \mu + \epsilon_{n,1} $$
+where $\epsilon_{n,1} \sim \mathcal{N}(0,\sigma^2)$. $X_{n,2}$ is a normal random variable given by:
+$$ X_{n,2} = \mu + \rho\times\epsilon_{n,1} + \epsilon_{n,2} $$
+where $\epsilon_{n,2} \sim \mathcal{N}(0,\sigma^2)$. Each random variable $\epsilon_{n,j}$ is independent of $\epsilon_{m,k}$ for all $m$, $n$, $j$, and $k$.
+
+Here is a function to simulate a sample of $(X_{n,1},X_{n,2})$ of size $N$ given parameter values $\mu$, $\sigma$, and $\rho$.
+
+```{r}
+draw_data <- function(mu,sig,rho,N) {
+  X = matrix(0,N,2) #<- this is an N x 2 array that will store X_{n,1} in the n-th row and 1st column, and X_{n,2} in the second column of the n-th row
+  eps_1 = rnorm(N,0,sig) #<- this command simulates N random realizations from a normal with mean zero and standard deviation sig. The n-th entry of this vector will be taken as the valuate of epsilon_{n,2}
+  eps_2 = rnorm(N,0,sig) #<- another vector of normal random variables, this time the n-th entry is epsilon_{n,2}
+  X[,1] = mu + eps_1 #<- This command sets of the value of the first column of X (i.e. each X_{n,1} for n=1,...N)
+  X[,2] = mu + rho*eps_1 + eps_2 #<- And setting the value for the second column (each X_{n,2} for n=1,...,N)
+  X
+}
+```
+
+## Question 1:
+Suppose we were to treat each observation of $X_{n,j}$ as taken from an iid sample of size 2$N$. In this case the best estimator of $\mu$ would be the sample mean:
+$$ \hat{\mu} = \frac{\sum_{n=1}^{N}\sum_{j=1,2}X_{n,j}}{2N}  $$
+What value of $\rho$ would be necessary for the iid assumption to be true? When $\rho=0$, write a formula for the variance (i.e. $E[(\hat{\mu}-\mu)^2]$) of $\hat{\mu}$ in terms of $\sigma$ and $N$.
+
+The observations are all mutually independent when $\rho=0$, since $\epsilon_{n,1}$ and $\epsilon_{n,2}$ are independent of each other. Under this assumption we have
+$$ \mathbb{V}[X_{n,1}] = \mathbb{V}[X_{n,2}] = \sigma^2 . $$
+When this is the case, we are effectively taking a sample mean of iid observations of sample size $2N$. We know from class then that
+$$ \mathbb{V}[\hat{\mu}] = \frac{\sigma^2}{2N}. $$
+
+## Question 2:
+
+Below is code that "tests" the estimator by repeatedly drawing a sample of size $N$ and calculating the estimator on that sample. Effectively, we are simulating draws from the sampling distribution of $\hat{\mu}$. The argument $B$ is the number of times to repeat the test.
+
+```{r}
+montecarlo <- function(mu,sig,rho,N,B) {
+  mu_hat = matrix(0,B) #<- this will store an estimate from each trial
+  for (b in 1:B) {
+    xb = draw_data(mu,sig,rho,N) #<- simulate a sample of size N
+    mu_hat[b] = sum(xb) / (2*N) #<- store the estimator for this trial
+  }
+  mu_hat
+}
+```
+
+Assuming that $\mu=2$, $\sigma=1$ and $N=100$ (and $\rho=0$), use this function to calculate the variance of $\hat{\mu}$ for $B=10,50,100,1000$ repetitions of the test. Show that the sample variance of $\hat{\mu}$ converges to what your formula in Question (1) predicts.
+
+Our formula predicts that the variance of our estimator is 1/200=0.005. Here we use the function above for the number of trials:
+
+```{r}
+v1 = var(montecarlo(2,1,0,100,10))
+v2 = var(montecarlo(2,1,0,100,50))
+v3 = var(montecarlo(2,1,0,100,100))
+v4 = var(montecarlo(2,1,0,100,1000))
+print(c(v1,v2,v3,v4))
+```
+
+
+As predicted, the variance of $\hat{\mu}$ converges on .005.
+
+## Question 3:
+Repeat the above exercise using $\rho=0.5$ instead. What do you notice about the sample variance of $\hat{\mu}$ relative to your formula? Explain what is happening here.
+
+
+```{r}
+v1 = var(montecarlo(2,1,0.5,100,10))
+v2 = var(montecarlo(2,1,0.5,100,50))
+v3 = var(montecarlo(2,1,0.5,100,100))
+v4 = var(montecarlo(2,1,0.5,100,1000))
+print(c(v1,v2,v3,v4))
+```
+
+We don't seem to be getting closer to 0.05 anymore. This is because our variance formula is no longer correct (it was derived under the assumption that all of our observations were independent). This is a enough of an answer. If you are curious, the formula could be derived as:
+
+$$ \mathbb{V}[\hat{\mu}] = \frac{1}{(2N)^2}\times N \times \mathbb{V}[X_{n,1}+X_{n,2}] = \frac{\sigma^2[(1+\rho)^2+1]}{4N}  $$
+
+This formula implies for the parameters above that $\mathbb{V}[\hat{\mu}] = 0.008125$ which makes sense given our simulation results.
+
+
+## Question 4:
+
+Update the simulation function above to instead calculate a confidence interval for $\mu$. Using a value of $B=1000$, show that the confidence interval works as it is intended when $\rho=0$. Repeat the exercise for $\rho=0.5$. Does the confidence interval still work as intended? Why or why not?
+
+Recall that the confidence interval is going to be:
+$$ \hat{\mu} \pm z_{0.025}\times\sqrt{\frac{s^2_{X}}{2N}}. $$
+
+where, following question (1), under the iid assumption we can estimate the variance using the sample variance of $X_{n,j}$ divided by $2N$. Accordingly we update the code:
+
+```{r}
+montecarlo2 <- function(mu,sig,rho,N,B) {
+  ci = matrix(0,B,2)
+  for (b in 1:B) {
+    xb = draw_data(mu,sig,rho,N) #<- simulate a sample of size N
+    mu_hat = sum(xb) / (2*N) #<- store the estimator for this trial
+    var_x = sum((xb - mu_hat)^2)/(2*N) #<- calculate the sample variance of X
+    se = sqrt(var_x/(2*N)) #<- the standard error of the sample mean
+    ci[b,1] = mu_hat - 1.96*se # - lower bound of confidence interval
+    ci[b,2] = mu_hat + 1.96*se # - upper bound
+  }
+  contains_pop_mu <- (ci[,1] < mu) & (ci[,2]>mu) #<- a boolean vector that returns a TRUE value when each ci contains mu
+}
+
+montecarlo3 <- function(mu,sig,rho,N,B) {
+  mu_hat = matrix(0,B)
+  for (b in 1:B) {
+    xb = draw_data(mu,sig,rho,N) #<- simulate a sample of size N
+    mu_hat[b] = sum(xb) / (2*N) #<- store the estimator for this trial
+  }
+  z = (mu_hat - mu)/sqrt(sig^2/(2*N))
+  z
+}
+
+
+
+```
+
+Now we run the test:
+
+```{r}
+ci_test <- mean(montecarlo2(2,1,0,100,1000))
+print(ci_test)
+
+
+```
+We see that the confidence interval works as intended. You may find that with $B=1000$ that there is still some small variation around 95\%. You can always try increasing $B$ in that case:
+
+```{r}
+ci_test <- mean(montecarlo2(2,1,0,100,10000))
+print(ci_test)
+```
+
+
+
+# Part 2: An introduction to reading and analyzing data
+
+You are going to document some patterns using the *Current Population Survey* which you have been introduced to in recitation and in class.
+
+## Question 1:
+Following the example from recitation, load the csv file *cps-econ-4261.csv* and replicate the steps for cleaning the data and creating the Wage variable, with **one** key difference: keep only observations between 2014 and 2018.
+
+Copying and pasting code, but changing the filter command:
+
+```{r}
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR>=2014,YEAR<=2018) %>%
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99)) %>%
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  filter(!is.na(Wage))
+
+```
+
+
+## Question 2:
+Write code to calculate mean wages separately by age (variable AGE), sex, and fertility status (hint: in recitation you did this by year, sex, and fertility status).
+
+Many ways to do this, here's one that uses piping and tidyverse tricks:
+
+```{r}
+d <- D %>%
+  mutate(kids = NCHILD>0,SEX = factor(SEX,levels=c(1,2),labels=c("Male","Female"))) %>%
+  group_by(AGE,SEX,kids) %>%
+  summarize(meanwage = mean(Wage),meanlogwage = mean(log(Wage)))
+```
+
+
+## Question 3:
+Write code to plot mean wages by age, sex, and fertility status. You can present the plot in whichever way makes the patterns most clear. Offer a brief interpretation of what the evolution of wage gaps by age and fertility status tell us about one potential source of gender gaps in wages.
+
+One way:
+```{r}
+d %>%
+  ggplot(aes(x=AGE,y=meanlogwage,color=SEX,linetype=kids)) + geom_line() + theme_minimal()
+
+```
+But to be honest this doesn't let us see very clearly the difference between men and women in each fertility class. Let's try faceting instead:
+
+```{r}
+d %>%
+  ggplot(aes(x=AGE,y=meanwage,color=SEX)) + geom_line() + facet_grid(. ~ kids) + theme_minimal()
+
+```
+Notice that the gap at the beginning of the life-cycle is much smaller for men and women without children. It suggests that the gender-specific career costs of childbearing could be playing an important role in determining the wage gap between men and women.
+
+Although the gap does start opening up from age 40, we are only using a measure of current children *in the household*, so as we look at women and men of older ages, it is increasingly likely that we are seeing people who have had children in the past that no longer live with them. So our measure of "fertility" in this sense is not particularly good.
