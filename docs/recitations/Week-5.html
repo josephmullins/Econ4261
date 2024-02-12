@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.537">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -218,13 +218,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#question-1-the-effect-of-measurement-error" id="toc-question-1-the-effect-of-measurement-error" class="nav-link active" data-scroll-target="#question-1-the-effect-of-measurement-error">Question 1: The Effect of Measurement Error</a>
+  <li><a href="#part-1-the-effect-of-measurement-error" id="toc-part-1-the-effect-of-measurement-error" class="nav-link active" data-scroll-target="#part-1-the-effect-of-measurement-error">Part 1: The Effect of Measurement Error</a>
   <ul class="collapse">
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">(1.1)</a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">(1.2)</a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">(1.3)</a></li>
   </ul></li>
-  <li><a href="#fixed-effects-and-frisch-waugh-lovell" id="toc-fixed-effects-and-frisch-waugh-lovell" class="nav-link" data-scroll-target="#fixed-effects-and-frisch-waugh-lovell">(2) “Fixed Effects” and Frisch-Waugh-Lovell</a></li>
+  <li><a href="#part-2-fixed-effects-and-frisch-waugh-lovell" id="toc-part-2-fixed-effects-and-frisch-waugh-lovell" class="nav-link" data-scroll-target="#part-2-fixed-effects-and-frisch-waugh-lovell">Part 2: “Fixed Effects” and Frisch-Waugh-Lovell</a></li>
   </ul>
 </nav>
     </div>
@@ -233,7 +233,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 5</h1>
+<div class="quarto-title-block"><div><h1 class="title">Week 5</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -252,21 +252,9 @@ window.Quarto = {
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-</div>
-<section id="question-1-the-effect-of-measurement-error" class="level2">
-<h2 class="anchored" data-anchor-id="question-1-the-effect-of-measurement-error">Question 1: The Effect of Measurement Error</h2>
+<section id="part-1-the-effect-of-measurement-error" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-the-effect-of-measurement-error">Part 1: The Effect of Measurement Error</h2>
 <p>Suppose that there is a linear relationship between the scalar variable <span class="math inline">\(x_{n}\)</span> and the conditional expectation of <span class="math inline">\(y_{n}\)</span>:</p>
 <p><span class="math display">\[ y_{n} = \beta_{0} + \beta_{1}x_{n} + \epsilon_{n}\]</span></p>
 <p>where <span class="math inline">\(\epsilon_{n}\)</span> is the prediction error which by definition satisfies:</p>
@@ -289,67 +277,67 @@ window.Quarto = {
 <p><span class="math display">\[ y_{n} = \tilde{\beta}_{0} + \tilde{\beta}_{1}x^*_{n} + \tilde{\epsilon}_{n}.\]</span></p>
 <p>Following the same steps above, show that</p>
 <p><span class="math display">\[ \tilde{\beta}_{1} = \frac{\mathbb{C}(y_{n},x^*_{n})}{\mathbb{V}(x^*_{n})} \neq \beta_{1} \]</span></p>
-<p>and hence the OLS estimator of the above linear model is not a consistent estimator for <span class="math inline">\(\beta_{1}\)</span>.</p>
+<p>and hence that the OLS estimator of the above linear model is not a consistent estimator for <span class="math inline">\(\beta_{1}\)</span>.</p>
 </section>
 <section id="section-2" class="level3">
 <h3 class="anchored" data-anchor-id="section-2">(1.3)</h3>
-<p>Write a simulation to show that your formula <span class="math inline">\(\tilde{\beta}_{1}\)</span> relative to <span class="math inline">\(\beta_{1}\)</span> is correct. To help you, here is code that evaluates the estimator without measurement error, assuming that <span class="math inline">\(x_{n}\sim\mathcal{N}(0,1)\)</span> and <span class="math inline">\(\epsilon_{n}\sim\mathcal{N}(0,\sigma^2_{\epsilon})\)</span>.</p>
+<p>Write a simulation to show that your formula for <span class="math inline">\(\tilde{\beta}_{1}\)</span> relative to <span class="math inline">\(\beta_{1}\)</span> is correct. To help you, here is code that evaluates the estimator without measurement error, assuming that <span class="math inline">\(x_{n}\sim\mathcal{N}(0,1)\)</span> and <span class="math inline">\(\epsilon_{n}\sim\mathcal{N}(0,\sigma^2_{\epsilon})\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>est_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(N,sig_eps,beta) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> beta[<span class="dv">1</span>] <span class="sc">+</span> x<span class="sc">*</span>beta[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,sig_eps)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimate for beta_{1}</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>(y,x)<span class="sc">/</span><span class="fu">var</span>(x)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>est_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(N,sig_eps,beta) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> beta[<span class="dv">1</span>] <span class="sc">+</span> x<span class="sc">*</span>beta[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,sig_eps)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimate for beta_{1}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>(y,x)<span class="sc">/</span><span class="fu">var</span>(x)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Set <span class="math inline">\(\beta_{0} = 1\)</span>, <span class="math inline">\(\beta_{1}=0.5\)</span>, and <span class="math inline">\(\sigma_\epsilon=0.3\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>btrue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sig_eps <span class="ot">&lt;-</span> <span class="fl">0.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>btrue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sig_eps <span class="ot">&lt;-</span> <span class="fl">0.3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that as we increase the number of observations we get closer and closer to the true value of <span class="math inline">\(\beta_{1}\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (N <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">10000</span>)) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  b_est <span class="ot">&lt;-</span> <span class="fu">est_beta</span>(N,sig_eps,btrue)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Sample size of"</span>, N,<span class="st">": "</span>,b_est))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (N <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">10000</span>)) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  b_est <span class="ot">&lt;-</span> <span class="fu">est_beta</span>(N,sig_eps,btrue)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Sample size of"</span>, N,<span class="st">": "</span>,b_est))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sample size of 10 :  0.581914388588723"
-[1] "Sample size of 100 :  0.502956145359533"
-[1] "Sample size of 1000 :  0.495990127590331"
-[1] "Sample size of 10000 :  0.502770066977806"</code></pre>
+<pre><code>[1] "Sample size of 10 :  0.668910246726913"
+[1] "Sample size of 100 :  0.477182823632863"
+[1] "Sample size of 1000 :  0.502675169496832"
+[1] "Sample size of 10000 :  0.50136063905263"</code></pre>
 </div>
 </div>
-<p>Your answer for (1.2) should give you a formula for bias in <span class="math inline">\(\hat{\beta}_{1}\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>. All you need to do is edit the function and show that it injects bias that approaches what is implied by your formula.</p>
+<p>Your answer for (1.2) should give you a formula for bias in <span class="math inline">\(\hat{\beta}_{1}\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>. All you need to do is edit the function and show the OLS estimator <em>with</em> measurement error has a bias that approaches what is implied by your formula.</p>
 </section>
 </section>
-<section id="fixed-effects-and-frisch-waugh-lovell" class="level2">
-<h2 class="anchored" data-anchor-id="fixed-effects-and-frisch-waugh-lovell">(2) “Fixed Effects” and Frisch-Waugh-Lovell</h2>
-<p>If you read applied papers in economics (and other fields) you will see the phrase “fixed effects” a lot. It just means, an individual dummy term for each unique realization of a discrete variable. For example, the phrase: “we regress log wages on education as we well as age and year fixed effects” means that you are adding dummies for each year and age in the data to your regression as well as education. You will often see it written this way:</p>
+<section id="part-2-fixed-effects-and-frisch-waugh-lovell" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-fixed-effects-and-frisch-waugh-lovell">Part 2: “Fixed Effects” and Frisch-Waugh-Lovell</h2>
+<p>If you read applied papers in economics (and other fields) you will see the phrase “fixed effects” a lot. It just means that there is an individual dummy term for each unique realization of a discrete variable. For example, the phrase: “we regress log wages on education as well as age and year fixed effects” means that you are adding dummies for each year and age in the data to your regression as well as education. You will often see it written this way:</p>
 <p><span class="math display">\[ \log(W_{nt}) = \beta_{0} + \beta_{1}\text{Educ}_{nt} + \mu_{a} + \gamma_{t} \]</span></p>
-<p>where <span class="math inline">\(\mu_{a}\)</span> and <span class="math inline">\(\gamma_{t}\)</span> are age and year fixed effects, respectively.</p>
+<p>where <span class="math inline">\(\mu_{a}\)</span> and <span class="math inline">\(\gamma_{t}\)</span> are the age and year “fixed effects”, respectively.</p>
 <p>Now suppose that we have a linear model:</p>
 <p><span class="math display">\[ \mathbf{Y} = \mathbf{X}\beta + \mathbf{W}\gamma + \epsilon\]</span></p>
-<p>The Frisch-Waugh-Lovell (FWL) theorem says that if we want to estimate <span class="math inline">\(\beta\)</span>, we can first regress or “project” both <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> on <span class="math inline">\(\mathbf{W}\)</span>, and then get the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> by regressing the residuals for <span class="math inline">\(\mathbf{Y}\)</span> on the residuals for <span class="math inline">\(\mathbf{X}\)</span>. Formally:</p>
+<p>The Frisch-Waugh-Lovell (FWL) theorem says that if we want to estimate <span class="math inline">\(\beta\)</span>, we can first regress or “project” both <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> on <span class="math inline">\(\mathbf{W}\)</span>, and then compute the OLS estimator <span class="math inline">\(\hat{\beta}\)</span> by regressing the residuals for <span class="math inline">\(\mathbf{Y}\)</span> on the residuals for <span class="math inline">\(\mathbf{X}\)</span>. Formally:</p>
 <p><span class="math display">\[ \hat{\mathbf{X}} = (\mathbf{I} - \mathbf{W}(\mathbf{W}^{T}\mathbf{W})^{-1}\mathbf{W}^{T})\mathbf{X} \]</span> <span class="math display">\[ \hat{\mathbf{Y}} = (\mathbf{I} - \mathbf{W}(\mathbf{W}^{T}\mathbf{W})^{-1}\mathbf{W}^{T})\mathbf{Y} \]</span> And then: <span class="math display">\[ \hat{\beta} = \left(\hat{\mathbf{X}}^{T}\hat{\mathbf{X}}\right)^{-1}\hat{\mathbf{X}}^{T}\hat{\mathbf{Y}}. \]</span></p>
-<p>Why do we care? Back in the day this made regressions that were difficult to compute more manageable. These days, if the number of “fixed effects” is very large, it can save a lot of time to first de-mean all of the other variables at the level of the fixed effect. For example if we have individual fixed effects we might first de-mean by individual. Here is an example. Let the model be:</p>
+<p>Why do we care? Back in the day this made regressions that were difficult to compute more manageable. These days, if the number of “fixed effects” is very large, it can save a lot of time to first de-mean all of the other variables at the level of the fixed effect. For example if we have individual fixed effects we might first de-mean by individual. Here is a simple example. Let the model be:</p>
 <p><span class="math display">\[ y_{nt} = \beta x_{nt} + \mu_{n} + \epsilon_{nt} \]</span> with <span class="math inline">\(N=5\)</span> individuals and <span class="math inline">\(T=20\)</span> observations each. We let each <span class="math inline">\(x_{nt}\)</span> be correlated with <span class="math inline">\(\mu_{n}\)</span> by assuming:</p>
 <p><span class="math display">\[ x_{nt} = \mu_{n} + 0.1\times\eta_{nt}, \eta_{nt}\sim\mathcal{N}(0,1) \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_gen <span class="ot">&lt;-</span> <span class="cf">function</span>(b) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="at">length.out=</span><span class="dv">5</span>) <span class="co">#&lt;- draw the fixed effects</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    xt <span class="ot">=</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(d,<span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">t=</span>t,<span class="at">x=</span>xt,<span class="at">y =</span> b<span class="sc">*</span>xt <span class="sc">+</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)))</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  d</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_gen <span class="ot">&lt;-</span> <span class="cf">function</span>(b) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="at">length.out=</span><span class="dv">5</span>) <span class="co">#&lt;- draw the fixed effects</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    xt <span class="ot">=</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(d,<span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">t=</span>t,<span class="at">x=</span>xt,<span class="at">y =</span> b<span class="sc">*</span>xt <span class="sc">+</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  d</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We first see that if we want to recover <span class="math inline">\(\beta\)</span> it is important to control for fixed effects:</p>
+<p>We first see that if we want to recover the true slope <span class="math inline">\(\beta\)</span> it is important to control for fixed effects:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data_gen</span>(<span class="sc">-</span><span class="fl">0.5</span>) <span class="co"># &lt;- set the true value of beta to be -0.5</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data_gen</span>(<span class="sc">-</span><span class="fl">0.5</span>) <span class="co"># &lt;- set the true value of beta to be -0.5</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -363,11 +351,11 @@ window.Quarto = {
 </div>
 <p>Of course we could just throw in dummies for each id type. Using FWL we can also just de-mean by the id variable and get a nice visual depiction of how the theorem works. Look at what happens once we de-mean:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>demean <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> y<span class="sc">-</span><span class="fu">mean</span>(y),<span class="at">x=</span>x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>demean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>demean <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> y<span class="sc">-</span><span class="fu">mean</span>(y),<span class="at">x=</span>x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>demean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -381,8 +369,8 @@ window.Quarto = {
 </div>
 <p>We can confirm that each version gives us the same point estimate of <span class="math inline">\(\beta\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x <span class="sc">+</span> <span class="fu">as.factor</span>(id),d) <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x <span class="sc">+</span> <span class="fu">as.factor</span>(id),d) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -390,25 +378,25 @@ lm(formula = y ~ 0 + x + as.factor(id), data = d)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.25969 -0.09061  0.01068  0.08366  0.21641 
+-0.20862 -0.06797 -0.01193  0.06648  0.26154 
 
 Coefficients:
-               Estimate Std. Error t value Pr(&gt;|t|)    
-x              -0.48069    0.11916  -4.034 0.000112 ***
-as.factor(id)1 -0.97381    0.12229  -7.963 3.82e-12 ***
-as.factor(id)2 -0.49741    0.06413  -7.757 1.03e-11 ***
-as.factor(id)3  0.01629    0.02591   0.629 0.531173    
-as.factor(id)4  0.50165    0.06585   7.618 2.01e-11 ***
-as.factor(id)5  1.00198    0.12813   7.820 7.61e-12 ***
+                Estimate Std. Error t value Pr(&gt;|t|)    
+x              -0.489661   0.099024  -4.945 3.32e-06 ***
+as.factor(id)1 -1.005694   0.099704 -10.087  &lt; 2e-16 ***
+as.factor(id)2 -0.543963   0.053485 -10.170  &lt; 2e-16 ***
+as.factor(id)3  0.004453   0.022858   0.195    0.846    
+as.factor(id)4  0.512718   0.052588   9.750 6.25e-16 ***
+as.factor(id)5  1.005613   0.099374  10.119  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1156 on 94 degrees of freedom
-Multiple R-squared:  0.9097,    Adjusted R-squared:  0.9039 
-F-statistic: 157.8 on 6 and 94 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1021 on 94 degrees of freedom
+Multiple R-squared:  0.9377,    Adjusted R-squared:  0.9337 
+F-statistic: 235.7 on 6 and 94 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,demean) <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,demean) <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -416,20 +404,22 @@ lm(formula = y ~ 0 + x, data = demean)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.25969 -0.09061  0.01068  0.08366  0.21641 
+-0.20862 -0.06797 -0.01193  0.06648  0.26154 
 
 Coefficients:
   Estimate Std. Error t value Pr(&gt;|t|)    
-x  -0.4807     0.1161   -4.14 7.31e-05 ***
+x -0.48966    0.09649  -5.075 1.82e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1127 on 99 degrees of freedom
-Multiple R-squared:  0.1476,    Adjusted R-squared:  0.139 
-F-statistic: 17.14 on 1 and 99 DF,  p-value: 7.313e-05</code></pre>
+Residual standard error: 0.09954 on 99 degrees of freedom
+Multiple R-squared:  0.2064,    Adjusted R-squared:  0.1984 
+F-statistic: 25.75 on 1 and 99 DF,  p-value: 1.819e-06</code></pre>
 </div>
 </div>
 
+
+<!-- -->
 
 </section>
 
@@ -513,6 +503,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -595,7 +636,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -815,7 +861,157 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 5"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Part 1: The Effect of Measurement Error</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>Suppose that there is a linear relationship between the scalar variable $x_{n}$ and the conditional expectation of $y_{n}$:</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>$$ y_{n} = \beta_{0} + \beta_{1}x_{n} + \epsilon_{n}$$</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>where $\epsilon_{n}$ is the prediction error which by definition satisfies:</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>$$ \mathbb{E}<span class="co">[</span><span class="ot">\epsilon_{n}|x_{n}</span><span class="co">]</span> = 0 $$</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### (1.1)</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>Show that the population parameter $\beta_{1}$ can be written as:</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>$$ \beta_{n} = \frac{\mathbb{C}(y_{n},x_{n})}{\mathbb{V}(x_{n})}.$$</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>Here is a hint. Do the following:</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a> (1) Evaluate $\mathbb{C}(y_{n},x_{n})$ by substituting in the formula $y_{n} = \beta_{0} + \beta_{1}x_{n} + \epsilon_{n}$ and using rules from your stats cheat sheet.</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a> (2) Then use that:</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    $$ \mathbb{C}(\epsilon_{n},x_{n}) = \mathbb{E}<span class="co">[</span><span class="ot">\epsilon_{n}(x_{n} - \mathbb{E}[x_{n}])</span><span class="co">]</span> = 0 $$</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### (1.2)</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>Now suppose that $x_{n}$ is observed with *measurement error*.</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>$$ x^*_{n} = x_{n} + \upsilon_{n} $$</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>where $\upsilon_{n}$ is independent of every other variable and has variance $\sigma^2_{\upsilon}$. Suppose you try to estimate $\beta_{1}$ using the linear model:</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>$$ y_{n} = \tilde{\beta}_{0} + \tilde{\beta}_{1}x^*_{n} + \tilde{\epsilon}_{n}.$$</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>Following the same steps above, show that </span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>$$ \tilde{\beta}_{1} = \frac{\mathbb{C}(y_{n},x^*_{n})}{\mathbb{V}(x^*_{n})} \neq \beta_{1} $$</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>and hence that the OLS estimator of the above linear model is not a consistent estimator for $\beta_{1}$.</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### (1.3)</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>Write a simulation to show that your formula for $\tilde{\beta}_{1}$ relative to $\beta_{1}$ is correct. To help you, here is code that evaluates the estimator without measurement error, assuming that $x_{n}\sim\mathcal{N}(0,1)$ and $\epsilon_{n}\sim\mathcal{N}(0,\sigma^2_{\epsilon})$.</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>est_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(N,sig_eps,beta) {</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> beta[<span class="dv">1</span>] <span class="sc">+</span> x<span class="sc">*</span>beta[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,sig_eps)</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the estimate for beta_{1}</span></span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>(y,x)<span class="sc">/</span><span class="fu">var</span>(x)</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a>Set $\beta_{0} = 1$, $\beta_{1}=0.5$, and $\sigma_\epsilon=0.3$.</span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>btrue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.5</span>)</span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>sig_eps <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>Notice that as we increase the number of observations we get closer and closer to the true value of $\beta_{1}$:</span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (N <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>,<span class="dv">10000</span>)) {</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>  b_est <span class="ot">&lt;-</span> <span class="fu">est_beta</span>(N,sig_eps,btrue)</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Sample size of"</span>, N,<span class="st">": "</span>,b_est))</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>Your answer for (1.2) should give you a formula for bias in $\hat{\beta}_{1}$ as $N\rightarrow\infty$. All you need to do is edit the function and show the OLS estimator *with* measurement error has a bias that approaches what is implied by your formula.</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## Part 2: "Fixed Effects" and Frisch-Waugh-Lovell</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a>If you read applied papers in economics (and other fields) you will see the phrase "fixed effects" a lot. It just means that there is an individual dummy term for each unique realization of a discrete variable. For example, the phrase: "we regress log wages on education as well as age and year fixed effects" means that you are adding dummies for each year and age in the data to your regression as well as education. You will often see it written this way:</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>$$ \log(W_{nt}) = \beta_{0} + \beta_{1}\text{Educ}_{nt} + \mu_{a} + \gamma_{t} $$</span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>where $\mu_{a}$ and $\gamma_{t}$ are the age and year "fixed effects", respectively.</span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a>Now suppose that we have a linear model:</span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a>$$ \mathbf{Y} = \mathbf{X}\beta + \mathbf{W}\gamma + \epsilon$$</span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a>The Frisch-Waugh-Lovell (FWL) theorem says that if we want to estimate $\beta$, we can first regress or "project" both $\mathbf{X}$ and $\mathbf{Y}$ on $\mathbf{W}$, and then compute the OLS estimator $\hat{\beta}$ by regressing the residuals for $\mathbf{Y}$ on the residuals for $\mathbf{X}$. Formally:</span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a>$$ \hat{\mathbf{X}} = (\mathbf{I} - \mathbf{W}(\mathbf{W}^{T}\mathbf{W})^{-1}\mathbf{W}^{T})\mathbf{X} $$</span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a>$$ \hat{\mathbf{Y}} = (\mathbf{I} - \mathbf{W}(\mathbf{W}^{T}\mathbf{W})^{-1}\mathbf{W}^{T})\mathbf{Y} $$</span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a>And then:</span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a>$$ \hat{\beta} = \left(\hat{\mathbf{X}}^{T}\hat{\mathbf{X}}\right)^{-1}\hat{\mathbf{X}}^{T}\hat{\mathbf{Y}}. $$</span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a>Why do we care? Back in the day this made regressions that were difficult to compute more manageable. These days, if the number of "fixed effects" is very large, it can save a lot of time to first de-mean all of the other variables at the level of the fixed effect. For example if we have individual fixed effects we might first de-mean by individual. Here is a simple example. Let the model be:</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a>$$ y_{nt} = \beta x_{nt} + \mu_{n} + \epsilon_{nt} $$</span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a>with $N=5$ individuals and $T=20$ observations each. We let each $x_{nt}$ be correlated with $\mu_{n}$ by assuming:</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a>$$ x_{nt} = \mu_{n} + 0.1\times\eta_{nt}, \eta_{nt}\sim\mathcal{N}(0,1) $$</span>
+<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a>data_gen <span class="ot">&lt;-</span> <span class="cf">function</span>(b) {</span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="at">length.out=</span><span class="dv">5</span>) <span class="co">#&lt;- draw the fixed effects</span></span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>    xt <span class="ot">=</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)</span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">rbind</span>(d,<span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="at">t=</span>t,<span class="at">x=</span>xt,<span class="at">y =</span> b<span class="sc">*</span>xt <span class="sc">+</span> mu <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span><span class="fu">rnorm</span>(<span class="dv">5</span>)))</span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>  d</span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a>We first see that if we want to recover the true slope $\beta$ it is important to control for fixed effects:</span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data_gen</span>(<span class="sc">-</span><span class="fl">0.5</span>) <span class="co"># &lt;- set the true value of beta to be -0.5</span></span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>Of course we could just throw in dummies for each id type. Using FWL we can also just de-mean by the id variable and get a nice visual depiction of how the theorem works. Look at what happens once we de-mean:</span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a>demean <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y =</span> y<span class="sc">-</span><span class="fu">mean</span>(y),<span class="at">x=</span>x<span class="sc">-</span><span class="fu">mean</span>(x))</span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>demean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>)</span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>We can confirm that each version gives us the same point estimate of $\beta$:</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x <span class="sc">+</span> <span class="fu">as.factor</span>(id),d) <span class="sc">%&gt;%</span></span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,demean) <span class="sc">%&gt;%</span></span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
