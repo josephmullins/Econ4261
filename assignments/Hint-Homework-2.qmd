@@ -1,0 +1,72 @@
+---
+title: "Hint for Homework 2"
+---
+
+```{r}
+#| warning: false
+library(tidyverse)
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR>=2014,YEAR<=2018) %>%
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99)) %>%
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  mutate(kids = NCHILD>0,female = SEX==2) %>%
+  filter(!is.na(Wage))
+
+```
+
+## Hint for Question 7
+
+The question asks you to write down a model with three properties. The first thing to say is that there are actually several specifications that have this property. The goal is to write one down such that your null hypothesis can be summarized (and tested) with one parameter.
+
+To fix ideas, consider a simpler model, where $F_{n}$ is a dummy for being female and $K_{n}$ is a dummy for having kids:
+
+$$ \mathbb{E}[\log(Wage_{n})|F_{n},K_{n}] = \beta_{1} + \beta_{2}F_{n} + \beta_{3}K_{n} + \beta_{4}K_{n}F_{n} $$
+
+Now define the wage gap as:
+
+$$ \Delta(K_{n}) = \mathbb{E}[\log(Wage_{n})|F_{n}=1,K_{n}] - \mathbb{E}[\log(Wage_{n})|F_{n}=0,K_{n}] $$
+
+For this *simpler* model, you can show that:
+
+$$ \Delta(K_{n}) = \beta_{2} + \beta_{4}K_{n} $$
+
+and so $\beta_{4}$ represents the difference in the wage gaps by fertility status.
+
+Now going back to the question. The three conditions are:
+
+**(1) There is a linear trend for all wages with age.**
+
+This requires us to put in a slope with age, so (letting age be $A_{n}$) something like:
+
+$$ \mathbb{E}[\log(Wage_{n})] = \beta_{1} + \beta_{2}A_{n} +\ ... $$
+
+**(2) A linear trend for wage gaps with age**
+
+Define now the wage gap as being dependent on $K_{n}$ and $A_{n}$:
+
+$$ \Delta(K_{n},A_{n}) = \mathbb{E}[\log(Wage_{n})|F_{n}=1,K_{n},A_{n}] - \mathbb{E}[\log(Wage_{n})|F_{n}=0,K_{n},A_{n}] $$
+
+this condition requires that you write the model to get something like:
+
+$$ \Delta(K_{n},A_{n}) = \beta_{k} + \beta_{j}A_{n} +\ ... $$
+
+
+
+**(3) A linear trend for the the difference in wage gaps by fertility status.**
+
+Combined with the condition above, you need to write a model that gives you an expression for wage gaps like:
+
+$$ \Delta(K_{n},A_{n}) = \beta_{k} + \beta_{j}A_{n} + \beta_{l}K_{n} + \beta_{m}A_{n}K_{n} $$
+
+notice that if you get this, the coefficient $\beta_{m}$ captures how the difference in wage gaps for the two groups (kids or no kids) changes with age, and you can pose your null hypothesis using just $\beta_{m}$.
+
+So suppose we run the regression with a full set of interactions:
+
+```{r}
+lm(log(Wage) ~ female*kids*AGE,D) %>%
+  summary()
+```
+
+you should be able to show that the resulting model gives you exactly the expression for the wage gaps that we are after. **Note**: don't just run this, please explain how you get there.
