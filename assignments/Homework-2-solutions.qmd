@@ -1,7 +1,5 @@
 ---
 title: "Homework 2"
-format:
-  pdf
 ---
 
 ```{r}
@@ -111,7 +109,7 @@ Under the null hypothesis, $\beta_{6}=0$. The point estimate of $\beta_{6}$ sugg
 ### Example 2:
 
 The model is:
-$$ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}kids_{n} + \beta_{6}Age_{n}F_{n}kids_{n} $$
+$$ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}kids_{n} + \beta_{7}Age_{n}F_{n}kids_{n} $$
 
 Notice that compared to example 1, this model has an additional lower order interaction $(Age_{n}\times kids_{n})$. This makes $\beta_{7}$ now the coefficient that represents how the difference in wage gaps grows with age.
 

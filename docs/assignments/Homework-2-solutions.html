@@ -210,7 +210,7 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -233,7 +233,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -242,7 +242,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
     
   
@@ -388,7 +388,7 @@ F-statistic: 359.7 on 3 and 29172 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Which can be estimated using:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as.integer</span>(female)) <span class="sc">%&gt;%</span> <span class="co">#&lt;- convert female from an factor variable to an integer to get this to run properly</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">as.integer</span>(female)) <span class="sc">%&gt;%</span> <span class="co">#&lt;- convert female from a factor variable to an integer to get this to run properly</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> female<span class="sc">*</span>kids <span class="sc">+</span> AGE <span class="sc">+</span> female<span class="sc">:</span>AGE <span class="sc">+</span> female<span class="sc">:</span>kids<span class="sc">:</span>AGE,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -422,7 +422,7 @@ F-statistic:  1056 on 6 and 29169 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="example-2" class="level3">
 <h3 class="anchored" data-anchor-id="example-2">Example 2:</h3>
-<p>The model is: <span class="math display">\[ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}kids_{n} + \beta_{6}Age_{n}F_{n}kids_{n} \]</span></p>
+<p>The model is: <span class="math display">\[ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}kids_{n} + \beta_{7}Age_{n}F_{n}kids_{n} \]</span></p>
 <p>Notice that compared to example 1, this model has an additional lower order interaction <span class="math inline">\((Age_{n}\times kids_{n})\)</span>. This makes <span class="math inline">\(\beta_{7}\)</span> now the coefficient that represents how the difference in wage gaps grows with age.</p>
 <p>We can estimate it as:</p>
 <div class="cell">
