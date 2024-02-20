@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.539">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econ4261 - Practice Exercises</title>
+<title>Econ4261 - Additional Material</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -135,6 +135,10 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="./Exercises.html" aria-current="page"> 
+<span class="menu-text">Additional Material</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -154,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Practice Exercises</h1>
+<h1 class="title">Additional Material</h1>
 </div>
 
 
@@ -181,20 +185,28 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
+<td><a href="./supplementary/Stats-CheatSheet.pdf">Stats Cheat Sheet</a></td>
+<td></td>
+</tr>
+<tr class="even">
 <td><a href="./supplementary/PracticeQuestions.pdf">Probability and Stats Review</a></td>
 <td><a href="./supplementary/PracticeQuestionsSolutions.pdf">Solutions</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./supplementary/Exercises-OLS.pdf">Linear Models and OLS</a></td>
 <td><a href="supplementary/Exercises-OLS-Solutions.pdf">Solutions</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="./supplementary/Exercises-Experiments.pdf">Causality and Experiments</a></td>
 <td><a href="./supplementary/Exercises-Experiments-Solutions.pdf">Solutions</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="./supplementary/Exercises-QuasiExperiments.pdf">Diff-in-Diff and IV</a></td>
 <td><a href="supplementary/QuasiExperiments - Solutions.pdf">Solutions</a> (handwritten)</td>
+</tr>
+<tr class="even">
+<td><a href="./supplementary/Midterm-2023.pdf">2023 Midterm</a></td>
+<td>Solutions given in recitation</td>
 </tr>
 </tbody>
 </table>
@@ -363,7 +375,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
