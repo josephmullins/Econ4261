@@ -50,14 +50,15 @@ This section:
 - We'll look at some *applications of experiments in economics*.
 :::
 
-## Causality vs Conditional Means
+## Causality vs Conditional Means {.smaller}
 
 :::{.incremental}
 - Outcome variable, $Y$ (e.g. earnings)
 - Treatment variable $X$ (e.g. college attendance)
 - Consider this experiment:
     - Pick someone **randomly** from the population with $X=x_{1}$.
-    - Forcibly change $X$ to $x_{2}$
+    - We can predict $Y$ **given** that $X=x_{1}$ using $\EE[Y|X=x_{1}]$.
+    - Imagine a world in which $X=x_{2}$ instead for this random person. Call this a **counterfactual**.
 - Is the expected effect on $Y$ given by 
 $$ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? $$
 - In general, **no**. We need **more assumptions**.
@@ -94,17 +95,16 @@ $$ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? $$
 ::::
 
 
-## How to infer causality {.smaller}
+## How to infer causality
 
 Here's the recipe:
 
 ::: {.incremental}
 
-1. Start with a **model of the world**: $Y = h_{\theta}(X,W,\eta)$. This is your theory of how the data is generated. $\eta$ is what we call **structural unobservable**. The model $h$ is indexed by population parameters, $\theta$. 
-2. Define a counterfactual of interest. Two (of infinitely many) examples:
-  $$ (1)\ \int h_{\theta}(X+1,W,\eta)dF(X,W,\eta)\qquad (2)\ \int h_{\theta}(0,W,\eta)dF(W,\eta|X=1). $$
-3. State the assumptions under which your counterfactual can be constructed 
-4. Then we debate the plausibility of your assumptions. That's it.
+1. Start with a **model of the world**. This is your theory of how the data is generated.  
+2. Define a **counterfactual** of interest using the model. 
+3. State the **assumptions** under which your counterfactual can be constructed from the data.
+4. Then we debate the **plausibility** of your assumptions. That's it.
 :::
 
 . . .
@@ -129,25 +129,6 @@ data: $(Y_{n},E_{n})_{n=1}^{N}$, iid sample of individuals.
 - In this case, an *overly strong* assumption. 
 - **Be careful**: always check how an error term is defined. If it is prediction error (what we have been calling $\epsilon_{n})$ this is **conceptually different** from a structural error/unobservable. 
 - As a prediction error, $\EE[\epsilon_{n}|X_{n}] = 0$ by definition.
-:::
-
-## Example 2: Returns to Education (again)
-
-Now suppose a different data-generating process. Imagine: 
-
-- Model: $Y = \gamma_{0} + \gamma_{1}C_{n} + \eta_{n}$.
-- Every college applicant takes a test, gets a test score $S_{n}$.
-- Test scores are sorted evenly into bins $b\in\{1,2,3\}$, college slots offered to a person in bin $b$ *randomly* with probability $p_{b}$: $p_{1}<p_{2}<p_{3}$.
-
-. . .
-
-We can exploit the **randomness** conditional on $b$ to infer causality.
-
-## Example 2: Returns to Education (again)
-
-:::{.incremental}
-- Does $\EE[Y|C] = \beta_{0} + \beta_{1}C$ work?  Still need same implausible assumption. 
-- What about $\EE[Y|C,S] = \beta_{0} + \beta_{1}C + \beta_{2}B_{2} + \beta_{3}B_{3}$ where $B_{b}$ is a dummy for $S$ being in bin $b$?
 :::
 
 ## Sources of Bias {.smaller}
@@ -177,13 +158,20 @@ flowchart LR
   B --> A
 ```
 
-## Omitted Variables
+## Omitted Variables {.smaller}
 
-Utility maximization:
-
-$$  U(C,H) = C - \exp(\alpha_{n})\frac{H^{1+1/\psi}}{1+1/\psi},\ C = WH $$
-$$ \log(W) = X\gamma + \zeta_{n},\qquad \EE[\alpha_{n}|\zeta_{n}] = a + \kappa\zeta_{n} $$
-**Exercise**: we'll show OVB when trying to estimate $\psi$ using $\EE[\log(H)|\log(W),X]$.
+::: {.incremental}
+- Suppose we estimate:
+$$ \EE[Y|X] = \beta_{0} + \beta_{1}X$$
+where $X$ is scalar, so $\beta_{1} = \frac{\BB{C}(Y,X)}{\BB{V}[X]}$
+- Now suppose the true model of outcomes is
+$$ Y = \gamma_{0} + \gamma_{1}X + \eta $$
+- This gives:
+$$ \beta_{1} = \gamma_{1} + \underline{\frac{\BB{C}(\eta,X)}{\BB{V}[X]}}_{\text{Bias}}$$
+- Notice two things:
+  1. The OVB term is the regression coefficient of unobservables ($\eta$) on $X$.
+  2. If $\EE[\eta|X]=0$, the bias term is equal to 0 (no OVB)
+:::
 
 ## Example
 ```{r}
@@ -205,19 +193,6 @@ d %>%
   ggplot(aes(x,y,color=e)) + geom_point() + theme_minimal() + geom_smooth(method = "lm",se = FALSE) + transition_states(state)  + labs(title = "{closest_state}") + guides(color = guide_legend(title = expression(eta)))
 ```
 
-## In general
-
-When the true model is
-
-$$ y = \gamma_{0} + \gamma_{1}x + \eta $$
-
-and we estimate
-
-$$ \EE[y|x] = \beta_{0} + \beta_{1} $$
-
-we get:
-
-$$ \beta_{1} = \gamma_{1} + \underline{\frac{\BB{C}(\eta,x)}{\BB{V}[x]}}_{\text{Bias}} $$
 
 ## Selection Bias
 
@@ -248,13 +223,13 @@ ggplot(d,aes(x,y,group=n)) + geom_point(aes(x,y,alpha=observed)) + geom_smooth(a
 
 ## Selection Example
 
-Let $\alpha_{n}=\alpha$ (no OVB), but:
-  $$  U(C,H) = C - \exp(\alpha)\frac{H^{1+1/\psi}}{1+1/\psi} - \Omega\mathbf{1}\{H>0\} $$
-
-. . . 
-
-**Exercise**: selection bias when trying to estimate $\gamma$ using $\EE[\log(W)|X]$, *even if* $\EE[\zeta_{n}|X_{n}] = 0$.
-
+:::{.incremental}
+- Suppose wages given by:
+$$\log(W) = \gamma_{0}+\gamma_{1}X + \zeta $$
+- But individuals work only if wages are high enough:
+$$ \mathbf{1}\{H>0\} = \mathbf{1}\{\log(W)>\Omega\} $$
+- **Exercise**: show selection bias when trying to estimate $\gamma_{1}$ using $\EE[\log(W)|X,H>0]$, *even if* $\EE[\zeta|X] = 0$.
+:::
 
 
 ## Simultaneity
@@ -297,37 +272,49 @@ The **Potential Outcomes Model** is a very general framework:
 - The treatment effect is $Y_{1} - Y_{0}$ is defined to be *heterogeneous*
 :::
 
-## The Potential Outcomes Model
+## The Potential Outcomes Model {.smaller}
 
-We can write the model this way:
-  $$ Y = \alpha_{0} + \alpha_{1}D + \eta $$
-  where:
+Using this simple model we can define some **causal parameters** of interest:
 
-- $Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}$
-- $\eta = (1-D)\eta_{0} + D\eta_{1}$
-- $\EE[\eta_{1}] = \EE[\eta_{0}] = 0$
-- $Y_{1} - Y_{0} = \alpha_{1} + \eta_{1} - \eta_{0}$
-- The **Average Treatment Effect (ATE)** is:
-    $$ \EE[Y_{1}-Y_{0}] = \alpha_{1} $$
-
+:::{.incremental}
+- The Average Treatment Effect (ATE):
+$$ \EE[Y_{1} - Y_{0}] $$
+- The Average Effect of Treatment on the Treated (ATT or TOT):
+$$ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=1] $$
+- The Average Effect of Treatment on the Untreated (ATU):
+$$ \EE[Y_{1}|D=0] - \EE[Y_{0}|D=0] $$
+- In many settings of interest, these are all different.
+- In data, we only see:
+$$ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=0] $$
+which in general is equal to **none of the above** (e.g. when $D$ is college)
+:::
 
 ## Motivating Experiments
 
-:::{.incremental}
 
-- How could we guarantee that $\EE[\eta|D] = 0$?
-- Suppose that the variable $D$ could be *assigned randomly* $\Rightarrow$ $\eta_{0},\eta_{1} \perp D$.
-- Then $\EE[\eta|D] = \EE[\eta] = 0$.
-- How could we estimate and do inference on $\alpha$?
+
+:::{.incremental}
+- If $D$ can be **randomly assigned**, we get:
+$$\EE[Y_{1}|D] = \EE[Y_{1}]\ \text{and}\ \EE[Y_{0}|D] = \EE[Y_{0}]$$
+- We could then identify the ATE, since:
+$$ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=0] = \EE[Y_{1}-Y_{0}] $$
+- In practice how could we estimate and do inference?
 :::
 
 
-## Regression Framework
+## Regression Framework {.smaller}
 
-- We can extend the model:
-    $$ Y = X\beta + \alpha D + \eta $$
-    and estimate by linear regression.
-- No bias as long as $D$ still randomly assigned.
+:::{.incremental}
+- Define $\eta_{D} = Y_{D}-\EE[Y_{D}]$
+- Let $\EE[Y_{D}] = \alpha_0 + \alpha_{1}D$, so:
+$$ Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}$$
+- The regression model is:
+$$ \EE[Y|D] = \beta_{0} + \beta_{1}D $$
+- If $D$ is randomly assigned, then $\beta_{1}=\alpha_{1}$ (the ATE).
+- Common to include other regressors, $X$, to increase precision:
+$$ \EE[Y|X,D] = X\beta + \alpha_{1}D $$
+:::
+
 
 ## Internal Validity
 
@@ -401,7 +388,7 @@ $$ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - Z\tau\} $$
 ## Regression Framework
 
 As with complete take-up, there is a regression framework for LATE/TOT:
-$$ Y = X\beta + \alpha D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) $$
+$$ Y = \alpha_{0} + \alpha_{1} D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) $$
 with
 $$ P[D|X,Z] = P_{always-taker} + P_{complier} Z $$
 

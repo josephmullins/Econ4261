@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments and Applications\n\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\n\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -1103,7 +1103,7 @@
     "href": "lectures/Causality.html#causality-vs-conditional-means",
     "title": "Causality and Experiments",
     "section": "Causality vs Conditional Means",
-    "text": "Causality vs Conditional Means\n\n\nOutcome variable, \\(Y\\) (e.g. earnings)\nTreatment variable \\(X\\) (e.g. college attendance)\nConsider this experiment:\n\nPick someone randomly from the population with \\(X=x_{1}\\).\nForcibly change \\(X\\) to \\(x_{2}\\)\n\nIs the expected effect on \\(Y\\) given by \\[ \\EE[Y|X={x_{2}}] - \\EE[Y|X=x_{1}]? \\]\nIn general, no. We need more assumptions."
+    "text": "Causality vs Conditional Means\n\n\nOutcome variable, \\(Y\\) (e.g. earnings)\nTreatment variable \\(X\\) (e.g. college attendance)\nConsider this experiment:\n\nPick someone randomly from the population with \\(X=x_{1}\\).\nWe can predict \\(Y\\) given that \\(X=x_{1}\\) using \\(\\EE[Y|X=x_{1}]\\).\nImagine a world in which \\(X=x_{2}\\) instead for this random person. Call this a counterfactual.\n\nIs the expected effect on \\(Y\\) given by \\[ \\EE[Y|X={x_{2}}] - \\EE[Y|X=x_{1}]? \\]\nIn general, no. We need more assumptions."
   },
   {
     "objectID": "lectures/Causality.html#two-equivalent-definitions-of-causality",
@@ -1117,7 +1117,7 @@
     "href": "lectures/Causality.html#how-to-infer-causality",
     "title": "Causality and Experiments",
     "section": "How to infer causality",
-    "text": "How to infer causality\nHere’s the recipe:\n\n\nStart with a model of the world: \\(Y = h_{\\theta}(X,W,\\eta)\\). This is your theory of how the data is generated. \\(\\eta\\) is what we call structural unobservable. The model \\(h\\) is indexed by population parameters, \\(\\theta\\).\nDefine a counterfactual of interest. Two (of infinitely many) examples: \\[ (1)\\ \\int h_{\\theta}(X+1,W,\\eta)dF(X,W,\\eta)\\qquad (2)\\ \\int h_{\\theta}(0,W,\\eta)dF(W,\\eta|X=1). \\]\nState the assumptions under which your counterfactual can be constructed\nThen we debate the plausibility of your assumptions. That’s it.\n\n\n\nWe’ll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics."
+    "text": "How to infer causality\nHere’s the recipe:\n\n\nStart with a model of the world. This is your theory of how the data is generated.\n\nDefine a counterfactual of interest using the model.\nState the assumptions under which your counterfactual can be constructed from the data.\nThen we debate the plausibility of your assumptions. That’s it.\n\n\n\nWe’ll explore different strategies (i.e. sets of assumptions) that have been used a lot in economics."
   },
   {
     "objectID": "lectures/Causality.html#example-1-returns-to-education",
@@ -1208,21 +1208,21 @@
     "href": "lectures/Causality.html#the-potential-outcomes-model-1",
     "title": "Causality and Experiments",
     "section": "The Potential Outcomes Model",
-    "text": "The Potential Outcomes Model\nWe can write the model this way: \\[ Y = \\alpha_{0} + \\alpha_{1}D + \\eta \\] where:\n\n\\(Y_{D} = \\alpha_{0} + \\alpha_{1}D + \\eta_{D}\\)\n\\(\\eta = (1-D)\\eta_{0} + D\\eta_{1}\\)\n\\(\\EE[\\eta_{1}] = \\EE[\\eta_{0}] = 0\\)\n\\(Y_{1} - Y_{0} = \\alpha_{1} + \\eta_{1} - \\eta_{0}\\)\nThe Average Treatment Effect (ATE) is: \\[ \\EE[Y_{1}-Y_{0}] = \\alpha_{1} \\]"
+    "text": "The Potential Outcomes Model\nUsing this simple model we can define some causal parameters of interest:\n\n\nThe Average Treatment Effect (ATE): \\[ \\EE[Y_{1} - Y_{0}] \\]\nThe Average Effect of Treatment on the Treated (ATT or TOT): \\[ \\EE[Y_{1}|D=1] - \\EE[Y_{0}|D=1] \\]\nThe Average Effect of Treatment on the Untreated (ATU): \\[ \\EE[Y_{1}|D=0] - \\EE[Y_{0}|D=0] \\]\nIn many settings of interest, these are all different.\nIn data, we only see: \\[ \\EE[Y_{1}|D=1] - \\EE[Y_{0}|D=0] \\] which in general is equal to none of the above (e.g. when \\(D\\) is college)"
   },
   {
     "objectID": "lectures/Causality.html#motivating-experiments",
     "href": "lectures/Causality.html#motivating-experiments",
     "title": "Causality and Experiments",
     "section": "Motivating Experiments",
-    "text": "Motivating Experiments\n\n\nHow could we guarantee that \\(\\EE[\\eta|D] = 0\\)?\nSuppose that the variable \\(D\\) could be assigned randomly \\(\\Rightarrow\\) \\(\\eta_{0},\\eta_{1} \\perp D\\).\nThen \\(\\EE[\\eta|D] = \\EE[\\eta] = 0\\).\nHow could we estimate and do inference on \\(\\alpha\\)?"
+    "text": "Motivating Experiments\n\n\nIf \\(D\\) can be randomly assigned, we get: \\[\\EE[Y_{1}|D] = \\EE[Y_{1}]\\ \\text{and}\\ \\EE[Y_{0}|D] = \\EE[Y_{0}]\\]\nWe could then identify the ATE, since: \\[ \\EE[Y_{1}|D=1] - \\EE[Y_{0}|D=0] = \\EE[Y_{1}-Y_{0}] \\]\nIn practice how could we estimate and do inference?"
   },
   {
     "objectID": "lectures/Causality.html#regression-framework",
     "href": "lectures/Causality.html#regression-framework",
     "title": "Causality and Experiments",
     "section": "Regression Framework",
-    "text": "Regression Framework\n\nWe can extend the model: \\[ Y = X\\beta + \\alpha D + \\eta \\] and estimate by linear regression.\nNo bias as long as \\(D\\) still randomly assigned."
+    "text": "Regression Framework\n\n\nDefine \\(\\eta_{D} = Y_{D}-\\EE[Y_{D}]\\)\nLet \\(\\EE[Y_{D}] = \\alpha_0 + \\alpha_{1}D\\), so: \\[ Y_{D} = \\alpha_{0} + \\alpha_{1}D + \\eta_{D}\\]\nThe regression model is: \\[ \\EE[Y|D] = \\beta_{0} + \\beta_{1}D \\]\nIf \\(D\\) is randomly assigned, then \\(\\beta_{1}=\\alpha_{1}\\) (the ATE).\nCommon to include other regressors, \\(X\\), to increase precision: \\[ \\EE[Y|X,D] = X\\beta + \\alpha_{1}D \\]"
   },
   {
     "objectID": "lectures/Causality.html#internal-validity",
@@ -1264,7 +1264,7 @@
     "href": "lectures/Causality.html#regression-framework-1",
     "title": "Causality and Experiments",
     "section": "Regression Framework",
-    "text": "Regression Framework\nAs with complete take-up, there is a regression framework for LATE/TOT: \\[ Y = X\\beta + \\alpha D + \\eta,\\ \\eta = \\eta_{0} + D(\\eta_{1}-\\eta_{0}) \\] with \\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \\]\nExercise: (1) calculate \\(\\EE[Y|X,Z]\\); (2) Show how the 2SLS estimator works.\n\nWe don’t know how to calculate standard errors for this kind of estimator yet. But we will soon."
+    "text": "Regression Framework\nAs with complete take-up, there is a regression framework for LATE/TOT: \\[ Y = \\alpha_{0} + \\alpha_{1} D + \\eta,\\ \\eta = \\eta_{0} + D(\\eta_{1}-\\eta_{0}) \\] with \\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \\]\nExercise: (1) calculate \\(\\EE[Y|X,Z]\\); (2) Show how the 2SLS estimator works.\n\nWe don’t know how to calculate standard errors for this kind of estimator yet. But we will soon."
   },
   {
     "objectID": "lectures/Causality.html#external-validity",
@@ -1285,7 +1285,7 @@
     "href": "lectures/Causality.html#omitted-variables-1",
     "title": "Causality and Experiments",
     "section": "Omitted Variables",
-    "text": "Omitted Variables\nUtility maximization:\n\\[  U(C,H) = C - \\exp(\\alpha_{n})\\frac{H^{1+1/\\psi}}{1+1/\\psi},\\ C = WH \\] \\[ \\log(W) = X\\gamma + \\zeta_{n},\\qquad \\EE[\\alpha_{n}|\\zeta_{n}] = a + \\kappa\\zeta_{n} \\] Exercise: we’ll show OVB when trying to estimate \\(\\psi\\) using \\(\\EE[\\log(H)|\\log(W),X]\\)."
+    "text": "Omitted Variables\n\n\nSuppose we estimate: \\[ \\EE[Y|X] = \\beta_{0} + \\beta_{1}X\\] where \\(X\\) is scalar, so \\(\\beta_{1} = \\frac{\\BB{C}(Y,X)}{\\BB{V}[X]}\\)\nNow suppose the true model of outcomes is \\[ Y = \\gamma_{0} + \\gamma_{1}X + \\eta \\]\nThis gives: \\[ \\beta_{1} = \\gamma_{1} + \\underline{\\frac{\\BB{C}(\\eta,X)}{\\BB{V}[X]}}_{\\text{Bias}}\\]\nNotice two things:\n\nThe OVB term is the regression coefficient of unobservables (\\(\\eta\\)) on \\(X\\).\nIf \\(\\EE[\\eta|X]=0\\), the bias term is equal to 0 (no OVB)"
   },
   {
     "objectID": "lectures/Causality.html#example",
@@ -1306,7 +1306,7 @@
     "href": "lectures/Causality.html#selection-example",
     "title": "Causality and Experiments",
     "section": "Selection Example",
-    "text": "Selection Example\nLet \\(\\alpha_{n}=\\alpha\\) (no OVB), but: \\[  U(C,H) = C - \\exp(\\alpha)\\frac{H^{1+1/\\psi}}{1+1/\\psi} - \\Omega\\mathbf{1}\\{H&gt;0\\} \\]\n\nExercise: selection bias when trying to estimate \\(\\gamma\\) using \\(\\EE[\\log(W)|X]\\), even if \\(\\EE[\\zeta_{n}|X_{n}] = 0\\)."
+    "text": "Selection Example\n\n\nSuppose wages given by: \\[\\log(W) = \\gamma_{0}+\\gamma_{1}X + \\zeta \\]\nBut individuals work only if wages are high enough: \\[ \\mathbf{1}\\{H&gt;0\\} = \\mathbf{1}\\{\\log(W)&gt;\\Omega\\} \\]\nExercise: show selection bias when trying to estimate \\(\\gamma_{1}\\) using \\(\\EE[\\log(W)|X,H&gt;0]\\), even if \\(\\EE[\\zeta|X] = 0\\)."
   },
   {
     "objectID": "lectures/Causality.html#simultaneity-1",
@@ -1334,7 +1334,7 @@
     "href": "lectures/Causality.html#in-general",
     "title": "Causality and Experiments",
     "section": "In general",
-    "text": "In general\nWhen the true model is\n\\[ y = \\gamma_{0} + \\gamma_{1}x + \\eta \\]\nand we estimate\n\\[ \\EE[y|x] = \\beta_{0} + \\beta_{1} \\]\nwe get:\n\\[ \\beta_{1} = \\gamma_{1} + \\underline{\\frac{\\BB{C}(\\eta,x)}{\\BB{V}[x]}}_{\\text{Bias}} \\]"
+    "text": "In general"
   },
   {
     "objectID": "lectures/Causality.html#selection-bias-1",
@@ -1412,5 +1412,103 @@
     "title": "Homework 1",
     "section": "Question 3:",
     "text": "Question 3:\nWrite code to plot mean wages by age, sex, and fertility status. You can present the plot in whichever way makes the patterns most clear. Offer a brief interpretation of what the evolution of wage gaps by age and fertility status tell us about one potential source of gender gaps in wages.\nOne way:\n\nd %&gt;%\n  ggplot(aes(x=AGE,y=meanlogwage,color=SEX,linetype=kids)) + geom_line() + theme_minimal()\n\n\n\n\n\n\n\n\nBut to be honest this doesn’t let us see very clearly the difference between men and women in each fertility class. Let’s try faceting instead:\n\nd %&gt;%\n  ggplot(aes(x=AGE,y=meanwage,color=SEX)) + geom_line() + facet_grid(. ~ kids) + theme_minimal()\n\n\n\n\n\n\n\n\nNotice that the gap at the beginning of the life-cycle is much smaller for men and women without children. It suggests that the gender-specific career costs of childbearing could be playing an important role in determining the wage gap between men and women.\nAlthough the gap does start opening up from age 40, we are only using a measure of current children in the household, so as we look at women and men of older ages, it is increasingly likely that we are seeing people who have had children in the past that no longer live with them. So our measure of “fertility” in this sense is not particularly good."
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#application-1-racial-bias-in-callbacks",
+    "href": "lectures/Experiments-Application.html#application-1-racial-bias-in-callbacks",
+    "title": "Causality and Experiments",
+    "section": "Application 1: Racial Bias in Callbacks",
+    "text": "Application 1: Racial Bias in Callbacks"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#paper-summary",
+    "href": "lectures/Experiments-Application.html#paper-summary",
+    "title": "Applications of Experiments in Economics",
+    "section": "Paper Summary",
+    "text": "Paper Summary\n\n\nBig question: is there racial discrimination in the labor market?\n\nCorrelations uninformative: legacy of institutional racism leads to differences in education, opportunities, and human capital\n\nThis paper: measures a specific kind of discrimination. Callbacks based on name (which can signify race)\nMethodology: Randomize names on job application to infer effect of changing “black sounding” name to “white sounding”\n\nOften referred to as a field experiment"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#design-of-the-experiment",
+    "href": "lectures/Experiments-Application.html#design-of-the-experiment",
+    "title": "Applications of Experiments in Economics",
+    "section": "Design of the Experiment",
+    "text": "Design of the Experiment\n\n\nStart by collecting resumes from two job search sites\n\nrestrict to cities and time of experiment\nrestrict to four occupations (sales, clerical, customer services, admin)\nclassify subjectively into two categories (high vs low quality)\n\nGenerate a pool of names\n\nUse all birth certificates from MA: 1974-1979\nTabulate frequency by race to get most uniquely white/black names\nValidate with survey\n\nSurvey job ads and manually pick two high and two low quality resumes that best fit job description\n\nRandomly assign one white name and one black name to each resume of same quality\nMeasure callbacks for each resume\n\nRespond to 1300 job ads with nearly 5000 resumes. What next? What would it tell us? Why?"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#results",
+    "href": "lectures/Experiments-Application.html#results",
+    "title": "Applications of Experiments in Economics",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#thoughts",
+    "href": "lectures/Experiments-Application.html#thoughts",
+    "title": "Applications of Experiments in Economics",
+    "section": "Thoughts?",
+    "text": "Thoughts?\n\nHow to interpret this table?\nWhat does it tell us?\nWhat doesn’t it tell us?"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#results-1",
+    "href": "lectures/Experiments-Application.html#results-1",
+    "title": "Applications of Experiments in Economics",
+    "section": "Results",
+    "text": "Results"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#thoughts-1",
+    "href": "lectures/Experiments-Application.html#thoughts-1",
+    "title": "Applications of Experiments in Economics",
+    "section": "Thoughts?",
+    "text": "Thoughts?\n\nHow to interpret this table?\nWhat does it tell us?\nWhat doesn’t it tell us?\nWhat role does randomization play? Why do we need it?"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#application-2-ban-the-box",
+    "href": "lectures/Experiments-Application.html#application-2-ban-the-box",
+    "title": "Applications of Experiments in Economics",
+    "section": "Application 2: Ban the Box",
+    "text": "Application 2: Ban the Box\n\nBan the Box: law that makes it illegal for employers to ask job applicants if they have ever been convicted of a crime.\nIntention: reduce labor market discrimination against individuals with criminal priors\nDue to mass incarceration and other discriminatory policies, black men have higher rates of prior conviction than white men\nPossible consequence: increase discrimination against black men without prior conviction (form of statistical discrimination)\nLink to paper"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#paper-summary-1",
+    "href": "lectures/Experiments-Application.html#paper-summary-1",
+    "title": "Applications of Experiments in Economics",
+    "section": "Paper Summary",
+    "text": "Paper Summary\n\n\nMain question: is there labor market discrimination against males with prior conviction? Does BTB increase racial discrimination?\nAnother “resume study”\nRandomized resumes in NY and NJ before and after introduction of BTB in both states"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#methodology",
+    "href": "lectures/Experiments-Application.html#methodology",
+    "title": "Applications of Experiments in Economics",
+    "section": "Methodology",
+    "text": "Methodology\n\n\nPopulation:\n\nprivate and for-profit employers on indeed.com and snagajob.com\njobs requiring no post-secondary education, special skills, or work experience (e.g. retail and restaurant)\nPre and post BTB introduction in 2015\n\nOn otherwise identical resumes, randomized along four dimensions:\n\nrace (by name);\na non-violent and minor felony conviction;\nemployment gap in resume; and\nGED or High school diploma\n\n15,220 applications to 4,291 stores among 293 chains\nNow what?"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#interpret",
+    "href": "lectures/Experiments-Application.html#interpret",
+    "title": "Applications of Experiments in Economics",
+    "section": "Interpret",
+    "text": "Interpret"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#interpret-1",
+    "href": "lectures/Experiments-Application.html#interpret-1",
+    "title": "Applications of Experiments in Economics",
+    "section": "Interpret",
+    "text": "Interpret"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#regression-framework",
+    "href": "lectures/Experiments-Application.html#regression-framework",
+    "title": "Applications of Experiments in Economics",
+    "section": "Regression Framework",
+    "text": "Regression Framework\nStore \\(j\\) for applicant \\(i\\): \\[ Callback_{ij} = \\alpha +  \\beta_{1} Box_{j} + \\beta_{2}White_{i} + \\beta_{3}Box_{j}\\times White_{i} + \\Gamma \\mathbf{X}_{i} + \\epsilon_{ij} \\]\n\n\nWhich coefficient captures the effect of box info on racial gap?\nWhat values would suggest that employers use race to proxy for criminal conviction?\nCross-sectional and temporal sources of variation in \\(Box_{j}\\)\nLimit either to pre BTB (cross-sectional) or stores that initially have box (temporal)"
+  },
+  {
+    "objectID": "lectures/Experiments-Application.html#results-2",
+    "href": "lectures/Experiments-Application.html#results-2",
+    "title": "Applications of Experiments in Economics",
+    "section": "Results",
+    "text": "Results\n\n\nThoughts? How do you think standard errors should be calculated?"
   }
 ]

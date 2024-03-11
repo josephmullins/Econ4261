@@ -10,7 +10,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.539">
 
-  <title>Econ4261 - Causality and Experiments</title>
+  <title>Econ4261 - Applications of Experiments in Economics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -321,369 +321,174 @@
       margin-right: 0; 
     }
   </style>
-  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Causality and Experiments</h1>
+  <h1 class="title">Applications of Experiments in Economics</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
+<section id="racial-bias-in-callbacks" class="title-slide slide level1 center">
+<h1>Racial Bias in Callbacks</h1>
 
 </section>
-<section id="overview" class="slide level2 smaller">
-<h2>Overview</h2>
-<div class="hidden">
-<p><span class="math display">\[
-\newcommand\ov{\overline}
-\newcommand\un{\underline}
-\newcommand\BB{\mathbb}
-\newcommand\EE{\mathbb{E}}
-\newcommand\mc{\mathcal}
-\newcommand\ti{\tilde}
-\newcommand\h{\hat}
-\newcommand\beq{\begin{equation}}
-\newcommand\eeq{\end{equation}}
-\newcommand\barr{\begin{array}}
-\newcommand\earr{\end{array}}
-\newcommand\bfp{\mathbf{p}}
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
-\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
-\]</span></p>
-</div>
-<p>In our toolkit so far:</p>
-<ul>
-<li>We know linear models inside and out.</li>
-<li>We can estimate any linear model.</li>
-<li>We can derive the approximate distribution of our estimator using the CLT under different assumptions.</li>
-<li>We can conduct simple tests and estimate confidence intervals.</li>
-</ul>
-<div class="fragment">
-<p>This section:</p>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="../figures/BM-abstract.png" class="r-stretch"></section>
+<section id="paper-summary" class="slide level2">
+<h2>Paper Summary</h2>
 <div>
 <ul>
-<li class="fragment">We will define <strong>causality</strong>.</li>
-<li class="fragment">We will learn how to <strong>infer causality</strong> from a conditional expectation.</li>
-<li class="fragment">We will look at estimating causal effects using <strong>experiments</strong>.</li>
-<li class="fragment">We’ll look at some <em>applications of experiments in economics</em>.</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="causality-vs-conditional-means" class="slide level2 smaller">
-<h2>Causality vs Conditional Means</h2>
-<div>
+<li class="fragment"><strong>Big question</strong>: is there racial discrimination in the labor market?
 <ul>
-<li class="fragment">Outcome variable, <span class="math inline">\(Y\)</span> (e.g.&nbsp;earnings)</li>
-<li class="fragment">Treatment variable <span class="math inline">\(X\)</span> (e.g.&nbsp;college attendance)</li>
-<li class="fragment">Consider this experiment:
-<ul>
-<li class="fragment">Pick someone <strong>randomly</strong> from the population with <span class="math inline">\(X=x_{1}\)</span>.</li>
-<li class="fragment">We can predict <span class="math inline">\(Y\)</span> <strong>given</strong> that <span class="math inline">\(X=x_{1}\)</span> using <span class="math inline">\(\EE[Y|X=x_{1}]\)</span>.</li>
-<li class="fragment">Imagine a world in which <span class="math inline">\(X=x_{2}\)</span> instead for this random person. Call this a <strong>counterfactual</strong>.</li>
+<li class="fragment">Correlations <em>uninformative</em>: legacy of institutional racism leads to differences in education, opportunities, and human capital</li>
 </ul></li>
-<li class="fragment">Is the expected effect on <span class="math inline">\(Y\)</span> given by <span class="math display">\[ \EE[Y|X={x_{2}}] - \EE[Y|X=x_{1}]? \]</span></li>
-<li class="fragment">In general, <strong>no</strong>. We need <strong>more assumptions</strong>.</li>
-</ul>
-</div>
-</section>
-<section id="two-equivalent-definitions-of-causality" class="slide level2">
-<h2>Two Equivalent Definitions of Causality</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="fragment fade-right">
-<p><strong>Ceterus paribus</strong></p>
+<li class="fragment">This paper: measures a specific kind of discrimination. Callbacks based on name (which can signify race)</li>
+<li class="fragment">Methodology: Randomize names on job application to infer effect of changing “black sounding” name to “white sounding”
 <ul>
-<li>“all else being equal”</li>
-<li>The effect on <span class="math inline">\(Y\)</span>, when <em>only</em> <span class="math inline">\(X\)</span> is changed</li>
-<li>Notice how our thought experiment replicates</li>
-<li>Hard to find in data!</li>
-</ul>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="fragment fade-left">
-<p><strong>Counterfactual</strong></p>
-<ul>
-<li>For the treatment unit, imagine a world where <span class="math inline">\(X=x_{2}\)</span> had been assigned/chosen instead of <span class="math inline">\(X=x_{1}\)</span>.</li>
-<li>Also replicates thought experiment.</li>
-<li>Hard to find in data!</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="how-to-infer-causality" class="slide level2">
-<h2>How to infer causality</h2>
-<p>Here’s the recipe:</p>
-<div>
-<ol type="1">
-<li class="fragment">Start with a <strong>model of the world</strong>. This is your theory of how the data is generated.<br>
-</li>
-<li class="fragment">Define a <strong>counterfactual</strong> of interest using the model.</li>
-<li class="fragment">State the <strong>assumptions</strong> under which your counterfactual can be constructed from the data.</li>
-<li class="fragment">Then we debate the <strong>plausibility</strong> of your assumptions. That’s it.</li>
-</ol>
-</div>
-<div class="fragment">
-<p>We’ll explore different strategies (i.e.&nbsp;sets of assumptions) that have been used a lot in economics.</p>
-</div>
-</section>
-<section id="example-1-returns-to-education" class="slide level2">
-<h2>Example 1: Returns to education</h2>
-<p>data: <span class="math inline">\((Y_{n},E_{n})_{n=1}^{N}\)</span>, iid sample of individuals.</p>
-<ul>
-<li><span class="math inline">\(Y_{n}\)</span> - hourly wages</li>
-<li><span class="math inline">\(E_{n}\)</span> - years of education</li>
-<li>Model: <span class="math display">\[ Y_{n} = \gamma_{0} + \gamma_{1}E_{n} + \eta_{n} \]</span></li>
-<li><span class="math inline">\(\eta_{n}\)</span>: unobserved determinants of wages (cognitive ability, grit, connections, resources)</li>
-</ul>
-</section>
-<section id="returns-to-education" class="slide level2">
-<h2>Returns to Education</h2>
-<div>
-<ul>
-<li class="fragment">We can estimate <span class="math inline">\(\EE[Y|E] = \beta_{0} + \beta_{1}E_{n}\)</span>.</li>
-<li class="fragment">When does <span class="math inline">\(\beta_{1} = \gamma_{1}\)</span> (i.e.&nbsp;the causal effect)?
-<ul>
-<li class="fragment">When <span class="math inline">\(\EE[\eta_{n}|E_{n}] = 0\)</span> <strong>(strict exogeneity)</strong></li>
+<li class="fragment">Often referred to as a <em>field experiment</em></li>
 </ul></li>
-<li class="fragment">In this case, an <em>overly strong</em> assumption.</li>
-<li class="fragment"><strong>Be careful</strong>: always check how an error term is defined. If it is prediction error (what we have been calling <span class="math inline">\(\epsilon_{n})\)</span> this is <strong>conceptually different</strong> from a structural error/unobservable.</li>
-<li class="fragment">As a prediction error, <span class="math inline">\(\EE[\epsilon_{n}|X_{n}] = 0\)</span> by definition.</li>
 </ul>
 </div>
 </section>
-<section id="sources-of-bias" class="slide level2 smaller">
-<h2>Sources of Bias</h2>
-<p>Three major sources of bias when trying to infer causality.</p>
+<section id="design-of-the-experiment" class="slide level2 smaller">
+<h2>Design of the Experiment</h2>
 <div>
 <ul>
-<li class="fragment"><em>Omitted variables</em>: when unobservables partly determine both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span></li>
-<li class="fragment"><em>Selection</em>: when unobservables determine whether data is observed or not.</li>
-<li class="fragment"><em>Simultaneity</em>: when observables are determined jointly by unobservables in equilibrium.</li>
+<li class="fragment">Start by collecting resumes from two job search sites
+<ul>
+<li class="fragment">restrict to cities and time of experiment</li>
+<li class="fragment">restrict to four occupations (sales, clerical, customer services, admin)</li>
+<li class="fragment">classify subjectively into two categories (high vs low quality)</li>
+</ul></li>
+<li class="fragment">Generate a pool of names
+<ul>
+<li class="fragment">Use all birth certificates from MA: 1974-1979</li>
+<li class="fragment">Tabulate frequency by race to get most uniquely white/black names</li>
+<li class="fragment">Validate with survey</li>
+</ul></li>
+<li class="fragment">Survey job ads and manually pick two high and two low quality resumes that best fit job description
+<ul>
+<li class="fragment">Randomly assign one white name and one black name to each resume of same quality</li>
+<li class="fragment">Measure <strong>callbacks</strong> for each resume</li>
+</ul></li>
+<li class="fragment">Respond to 1300 job ads with nearly 5000 resumes. What next? What would it tell us? Why?</li>
 </ul>
 </div>
-<div class="fragment">
-<p>When the causal variable of interest depends in some way on the unobservables, we say that the determination of <span class="math inline">\(X\)</span> is <strong>endogenous</strong>.</p>
-</div>
-<div class="fragment">
-<p>You will often then see these biases referred to as problems with <strong>endogeneity</strong>.</p>
-</div>
 </section>
-<section id="omitted-variables" class="slide level2">
-<h2>Omitted Variables</h2>
-<div class="cell" data-reveal="true" data-layout-align="center">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A(("Variable of Interest" )) &amp; B(("Unobservables")) --&gt; C{"Outcome of Interest"}
-  B --&gt; A
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+
+<img data-src="../figures/BM-Table1.png" class="r-stretch"></section>
+<section id="thoughts" class="slide level2">
+<h2>Thoughts?</h2>
+<ul>
+<li>How to interpret this table?</li>
+<li>What does it tell us?</li>
+<li>What doesn’t it tell us?</li>
+</ul>
 </section>
-<section id="omitted-variables-1" class="slide level2 smaller">
-<h2>Omitted Variables</h2>
+<section id="results-1" class="slide level2">
+<h2>Results</h2>
+
+<img data-src="../figures/BM-Table4.png" class="r-stretch"></section>
+<section id="thoughts-1" class="slide level2">
+<h2>Thoughts?</h2>
+<ul>
+<li>How to interpret this table?</li>
+<li>What does it tell us?</li>
+<li>What doesn’t it tell us?</li>
+<li>What role does randomization play? Why do we need it?</li>
+</ul>
+</section></section>
+<section>
+<section id="the-effect-of-ban-the-box-on-racial-discrimination" class="title-slide slide level1 center">
+<h1>The Effect of Ban the Box on Racial Discrimination</h1>
+
+</section>
+<section id="application-2-ban-the-box" class="slide level2">
+<h2>Application 2: Ban the Box</h2>
+<ul>
+<li><strong>Ban the Box</strong>: law that makes it illegal for employers to ask job applicants if they have ever been convicted of a crime.</li>
+<li><strong>Intention</strong>: reduce labor market discrimination against individuals with criminal priors</li>
+<li>Due to mass incarceration and other discriminatory policies, black men have higher rates of prior conviction than white men</li>
+<li>Possible consequence: increase discrimination against black men <em>without</em> prior conviction (form of statistical discrimination)</li>
+<li><a href="https://academic.oup.com/qje/article/133/1/191/4060073">Link to paper</a></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="../figures/AS-abstract.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="paper-summary-1" class="slide level2">
+<h2>Paper Summary</h2>
 <div>
 <ul>
-<li class="fragment">Suppose we estimate: <span class="math display">\[ \EE[Y|X] = \beta_{0} + \beta_{1}X\]</span> where <span class="math inline">\(X\)</span> is scalar, so <span class="math inline">\(\beta_{1} = \frac{\BB{C}(Y,X)}{\BB{V}[X]}\)</span></li>
-<li class="fragment">Now suppose the true model of outcomes is <span class="math display">\[ Y = \gamma_{0} + \gamma_{1}X + \eta \]</span></li>
-<li class="fragment">This gives: <span class="math display">\[ \beta_{1} = \gamma_{1} + \underline{\frac{\BB{C}(\eta,X)}{\BB{V}[X]}}_{\text{Bias}}\]</span></li>
-<li class="fragment">Notice two things:
+<li class="fragment"><strong>Main question</strong>: is there labor market discrimination against males with prior conviction? Does BTB increase racial discrimination?</li>
+<li class="fragment">Another “resume study”</li>
+<li class="fragment">Randomized resumes in NY and NJ <em>before</em> and <em>after</em> introduction of BTB in both states</li>
+</ul>
+</div>
+</section>
+<section id="methodology" class="slide level2 smaller">
+<h2>Methodology</h2>
+<div>
+<ul>
+<li class="fragment"><strong>Population</strong>:
+<ul>
+<li class="fragment">private and for-profit employers on indeed.com and snagajob.com</li>
+<li class="fragment">jobs requiring no post-secondary education, special skills, or work experience (e.g.&nbsp;retail and restaurant)</li>
+<li class="fragment">Pre and post BTB introduction in 2015</li>
+</ul></li>
+<li class="fragment">On otherwise identical resumes, randomized along four dimensions:
 <ol type="1">
-<li class="fragment">The OVB term is the regression coefficient of unobservables (<span class="math inline">\(\eta\)</span>) on <span class="math inline">\(X\)</span>.</li>
-<li class="fragment">If <span class="math inline">\(\EE[\eta|X]=0\)</span>, the bias term is equal to 0 (no OVB)</li>
+<li class="fragment">race (by name);</li>
+<li class="fragment">a non-violent and minor felony conviction;</li>
+<li class="fragment">employment gap in resume; and</li>
+<li class="fragment">GED or High school diploma</li>
 </ol></li>
+<li class="fragment">15,220 applications to 4,291 stores among 293 chains</li>
+<li class="fragment">Now what?</li>
 </ul>
 </div>
 </section>
-<section id="example" class="slide level2">
-<h2>Example</h2>
+<section id="interpret" class="slide level2">
+<h2>Interpret</h2>
 
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-4-1.gif" class="r-stretch"></section>
-<section id="selection-bias" class="slide level2">
-<h2>Selection Bias</h2>
-<div>
-<ul>
-<li class="fragment">Suppose that <span class="math inline">\(Y = X\gamma + \eta\)</span> is the model</li>
-<li class="fragment">Suppose that some unobservable <span class="math inline">\(\upsilon\)</span> determines whether data is observed or not</li>
-<li class="fragment">Suppose <span class="math inline">\(\upsilon\)</span> and <span class="math inline">\(\eta\)</span> are not independent</li>
-<li class="fragment">Then we get <strong>selection bias</strong></li>
-<li class="fragment"><strong>Simple example</strong>: only see <span class="math inline">\(Y\)</span> if <span class="math inline">\(Y&gt;c\)</span>…</li>
-</ul>
-</div>
-</section>
-<section id="selection-bias-1" class="slide level2">
-<h2>Selection Bias</h2>
+<img data-src="../figures/AS-Table2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="interpret-1" class="slide level2">
+<h2>Interpret</h2>
 
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-6-1.gif" class="r-stretch"></section>
-<section id="selection-example" class="slide level2">
-<h2>Selection Example</h2>
-<div>
-<ul>
-<li class="fragment">Suppose wages given by: <span class="math display">\[\log(W) = \gamma_{0}+\gamma_{1}X + \zeta \]</span></li>
-<li class="fragment">But individuals work only if wages are high enough: <span class="math display">\[ \mathbf{1}\{H&gt;0\} = \mathbf{1}\{\log(W)&gt;\Omega\} \]</span></li>
-<li class="fragment"><strong>Exercise</strong>: show selection bias when trying to estimate <span class="math inline">\(\gamma_{1}\)</span> using <span class="math inline">\(\EE[\log(W)|X,H&gt;0]\)</span>, <em>even if</em> <span class="math inline">\(\EE[\zeta|X] = 0\)</span>.</li>
-</ul>
-</div>
-</section>
-<section id="simultaneity" class="slide level2">
-<h2>Simultaneity</h2>
-<p>Supply and demand: <span class="math display">\[ \log(Q_{m}^{D}) = \alpha_{0} - \alpha_{1}\log(P_{m}) + \eta_{m} \]</span> <span class="math display">\[ \log(Q_{m}^{S}) = \gamma_{0} + \gamma_{1}\log(P_{m}) + \upsilon_{m} \]</span> <span class="math inline">\(\eta\)</span> and <span class="math inline">\(\upsilon\)</span> are demand and supply “shocks” across markets.</p>
-<p><strong>Exercise</strong>: simultaneity bias when trying to estimate <span class="math inline">\(\gamma\)</span>.</p>
-</section>
-<section id="simultaneity-1" class="slide level2">
-<h2>Simultaneity</h2>
-
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-8-1.gif" class="r-stretch"></section>
-<section id="simultaneity-2" class="slide level2">
-<h2>Simultaneity</h2>
-<p>No apparent relationsip between price and quantity</p>
-
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
-<section id="the-potential-outcomes-model" class="slide level2">
-<h2>The Potential Outcomes Model</h2>
-<p>The <strong>Potential Outcomes Model</strong> is a very general framework:</p>
-<div>
-<ul>
-<li class="fragment"><span class="math inline">\(D\in\{0,1\}\)</span> is treatment variable.</li>
-<li class="fragment">Every individual is defined by a triple: <span class="math inline">\((Y_{0},Y_{1},D)\)</span></li>
-<li class="fragment">We only see <span class="math inline">\(Y=Y_{D}\)</span>, <span class="math inline">\(Y_{1-D}\)</span> is the <em>counterfactual</em></li>
-<li class="fragment">The treatment effect is <span class="math inline">\(Y_{1} - Y_{0}\)</span> is defined to be <em>heterogeneous</em></li>
-</ul>
-</div>
-</section>
-<section id="the-potential-outcomes-model-1" class="slide level2 smaller">
-<h2>The Potential Outcomes Model</h2>
-<p>Using this simple model we can define some <strong>causal parameters</strong> of interest:</p>
-<div>
-<ul>
-<li class="fragment">The Average Treatment Effect (ATE): <span class="math display">\[ \EE[Y_{1} - Y_{0}] \]</span></li>
-<li class="fragment">The Average Effect of Treatment on the Treated (ATT or TOT): <span class="math display">\[ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=1] \]</span></li>
-<li class="fragment">The Average Effect of Treatment on the Untreated (ATU): <span class="math display">\[ \EE[Y_{1}|D=0] - \EE[Y_{0}|D=0] \]</span></li>
-<li class="fragment">In many settings of interest, these are all different.</li>
-<li class="fragment">In data, we only see: <span class="math display">\[ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=0] \]</span> which in general is equal to <strong>none of the above</strong> (e.g.&nbsp;when <span class="math inline">\(D\)</span> is college)</li>
-</ul>
-</div>
-</section>
-<section id="motivating-experiments" class="slide level2">
-<h2>Motivating Experiments</h2>
-<div>
-<ul>
-<li class="fragment">If <span class="math inline">\(D\)</span> can be <strong>randomly assigned</strong>, we get: <span class="math display">\[\EE[Y_{1}|D] = \EE[Y_{1}]\ \text{and}\ \EE[Y_{0}|D] = \EE[Y_{0}]\]</span></li>
-<li class="fragment">We could then identify the ATE, since: <span class="math display">\[ \EE[Y_{1}|D=1] - \EE[Y_{0}|D=0] = \EE[Y_{1}-Y_{0}] \]</span></li>
-<li class="fragment">In practice how could we estimate and do inference?</li>
-</ul>
-</div>
-</section>
+<img data-src="../figures/AS-Table3.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="regression-framework" class="slide level2 smaller">
 <h2>Regression Framework</h2>
+<p>Store <span class="math inline">\(j\)</span> for applicant <span class="math inline">\(i\)</span>: <span class="math display">\[ Callback_{ij} = \alpha +  \beta_{1} Box_{j} + \beta_{2}White_{i} + \beta_{3}Box_{j}\times White_{i} + \Gamma \mathbf{X}_{i} + \epsilon_{ij} \]</span></p>
 <div>
 <ul>
-<li class="fragment">Define <span class="math inline">\(\eta_{D} = Y_{D}-\EE[Y_{D}]\)</span></li>
-<li class="fragment">Let <span class="math inline">\(\EE[Y_{D}] = \alpha_0 + \alpha_{1}D\)</span>, so: <span class="math display">\[ Y_{D} = \alpha_{0} + \alpha_{1}D + \eta_{D}\]</span></li>
-<li class="fragment">The regression model is: <span class="math display">\[ \EE[Y|D] = \beta_{0} + \beta_{1}D \]</span></li>
-<li class="fragment">If <span class="math inline">\(D\)</span> is randomly assigned, then <span class="math inline">\(\beta_{1}=\alpha_{1}\)</span> (the ATE).</li>
-<li class="fragment">Common to include other regressors, <span class="math inline">\(X\)</span>, to increase precision: <span class="math display">\[ \EE[Y|X,D] = X\beta + \alpha_{1}D \]</span></li>
+<li class="fragment">Which coefficient captures the effect of box info on racial gap?</li>
+<li class="fragment">What values would suggest that employers use race to proxy for criminal conviction?</li>
+<li class="fragment">Cross-sectional and temporal sources of variation in <span class="math inline">\(Box_{j}\)</span></li>
+<li class="fragment">Limit either to pre BTB (cross-sectional) or stores that initially have box (temporal)</li>
 </ul>
 </div>
 </section>
-<section id="internal-validity" class="slide level2">
-<h2>Internal Validity</h2>
-<div>
-<ul>
-<li class="fragment"><strong>Internal validity</strong> is achieved if the experiment and subsequent analysis properly identifies the parameter of interest.</li>
-<li class="fragment"><strong>Example 1</strong>: suppose that <span class="math inline">\(D\)</span> is not properly randomized.
-<ul>
-<li class="fragment"><em>Balance test</em>: randomization also implies that <span class="math inline">\(\EE[X|D=1]=\EE[X|D=0]\)</span> which can be tested.</li>
-</ul></li>
-<li class="fragment"><strong>Example 2</strong>: suppose that <span class="math inline">\(D\)</span> can only be offered, and takeup is not 100%. Can we be sure that <span class="math inline">\(\EE[Y|D=1] - \EE[Y|D=0]\)</span> is equal to <span class="math inline">\(\alpha\)</span>?</li>
-</ul>
-</div>
-</section>
-<section id="internal-validity-imperfect-takeup" class="slide level2">
-<h2>Internal Validity: Imperfect Takeup</h2>
+<section id="results-2" class="slide level2">
+<h2>Results</h2>
 
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-12-1.gif" class="r-stretch"></section>
-<section id="internal-validity-imperfect-takeup-1" class="slide level2">
-<h2>Internal Validity: Imperfect Takeup</h2>
-<p>Consider a model of earnings: <span class="math display">\[ Y_{D} = \alpha_0 + \alpha_{1}D + \eta_{D} \]</span></p>
-<p>where <span class="math inline">\(D\in\{0,1\}\)</span> indicates college attendance, and individuals go to college if the benefits outweigh the costs: <span class="math display">\[ D = \mathbf{1}\{Y_{1} - Y_{0} \geq C \} \]</span></p>
-<p>Now suppose that a tuition subsidy of <span class="math inline">\(\tau\)</span> is randomly offered to some, <span class="math inline">\(Z\in\{0,1\}\)</span>, so that: <span class="math display">\[ D_{Z} = \mathbf{1}\{Y_{1} - Y_{0} \geq C - Z\tau\} \]</span></p>
-</section>
-<section id="exercise" class="slide level2">
-<h2>Exercise</h2>
-<div>
-<ol type="1">
-<li class="fragment">Solve for <span class="math inline">\(P_{Z} = P[D=1|Z]\)</span>.</li>
-<li class="fragment">Solve for <span class="math inline">\(\EE[Y|Z]\)</span>.</li>
-<li class="fragment">Define populations: compliers, always-takers, never takers.</li>
-<li class="fragment">Define the Local Average Treatment Effect (LATE). Estimate??</li>
-</ol>
-</div>
-</section>
-<section id="the-late" class="slide level2">
-<h2>The LATE</h2>
-<div>
-<ul>
-<li class="fragment">The <strong>LATE</strong> is the Average Treatment Effect of <span class="math inline">\(D\)</span> among the <strong>compliers</strong>, the population of individuals who are moved into treatment by the randomized variable, <span class="math inline">\(Z\)</span>.</li>
-<li class="fragment">In many experiments, there are not always-takers by definition, and we instead call it the effect of <strong>Treatment on the Treated (TOT)</strong></li>
-<li class="fragment">The derivation requires that there are no <strong>defiers</strong> (people who are moved in the opposite direction by the randomized variable <span class="math inline">\(Z\)</span>).</li>
-</ul>
-</div>
-</section>
-<section id="regression-framework-1" class="slide level2">
-<h2>Regression Framework</h2>
-<p>As with complete take-up, there is a regression framework for LATE/TOT: <span class="math display">\[ Y = \alpha_{0} + \alpha_{1} D + \eta,\ \eta = \eta_{0} + D(\eta_{1}-\eta_{0}) \]</span> with <span class="math display">\[ P[D|X,Z] = P_{always-taker} + P_{complier} Z \]</span></p>
-<p><strong>Exercise</strong>: (1) calculate <span class="math inline">\(\EE[Y|X,Z]\)</span>; (2) Show how the <strong>2SLS</strong> estimator works.</p>
-<div class="fragment">
-<p>We don’t know how to calculate standard errors for this kind of estimator yet. But we will soon.</p>
-</div>
-</section>
-<section id="external-validity" class="slide level2 smaller">
-<h2>External Validity</h2>
-<div>
-<ul>
-<li class="fragment"><strong>External validity</strong> is achieved if the experiment can be used to forecast a treatment effect outside the population of interest (a moving goalpost)</li>
-<li class="fragment">This is much harder to test or guarantee than internal validity.</li>
-<li class="fragment"><em>Example 1:</em> does experiment identify effect of offering tuition subsidy to entire population? Why not?</li>
-<li class="fragment"><em>Example 2:</em> Suppose we run a housing voucher experiment, would we expect the same ATE if we run the experiment on high income population?</li>
-<li class="fragment"><em>Example 3:</em> if we rename every Jamal in the country to Greg, does the resume study tell us about the effect on callbacks?</li>
-</ul>
-</div>
-</section>
-<section id="external-validity-exercise" class="slide level2">
-<h2>External Validity Exercise</h2>
-<div>
-<ul>
-<li class="fragment">Consider our college tuition subsidy experiment</li>
-<li class="fragment">We can estimate the effect of the subsidy on <em>compliers</em></li>
-<li class="fragment">Can we use this to estimate the effect of increasing the subsidy from <span class="math inline">\(\tau\)</span> to <span class="math inline">\(\tau'\)</span>?</li>
-</ul>
-</div>
-</section>
-<section id="failure-of-late-for-subsidy-expansion" class="slide level2">
-<h2>Failure of LATE for subsidy expansion</h2>
+<img data-src="../figures/AS-Table4.png" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment">
+<p>Thoughts? How do you think standard errors should be calculated?</p>
 
-
-<img data-src="Causality_files/figure-revealjs/unnamed-chunk-14-1.gif" class="r-stretch"><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </div>
 </section></section>
@@ -899,44 +704,6 @@
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
