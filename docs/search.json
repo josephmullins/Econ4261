@@ -254,9 +254,9 @@
   {
     "objectID": "Data.html",
     "href": "Data.html",
-    "title": "Recitation Materials",
+    "title": "Data",
     "section": "",
-    "text": "Here are the data sources we will use in our lectures, recitations, and your homework.\n\n\n\nDataset\nLink\nSource\n\n\n\n\nCPS data\ndata\nIPUMS\n\n\nResume Audit Study\ndata\nBertrand & Mullainathan, AER 2004\n\n\nCollege Attendance and Credit Constraints\nNLSY79, NLSY97\nLochner & Monge-Naranjo, AER 2011\n\n\nTeacher response to financial incentives\ndata\nDuflo, Hanna & Ryan\n\n\nCPS replication data for Card & Krueger’s Minimum Wage Study\ndata\nIPUMS\n\n\n\n\n\nMaterials will be updated here as we continue through the course.\nThese recitations have been rendered using Quarto notebooks. The original source files for the notebooks can be downloaded from this site’s Github repo. You may want to study the source files (which can be opened in Rstudio) to learn how to format your own notebooks for the homework assignments.\n\n\n\nTopic\nNotebook\nData\n\n\n\n\nIntroduction to R and Monte Carlo Simulation\nnotebook\n\n\n\nWorking with data in R and the Tidyverse packages\nnotebook\ncps data\n\n\nOLS in R\nnotebook\ncps data\n\n\nSaturated Models and Testing\nnotebook\ncps data\n\n\nMeasurement Error and Frisch-Waugh-Lovell\nnotebook\nsimulations only\n\n\nClustered Standard Errors\nnotebook\nsimulations only\n\n\nReplicating Card and Krueger\nnotebook\ndata\n\n\nThe Child Penalty\nnotebook\ndata\n\n\nImport Competition and Local Labor Markets\nnotebook\ndata\n\n\nMonotonicity and IV\nnotebook\nsimulations only"
+    "text": "Here are the data sources we will use in our lectures, recitations, and your homework.\n\n\n\nDataset\nLink\nSource\n\n\n\n\nCPS data\ndata\nIPUMS\n\n\nResume Audit Study\ndata\nBertrand & Mullainathan, AER 2004\n\n\nCollege Attendance and Credit Constraints\nNLSY79, NLSY97\nLochner & Monge-Naranjo, AER 2011\n\n\nTeacher response to financial incentives\ndata\nDuflo, Hanna & Ryan\n\n\nCPS replication data for Card & Krueger’s Minimum Wage Study\ndata\nIPUMS"
   },
   {
     "objectID": "index.html#course-information",
