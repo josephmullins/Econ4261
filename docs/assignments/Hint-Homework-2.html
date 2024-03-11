@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econ4261 - Week 6</title>
+<title>Econ4261 - Hint for Homework 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -218,8 +218,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#deriving-clustered-standard-errors" id="toc-deriving-clustered-standard-errors" class="nav-link active" data-scroll-target="#deriving-clustered-standard-errors">1 - Deriving “clustered” standard errors</a></li>
-  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">2 - An Example</a></li>
+  <li><a href="#hint-for-question-7" id="toc-hint-for-question-7" class="nav-link active" data-scroll-target="#hint-for-question-7">Hint for Question 7</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +227,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 6</h1>
+<h1 class="title">Hint for Homework 2</h1>
 </div>
 
 
@@ -246,135 +245,71 @@ window.Quarto = {
 
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2014</span>,YEAR<span class="sc">&lt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kids =</span> NCHILD<span class="sc">&gt;</span><span class="dv">0</span>,<span class="at">female =</span> SEX<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<section id="deriving-clustered-standard-errors" class="level1">
-<h1>1 - Deriving “clustered” standard errors</h1>
-<p>Recall that if we have a random sample of <span class="math inline">\(C\)</span> “clusters” of observations of <span class="math inline">\(X\)</span> from <span class="math inline">\(c=1,2,,,C\)</span>, each with <span class="math inline">\(N_{c}\)</span> observations, then the sample mean can be written as:</p>
-<p><span class="math display">\[ \overline{X} = \frac{1}{\overline{N}}\sum_{c=1}^{C}\sum_{n=1}^{N_{c}} X_{n}.\]</span> where <span class="math inline">\(\overline{N} = \sum_{c}N_{c}\)</span> is the total number of observations.</p>
-<p>Suppose that <span class="math inline">\(\mathbb{E}[X]=0\)</span>, and that observations of <span class="math inline">\(X\)</span> are independent across clusters but <em>not</em> within them. Then the variance of the sample mean is:</p>
-<p><span class="math display">\[ V[\overline{X}] = \frac{1}{\overline{N}^2}\times C \times \mathbb{E}\left[\left(\sum_{n=1}^{N_{c}}X_{n}\right)^2\right] \]</span></p>
-<p>which we could then estimate by substituting in the sample mean.</p>
-<p>Now suppose instead that we have the regression model:</p>
-<p><span class="math display">\[ Y_{c,n} = X_{c,n}\beta + \epsilon_{c,n} \]</span></p>
-<p>where the error terms <span class="math inline">\(\epsilon_{c,n}\)</span> are independent across clusters but not within them. In other words, <span class="math inline">\(\epsilon_{c,n}\)</span> and <span class="math inline">\(\epsilon_{d,m}\)</span> are independent only if <span class="math inline">\(c\neq d\)</span>. Recall that:</p>
-<p><span class="math display">\[ V[\hat{\beta}] = V[(\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'{\epsilon}]\]</span></p>
-<p>which we now must calculate allowing for the correlation with each cluster. Following the logic above, we can estimate the variance of <span class="math inline">\(\hat{\beta}\)</span> as:</p>
-<p><span class="math display">\[ \widehat{V[\hat{\beta}]} = (\mathbf{X}'\mathbf{X})^{-1}\sum_{c=1}^{C}\left(\sum_{n=1}^{N_{c}}X_{c,n}'\hat{\epsilon_{c,n}}\right)\left(\sum_{n=1}^{N_{c}}\hat{\epsilon}_{n,c}X_{c,n}\right)(\mathbf{X}'\mathbf{X})^{-1}\]</span></p>
-<p>which if we let <span class="math inline">\(\mathbf{X}_{c}\)</span> be all the observations in cluster <span class="math inline">\(c\)</span> stacked in a matrix, and the same for <span class="math inline">\(\hat{\epsilon}_{c}\)</span>, can be written as:</p>
-<p><span class="math display">\[ \widehat{V[\hat{\beta}]} = (\mathbf{X}'\mathbf{X})^{-1}\sum_{c=1}^{C}\left(\mathbf{X}_{c}'\hat{\epsilon}_{c}\hat{\epsilon}_{c}'\mathbf{X}_{c}\right)(\mathbf{X}'\mathbf{X})^{-1}.\]</span></p>
-<p>This is the calculation being made when researchers refer to “clustering” their standard errors.</p>
-</section>
-<section id="an-example" class="level1">
-<h1>2 - An Example</h1>
-<p>Suppose that we are evaluating a classroom intervention and the model of outcomes for student <span class="math inline">\(n\)</span> in classroom <span class="math inline">\(c\)</span> for school <span class="math inline">\(s\)</span> is:</p>
-<p><span class="math display">\[ Y_{s,c,n} = \alpha D_{s} + \mu_{s} + \gamma_{c} + \epsilon_{n} \]</span></p>
-<p>We will assume 3 classrooms per school and 10 students per classroom. Here, <span class="math inline">\(\alpha\)</span> is the parameter of interest, the treatment effect of the intervention. Notice that <span class="math inline">\(D_{s}\)</span> is assigned at the level of the school.</p>
-<p>Here is code to generate the outcomes:</p>
+<section id="hint-for-question-7" class="level2">
+<h2 class="anchored" data-anchor-id="hint-for-question-7">Hint for Question 7</h2>
+<p>The question asks you to write down a model with three properties. The first thing to say is that there are actually several specifications that have this property. The goal is to write one down such that your null hypothesis can be summarized (and tested) with one parameter.</p>
+<p>To fix ideas, consider a simpler model, where <span class="math inline">\(F_{n}\)</span> is a dummy for being female and <span class="math inline">\(K_{n}\)</span> is a dummy for having kids:</p>
+<p><span class="math display">\[ \mathbb{E}[\log(Wage_{n})|F_{n},K_{n}] = \beta_{1} + \beta_{2}F_{n} + \beta_{3}K_{n} + \beta_{4}K_{n}F_{n} \]</span></p>
+<p>Now define the wage gap as:</p>
+<p><span class="math display">\[ \Delta(K_{n}) = \mathbb{E}[\log(Wage_{n})|F_{n}=1,K_{n}] - \mathbb{E}[\log(Wage_{n})|F_{n}=0,K_{n}] \]</span></p>
+<p>For this <em>simpler</em> model, you can show that:</p>
+<p><span class="math display">\[ \Delta(K_{n}) = \beta_{2} + \beta_{4}K_{n} \]</span></p>
+<p>and so <span class="math inline">\(\beta_{4}\)</span> represents the difference in the wage gaps by fertility status.</p>
+<p>Now going back to the question. The three conditions are:</p>
+<p><strong>(1) There is a linear trend for all wages with age.</strong></p>
+<p>This requires us to put in a slope with age, so (letting age be <span class="math inline">\(A_{n}\)</span>) something like:</p>
+<p><span class="math display">\[ \mathbb{E}[\log(Wage_{n})] = \beta_{1} + \beta_{2}A_{n} +\ ... \]</span></p>
+<p><strong>(2) A linear trend for wage gaps with age</strong></p>
+<p>Define now the wage gap as being dependent on <span class="math inline">\(K_{n}\)</span> and <span class="math inline">\(A_{n}\)</span>:</p>
+<p><span class="math display">\[ \Delta(K_{n},A_{n}) = \mathbb{E}[\log(Wage_{n})|F_{n}=1,K_{n},A_{n}] - \mathbb{E}[\log(Wage_{n})|F_{n}=0,K_{n},A_{n}] \]</span></p>
+<p>this condition requires that you write the model to get something like:</p>
+<p><span class="math display">\[ \Delta(K_{n},A_{n}) = \beta_{k} + \beta_{j}A_{n} +\ ... \]</span></p>
+<p><strong>(3) A linear trend for the the difference in wage gaps by fertility status.</strong></p>
+<p>Combined with the condition above, you need to write a model that gives you an expression for wage gaps like:</p>
+<p><span class="math display">\[ \Delta(K_{n},A_{n}) = \beta_{k} + \beta_{j}A_{n} + \beta_{l}K_{n} + \beta_{m}A_{n}K_{n} \]</span></p>
+<p>notice that if you get this, the coefficient <span class="math inline">\(\beta_{m}\)</span> captures how the difference in wage gaps for the two groups (kids or no kids) changes with age, and you can pose your null hypothesis using just <span class="math inline">\(\beta_{m}\)</span>.</p>
+<p>So suppose we run the regression with a full set of interactions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>generate_data <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha,S) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># draw the classroom effect</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  mu_s <span class="ot">=</span> <span class="fu">rnorm</span>(S)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  D <span class="ot">=</span> <span class="fu">runif</span>(S)<span class="sc">&lt;</span><span class="fl">0.5</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">=</span> <span class="fu">data.frame</span>()</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (c <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    gamma_c <span class="ot">=</span> <span class="fu">rnorm</span>(S,<span class="fl">0.2</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      eps_n <span class="ot">=</span> <span class="fu">rnorm</span>(S,<span class="fl">0.2</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      d <span class="ot">=</span> <span class="fu">rbind</span>(d,<span class="fu">data.frame</span>(<span class="at">school =</span> <span class="dv">1</span><span class="sc">:</span>S,<span class="at">class =</span> (<span class="dv">1</span><span class="sc">:</span>S <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">3</span> <span class="sc">+</span> c,<span class="at">D =</span> D,<span class="at">y =</span> alpha<span class="sc">*</span>D <span class="sc">+</span> mu_s <span class="sc">+</span> gamma_c <span class="sc">+</span> eps_n))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  d</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">generate_data</span>(<span class="fl">0.1</span>,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Questions:</p>
-<ol type="1">
-<li>Notice that the error terms must be correlated. What is the appropriate level of clustering here?</li>
-<li>Previously we saw that including fixed effects could also remove correlation. What prohibits us from doing that in this model? (hint: would the rank condition hold if we used school or classroom fixed effects?)</li>
-</ol>
-<p>Here is a way to estimate the model with proper standard errors:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(y <span class="sc">~</span> D,d) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">cluster =</span> <span class="st">"school"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> female<span class="sc">*</span>kids<span class="sc">*</span>AGE,D) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>OLS estimation, Dep. Var.: y
-Observations: 3,000 
-Standard-errors: Clustered (school) 
-            Estimate Std. Error  t value Pr(&gt;|t|) 
-(Intercept) 0.298715   0.185445 1.610804  0.11041 
-DTRUE       0.156478   0.240978 0.649347  0.51762 
+<pre><code>
+Call:
+lm(formula = log(Wage) ~ female * kids * AGE, data = D)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.2496 -0.3884 -0.0455  0.3814  3.5042 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)              2.3438992  0.0129504 180.990  &lt; 2e-16 ***
+femaleTRUE               0.0226944  0.0187803   1.208  0.22689    
+kidsTRUE                 0.2851217  0.0262307  10.870  &lt; 2e-16 ***
+AGE                      0.0144519  0.0003105  46.537  &lt; 2e-16 ***
+femaleTRUE:kidsTRUE     -0.2009343  0.0362205  -5.548 2.91e-08 ***
+femaleTRUE:AGE          -0.0034880  0.0004397  -7.932 2.19e-15 ***
+kidsTRUE:AGE            -0.0030114  0.0006041  -4.985 6.22e-07 ***
+femaleTRUE:kidsTRUE:AGE  0.0022960  0.0008361   2.746  0.00603 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 1.74154   Adj. R2: 0.001678</code></pre>
+
+Residual standard error: 0.5823 on 59514 degrees of freedom
+Multiple R-squared:  0.09773,   Adjusted R-squared:  0.09762 
+F-statistic: 920.9 on 7 and 59514 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>Which we can compare to standard errors without the clustering:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(y <span class="sc">~</span> D,d) <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="st">"standard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>OLS estimation, Dep. Var.: y
-Observations: 3,000 
-Standard-errors: IID 
-            Estimate Std. Error t value   Pr(&gt;|t|)    
-(Intercept) 0.298715   0.045909 6.50671 8.9695e-11 ***
-DTRUE       0.156478   0.063664 2.45787 1.4033e-02 *  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 1.74154   Adj. R2: 0.001678</code></pre>
-</div>
-</div>
-<p>In order to see the consequence of failing to deal with the correlation in errors, let’s check the actual size of a two-sided test that <span class="math inline">\(\alpha=0\)</span> when this is the true value. If the standard errors are correct, we should get close to 5% when we choose critical values of 1.96.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a function to test that $\alpha=0$ against a two-sided alternative</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>testcoef <span class="ot">&lt;-</span> <span class="cf">function</span>(mod) {</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  stat <span class="ot">&lt;-</span> mod<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">/</span>mod<span class="sc">$</span>se[<span class="dv">2</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(stat)<span class="sc">&gt;</span><span class="fl">1.96</span> </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># tests the two assumptions for a sample of size S for B montecarlo trials</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>simulation_test <span class="ot">&lt;-</span> <span class="cf">function</span>(B,S) {</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  test1 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  test2 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">=</span> <span class="fu">generate_data</span>(<span class="dv">0</span>,S)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">&lt;-</span> <span class="fu">feols</span>(y <span class="sc">~</span> D,d)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    se1 <span class="ot">=</span> mod<span class="sc">$</span>se[<span class="dv">2</span>] <span class="co">#&lt;- assuming iid erros</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    se2 <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">vcov</span>(mod,<span class="at">cluster =</span><span class="st">"school"</span>)[<span class="dv">2</span>,<span class="dv">2</span>])</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    t1 <span class="ot">=</span> mod<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">/</span>se1</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    t2 <span class="ot">=</span> mod<span class="sc">$</span>coefficients[<span class="dv">2</span>]<span class="sc">/</span>se2</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    test1[b] <span class="ot">&lt;-</span> <span class="fu">abs</span>(t1)<span class="sc">&gt;</span><span class="fl">1.96</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    test2[b] <span class="ot">&lt;-</span> <span class="fu">abs</span>(t2)<span class="sc">&gt;</span><span class="fl">1.96</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The mean rejection rate under the iid assumption is "</span>,<span class="fu">mean</span>(test1)))</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The mean rejection rate when clustering standard errors by school is "</span>,<span class="fu">mean</span>(test2)))</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simulation_test</span>(<span class="dv">100</span>,<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "The mean rejection rate under the iid assumption is  0.64"
-[1] "The mean rejection rate when clustering standard errors by school is  0.04"</code></pre>
-</div>
-</div>
-<p>Look how badly the test does when the correlation in errors is not accounted for! In this case, it drastically overstates the precision that is available from these 3000 observations. The size of the clustered standard errors won’t always be perfect, but it will get increasingly correct as <span class="math inline">\(S\rightarrow\infty\)</span>.</p>
+<p>you should be able to show that the resulting model gives you exactly the expression for the wage gaps that we are after. <strong>Note</strong>: don’t just run this, please explain how you get there.</p>
 
 
 </section>

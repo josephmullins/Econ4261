@@ -14,14 +14,15 @@ $$ \mathbb{E}[y_{n}|\mathbf{d}_{n}] = \mathbf{d}_{n}\beta $$
 
 with $\mathbf{d}_{n} = [d_{1,n},\ d_{2,n},...,\ d_{K,n}]$ where each dummy is an indicator for a mutually exclusive event, meaning that $d_{k,n}=1$ implies that $d_{j,n}=0$ for all $j\neq k$.
 
-### Example:
+### Example
 
 Suppose that $\mathbf{x}_{n} = [AGE_{n},SEX_{n}]$ and we define $\mathbf{d}_{n}$ to be a vector of dummies for each combination of age and sex. Argue that this satisfies the conditions above. We call this a *saturated model*. There is one dummy for each unique potential realization of $\mathbf{x}_{n}$.
 
-### Exercise:
+### Exercise
 Re-writing the model as
 
 $$ \mathbf{Y} = \mathbf{D}\beta + \epsilon $$
+
 the OLS estimator is:
 
 $$ \hat{\beta} = \left(\mathbf{D}^{T}\mathbf{D}\right)^{-1}\mathbf{D}^{T}\mathbf{Y}.$$
@@ -40,6 +41,7 @@ For example, if $\mathbf{x}_{n} = [1,F_{n},C_{n},F_{n}C_{n}]$ where $F_{n}$ is a
 Here's an exercise in how to use the correct interpretation of coefficients in a linear model to test hypothesis. First we read in the cps data.
 
 ```{r}
+#| warning: false
 library(tidyverse)
 D <- read.csv("../data/cps-econ-4261.csv") %>%
   filter(YEAR>=2014,YEAR<=2018) %>%
@@ -51,17 +53,21 @@ D <- read.csv("../data/cps-econ-4261.csv") %>%
 
 ```
 
-Suppose we wanted to test if the wage gap is large for married vs unmarried couples. The estimand (i.e. the population parameter we are going for) is:
+Suppose we wanted to test if the wage gap is *larger* for married vs unmarried couples. The estimand (i.e. the population parameter we are going for) is:
 
-$$\left(\mathbb{E}[\log(W)|\text{Female,Married}] - \mathbb{E}[\log(W)|\text{Male,Married}]\right) - \left(\mathbb{E}[\log(W)|\text{Female,Single}] - \mathbb{E}[\log(W)|\text{Male,Single}]\right) $$
+$$
+\begin{multline}
+\Delta = \left(\mathbb{E}[\log(W)|\text{Female,Married}] - \mathbb{E}[\log(W)|\text{Male,Married}]\right) \\ - \left(\mathbb{E}[\log(W)|\text{Female,Single}] - \mathbb{E}[\log(W)|\text{Male,Single}]\right) 
+\end{multline}
+$$
 
 A simple way to test this would be to write the model with a dummy $F_{n}=1$ if female (0 otherwise) and a dummy $M_{n}=1$ if married (0 otherwise):
 $$\mathbb{E}[\log(W)|F_{n},M_{n}] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}M_{n} + \beta_{3}M_{n}F_{n} $$
 
-### Exercise:
-Show that the population parameter above is equal to $\beta_{3}$.
+### Exercise
+Show that the population parameter $\Delta$ defined above is equal to $\beta_{3}$.
 
-### Exercise:
+### Exercise
 Use the following regression to test the null hypothesis that wage gaps are the same for married and single individuals.
 ```{r}
 D %>%
@@ -73,7 +79,7 @@ D %>%
 Notice the two-sided p-values are tiny: we strongly reject that wage gaps are the same. They appear to be much bigger for unmarried individuals.
 
 
-### Exercise:
+### Exercise
 
 Which parameter indicates the wage gap amongst unmarried individuals?
 

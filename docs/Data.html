@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.539">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
   <li class="nav-item">
     <a class="nav-link" href="./Exercises.html"> 
-<span class="menu-text">Practice Exercises</span></a>
+<span class="menu-text">Additional Material</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -158,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data</h1>
+<h1 class="title">Recitation Materials</h1>
 </div>
 
 
@@ -214,6 +214,69 @@ ul.task-list li input[type="checkbox"] {
 </table>
 
 
+<p>Materials will be updated here as we continue through the course.</p>
+<p>These recitations have been rendered using <a href="https://quarto.org">Quarto</a> notebooks. The original source files for the notebooks can be downloaded from this site’s <a href="https://github.com/josephmullins/Econ4261/tree/main/recitations">Github repo</a>. You may want to study the source files (which can be opened in Rstudio) to learn how to format your own notebooks for the homework assignments.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Notebook</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Introduction to <code>R</code> and Monte Carlo Simulation</td>
+<td><a href="./recitations/Week-1.html">notebook</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Working with data in <code>R</code> and the Tidyverse packages</td>
+<td><a href="./recitations/Week-2.html">notebook</a></td>
+<td><a href="data/cps-econ-4261.csv">cps data</a></td>
+</tr>
+<tr class="odd">
+<td>OLS in <code>R</code></td>
+<td><a href="./recitations/Week-3.html">notebook</a></td>
+<td>cps data</td>
+</tr>
+<tr class="even">
+<td>Saturated Models and Testing</td>
+<td><a href="./recitations/Week-4.html">notebook</a></td>
+<td>cps data</td>
+</tr>
+<tr class="odd">
+<td>Measurement Error and Frisch-Waugh-Lovell</td>
+<td><a href="./recitations/Week-5.html">notebook</a></td>
+<td>simulations only</td>
+</tr>
+<tr class="even">
+<td>Clustered Standard Errors</td>
+<td><a href="./recitations/Week-6.html">notebook</a></td>
+<td>simulations only</td>
+</tr>
+<tr class="odd">
+<td>Replicating Card and Krueger</td>
+<td><a href="./recitations/Week-7.html">notebook</a></td>
+<td><a href="./data/cps-CardKrueger.csv">data</a></td>
+</tr>
+<tr class="even">
+<td>The Child Penalty</td>
+<td><a href="./recitations/Week-8.html">notebook</a></td>
+<td><a href="data/nlsy79_clean_all.RData">data</a></td>
+</tr>
+<tr class="odd">
+<td>Import Competition and Local Labor Markets</td>
+<td><a href="./recitations/Week-9.html">notebook</a></td>
+<td><a href="data/workfile_china.dta">data</a></td>
+</tr>
+<tr class="even">
+<td>Monotonicity and IV</td>
+<td><a href="./recitations/Week-10.html">notebook</a></td>
+<td>simulations only</td>
+</tr>
+</tbody>
+</table>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -377,7 +440,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {

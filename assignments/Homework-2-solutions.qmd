@@ -1,0 +1,123 @@
+---
+title: "Homework 2"
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Question 1
+
+Here is code to import and clean the cps data, with the additional filtering line added in.
+
+```{r}
+D <- read.csv("../data/cps-econ-4261.csv") %>%
+  filter(YEAR>=2014,YEAR<=2018,AGE<=40) %>% #<- see, right here!
+  mutate(EARNWEEK = na_if(EARNWEEK,9999.99),
+         UHRSWORKT = na_if(na_if(na_if(UHRSWORKT,999),997),0),
+         HOURWAGE = na_if(HOURWAGE,999.99)) %>%
+  mutate(Wage = case_when(PAIDHOUR==1 ~ EARNWEEK/UHRSWORKT,PAIDHOUR==2 ~ HOURWAGE)) %>%
+  mutate(kids = NCHILD>0,female = SEX==2) %>%
+  filter(!is.na(Wage))
+
+```
+
+## Question 2
+
+Estimate the model:
+
+$$ \log(W_{n}) = \beta_{0} + \beta_{1}F_{n} $$
+
+where $W_{n}$ is the wage and $F_{n}$ a dummy variable that is equal to one if the individual is female.
+
+```{r}
+lm(log(Wage) ~ female,D) %>%
+  summary()
+```
+
+
+## Question 3
+
+Now calculate the difference between the sample mean of log wages for women and the sample mean for men. What do you notice? Explain why.
+
+```{r}
+d <- D %>%
+  group_by(SEX) %>%
+  summarize(meanwage = mean(log(Wage))) 
+
+gap <- d$meanwage[2] - d$meanwage[1]
+print(gap)
+```
+
+The difference is exactly the same as the point estimate for $\beta_{1}$. This is because the OLS estimator (as we discussed in recitation) must give that $\hat{\beta}_{0}$ is the sample mean of log wages for all men, and $\hat{\beta}_0+\hat{\beta}_{1}$ gives the sample mean of log wages for all women, implying that $\hat{\beta}_{1}$ must be the difference in sample means.
+
+## Question 4
+
+Write down a linear model that allows for wage gaps to be different by the individual's fertility status.
+
+$$ \mathbb{E}[\log(W_{n})|F_{n},kids_{n}] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n}  $$
+
+where $kids_{n}$ is a dummy that indicates children in the household. $\beta_{3}$ represents the difference in age gaps by fertility status.
+
+## Question 5
+
+Suppose that the null hypothesis is that wage gaps are the same for each. Write this null hypothesis in terms of the parameters of your model.
+
+This is equivalent to $\beta_{3}=0$.
+
+## Question 6
+
+Test the null hypothesis against a two-sided alternative. Make your test size 5\%. Recall that we used the variable `NCHILD` to impute fertility status.
+
+We use the variable `kids` that we constructed already:
+
+```{r}
+lm(log(Wage) ~ female*kids,D) %>%
+  summary()
+```
+
+We estimate the the wage gap is 14 percentage points larger among individuals with children. The last column gives p-values for the two-sided hypothesis test that $\beta_{3}=0$ and strongly rejects the null. It certainly does at 5\% size. Equivalently, the test statistic is much large than the 5\% critical value of 1.96.
+
+## Question 7
+
+Re-write the model to allow for:
+
+  (1) A linear trend for all wages with age;
+  (2) A linear trend for wage gaps with age; AND
+  (3) A linear trend for the the *difference* in wage gaps by fertility status.
+  
+Use this model to test the null hypothesis that the difference in wage gaps by fertility status does not change with age. Use a two-sided alternative with size 10\%.
+
+There are several models that satisfy these properties. Here are two examples.
+
+### Example 1
+The model is:
+$$ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}F_{n}kids_{n} $$
+
+Which can be estimated using:
+
+```{r}
+D %>%
+  mutate(female = as.integer(female)) %>% #<- convert female from a factor variable to an integer to get this to run properly
+  lm(log(Wage) ~ female*kids + AGE + female:AGE + female:kids:AGE,data=.) %>%
+  summary()
+
+```
+
+Under the null hypothesis, $\beta_{6}=0$. The point estimate of $\beta_{6}$ suggests that the difference in the wage gaps grows with age, and the two-sided p-value strongly rejects the null. Since the p-value is less than 0.05, we reject the null at 95\% significance (as well as at much higher levels of significance).
+
+### Example 2:
+
+The model is:
+$$ \mathbb{E}[\log(Wage)|Age_{n},kids_{n},F_{n} ] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}kid_{n} + \beta_{3}kids_{n}F_{n} + \beta_{4}Age_{n} + \beta_{5}Age_{n}F_{n} + \beta_{6}Age_{n}kids_{n} + \beta_{7}Age_{n}F_{n}kids_{n} $$
+
+Notice that compared to example 1, this model has an additional lower order interaction $(Age_{n}\times kids_{n})$. This makes $\beta_{7}$ now the coefficient that represents how the difference in wage gaps grows with age.
+
+We can estimate it as:
+
+```{r}
+lm(log(Wage) ~ female*kids*AGE,D) %>%
+ summary()
+```
+
+And similarly strongly reject the null that $\beta_{7}=0$.

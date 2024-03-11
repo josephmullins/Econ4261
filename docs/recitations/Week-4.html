@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.537">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -220,14 +220,14 @@ window.Quarto = {
   <ul>
   <li><a href="#saturated-models" id="toc-saturated-models" class="nav-link active" data-scroll-target="#saturated-models">(1) Saturated Models</a>
   <ul class="collapse">
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example:</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise:</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   </ul></li>
   <li><a href="#testing-hypotheses-in-a-linear-model" id="toc-testing-hypotheses-in-a-linear-model" class="nav-link" data-scroll-target="#testing-hypotheses-in-a-linear-model">(2) Testing hypotheses in a linear model</a>
   <ul class="collapse">
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise:</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise:</a></li>
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise:</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -260,13 +260,14 @@ window.Quarto = {
 <p><span class="math display">\[ \mathbb{E}[y_{n}|\mathbf{d}_{n}] = \mathbf{d}_{n}\beta \]</span></p>
 <p>with <span class="math inline">\(\mathbf{d}_{n} = [d_{1,n},\ d_{2,n},...,\ d_{K,n}]\)</span> where each dummy is an indicator for a mutually exclusive event, meaning that <span class="math inline">\(d_{k,n}=1\)</span> implies that <span class="math inline">\(d_{j,n}=0\)</span> for all <span class="math inline">\(j\neq k\)</span>.</p>
 <section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example:</h3>
+<h3 class="anchored" data-anchor-id="example">Example</h3>
 <p>Suppose that <span class="math inline">\(\mathbf{x}_{n} = [AGE_{n},SEX_{n}]\)</span> and we define <span class="math inline">\(\mathbf{d}_{n}\)</span> to be a vector of dummies for each combination of age and sex. Argue that this satisfies the conditions above. We call this a <em>saturated model</em>. There is one dummy for each unique potential realization of <span class="math inline">\(\mathbf{x}_{n}\)</span>.</p>
 </section>
 <section id="exercise" class="level3">
-<h3 class="anchored" data-anchor-id="exercise">Exercise:</h3>
+<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
 <p>Re-writing the model as</p>
-<p><span class="math display">\[ \mathbf{Y} = \mathbf{D}\beta + \epsilon \]</span> the OLS estimator is:</p>
+<p><span class="math display">\[ \mathbf{Y} = \mathbf{D}\beta + \epsilon \]</span></p>
+<p>the OLS estimator is:</p>
 <p><span class="math display">\[ \hat{\beta} = \left(\mathbf{D}^{T}\mathbf{D}\right)^{-1}\mathbf{D}^{T}\mathbf{Y}.\]</span></p>
 <p>Show that each element <span class="math inline">\(\hat{\beta}_{k}\)</span> is equal to the sample mean of <span class="math inline">\(y_{n}\)</span> using only observations for which <span class="math inline">\(d_{k,n}=1\)</span>.</p>
 <p>It follows that the following rule holds for any regression involving dummy variables. Suppose that the vector <span class="math inline">\(\mathbf{x}_{n}\)</span> can take one of <span class="math inline">\(K\)</span> unique values <span class="math inline">\((x^{k})_{k=1}^{K}\)</span>, and suppose that there is a unique combination of dummy variables <span class="math inline">\(\mathbf{d}^{k}\)</span> for each value. Then the OLS estimator solves:</p>
@@ -278,42 +279,34 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="testing-hypotheses-in-a-linear-model">(2) Testing hypotheses in a linear model</h2>
 <p>Here’s an exercise in how to use the correct interpretation of coefficients in a linear model to test hypothesis. First we read in the cps data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2014</span>,YEAR<span class="sc">&lt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2014</span>,YEAR<span class="sc">&lt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Suppose we wanted to test if the wage gap is large for married vs unmarried couples. The estimand (i.e.&nbsp;the population parameter we are going for) is:</p>
-<p><span class="math display">\[\left(\mathbb{E}[\log(W)|\text{Female,Married}] - \mathbb{E}[\log(W)|\text{Male,Married}]\right) - \left(\mathbb{E}[\log(W)|\text{Female,Single}] - \mathbb{E}[\log(W)|\text{Male,Single}]\right) \]</span></p>
+<p>Suppose we wanted to test if the wage gap is <em>larger</em> for married vs unmarried couples. The estimand (i.e.&nbsp;the population parameter we are going for) is:</p>
+<p><span class="math display">\[
+\begin{multline}
+\Delta = \left(\mathbb{E}[\log(W)|\text{Female,Married}] - \mathbb{E}[\log(W)|\text{Male,Married}]\right) \\ - \left(\mathbb{E}[\log(W)|\text{Female,Single}] - \mathbb{E}[\log(W)|\text{Male,Single}]\right)
+\end{multline}
+\]</span></p>
 <p>A simple way to test this would be to write the model with a dummy <span class="math inline">\(F_{n}=1\)</span> if female (0 otherwise) and a dummy <span class="math inline">\(M_{n}=1\)</span> if married (0 otherwise): <span class="math display">\[\mathbb{E}[\log(W)|F_{n},M_{n}] = \beta_{0} + \beta_{1}F_{n} + \beta_{2}M_{n} + \beta_{3}M_{n}F_{n} \]</span></p>
 <section id="exercise-1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1">Exercise:</h3>
-<p>Show that the population parameter above is equal to <span class="math inline">\(\beta_{3}\)</span>.</p>
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise</h3>
+<p>Show that the population parameter <span class="math inline">\(\Delta\)</span> defined above is equal to <span class="math inline">\(\beta_{3}\)</span>.</p>
 </section>
 <section id="exercise-2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-2">Exercise:</h3>
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise</h3>
 <p>Use the following regression to test the null hypothesis that wage gaps are the same for married and single individuals.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married =</span> MARST<span class="sc">==</span><span class="dv">1</span>,<span class="at">Female =</span> SEX<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> Female<span class="sc">*</span>Married,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married =</span> MARST<span class="sc">==</span><span class="dv">1</span>,<span class="at">Female =</span> SEX<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> Female<span class="sc">*</span>Married,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -340,7 +333,7 @@ F-statistic:  1557 on 3 and 59518 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Notice the two-sided p-values are tiny: we strongly reject that wage gaps are the same. They appear to be much bigger for unmarried individuals.</p>
 </section>
 <section id="exercise-3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-3">Exercise:</h3>
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise</h3>
 <p>Which parameter indicates the wage gap amongst unmarried individuals?</p>
 
 
@@ -562,7 +555,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -783,85 +781,91 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 4"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## (1) Saturated Models</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>Suppose we have a model with a vector of dummy variables:</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>$$ \mathbb{E}<span class="co">[</span><span class="ot">y_{n}|\mathbf{d}_{n}</span><span class="co">]</span> = \mathbf{d}_{n}\beta $$</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>with $\mathbf{d}_{n} = [d_{1,n},\ d_{2,n},...,\ d_{K,n}]$ where each dummy is an indicator for a mutually exclusive event, meaning that $d_{k,n}=1$ implies that $d_{j,n}=0$ for all $j\neq k$.</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example:</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>Suppose that $\mathbf{x}_{n} = [AGE_{n},SEX_{n}]$ and we define $\mathbf{d}_{n}$ to be a vector of dummies for each combination of age and sex. Argue that this satisfies the conditions above. We call this a *saturated model*. There is one dummy for each unique potential realization of $\mathbf{x}_{n}$.</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise:</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>Re-writing the model as</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>$$ \mathbf{Y} = \mathbf{D}\beta + \epsilon $$</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>the OLS estimator is:</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>$$ \hat{\beta} = \left(\mathbf{D}^{T}\mathbf{D}\right)^{-1}\mathbf{D}^{T}\mathbf{Y}.$$</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>Show that each element $\hat{\beta}_{k}$ is equal to the sample mean of $y_{n}$ using only observations for which $d_{k,n}=1$.</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>It follows that the following rule holds for any regression involving dummy variables. Suppose that the vector $\mathbf{x}_{n}$ can take one of $K$ unique values $(x^{k})_{k=1}^{K}$, and suppose that there is a unique combination of dummy variables $\mathbf{d}^{k}$ for each value. Then the OLS estimator solves:</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>$$ \mathbf{d}^{k}\hat{\beta} =\frac{\sum_{n}y_{n}\mathbf{1}<span class="sc">\{</span>\mathbf{x}_{n}=x^{k}\}}{\sum_{n}\mathbf{1}\{\mathbf{x}_{n}=x^k<span class="sc">\}</span>}  $$</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>For example, if $\mathbf{x}_{n} = [1,F_{n},C_{n},F_{n}C_{n}]$ where $F_{n}$ is a dummy variable equal to 1 if person $n$ is female, and $C_{n}$ is a dummy variable equal 1 if person $n$ has a college education, then $\mathbf{x}_{n}$ has four unique values. Hence for example $\mathbb{E}[y_{n}|\text{Male},\text{Non-College}]=\beta_{0}$ and $\hat{\beta}_{0}$ is the sample mean of $y_{n}$ for all observations of non-college educated men. Similarly $\hat{\beta}_{0} + \hat{\beta}_{1}$ is equal to the sample mean of all $y_{n}$ for all non-college educated women, and so on.</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## (2) Testing hypotheses in a linear model</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>Here's an exercise in how to use the correct interpretation of coefficients in a linear model to test hypothesis. First we read in the cps data.</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2014</span>,YEAR<span class="sc">&lt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to test if the wage gap is large for married vs unmarried couples. The estimand (i.e. the population parameter we are going for) is:</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>$$\left(\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Female,Married}</span><span class="co">]</span> - \mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Male,Married}</span><span class="co">]</span>\right) - \left(\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Female,Single}</span><span class="co">]</span> - \mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Male,Single}</span><span class="co">]</span>\right) $$</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>A simple way to test this would be to write the model with a dummy $F_{n}=1$ if female (0 otherwise) and a dummy $M_{n}=1$ if married (0 otherwise):</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>$$\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|F_{n},M_{n}</span><span class="co">]</span> = \beta_{0} + \beta_{1}F_{n} + \beta_{2}M_{n} + \beta_{3}M_{n}F_{n} $$</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise:</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>Show that the population parameter above is equal to $\beta_{3}$.</span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise:</span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>Use the following regression to test the null hypothesis that wage gaps are the same for married and single individuals.</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married =</span> MARST<span class="sc">==</span><span class="dv">1</span>,<span class="at">Female =</span> SEX<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> Female<span class="sc">*</span>Married,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>Notice the two-sided p-values are tiny: we strongly reject that wage gaps are the same. They appear to be much bigger for unmarried individuals.</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise:</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>Which parameter indicates the wage gap amongst unmarried individuals?</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Week 4"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## (1) Saturated Models</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>Suppose we have a model with a vector of dummy variables:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>$$ \mathbb{E}<span class="co">[</span><span class="ot">y_{n}|\mathbf{d}_{n}</span><span class="co">]</span> = \mathbf{d}_{n}\beta $$</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>with $\mathbf{d}_{n} = [d_{1,n},\ d_{2,n},...,\ d_{K,n}]$ where each dummy is an indicator for a mutually exclusive event, meaning that $d_{k,n}=1$ implies that $d_{j,n}=0$ for all $j\neq k$.</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Example</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>Suppose that $\mathbf{x}_{n} = [AGE_{n},SEX_{n}]$ and we define $\mathbf{d}_{n}$ to be a vector of dummies for each combination of age and sex. Argue that this satisfies the conditions above. We call this a *saturated model*. There is one dummy for each unique potential realization of $\mathbf{x}_{n}$.</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>Re-writing the model as</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>$$ \mathbf{Y} = \mathbf{D}\beta + \epsilon $$</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>the OLS estimator is:</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>$$ \hat{\beta} = \left(\mathbf{D}^{T}\mathbf{D}\right)^{-1}\mathbf{D}^{T}\mathbf{Y}.$$</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>Show that each element $\hat{\beta}_{k}$ is equal to the sample mean of $y_{n}$ using only observations for which $d_{k,n}=1$.</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>It follows that the following rule holds for any regression involving dummy variables. Suppose that the vector $\mathbf{x}_{n}$ can take one of $K$ unique values $(x^{k})_{k=1}^{K}$, and suppose that there is a unique combination of dummy variables $\mathbf{d}^{k}$ for each value. Then the OLS estimator solves:</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>$$ \mathbf{d}^{k}\hat{\beta} =\frac{\sum_{n}y_{n}\mathbf{1}<span class="sc">\{</span>\mathbf{x}_{n}=x^{k}\}}{\sum_{n}\mathbf{1}\{\mathbf{x}_{n}=x^k<span class="sc">\}</span>}  $$</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>For example, if $\mathbf{x}_{n} = [1,F_{n},C_{n},F_{n}C_{n}]$ where $F_{n}$ is a dummy variable equal to 1 if person $n$ is female, and $C_{n}$ is a dummy variable equal 1 if person $n$ has a college education, then $\mathbf{x}_{n}$ has four unique values. Hence for example $\mathbb{E}[y_{n}|\text{Male},\text{Non-College}]=\beta_{0}$ and $\hat{\beta}_{0}$ is the sample mean of $y_{n}$ for all observations of non-college educated men. Similarly $\hat{\beta}_{0} + \hat{\beta}_{1}$ is equal to the sample mean of all $y_{n}$ for all non-college educated women, and so on.</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## (2) Testing hypotheses in a linear model</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>Here's an exercise in how to use the correct interpretation of coefficients in a linear model to test hypothesis. First we read in the cps data.</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">2014</span>,YEAR<span class="sc">&lt;=</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to test if the wage gap is *larger* for married vs unmarried couples. The estimand (i.e. the population parameter we are going for) is:</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>\begin{multline}</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>\Delta = \left(\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Female,Married}</span><span class="co">]</span> - \mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Male,Married}</span><span class="co">]</span>\right) <span class="sc">\\</span> - \left(\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Female,Single}</span><span class="co">]</span> - \mathbb{E}<span class="co">[</span><span class="ot">\log(W)|\text{Male,Single}</span><span class="co">]</span>\right) </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>\end{multline}</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>A simple way to test this would be to write the model with a dummy $F_{n}=1$ if female (0 otherwise) and a dummy $M_{n}=1$ if married (0 otherwise):</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>$$\mathbb{E}<span class="co">[</span><span class="ot">\log(W)|F_{n},M_{n}</span><span class="co">]</span> = \beta_{0} + \beta_{1}F_{n} + \beta_{2}M_{n} + \beta_{3}M_{n}F_{n} $$</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>Show that the population parameter $\Delta$ defined above is equal to $\beta_{3}$.</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>Use the following regression to test the null hypothesis that wage gaps are the same for married and single individuals.</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Married =</span> MARST<span class="sc">==</span><span class="dv">1</span>,<span class="at">Female =</span> SEX<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> Female<span class="sc">*</span>Married,<span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>Notice the two-sided p-values are tiny: we strongly reject that wage gaps are the same. They appear to be much bigger for unmarried individuals.</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exercise</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>Which parameter indicates the wage gap amongst unmarried individuals?</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
