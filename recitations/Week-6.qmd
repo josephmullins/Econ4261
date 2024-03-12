@@ -1,6 +1,9 @@
 ---
 title: "Week 6"
-output: html_notebook
+format:
+  html:
+    code-tools: true
+
 ---
 
 ```{r}
