@@ -12,7 +12,7 @@ Materials here will be uploaded as we continue through the course.
 | Review: Linear Models | [Slides](lectures/Intro-3-LinearModels.qmd) |
 | Causality | [Slides](lectures/Causality.qmd) |
 | Experiments in Economics | [Slides](lectures/Experiments-Application.qmd) |
-| Introduction to Difference in Differences | | 
+| Introduction to Difference in Differences | [Slides](lectures/Diff-in-Diff-Intro.qmd) | 
 | A Regression Framework for Diff-in-Diff | |
 | Application: the Child Penalty | |
 | Instrumental Variables | |
