@@ -1,0 +1,167 @@
+---
+title: "Difference-in-Differences"
+format: 
+  revealjs:
+    theme: solarized
+    transition: slide
+    chalkboard:
+        theme: whiteboard
+        chalk-effect: 0.0
+        chalk-width: 6
+---
+
+```{r}
+#| warning: false
+library(tidyverse)
+library(gganimate)
+```
+
+## Introduction
+
+:::{.incremental}
+- Previously: how to estimate "causal effects" when treatments are randomly offered to individuals.
+- Can we ever do this in non-experimental settings? 
+- With additional assumptions, we can try. 
+- We'll now explore the method of **difference-in-differences**, which infers causality by making a particular modelling assumption for conditional means.
+:::
+
+## Example 1: Medicaid Expansion
+
+:::{.incremental}
+- Consider the Medicaid Expansion introduced by the ACA
+    - Increased eligiblity of individuals for public health insurance
+- Some states adopted, some states did not.
+- Let $Y_{st}$ be all-cause mortality in state $s$ at time $t$.
+- Suppose we have data on two states $s\in\{1,2\}$ in $T=10$ periods. 
+- Suppose that only state 2 adopts the expansion in period 5...
+:::
+
+## Example 1: Medicaid Expansion
+```{r}
+#| warning: false
+d0 <- data.frame(t = 1:10,Case = "State 1") %>%
+    mutate(y = 0.9 + 0.005*rnorm(10) - 0.05*pmin(2,pmax(t-5,0)))
+d1 <- data.frame(t = 1:10,Case = "State 2") %>%
+    mutate(y = 1 + 0.005*rnorm(10) )
+rbind(d0,d1) %>%
+    ggplot(aes(x=t,y=y,color=Case)) + geom_line() + geom_point() + theme_minimal() + 
+    geom_vline(xintercept=5,linetype="dashed") + 
+    ylab("All-cause Mortality (per 1000 persons)") + theme(legend.position = "bottom") + transition_reveal(t,keep_last = TRUE)
+
+```
+
+## Example 1: Medicaid Expansion
+```{r}
+#| warning: false
+rbind(d0,d1) %>%
+    ggplot(aes(x=t,y=y,color=Case)) + geom_line() + geom_point() + theme_minimal() + 
+    geom_vline(xintercept=5,linetype="dashed") + 
+    ylab("All-cause Mortality (per 1000 persons)") + theme(legend.position = "bottom")
+
+```
+
+
+
+## Example 2: COVID policies and education outcomes
+
+:::{.incremental}
+- When covid hit, states adopted different policies with regards to school closures.
+- Let $Y_{pt}$ be average standardized math score for students in districts with policy $p$ in year $t$. 
+- Suppose we compare districts that remained fully in person to those that went fully remote...
+:::
+
+
+## Example 2: COVID policies and education outcomes
+```{r}
+#| warning: false
+d0 <- data.frame(t = 2015:2024,Case = "Fully Remote") %>%
+    mutate(y = 0 + 0.005*rnorm(10) - 0.05*pmin(3,pmax(t-2020,0)))
+d1 <- data.frame(t = 2015:2024,Case = "Fully In Person") %>%
+    mutate(y = -0.1 + 0.005*rnorm(10) - 0.025*pmin(3,pmax(t-2020,0)))
+rbind(d0,d1) %>%
+    rename(year = t) %>%
+    ggplot(aes(x=year,y=y,color=Case)) + geom_line() + geom_point() + theme_minimal() + theme(legend.position = "bottom") + transition_reveal(year,keep_last = TRUE)
+```
+
+## Example 2: COVID policies and education outcomes
+```{r}
+rbind(d0,d1) %>%
+    rename(year = t) %>%
+    ggplot(aes(x=year,y=y,color=Case)) + geom_line() + geom_point() + theme_minimal() + theme(legend.position = "bottom")
+```
+
+## Simplest Setup: Two units, two periods
+
+:::{.incremental}
+- Let $j$ index treatment units $j\in\{1,2\}$
+- Let $t$ index periods $t\in\{1,2\}$
+- Let $Y(p)$ be the **potential outcome** of interest where $p\in\{0,1\}$ indicates treatment
+- Let $P(j,t)\in\{0,1\}$ indicate whether the policy is in place. Here:
+$$ P(1,1)=P(1,2) = 0\ \text{and}\ P(1,1)=0,\ P(1,2) = 1 $$
+- So policy introduced in unit 2 in period 2.
+:::
+
+## Simplest Setup: assumptions
+
+:::{.incremental}
+- Recall that causal inference is all about making assumptions to construct a **counterfactual**
+- Here, that is given by the **parallel trends** assumption: that average differences in $Y(0)$ between the untreated ($j=1$) and treated ($j=2$) units are stable over time
+- Define $Y_{jt}(p) = \mathbb{E}[Y(p)|j,t]$
+- Math:
+$$ Y_{2t}(0) - Y_{1t}(0) = \text{constant for all}\ t $$
+:::
+
+## Simplest Setup: Causal Inference
+
+We want:
+$$ ATT = Y_{22}(1) - Y_{22}(0) $$
+
+. . . 
+
+Use parallel trends to calculate the counterfactual:
+
+$$ Y_{22}(0) = Y_{12}(0) + Y_{21}(0) - Y_{11}(0) $$
+
+. . . 
+
+So:
+$$ \begin{multline} ATT = \mathbb{E}[Y|j=2,t=2] - \mathbb{E}[Y|j=1,t=2] \\ - (\mathbb{E}[Y|j=2,t=1]-\mathbb{E}[Y|j=1,t=1]) \end{multline} $$
+
+Hence the name: **difference-in-differences**.
+
+## Graphical Intuition
+
+## Example: Minimum Wages
+
+:::{.incremental}
+- Do higher minimum wages decrease employment?
+- Card and Krueger (1994) consider impact of New Jersey's 1992 minimum wage increase from \$4.25 to \$5.05 per hour.
+- Compare employment in 410 fast-food restaurants in New Jersey and eastern Pennsylvania before and after rise.
+- Use survey data on employment and wages from two waves:
+  - March 92 - one month before min wage increase
+  - Dec 92 - eight months after
+:::
+
+## Estimation and Inference
+
+:::{.incremental}
+- Estimation is straightforward in the $2\times2$ case (exercise)
+- Let's work out inference in two cases:
+    1. Each unit and time period has an independent sample
+    2. Individuals in each unit are observed in both periods
+:::
+
+## Card \& Krueger Results
+
+![](/figures/CardKruegerResults.png)
+
+## Card \& Krueger Results
+
+:::{.incremental}
+- Card \& Krueger find **no significant effect** of minimum wage on employment. 
+- Are you satisfied with this evidence? Any potential issues? 
+- This paper sparked a decades-long empirical debate. Still no resolution. 
+- Depends who you read, what specification you use, which outcomes you look at, who you look at. 
+- Most recent: Seattle minimum wage study - two groups of researchers finding conflicting results. 
+- Krueger was Assistant Secretary of Treasury and chair of Obama's CEA.
+:::

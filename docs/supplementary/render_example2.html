@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Econ4261 - Week 9</title>
+<title>Econ4261 - Rendering example</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,35 +101,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -218,11 +189,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1 - Introduction</a></li>
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">2 - The Data</a></li>
-  <li><a href="#some-graphical-analysis" id="toc-some-graphical-analysis" class="nav-link" data-scroll-target="#some-graphical-analysis">3 - Some Graphical Analysis</a></li>
-  <li><a href="#analysis-on-employment-tables-2-and-3" id="toc-analysis-on-employment-tables-2-and-3" class="nav-link" data-scroll-target="#analysis-on-employment-tables-2-and-3">4 - Analysis on Employment (Tables 2 and 3)</a></li>
-  <li><a href="#other-outcomes" id="toc-other-outcomes" class="nav-link" data-scroll-target="#other-outcomes">5 - Other Outcomes</a></li>
+  <li><a href="#heading" id="toc-heading" class="nav-link active" data-scroll-target="#heading">Heading</a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +198,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 9</h1>
+<h1 class="title">Rendering example</h1>
 </div>
 
 
@@ -248,42 +215,11 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>1 - Introduction</h1>
-<p>In <a href="https://www.aeaweb.org/articles?id=10.1257/aer.103.6.2121">The China Syndrome: Local Labor Market Effects of Import Competition in the United States</a>, AER (2013), the authors (Autor, Dorn and Hanson) examine the effect of China’s rise in global trade on local labor market outcomes in the United States such as unemployment, labor force participation, wages, and welfare dependence.</p>
-<p>The authors begin by proposing a simple measure of the growth China’s local import penetration into a local market <span class="math inline">\(i\)</span> in the US:</p>
-<p><span class="math display">\[ \Delta IPW_{uit} =  \sum_{j}\frac{L_{ijt}}{L_{ujt}}\frac{\Delta M_{ucjt}}{L_{it}} \]</span></p>
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(\Delta M_{ucjt}\)</span> is the growth in overall imports from China to the US in industry <span class="math inline">\(j\)</span></li>
-<li><span class="math inline">\(L_{it}\)</span> is total employment in local labor market <span class="math inline">\(i\)</span> at the start of period <span class="math inline">\(t\)</span></li>
-<li><span class="math inline">\(L_{ijt}\)</span> is total employment in market <span class="math inline">\(i\)</span> in industry <span class="math inline">\(j\)</span> at the start of period <span class="math inline">\(t\)</span></li>
-<li><span class="math inline">\(L_{ujt}\)</span> is total employment in the US in industry <span class="math inline">\(j\)</span> at the start of period <span class="math inline">\(t\)</span></li>
-</ul>
-<p>In words: market <span class="math inline">\(i\)</span>’s per worker exposure is proportional to a weighted average of the national growth in imports for each industry <span class="math inline">\(j\)</span>, where the weights are the fraction of market <span class="math inline">\(i\)</span>’s industrial employment dedicated to <span class="math inline">\(j\)</span>. So, local markets where existing employment is highly reliant on industries for which Chinese imports are growing more are more exposed to the trade shock.</p>
-<p>The authors estimate a series of specifications of the form:</p>
-<p><span class="math display">\[ \Delta Y_{it} = \gamma_{t} + \beta_{1}\Delta IPW_{uit} + \mathbf{X}_{it}'\beta_{2} + e_{it} \]</span> where <span class="math inline">\(Y\)</span> are the outcomes of interest. One issue is that changes in import penetration could be a function of both <strong>supply</strong> and <strong>demand</strong> shocks, which would have different impacts on employment and wages. To isolate the portion of the change in import competition that is due to the supply side, the authors construct an instrumental variable:</p>
-<p><span class="math display">\[ \Delta IPW_{oit} = \sum_{j}\frac{L_{ijt-1}}{L_{ujt-1}}\frac{\Delta M_{oct}}{L_{it-1}} \]</span> where:</p>
-<ul>
-<li><span class="math inline">\(\Delta M_{oct}\)</span> is the change in China’s exports to other high income countries.</li>
-<li><span class="math inline">\(L_{ijt-1}\)</span> is lagged employment and so on.</li>
-</ul>
-<p>The first substitution is to isolate supply side factors driving increases in China’s exports, while the second is to protect against the possibility that current employment shares may be determined in anticipation of future import competition.</p>
-<p>This paper studies more conventional effects, but follow-up papers suggest that exposure to import competition also lead to <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20170011">political polarization</a> and <a href="https://www.aeaweb.org/articles?id=10.1257/aeri.20180010">changes in the marriage prospects of men</a>.</p>
-</section>
-<section id="the-data" class="level1">
-<h1>2 - The Data</h1>
-<p>I downloaded the data from the <a href="https://www.openicpsr.org/openicpsr/project/112670/version/V1/view">AER’s replication files</a>. The original data are in stata format, which we can read in as follows:</p>
+<section id="heading" class="level2">
+<h2 class="anchored" data-anchor-id="heading">Heading</h2>
+<p>Text where I say something, then I show you some code with ggplot output:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> readstata13<span class="sc">::</span><span class="fu">read.dta13</span>(<span class="st">"../data/workfile_china.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>There are lots of variables in here, but the replication materials provide a guide.</p>
-</section>
-<section id="some-graphical-analysis" class="level1">
-<h1>3 - Some Graphical Analysis</h1>
-<p>Figure 2 Panel A in the paper shows how the instrument (“change in predicted import exposure”) correlates with the endogenous variable (“change in import exposure”), controlling for the lagged share of manufacturing employment (which will be one of the controls in <span class="math inline">\(\mathbf{X}_{it}\)</span>. The graph shows the strength of the instrument. Panel B of the figure shows how the instrument itself predicts changes in manufacturing employment (the so-called “reduced form”), which you will replicate in your homework.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 </div>
@@ -298,137 +234,16 @@ window.Quarto = {
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_trade <span class="ot">&lt;-</span> <span class="fu">lm</span>(d_tradeusch_pw <span class="sc">~</span> l_shind_manuf_cbp, <span class="at">weights =</span> timepwt48,d)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mod_IV <span class="ot">&lt;-</span> <span class="fu">lm</span>(d_tradeotch_pw_lag <span class="sc">~</span> l_shind_manuf_cbp,<span class="at">weights =</span> timepwt48,d)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>resid_trade <span class="ot">&lt;-</span> <span class="fu">residuals</span>(mod_trade)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>resid_IV <span class="ot">&lt;-</span> <span class="fu">residuals</span>(mod_IV)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>resid_IV,<span class="at">y=</span>resid_trade)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Chg in Predicted Import Exposure per Worker (in kUSD)"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Change in Import Exposure per Worker (in kUSD)"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">rnorm</span>(<span class="dv">10</span>),<span class="at">y=</span><span class="fu">rnorm</span>(<span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x,y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-9_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="render_example2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="analysis-on-employment-tables-2-and-3" class="level1">
-<h1>4 - Analysis on Employment (Tables 2 and 3)</h1>
-<p>The first three columns of Table 2 show TSLS estimates of the effect of increases in trade exposure on manufacturing employment using different periods of data in a basic model without controls. We will see how to implement TSLS in the <em>fixest</em> package by replicating the first three columns. Some notes:</p>
-<ol type="1">
-<li>change in manufacturing is given by the variable <code>d_sh_emlp_mfg</code></li>
-<li>the change in import exposure is <code>d_tradeusch_pw</code></li>
-<li>the predicted change given global trends (the instrument) is <code>d_tradeotch_pw_lag</code></li>
-<li>local labor markets are defined at the commuting zone level, and so each observation in the regressions is weighted using population share of the CZ, given by <em>timepwt48</em></li>
-<li>standard errors are clustered by state level</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># column (1)</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yr<span class="sc">==</span><span class="dv">1990</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(d_sh_empl_mfg <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> d_tradeusch_pw <span class="sc">~</span> d_tradeotch_pw_lag,<span class="at">data=</span>.,<span class="at">weights =</span> <span class="sc">~</span> timepwt48,<span class="at">cluster =</span> <span class="st">"statefip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TSLS estimation, Dep. Var.: d_sh_empl_mfg, Endo.: d_tradeusch_pw, Instr.: d_tradeotch_pw_lag
-Second stage: Dep. Var.: d_sh_empl_mfg
-Observations: 722 
-Weights: timepwt48 
-Standard-errors: Clustered (statefip) 
-                    Estimate Std. Error  t value   Pr(&gt;|t|)    
-(Intercept)        -1.056490   0.195430 -5.40598 2.1064e-06 ***
-fit_d_tradeusch_pw -0.887512   0.183204 -4.84439 1.4208e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 0.064517   Adj. R2: -0.137897
-F-test (1st stage), d_tradeusch_pw: stat = 574.9, p &lt; 2.2e-16, on 1 and 720 DoF.
-                        Wu-Hausman: stat = 105.8, p &lt; 2.2e-16, on 1 and 719 DoF.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># column (2)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yr<span class="sc">==</span><span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(d_sh_empl_mfg <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> d_tradeusch_pw <span class="sc">~</span> d_tradeotch_pw_lag,<span class="at">data=</span>., <span class="at">weights =</span> <span class="sc">~</span> timepwt48,<span class="at">cluster =</span> <span class="st">"statefip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TSLS estimation, Dep. Var.: d_sh_empl_mfg, Endo.: d_tradeusch_pw, Instr.: d_tradeotch_pw_lag
-Second stage: Dep. Var.: d_sh_empl_mfg
-Observations: 722 
-Weights: timepwt48 
-Standard-errors: Clustered (statefip) 
-                    Estimate Std. Error   t value   Pr(&gt;|t|)    
-(Intercept)        -0.846013   0.258465  -3.27322 1.9982e-03 ** 
-fit_d_tradeusch_pw -0.718382   0.064980 -11.05551 1.1385e-14 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 0.061999   Adj. R2: 0.137885
-F-test (1st stage), d_tradeusch_pw: stat = 580.8, p &lt; 2.2e-16, on 1 and 720 DoF.
-                        Wu-Hausman: stat =  84.9, p &lt; 2.2e-16, on 1 and 719 DoF.</code></pre>
-</div>
-</div>
-<p>Column (3) uses both the change from 1990-2000 and the change from 2000 to 2007, which allows us to add a time fixed effect to the regression. Now how this changes how we write the formula to add a year effect below:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># column (3)</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yr<span class="sc">&gt;=</span><span class="dv">1990</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(d_sh_empl_mfg <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> yr <span class="sc">|</span> d_tradeusch_pw <span class="sc">~</span> d_tradeotch_pw_lag,<span class="at">data=</span>.,<span class="at">weights=</span><span class="sc">~</span> timepwt48,<span class="at">cluster=</span><span class="st">"statefip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TSLS estimation, Dep. Var.: d_sh_empl_mfg, Endo.: d_tradeusch_pw, Instr.: d_tradeotch_pw_lag
-Second stage: Dep. Var.: d_sh_empl_mfg
-Observations: 1,444 
-Weights: timepwt48 
-Fixed-effects: yr: 2
-Standard-errors: Clustered (statefip) 
-                   Estimate Std. Error  t value   Pr(&gt;|t|)    
-fit_d_tradeusch_pw -0.74603   0.068807 -10.8424 2.2079e-14 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 0.062748     Adj. R2: 0.065058
-                 Within R2: 0.031189
-F-test (1st stage), d_tradeusch_pw: stat = 1,147.0, p &lt; 2.2e-16, on 1 and 1,441 DoF.
-                        Wu-Hausman: stat =   152.6, p &lt; 2.2e-16, on 1 and 1,440 DoF.</code></pre>
-</div>
-</div>
-<p>Table (3) in the paper augments this analysis by including controls (<span class="math inline">\(\mathbf{X}_{it}\)</span>) that in theory can weaken the required assumptions on the instrument and test for robustness of the results. For example, each of columns (2-6) includes a control for the share of manufacturing in a CZ’s start-of-period employment (<code>l_shind_manuf_cbp</code>). From the paper: “This specification further addresses the concern that the China exposure variable may in part be picking up an overall trend decline in US manufacturing rather than the component that is due to differences across manufacturing industries in their exposure to rising Chinese competition.”</p>
-<p>Column (4) includes this variable on top of a measure of the percent of the working population in the CZ with college education (<code>l_sh_popedu_c</code>), the share of the CZ who are foreign born (<code>l_sh_popfborn</code>), the employment rate among women (<code>l_sh_empl_f</code>) on top of time dummies and census division fixed effects.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">feols</span>(d_sh_empl_mfg <span class="sc">~</span> l_shind_manuf_cbp <span class="sc">+</span> l_sh_popedu_c <span class="sc">+</span> l_sh_popfborn <span class="sc">+</span> l_sh_empl_f <span class="sc">+</span> reg_midatl <span class="sc">+</span> reg_encen <span class="sc">+</span> reg_wncen <span class="sc">+</span> reg_satl <span class="sc">+</span> reg_escen <span class="sc">+</span> reg_wscen <span class="sc">+</span> reg_mount <span class="sc">+</span> reg_pacif <span class="sc">|</span> yr<span class="sc">|</span> d_tradeusch_pw <span class="sc">~</span> d_tradeotch_pw_lag,<span class="at">data=</span>d,<span class="at">weights =</span> <span class="sc">~</span> timepwt48,<span class="at">cluster=</span><span class="st">"statefip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>TSLS estimation, Dep. Var.: d_sh_empl_mfg, Endo.: d_tradeusch_pw, Instr.: d_tradeotch_pw_lag
-Second stage: Dep. Var.: d_sh_empl_mfg
-Observations: 1,444 
-Weights: timepwt48 
-Fixed-effects: yr: 2
-Standard-errors: Clustered (statefip) 
-                    Estimate Std. Error   t value   Pr(&gt;|t|)    
-fit_d_tradeusch_pw -0.507971   0.082422 -6.163049 1.5242e-07 ***
-l_shind_manuf_cbp  -0.061327   0.017230 -3.559386 8.6276e-04 ***
-l_sh_popedu_c      -0.008222   0.016720 -0.491769 6.2517e-01    
-l_sh_popfborn      -0.007106   0.007965 -0.892129 3.7687e-01    
-l_sh_empl_f        -0.054137   0.025169 -2.150956 3.6652e-02 *  
-reg_midatl         -0.159267   0.198726 -0.801439 4.2691e-01    
-reg_encen           0.662912   0.304970  2.173699 3.4799e-02 *  
-reg_wncen           1.681112   0.538038  3.124523 3.0489e-03 ** 
-reg_satl           -0.437244   0.290169 -1.506858 1.3854e-01    
-reg_escen           0.451203   0.301457  1.496740 1.4115e-01    
-reg_wscen           0.536810   0.221788  2.420381 1.9423e-02 *  
-reg_mount           0.448619   0.288208  1.556578 1.2628e-01    
-reg_pacif           0.273869   0.214625  1.276034 2.0821e-01    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-RMSE: 0.053511     Adj. R2: 0.314332
-                 Within R2: 0.29541 
-F-test (1st stage), d_tradeusch_pw: stat = 555.2, p &lt; 2.2e-16, on 1 and 1,429 DoF.
-                        Wu-Hausman: stat =  72.6, p &lt; 2.2e-16, on 1 and 1,428 DoF.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note: the census division itself is not available, only dummies for each division, which are the reg_* variables we add to the formula above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="other-outcomes" class="level1">
-<h1>5 - Other Outcomes</h1>
-<p>Tables (4) through (9) in the paper show the effect of changes in import competition on other important outcomes using the same basic IV approach. In your final homework you will be asked to replicate some of these results using the same dataset.</p>
 
 
 </section>

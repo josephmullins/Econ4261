@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.539">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -200,7 +200,7 @@ window.Quarto = {
   </li>
   <li class="nav-item">
     <a class="nav-link" href="../Exercises.html"> 
-<span class="menu-text">Practice Exercises</span></a>
+<span class="menu-text">Additional Material</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -302,10 +302,10 @@ window.Quarto = {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Sample size of"</span>, N,<span class="st">": "</span>,b_est))</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sample size of 10 :  0.668910246726913"
-[1] "Sample size of 100 :  0.477182823632863"
-[1] "Sample size of 1000 :  0.502675169496832"
-[1] "Sample size of 10000 :  0.50136063905263"</code></pre>
+<pre><code>[1] "Sample size of 10 :  0.551419629106477"
+[1] "Sample size of 100 :  0.429516467381002"
+[1] "Sample size of 1000 :  0.510536199724854"
+[1] "Sample size of 10000 :  0.501477880437667"</code></pre>
 </div>
 </div>
 <p>Your answer for (1.2) should give you a formula for bias in <span class="math inline">\(\hat{\beta}_{1}\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>. All you need to do is edit the function and show the OLS estimator <em>with</em> measurement error has a bias that approaches what is implied by your formula.</p>
@@ -339,12 +339,12 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data_gen</span>(<span class="sc">-</span><span class="fl">0.5</span>) <span class="co"># &lt;- set the true value of beta to be -0.5</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d,<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-5_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -357,12 +357,12 @@ window.Quarto = {
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>demean <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span><span class="fu">as.factor</span>(id))) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,<span class="at">se=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -378,22 +378,22 @@ lm(formula = y ~ 0 + x + as.factor(id), data = d)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.20862 -0.06797 -0.01193  0.06648  0.26154 
+-0.22101 -0.07281 -0.00354  0.06912  0.24513 
 
 Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-x              -0.489661   0.099024  -4.945 3.32e-06 ***
-as.factor(id)1 -1.005694   0.099704 -10.087  &lt; 2e-16 ***
-as.factor(id)2 -0.543963   0.053485 -10.170  &lt; 2e-16 ***
-as.factor(id)3  0.004453   0.022858   0.195    0.846    
-as.factor(id)4  0.512718   0.052588   9.750 6.25e-16 ***
-as.factor(id)5  1.005613   0.099374  10.119  &lt; 2e-16 ***
+               Estimate Std. Error t value Pr(&gt;|t|)    
+x              -0.40290    0.10436  -3.861 0.000207 ***
+as.factor(id)1 -0.90669    0.10876  -8.337 6.25e-13 ***
+as.factor(id)2 -0.45168    0.05816  -7.766 9.87e-12 ***
+as.factor(id)3  0.05094    0.02390   2.132 0.035635 *  
+as.factor(id)4  0.45092    0.06131   7.354 7.05e-11 ***
+as.factor(id)5  0.91881    0.10654   8.624 1.54e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1021 on 94 degrees of freedom
-Multiple R-squared:  0.9377,    Adjusted R-squared:  0.9337 
-F-statistic: 235.7 on 6 and 94 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.1068 on 94 degrees of freedom
+Multiple R-squared:  0.9229,    Adjusted R-squared:  0.918 
+F-statistic: 187.6 on 6 and 94 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> x,demean) <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -404,17 +404,17 @@ lm(formula = y ~ 0 + x, data = demean)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.20862 -0.06797 -0.01193  0.06648  0.26154 
+-0.22101 -0.07281 -0.00354  0.06912  0.24513 
 
 Coefficients:
   Estimate Std. Error t value Pr(&gt;|t|)    
-x -0.48966    0.09649  -5.075 1.82e-06 ***
+x  -0.4029     0.1017  -3.962  0.00014 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.09954 on 99 degrees of freedom
-Multiple R-squared:  0.2064,    Adjusted R-squared:  0.1984 
-F-statistic: 25.75 on 1 and 99 DF,  p-value: 1.819e-06</code></pre>
+Residual standard error: 0.1041 on 99 degrees of freedom
+Multiple R-squared:  0.1369,    Adjusted R-squared:  0.1281 
+F-statistic:  15.7 on 1 and 99 DF,  p-value: 0.0001403</code></pre>
 </div>
 </div>
 
@@ -636,12 +636,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
