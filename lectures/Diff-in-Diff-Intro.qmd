@@ -97,7 +97,7 @@ rbind(d0,d1) %>%
 - Let $t$ index periods $t\in\{1,2\}$
 - Let $Y(p)$ be the **potential outcome** of interest where $p\in\{0,1\}$ indicates treatment
 - Let $P(j,t)\in\{0,1\}$ indicate whether the policy is in place. Here:
-$$ P(1,1)=P(1,2) = 0\ \text{and}\ P(1,1)=0,\ P(1,2) = 1 $$
+$$ P(1,1)=P(1,2) = 0\ \text{and}\ P(2,1)=0,\ P(2,2) = 1 $$
 - So policy introduced in unit 2 in period 2.
 :::
 
