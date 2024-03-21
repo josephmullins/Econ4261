@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.539">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -200,7 +200,7 @@ window.Quarto = {
   </li>
   <li class="nav-item">
     <a class="nav-link" href="../Exercises.html"> 
-<span class="menu-text">Practice Exercises</span></a>
+<span class="menu-text">Additional Material</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -220,6 +220,7 @@ window.Quarto = {
   <ul>
   <li><a href="#part-1-linear-regression" id="toc-part-1-linear-regression" class="nav-link active" data-scroll-target="#part-1-linear-regression">Part 1: Linear Regression</a></li>
   <li><a href="#part-2-theory" id="toc-part-2-theory" class="nav-link" data-scroll-target="#part-2-theory">Part 2: Theory</a></li>
+  <li><a href="#a-disclaimer-for-ipums-cps-data" id="toc-a-disclaimer-for-ipums-cps-data" class="nav-link" data-scroll-target="#a-disclaimer-for-ipums-cps-data">A Disclaimer for IPUMS CPS data</a></li>
   </ul>
 </nav>
     </div>
@@ -252,30 +253,32 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">==</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span>(<span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.2.1     ✔ dplyr   1.1.1
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   2.0.0     ✔ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">==</span><span class="dv">2018</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span>(<span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Suppose we wanted to estimate the conditional expectation of wages given age and sex using a linear model. As a first step, let’s try:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> AGE <span class="sc">+</span> SEX,D)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> AGE <span class="sc">+</span> SEX,D)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -300,8 +303,8 @@ F-statistic: 474.7 on 2 and 11131 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Clearly, age is a strong predictor of wages (for obvious reasons). How do we know that this linear model works well? Let’s try adding <span class="math inline">\(AGE^2\)</span> to the specification:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="fu">poly</span>(AGE,<span class="dv">2</span>) <span class="sc">+</span> SEX,D)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="fu">poly</span>(AGE,<span class="dv">2</span>) <span class="sc">+</span> SEX,D)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -328,10 +331,10 @@ F-statistic: 545.6 on 3 and 11130 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Did this help very much? One way to see this is to look at the <span class="math inline">\(R^2\)</span>, which we will go over in class. Informally, you can think of it as the fraction of the overall variation in the outcome variable (log wages) that is explained by the right hand side variables. Notice that when we add <span class="math inline">\(AGE^2\)</span>, we increase the amount of variation that we can explain by more than half.</p>
 <p>Often in simple scenarios like this one, we can visualize the fit of the model. Since age is a discrete random variable, this is actually pretty simple in this case. First let’s take averages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mean_wage <span class="ot">&lt;-</span> D <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AGE,SEX) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanwage=</span><span class="fu">mean</span>(<span class="fu">log</span>(Wage),<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">case=</span><span class="st">"true mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_wage <span class="ot">&lt;-</span> D <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AGE,SEX) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">meanwage=</span><span class="fu">mean</span>(<span class="fu">log</span>(Wage),<span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">case=</span><span class="st">"true mean"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'AGE'. You can override using the `.groups`
 argument.</code></pre>
@@ -339,35 +342,35 @@ argument.</code></pre>
 </div>
 <p>Now in the same dataframe let’s fill in both models’ prediction for mean wages.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1,mean_wage)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2,mean_wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod1,mean_wage)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2,mean_wage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now let’s plot the prediction against the actual first model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod1,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod1,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>And the second:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod2,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod2,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>So it looks like the second model is doing pretty well! One might be tempted to allow for different age trends by sex. This can be done by specifying an interaction between sex and the polynomial like so:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> SEX<span class="sc">*</span><span class="fu">poly</span>(AGE,<span class="dv">2</span>),D)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> SEX<span class="sc">*</span><span class="fu">poly</span>(AGE,<span class="dv">2</span>),D)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -395,12 +398,12 @@ F-statistic: 332.5 on 5 and 11128 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Note that the gain in model fit (as measured by <span class="math inline">\(R^2\)</span>) is much more modest. The visual fit is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod3,mean_wage)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod3,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod3,mean_wage)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod3,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-3_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -408,8 +411,8 @@ F-statistic: 332.5 on 5 and 11128 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>There seems to be a clear improvement in fitting wages for younger ages here.</p>
 <p>Of course, the linear model can also perfectly fit the conditional sample means, we just need to include a dummy variable for each combination of age and sex in the data. We have either talked about dummy variables in class already or we will do very soon. More on this in recitation next week. For reference, this can be achieved in lm by interacting AGE dummies with SEX dummies:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="fu">as.factor</span>(AGE)<span class="sc">*</span>SEX,D)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Wage) <span class="sc">~</span> <span class="fu">as.factor</span>(AGE)<span class="sc">*</span>SEX,D)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -524,12 +527,12 @@ Residual standard error: 0.5611 on 11038 degrees of freedom
 Multiple R-squared:  0.1452,    Adjusted R-squared:  0.1378 
 F-statistic: 19.73 on 95 and 11038 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod4 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod4,mean_wage)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod4,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mean_wage<span class="sc">$</span>mod4 <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod4,mean_wage)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_wage,<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>meanwage,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>AGE,<span class="at">y=</span>mod4,<span class="at">color=</span>SEX))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -546,48 +549,54 @@ F-statistic: 19.73 on 95 and 11038 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Now, suppose that (1) <span class="math inline">\(\beta&gt;0\)</span>; and (2) You incorrectly test the hypothesis under the assumption that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent; and (3) The null is true (<span class="math inline">\(\mu_{X}=\mu_{Y}\)</span>)</p>
 <p>For a given target size <span class="math inline">\(\alpha\)</span> of the test, is the actual size of the test larger or smaller than what you intended as <span class="math inline">\(N\)</span> grows large? you can use the simulation code below to help you:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>monte_carlo_test <span class="ot">&lt;-</span> <span class="cf">function</span>(B,N,beta,alpha) {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  zcrit <span class="ot">=</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>) <span class="co">#&lt;- two-sided critical value</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  reject <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">=</span> <span class="fu">rnorm</span>(N) <span class="co">#&lt;- draw X as a standard normal with mean 0 and variance 1</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">=</span> beta<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(N) <span class="co">#&lt;- draw Y as a standard normal with mean 0, variance 1+beta and covarariance(x,y) =beta</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    test_stat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(x)<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">/</span><span class="fu">sqrt</span>((<span class="fu">var</span>(x)<span class="sc">+</span><span class="fu">var</span>(y))<span class="sc">/</span>N) <span class="co">#&lt;- test statistic under incorrect assumption</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    reject[b] <span class="ot">&lt;-</span> <span class="fu">abs</span>(test_stat)<span class="sc">&gt;</span>zcrit</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(reject) <span class="co">#&lt;- estimate size of test using simulation</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>monte_carlo_test <span class="ot">&lt;-</span> <span class="cf">function</span>(B,N,beta,alpha) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  zcrit <span class="ot">=</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>) <span class="co">#&lt;- two-sided critical value</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  reject <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">=</span> <span class="fu">rnorm</span>(N) <span class="co">#&lt;- draw X as a standard normal with mean 0 and variance 1</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">=</span> beta<span class="sc">*</span>x <span class="sc">+</span> <span class="fu">rnorm</span>(N) <span class="co">#&lt;- draw Y as a standard normal with mean 0, variance 1+beta and covarariance(x,y) =beta</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    test_stat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(x)<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">/</span><span class="fu">sqrt</span>((<span class="fu">var</span>(x)<span class="sc">+</span><span class="fu">var</span>(y))<span class="sc">/</span>N) <span class="co">#&lt;- test statistic under incorrect assumption</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    reject[b] <span class="ot">&lt;-</span> <span class="fu">abs</span>(test_stat)<span class="sc">&gt;</span>zcrit</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(reject) <span class="co">#&lt;- estimate size of test using simulation</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This simulation is basically telling you the answer but it’s more important that you understand <em>why</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">50</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">50</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0194</code></pre>
+<pre><code>[1] 0.026</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">100</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">100</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0216</code></pre>
+<pre><code>[1] 0.023</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">1000</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">1000</span>,<span class="fl">0.3</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.019</code></pre>
+<pre><code>[1] 0.0172</code></pre>
 </div>
 </div>
 <p>Compared to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">50</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">50</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0498</code></pre>
+<pre><code>[1] 0.0504</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">100</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">100</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0508</code></pre>
+<pre><code>[1] 0.0524</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">1000</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monte_carlo_test</span>(<span class="dv">5000</span>,<span class="dv">1000</span>,<span class="fl">0.</span>,<span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.051</code></pre>
+<pre><code>[1] 0.0474</code></pre>
 </div>
 </div>
+</section>
+<section id="a-disclaimer-for-ipums-cps-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-disclaimer-for-ipums-cps-data">A Disclaimer for IPUMS CPS data</h2>
+<p>These data are a subsample of the IPUMS CPS data available from cps.ipums.org. Any use of these data should be cited as follows:</p>
+<p>Sarah Flood, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert Warren, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Megan Schouweiler, and Michael Westberry. IPUMS CPS: Version 11.0 [dataset]. Minneapolis, MN: IPUMS, 2023. <a href="https://doi.org/10.18128/D030.V11.0" class="uri">https://doi.org/10.18128/D030.V11.0</a></p>
+<p>The CPS data file is intended only for exercises as part of ECON4261. Individuals are not to redistribute the data without permission. Contact <a href="mailto:ipums@umn.edu" class="email">ipums@umn.edu</a> for redistribution requests. For all other uses of these data, please access data directly via <a href="http://cps.ipums.org/">cps.ipums.org</a>.</p>
 
 
 </section>
@@ -754,12 +763,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {

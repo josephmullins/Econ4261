@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.539">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
   <li class="nav-item">
     <a class="nav-link" href="../Exercises.html"> 
-<span class="menu-text">Practice Exercises</span></a>
+<span class="menu-text">Additional Material</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -194,7 +194,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#piping" id="toc-piping" class="nav-link" data-scroll-target="#piping">Piping</a></li>
   </ul></li>
   <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing data:</a></li>
-  <li><a href="#visualizing-data" id="toc-visualizing-data" class="nav-link" data-scroll-target="#visualizing-data">Visualizing data:</a></li>
+  <li><a href="#visualizing-data" id="toc-visualizing-data" class="nav-link" data-scroll-target="#visualizing-data">Visualizing data:</a>
+  <ul class="collapse">
+  <li><a href="#a-disclaimer-for-ipums-cps-data" id="toc-a-disclaimer-for-ipums-cps-data" class="nav-link" data-scroll-target="#a-disclaimer-for-ipums-cps-data">A Disclaimer for IPUMS CPS data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -252,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -263,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -274,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -292,12 +295,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 44424 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>Warning: Removed 44424 rows containing non-finite values (stat_bin).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -306,12 +309,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 119097 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>Warning: Removed 119097 rows containing non-finite values (stat_bin).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -320,12 +323,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 391529 rows containing non-finite values (`stat_bin()`).</code></pre>
+<pre><code>Warning: Removed 391529 rows containing non-finite values (stat_bin).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -402,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -415,13 +418,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'YEAR'. You can override using the
-`.groups` argument.</code></pre>
+<pre><code>`summarise()` has grouped output by 'YEAR'. You can override using the `.groups`
+argument.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -441,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -457,22 +460,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`summarise()` has grouped output by 'YEAR', 'SEX'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Week-2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Week-2_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<section id="a-disclaimer-for-ipums-cps-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-disclaimer-for-ipums-cps-data">A Disclaimer for IPUMS CPS data</h2>
+<p>These data are a subsample of the IPUMS CPS data available from cps.ipums.org. Any use of these data should be cited as follows:</p>
+<p>Sarah Flood, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert Warren, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Megan Schouweiler, and Michael Westberry. IPUMS CPS: Version 11.0 [dataset]. Minneapolis, MN: IPUMS, 2023. <a href="https://doi.org/10.18128/D030.V11.0" class="uri">https://doi.org/10.18128/D030.V11.0</a></p>
+<p>The CPS data file is intended only for exercises as part of ECON4261. Individuals are not to redistribute the data without permission. Contact <a href="mailto:ipums@umn.edu" class="email">ipums@umn.edu</a> for redistribution requests. For all other uses of these data, please access data directly via <a href="http://cps.ipums.org/">cps.ipums.org</a>.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -688,12 +693,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -914,171 +914,179 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb35" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Working with Data in `R` and the Tidyverse"</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>We are going to make use of a library called <span class="in">`tidyverse`</span> which is very popular and can simplify working with and depicting data. If you are comfortable using <span class="in">`R`</span> and prefer not to use these libraries that is totally fine.</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reading and Cleaning Data</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>First, we load the libraries we would like to use. If you are using the tidyverse for the first time you will need to install it by running:</span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("tidyverse")</span></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>Then:</span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>to load the package.</span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>Next, we want to load the data into memory. These data on wages comes from the Current Population Survey, administered by the Census Bureau and the Bureau of Labor Statistics. Learn more about the CPS <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.census.gov/programs-surveys/cps.html)</span>.</span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>One convenient way to get this data is through <span class="co">[</span><span class="ot">IPUMS</span><span class="co">](https://www.ipums.org/)</span>. Actually run here at the Minnesota Population Center. *NOTE*: if you want to know more about any of the variables we are using here, you can look them up on the IPUMS website, or consult the <span class="co">[</span><span class="ot">codebook</span><span class="co">](/data/cps-econ-4262.xml)</span>.</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>Since the data is stored as a .csv file, we will use the command <span class="in">`read.csv`</span>. Note that the file path below is written assuming that the data is stored in an adjacent folder called <span class="in">`data`</span>. **If you want to run this code, you have to make sure you are pointing to the directory where you have saved this data**.</span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>)</span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>For this exercise, we are going to just focus data from the years 1994 onwards. To drop other observations we can use the <span class="in">`filter`</span> command:</span>
-<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">filter</span>(D,YEAR<span class="sc">&gt;=</span><span class="dv">1994</span>)</span>
-<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>We are using these data to think about wages. Therefore I have already removed observations of individuals who are not working. However, there are still some issues to navigate. For instance, how do we compare wages for salaried workers to those who earn wages by the hour? Here we will impute wages for salaried workers by dividing their weekly earnings (<span class="in">`EARNWEEK`</span>) by their reported hours of work (<span class="in">`UHRSWORKT`</span>). For wage workers we use the variable HOURWAGE. </span>
-<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>However if we look at the distributions of these variables, we notice there are some strange outliers:</span>
-<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>UHRSWORKT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>EARNWEEK)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>HOURWAGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>This is because the CPS codes data that is missing for particular reasons as particular values. You always should be very cautious of this and read your data books carefully! In this case we'll replace those missing data codes with the value <span class="in">`NA`</span> which is a generic indicator for missing data. We use the function <span class="in">`na_if`</span> to do this. The function <span class="in">`mutate`</span> tells R to create new variables using those available in the dataframe <span class="in">`D`</span>.</span>
-<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">mutate</span>(D,<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
-<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>            <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>), <span class="co">#&lt;- there are three values to code as missing here so we use na_if three times.</span></span>
-<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a>            <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>))</span>
-<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>Now these variables look better:</span>
-<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>UHRSWORKT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>EARNWEEK)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>HOURWAGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
-<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a>Notice that we also coded hours as missing if they are equal to zero. These are not missing observations, but will create non-sensical imputed wages if individuals report positive earnings even though their usual hours of work are zero. Hence, we'll drop these also.</span>
-<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a>To calculate wages, we will use the function <span class="in">`case_when`</span> which creates new variables in a way that can depend on the values of another variable. In this case we will use PAIDHOUR - which tells us whether the worker earns an hourly wage or not - to tell us how we want to calculate the wage:</span>
-<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">mutate</span>(D,<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE))</span>
-<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Piping</span></span>
-<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>Taking stock, so far we did the following:</span>
-<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a><span class="ss"> 1. </span>Read in the data.</span>
-<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a><span class="ss"> 2. </span>Dropped observations from before 1994</span>
-<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a><span class="ss"> 3. </span>Re-coded specific values of some variables as missing.</span>
-<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a><span class="ss"> 4. </span>Coded a wage variable that depends on whether the worker is paid by the hour.</span>
-<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a>We can do all this more succinctly using something called "piping". The operator <span class="in">`%&gt;%`</span> tells <span class="in">`R`</span> to send the output of a function as the first argument of a function call on the next line. Since everything we did here was a modification to the dataframe <span class="in">`D`</span>, we can pipe the operations in a sequence as:</span>
-<span id="cb35-105"><a href="#cb35-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-108"><a href="#cb35-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">1994</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb35-111"><a href="#cb35-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
-<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
-<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
-<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span>
-<span id="cb35-116"><a href="#cb35-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-117"><a href="#cb35-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-118"><a href="#cb35-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a>In the last two lines, we also dropped all observations where the new variable Wage is missing.</span>
-<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summarizing data:</span></span>
-<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`summarize`</span> provides a useful way for us to look at summary statistics for data. For example, we can use it to calculate the mean and the variance of log wages:</span>
-<span id="cb35-124"><a href="#cb35-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-127"><a href="#cb35-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-128"><a href="#cb35-128" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-129"><a href="#cb35-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage)))</span>
-<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to make this calculation separately by year? We can do this using the <span class="in">`group_by`</span> command, which tells R to perform operations separately by groups of variables:</span>
-<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-137"><a href="#cb35-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-138"><a href="#cb35-138" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-139"><a href="#cb35-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage)))</span>
-<span id="cb35-141"><a href="#cb35-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-142"><a href="#cb35-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a><span class="fu"># Visualizing data:</span></span>
-<span id="cb35-144"><a href="#cb35-144" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to visualize changes in wage inequality since 1994. <span class="in">`ggplot`</span>, which is part of tidyverse, makes this really convenient. Here is one simple example:</span>
-<span id="cb35-145"><a href="#cb35-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-148"><a href="#cb35-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-149"><a href="#cb35-149" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-150"><a href="#cb35-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-152"><a href="#cb35-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>v)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
-<span id="cb35-153"><a href="#cb35-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-154"><a href="#cb35-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`aes`</span> is a crucial piece that tells ggplot how particular objects in the plot are connected to variables in the data. In this case we needed to only specify the <span class="in">`x`</span> and <span class="in">`y`</span> variables. We can also specify, for example, the color of a variable if we need to:</span>
-<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-160"><a href="#cb35-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-161"><a href="#cb35-161" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-162"><a href="#cb35-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> <span class="co">#&lt;-</span></span>
-<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX) <span class="sc">%&gt;%</span></span>
-<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>)</span>
-<span id="cb35-166"><a href="#cb35-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-167"><a href="#cb35-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-168"><a href="#cb35-168" aria-hidden="true" tabindex="-1"></a>What does this graph tell us about wage gaps over time?</span>
-<span id="cb35-169"><a href="#cb35-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-170"><a href="#cb35-170" aria-hidden="true" tabindex="-1"></a>Here is one more example that plots the wages separately by fertility status. We use the variable NCHILD to proxy for this:</span>
-<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-175"><a href="#cb35-175" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-176"><a href="#cb35-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kids =</span> NCHILD<span class="sc">&gt;</span><span class="dv">0</span>,<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-177"><a href="#cb35-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX,kids) <span class="sc">%&gt;%</span></span>
-<span id="cb35-178"><a href="#cb35-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX,<span class="at">linetype=</span>kids)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>)</span>
-<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb35-182"><a href="#cb35-182" aria-hidden="true" tabindex="-1"></a>What do you notice about the relative size of the wage gap in these two variables? If this looks a little crowded to you, you could also consider using the command ``facet_grid`` which arranges plots in a grid:</span>
-<span id="cb35-183"><a href="#cb35-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-186"><a href="#cb35-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
-<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kids =</span> NCHILD<span class="sc">&gt;</span><span class="dv">0</span>,<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX,kids) <span class="sc">%&gt;%</span></span>
-<span id="cb35-190"><a href="#cb35-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
-<span id="cb35-191"><a href="#cb35-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(. <span class="sc">~</span> kids) <span class="co">#&lt;- notice I increased the thickness of the lines also</span></span>
-<span id="cb35-192"><a href="#cb35-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb34" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Working with Data in `R` and the Tidyverse"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>We are going to make use of a library called <span class="in">`tidyverse`</span> which is very popular and can simplify working with and depicting data. If you are comfortable using <span class="in">`R`</span> and prefer not to use these libraries that is totally fine.</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reading and Cleaning Data</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>First, we load the libraries we would like to use. If you are using the tidyverse for the first time you will need to install it by running:</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("tidyverse")</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>Then:</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>to load the package.</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>Next, we want to load the data into memory. These data on wages comes from the Current Population Survey, administered by the Census Bureau and the Bureau of Labor Statistics. Learn more about the CPS <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.census.gov/programs-surveys/cps.html)</span>.</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>One convenient way to get this data is through <span class="co">[</span><span class="ot">IPUMS</span><span class="co">](https://www.ipums.org/)</span>. Actually run here at the Minnesota Population Center. *NOTE*: if you want to know more about any of the variables we are using here, you can look them up on the IPUMS website, or consult the <span class="co">[</span><span class="ot">codebook</span><span class="co">](/data/cps-econ-4262.xml)</span>.</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>Since the data is stored as a .csv file, we will use the command <span class="in">`read.csv`</span>. Note that the file path below is written assuming that the data is stored in an adjacent folder called <span class="in">`data`</span>. **If you want to run this code, you have to make sure you are pointing to the directory where you have saved this data**.</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>)</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>For this exercise, we are going to just focus data from the years 1994 onwards. To drop other observations we can use the <span class="in">`filter`</span> command:</span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">filter</span>(D,YEAR<span class="sc">&gt;=</span><span class="dv">1994</span>)</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>We are using these data to think about wages. Therefore I have already removed observations of individuals who are not working. However, there are still some issues to navigate. For instance, how do we compare wages for salaried workers to those who earn wages by the hour? Here we will impute wages for salaried workers by dividing their weekly earnings (<span class="in">`EARNWEEK`</span>) by their reported hours of work (<span class="in">`UHRSWORKT`</span>). For wage workers we use the variable HOURWAGE. </span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>However if we look at the distributions of these variables, we notice there are some strange outliers:</span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>UHRSWORKT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>EARNWEEK)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>HOURWAGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>This is because the CPS codes data that is missing for particular reasons as particular values. You always should be very cautious of this and read your data books carefully! In this case we'll replace those missing data codes with the value <span class="in">`NA`</span> which is a generic indicator for missing data. We use the function <span class="in">`na_if`</span> to do this. The function <span class="in">`mutate`</span> tells R to create new variables using those available in the dataframe <span class="in">`D`</span>.</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">mutate</span>(D,<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>            <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>), <span class="co">#&lt;- there are three values to code as missing here so we use na_if three times.</span></span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>            <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>))</span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>Now these variables look better:</span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>UHRSWORKT)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>EARNWEEK)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(D,<span class="fu">aes</span>(<span class="at">x=</span>HOURWAGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-82"><a href="#cb34-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-83"><a href="#cb34-83" aria-hidden="true" tabindex="-1"></a>Notice that we also coded hours as missing if they are equal to zero. These are not missing observations, but will create non-sensical imputed wages if individuals report positive earnings even though their usual hours of work are zero. Hence, we'll drop these also.</span>
+<span id="cb34-84"><a href="#cb34-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-85"><a href="#cb34-85" aria-hidden="true" tabindex="-1"></a>To calculate wages, we will use the function <span class="in">`case_when`</span> which creates new variables in a way that can depend on the values of another variable. In this case we will use PAIDHOUR - which tells us whether the worker earns an hourly wage or not - to tell us how we want to calculate the wage:</span>
+<span id="cb34-86"><a href="#cb34-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-89"><a href="#cb34-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-90"><a href="#cb34-90" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">mutate</span>(D,<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE))</span>
+<span id="cb34-91"><a href="#cb34-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-92"><a href="#cb34-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-93"><a href="#cb34-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-94"><a href="#cb34-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-95"><a href="#cb34-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Piping</span></span>
+<span id="cb34-96"><a href="#cb34-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-97"><a href="#cb34-97" aria-hidden="true" tabindex="-1"></a>Taking stock, so far we did the following:</span>
+<span id="cb34-98"><a href="#cb34-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-99"><a href="#cb34-99" aria-hidden="true" tabindex="-1"></a><span class="ss"> 1. </span>Read in the data.</span>
+<span id="cb34-100"><a href="#cb34-100" aria-hidden="true" tabindex="-1"></a><span class="ss"> 2. </span>Dropped observations from before 1994</span>
+<span id="cb34-101"><a href="#cb34-101" aria-hidden="true" tabindex="-1"></a><span class="ss"> 3. </span>Re-coded specific values of some variables as missing.</span>
+<span id="cb34-102"><a href="#cb34-102" aria-hidden="true" tabindex="-1"></a><span class="ss"> 4. </span>Coded a wage variable that depends on whether the worker is paid by the hour.</span>
+<span id="cb34-103"><a href="#cb34-103" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a>We can do all this more succinctly using something called "piping". The operator <span class="in">`%&gt;%`</span> tells <span class="in">`R`</span> to send the output of a function as the first argument of a function call on the next line. Since everything we did here was a modification to the dataframe <span class="in">`D`</span>, we can pipe the operations in a sequence as:</span>
+<span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/cps-econ-4261.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-110"><a href="#cb34-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR<span class="sc">&gt;=</span><span class="dv">1994</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-111"><a href="#cb34-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EARNWEEK =</span> <span class="fu">na_if</span>(EARNWEEK,<span class="fl">9999.99</span>),</span>
+<span id="cb34-112"><a href="#cb34-112" aria-hidden="true" tabindex="-1"></a>         <span class="at">UHRSWORKT =</span> <span class="fu">na_if</span>(<span class="fu">na_if</span>(<span class="fu">na_if</span>(UHRSWORKT,<span class="dv">999</span>),<span class="dv">997</span>),<span class="dv">0</span>),</span>
+<span id="cb34-113"><a href="#cb34-113" aria-hidden="true" tabindex="-1"></a>         <span class="at">HOURWAGE =</span> <span class="fu">na_if</span>(HOURWAGE,<span class="fl">999.99</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-114"><a href="#cb34-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Wage =</span> <span class="fu">case_when</span>(PAIDHOUR<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> EARNWEEK<span class="sc">/</span>UHRSWORKT,PAIDHOUR<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> HOURWAGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-115"><a href="#cb34-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Wage))</span>
+<span id="cb34-116"><a href="#cb34-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-117"><a href="#cb34-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-118"><a href="#cb34-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-119"><a href="#cb34-119" aria-hidden="true" tabindex="-1"></a>In the last two lines, we also dropped all observations where the new variable Wage is missing.</span>
+<span id="cb34-120"><a href="#cb34-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-121"><a href="#cb34-121" aria-hidden="true" tabindex="-1"></a><span class="fu"># Summarizing data:</span></span>
+<span id="cb34-122"><a href="#cb34-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-123"><a href="#cb34-123" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`summarize`</span> provides a useful way for us to look at summary statistics for data. For example, we can use it to calculate the mean and the variance of log wages:</span>
+<span id="cb34-124"><a href="#cb34-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-127"><a href="#cb34-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-128"><a href="#cb34-128" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-129"><a href="#cb34-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage)))</span>
+<span id="cb34-130"><a href="#cb34-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-131"><a href="#cb34-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-132"><a href="#cb34-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-133"><a href="#cb34-133" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to make this calculation separately by year? We can do this using the <span class="in">`group_by`</span> command, which tells R to perform operations separately by groups of variables:</span>
+<span id="cb34-134"><a href="#cb34-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-137"><a href="#cb34-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-138"><a href="#cb34-138" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-139"><a href="#cb34-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR) <span class="sc">%&gt;%</span></span>
+<span id="cb34-140"><a href="#cb34-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage)))</span>
+<span id="cb34-141"><a href="#cb34-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-142"><a href="#cb34-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-143"><a href="#cb34-143" aria-hidden="true" tabindex="-1"></a><span class="fu"># Visualizing data:</span></span>
+<span id="cb34-144"><a href="#cb34-144" aria-hidden="true" tabindex="-1"></a>Suppose we wanted to visualize changes in wage inequality since 1994. <span class="in">`ggplot`</span>, which is part of tidyverse, makes this really convenient. Here is one simple example:</span>
+<span id="cb34-145"><a href="#cb34-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-148"><a href="#cb34-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-149"><a href="#cb34-149" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-150"><a href="#cb34-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR) <span class="sc">%&gt;%</span></span>
+<span id="cb34-151"><a href="#cb34-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-152"><a href="#cb34-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>v)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb34-153"><a href="#cb34-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-154"><a href="#cb34-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-155"><a href="#cb34-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-156"><a href="#cb34-156" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`aes`</span> is a crucial piece that tells ggplot how particular objects in the plot are connected to variables in the data. In this case we needed to only specify the <span class="in">`x`</span> and <span class="in">`y`</span> variables. We can also specify, for example, the color of a variable if we need to:</span>
+<span id="cb34-157"><a href="#cb34-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-160"><a href="#cb34-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-161"><a href="#cb34-161" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-162"><a href="#cb34-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span> <span class="co">#&lt;-</span></span>
+<span id="cb34-163"><a href="#cb34-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX) <span class="sc">%&gt;%</span></span>
+<span id="cb34-164"><a href="#cb34-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage)),<span class="at">v =</span> <span class="fu">var</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-165"><a href="#cb34-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>)</span>
+<span id="cb34-166"><a href="#cb34-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-167"><a href="#cb34-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-168"><a href="#cb34-168" aria-hidden="true" tabindex="-1"></a>What does this graph tell us about wage gaps over time?</span>
+<span id="cb34-169"><a href="#cb34-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-170"><a href="#cb34-170" aria-hidden="true" tabindex="-1"></a>Here is one more example that plots the wages separately by fertility status. We use the variable NCHILD to proxy for this:</span>
+<span id="cb34-171"><a href="#cb34-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-174"><a href="#cb34-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-175"><a href="#cb34-175" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-176"><a href="#cb34-176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kids =</span> NCHILD<span class="sc">&gt;</span><span class="dv">0</span>,<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-177"><a href="#cb34-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX,kids) <span class="sc">%&gt;%</span></span>
+<span id="cb34-178"><a href="#cb34-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-179"><a href="#cb34-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX,<span class="at">linetype=</span>kids)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>)</span>
+<span id="cb34-180"><a href="#cb34-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-181"><a href="#cb34-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-182"><a href="#cb34-182" aria-hidden="true" tabindex="-1"></a>What do you notice about the relative size of the wage gap in these two variables? If this looks a little crowded to you, you could also consider using the command ``facet_grid`` which arranges plots in a grid:</span>
+<span id="cb34-183"><a href="#cb34-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-186"><a href="#cb34-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb34-187"><a href="#cb34-187" aria-hidden="true" tabindex="-1"></a>D <span class="sc">%&gt;%</span></span>
+<span id="cb34-188"><a href="#cb34-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">kids =</span> NCHILD<span class="sc">&gt;</span><span class="dv">0</span>,<span class="at">SEX =</span> <span class="fu">factor</span>(SEX,<span class="at">levels=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-189"><a href="#cb34-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR,SEX,kids) <span class="sc">%&gt;%</span></span>
+<span id="cb34-190"><a href="#cb34-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">log</span>(Wage))) <span class="sc">%&gt;%</span></span>
+<span id="cb34-191"><a href="#cb34-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>YEAR,<span class="at">y=</span>m,<span class="at">color=</span>SEX)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Mean Log Wage"</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(. <span class="sc">~</span> kids) <span class="co">#&lt;- notice I increased the thickness of the lines also</span></span>
+<span id="cb34-192"><a href="#cb34-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-193"><a href="#cb34-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-194"><a href="#cb34-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-195"><a href="#cb34-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## A Disclaimer for IPUMS CPS data</span></span>
+<span id="cb34-196"><a href="#cb34-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-197"><a href="#cb34-197" aria-hidden="true" tabindex="-1"></a>These data are a subsample of the IPUMS CPS data available from cps.ipums.org. Any use of these data should be cited as follows:</span>
+<span id="cb34-198"><a href="#cb34-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-199"><a href="#cb34-199" aria-hidden="true" tabindex="-1"></a>  Sarah Flood, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert Warren, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Megan Schouweiler, and Michael Westberry. IPUMS CPS: Version 11.0 <span class="co">[</span><span class="ot">dataset</span><span class="co">]</span>. Minneapolis, MN: IPUMS, 2023. <span class="ot">&lt;https://doi.org/10.18128/D030.V11.0&gt;</span> </span>
+<span id="cb34-200"><a href="#cb34-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-201"><a href="#cb34-201" aria-hidden="true" tabindex="-1"></a>The CPS data file is intended only for exercises as part of ECON4261. Individuals are not to redistribute the data without permission. Contact <span class="ot">&lt;ipums@umn.edu&gt;</span> for redistribution requests. For all other uses of these data, please access data directly via <span class="co">[</span><span class="ot">cps.ipums.org</span><span class="co">](http://cps.ipums.org/)</span>.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
