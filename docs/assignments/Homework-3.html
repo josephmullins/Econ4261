@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.537">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -126,16 +126,47 @@ window.Quarto = {
 <span class="menu-text">Lecture Slides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../assignments/GroupProject.html"> 
-<span class="menu-text">Group Project</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="../Recitations.html"> 
 <span class="menu-text">Recitation Materials</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../Data.html"> 
 <span class="menu-text">Data</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../assignments/GroupProject.html">
+ <span class="dropdown-text">Group Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/Homework-1.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/Homework-2.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/Homework-3.html">
+ <span class="dropdown-text">Homework 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/Homework-4.html">
+ <span class="dropdown-text">Homework 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../assignments/Homework-5.html">
+ <span class="dropdown-text">Homework 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Exercises.html"> 
+<span class="menu-text">Additional Material</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -197,18 +228,18 @@ window.Quarto = {
 </section>
 <section id="question-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
-<p>Use a regression framework to replicate the paper’s evidence that (1) white sounding names receive more callbacks than black sounding names; and (2) white sounding names receive significantly more (at a significannce of 10%) callbacks when the resume quality is “high”, while black sounding names do not.</p>
+<p>Use a regression framework to replicate the paper’s evidence that (1) white sounding names receive more callbacks than black sounding names; and (2) white sounding names receive significantly more (at a significance of 10%) callbacks when the resume quality is “high”, while black sounding names do not.</p>
 </section>
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2:</h2>
 <p>Re-run the same analysis to document racial bias in callbacks (finding 1) using a regression framework, this time controlling for education and years of experience in the regression.</p>
 </section>
-<section id="question-3" class="level1">
-<h1>Question 3:</h1>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3:</h2>
 <p>Use a regression framework to test the null hypothesis that racial differences in callbacks are the same regardless of the applicant’s years of experience.</p>
 </section>
-<section id="question-4" class="level1">
-<h1>Question 4</h1>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
 <p>Consider the model:</p>
 <p><span class="math display">\[ \mathbb{E}[white|eduction] = \beta_{0} + \beta_{1}education \]</span></p>
 <p>where <code>white</code> is a dummy variable equal to 1 if the applicant has a white sounding name.</p>
@@ -379,7 +410,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
