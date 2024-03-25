@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\n\n\n\nApplication: the Child Penalty\n\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\nSlides\n\n\nApplication: the Child Penalty\nSlides\n\n\nApplication: Neighborhood Effects and Moving to Opportunity\nSlides\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -1720,5 +1720,180 @@
     "title": "Data",
     "section": "A Disclaimer for IPUMS CPS data",
     "text": "A Disclaimer for IPUMS CPS data\nThese data are a subsample of the IPUMS CPS data available from cps.ipums.org. Any use of these data should be cited as follows:\nSarah Flood, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert Warren, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Megan Schouweiler, and Michael Westberry. IPUMS CPS: Version 11.0 [dataset]. Minneapolis, MN: IPUMS, 2023. https://doi.org/10.18128/D030.V11.0\nThe CPS data file is intended only for exercises as part of ECON4261. Individuals are not to redistribute the data without permission. Contact ipums@umn.edu for redistribution requests. For all other uses of these data, please access data directly via cps.ipums.org."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#overview",
+    "href": "lectures/Diff-in-Diff-Regression.html#overview",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Overview",
+    "text": "Overview\nLast lecture:\n\nIntroduced the method of Difference in Differences to estimate the effect of treatment/policies\nSaw the crucial importance of parallel trends.\nDerived the sampling distribution of the DD estimator in a simple case.\n\n\nThis lecture:\n\nShow how we can use OLS to estimate the effect of policies using the parallel trends assumption.\nDiscuss some ways to test the underlying assumptions of the Diff in Diff approach.\nSee some applications of the approach and play with difference specifications.\nTalk some more about inference."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#a-regression-model",
+    "href": "lectures/Diff-in-Diff-Regression.html#a-regression-model",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "A Regression Model",
+    "text": "A Regression Model\n\n\nLet \\(n\\) index observations, \\(j\\) treatment units, and \\(t\\) time\n\\(P_{jt}\\in\\{0,1\\}\\) indicates if treatment/policy applies in unit \\(j\\) at time \\(t\\)\nAssume homogenous treatment effects: \\[ \\alpha = Y_{jt}(1) - Y_{jt}(0)\\ \\text{for all }j,t \\]\nExcerise: show that this implies \\[ \\mathbb{E}[Y_{n}|j,t] = \\gamma_{t} + \\mu_{j} + \\alpha P_{jt}\\] where \\(\\mu_{j}\\) and \\(\\gamma_{t}\\) are unit and time fixed effects"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#three-ways-to-write-the-same-model",
+    "href": "lectures/Diff-in-Diff-Regression.html#three-ways-to-write-the-same-model",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Three ways to write the same model",
+    "text": "Three ways to write the same model\nLet \\(P_{n} = P_{j(n)t(n)}\\). Then:\n\\[ Y_{n} = \\alpha P_{n} + \\sum_{y}\\mathbf{1}\\{y=t(n)\\}\\gamma_{y} + \\sum_{g}\\mathbf{1}\\{g=j(n)\\}\\mu_{g} + \\epsilon_{n} \\]\n\n\\[ Y_{n} = \\alpha P_{n} + \\mathbf{D}^{y}_{n}\\gamma + \\mathbf{D}^{g}_{n}\\mu + \\epsilon_{n} \\]\nwhere \\(\\mathbf{D}^{y}\\) and \\(\\mathbf{D}^{g}\\) are vectors of dummy variables.\n\n\n\\[ Y_{n} = \\alpha P_{n} + \\gamma_{t(n)} + \\mu_{j(n)} + \\epsilon_{n} \\]\n\n\nQuestion: How many dummies excluded?"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#some-comments",
+    "href": "lectures/Diff-in-Diff-Regression.html#some-comments",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Some Comments",
+    "text": "Some Comments\n\n\nWhen there are two units and two time periods, \\(\\hat{\\alpha}\\) is the simple diff-in-diff estimator\nThe regression model can handle arbitrarily many units and time periods\nStandard errors are implied by usual assumptions (hetero- vs homo-skedasticity)\n\\(P_{jt}\\) does not have to be discrete (examples coming up)\nCommon to include other control variables: \\[ Y_{n} = X_{n}\\beta + \\gamma_{t(n)} + \\mu_{j(n)} + \\alpha P_{n} + \\epsilon_{n} \\]"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#event-study-models",
+    "href": "lectures/Diff-in-Diff-Regression.html#event-study-models",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Event Study Models",
+    "text": "Event Study Models\nWhen we have many periods, we can identify a richer set of treatment effects (e.g. time-varying)\n\n\\[ Y_{n} = \\sum_{\\tau}\\alpha_{\\tau}\\mathbf{1}\\{t-t_{j(n)}^{*} = \\tau\\} + \\gamma_{t} + \\mu_{s} + \\epsilon_{n} \\]\nwhere \\(t^*_{j}\\) is the time period in which unit \\(j\\) receives the treatment.\n\n\nThis is called an Event Study\n\n\nExercise: What do we need in the data for each \\(\\alpha_{\\tau}\\) to be identified?"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#identification-examples-exercises",
+    "href": "lectures/Diff-in-Diff-Regression.html#identification-examples-exercises",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Identification Examples (Exercises)",
+    "text": "Identification Examples (Exercises)\nSuppose adoption looks like this:"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#identification-example-exercise",
+    "href": "lectures/Diff-in-Diff-Regression.html#identification-example-exercise",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Identification Example (Exercise)",
+    "text": "Identification Example (Exercise)\nSuppose adoption looks like this:\n\nLesson: OLS will use homogenous \\(ATE\\) a lot. Be careful!"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#diagnostics",
+    "href": "lectures/Diff-in-Diff-Regression.html#diagnostics",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Diagnostics",
+    "text": "Diagnostics\nCan we test these assumptions? Sometimes, and in general we can do some diagnostics.\n\n\nCheck for parallel trends prior to treatment.\n“Placebo tests”\n\nUse a fake treatment period.\nUse a fake treatment group.\nUse placebo outcomes (e.g. demographics, things that should not be affected by treatment).\nIdea: should get null effects for placebo tests."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#diagnostics-1",
+    "href": "lectures/Diff-in-Diff-Regression.html#diagnostics-1",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Diagnostics",
+    "text": "Diagnostics\nIn event studies, common to estimate:\n\\[ Y_{n} = \\sum_{\\tau=-T_{1}}^{T_{2}}\\alpha_{\\tau}\\mathbf{1}\\{t-t_{j(n)}^{*} = \\tau\\} + \\gamma_{t} + \\mu_{s} + \\epsilon_{n} \\]\n\n\nWhat do parallel trends say about \\(\\alpha_{\\tau}\\) for \\(\\tau&lt;0\\)?\nHow could we use estimates to test?\nExercise: testing multiple parameters\nIs there any other explanation?"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#example---employmet-in-nj-and-pa",
+    "href": "lectures/Diff-in-Diff-Regression.html#example---employmet-in-nj-and-pa",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Example - Employmet in NJ and PA",
+    "text": "Example - Employmet in NJ and PA\nTotal nonfarm employment:"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#example---employmet-in-nj-and-pa-1",
+    "href": "lectures/Diff-in-Diff-Regression.html#example---employmet-in-nj-and-pa-1",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Example - Employmet in NJ and PA",
+    "text": "Example - Employmet in NJ and PA\nChanes in total nonfarm employment:"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#how-to-test",
+    "href": "lectures/Diff-in-Diff-Regression.html#how-to-test",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "How to Test?",
+    "text": "How to Test?\nExercises:\n\nComparison of means.\nUse placebo treatment period."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#standard-errors-and-inference",
+    "href": "lectures/Diff-in-Diff-Regression.html#standard-errors-and-inference",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Standard Errors and Inference",
+    "text": "Standard Errors and Inference\n\n\nLook again at the graph\nNotice the jumps. Could this only be sampling error?\nNo. Likely correlated aggregate shocks.\nWhat assumption does this violate?\nHow to handle? Clustering\nTypically cluster at the level of the treatment unit"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-1-background",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-1-background",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application 1: Background",
+    "text": "Application 1: Background\n\nPresident Johnson’s “War On Poverty”: - A series of legislative actions that introduced and expanded some important programs. - (1) Food Stamps (2) Head Start (3) Medicaid. - Office of Economic Opportunity oversaw program rollout through adoption at the county level."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#approach",
+    "href": "lectures/Diff-in-Diff-Regression.html#approach",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Approach",
+    "text": "Approach\n\n\nConsider two counties that adopted a policy at different times.\nWe can’t directly compare children across counties (counties are different).\nWe can’t compare children within counties at different time periods (aggregate trends).\nBut we can use the initial difference to construct a counterfactual (difference in differences).\nThe models will get more complicated but this intuition underlies all of the linear models used in these papers."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#econometric-approach",
+    "href": "lectures/Diff-in-Diff-Regression.html#econometric-approach",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Econometric Approach",
+    "text": "Econometric Approach\n\\[ Y_{bct} = \\lambda_b + \\gamma_t + \\eta_c + \\sum_{a=-\\tau}^A\\alpha_{a}\\mathbf{1}\\{a=T_{c}-b\\} \\]\n\n\\(b\\) is birth year, \\(t\\) is calendar year, \\(c\\) is county\n\\(T_{c}\\) is the year that county \\(c\\) adopts the policy.\n\\(a\\) is the age of the cohort at the time of introduction.\nRequires sufficient variation in timing of county adoption.\nEach \\(\\alpha_{a}\\) is an Intent to Treat effect."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-food-stamps",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-food-stamps",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Food Stamps",
+    "text": "Application: Food Stamps"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-1",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-1",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Food Stamps",
+    "text": "Application: Food Stamps"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#diff-in-diff-model",
+    "href": "lectures/Diff-in-Diff-Regression.html#diff-in-diff-model",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Diff-in-Diff Model",
+    "text": "Diff-in-Diff Model\nTo exploit the differences in food stamp access, use diff-in-diff: \\[\n  \\begin{split}\n  y_{icb} = \\alpha + \\delta FSP_{cb} + X_{icb}\\beta + \\eta_c + \\lambda_b + \\gamma_t + \\theta_s \\times b \\\\ + \\varphi CB60_{c} \\times b + \\epsilon_{icb}\n  \\end{split}\n  \\]\n\nKey: \\(FSB_{cb}\\) is fraction of first 5 years with access to FSP.\n\\(\\lambda_b\\) - cohort effect\n\\(\\theta_s\\) - state-specific cohort trend\n\\(\\gamma_t\\) - time effect"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#findings",
+    "href": "lectures/Diff-in-Diff-Regression.html#findings",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Findings",
+    "text": "Findings\nFrom the paper:\nWe find that access to food stamps in utero and in early childhood leads to significant reductions in metabolic syndrome conditions (obesity, high blood pressure, heart disease, diabetes) in adulthood and, for women, increases in economic ­self-sufficiency (increases in educational attainment, earnings, income, and decreases in welfare participation)."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#food-stamps-take-2",
+    "href": "lectures/Diff-in-Diff-Regression.html#food-stamps-take-2",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Food Stamps Take 2",
+    "text": "Food Stamps Take 2\n\nThe PSID has a limited sample size.\nCensus is much bigger, but do not see county of birth.\nCan link individuals to place of birth through confidential SSA data."
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-2",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-2",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Food Stamps",
+    "text": "Application: Food Stamps"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-3",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-food-stamps-3",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Food Stamps",
+    "text": "Application: Food Stamps"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-head-start",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-head-start",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Head Start",
+    "text": "Application: Head Start"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#application-head-start-1",
+    "href": "lectures/Diff-in-Diff-Regression.html#application-head-start-1",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Application: Head Start",
+    "text": "Application: Head Start"
   }
 ]
