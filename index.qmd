@@ -23,7 +23,8 @@ Tuesdays and Thursdays, 8.15am-9.30am, Blegen Hall 145
 | March 21 | [Assignment 3](assignments/Homework-3.qmd) due |
 | April 11 | [Assignment 4](assignments/Homework-4.qmd) due |
 | April 25 | [Assignment 5](assignments/Homework-5.qmd) due |
-| April 23 and 25 | [Group project](assignments/GroupProject.qmd) presentations |
+| April 23 | Groups 1, 2, and 3 present [Group Project](assignments/GroupProject.qmd) |
+| April 25 | Groups 4 and 5 present [Group Project](assignments/GroupProject.qmd) |
 | May 5 | Individual writeups for [group project](assignments/GroupProject.qmd) due  |
 | May 7 | Final Exam (10:30am - 12:30pm, Blegen 145) [see the schedule](https://onestop.umn.edu/calendar/final-exam-times) |
 
