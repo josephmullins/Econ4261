@@ -129,7 +129,6 @@ $$ Y_{n} = \sum_{\tau=-T_{1}}^{T_{2}}\alpha_{\tau}\mathbf{1}\{t-t_{j(n)}^{*} = \
 Total nonfarm employment:
 
 ![](/figures/NJ-PENN-Emp.png){fig-align="center"}
-What about [this](/figures/NJ-PENN-DiffEmp.png)?
 
 
 ## Example - Employment in NJ and PA
