@@ -124,15 +124,15 @@ $$ Y_{n} = \sum_{\tau=-T_{1}}^{T_{2}}\alpha_{\tau}\mathbf{1}\{t-t_{j(n)}^{*} = \
 - Is there any other explanation?
 :::
 
-## Example - Employmet in NJ and PA
+## Example - Employment in NJ and PA
 
 Total nonfarm employment:
 
 ![](/figures/NJ-PENN-EMP.png)
 
-## Example - Employmet in NJ and PA
+## Example - Employment in NJ and PA
 
-Chanes in total nonfarm employment:
+Changes in total nonfarm employment:
 
 ![](/figures/NJ-PENN-DiffEMP.png)
 
@@ -156,10 +156,13 @@ Exercises:
 
 ## Application 1: Background
 
-:::{.incremental}
 President Johnson's "War On Poverty":
+
+:::{.incremental}
 - A series of legislative actions that introduced and expanded some important programs. 
-- (1) Food Stamps (2) Head Start (3) Medicaid. 
+  1. Food Stamps 
+  2. Head Start 
+  3. Medicaid. 
 - **Office of Economic Opportunity** oversaw program rollout through adoption at the **county level**.
 :::
 

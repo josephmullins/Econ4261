@@ -1817,7 +1817,7 @@
     "href": "lectures/Diff-in-Diff-Regression.html#application-1-background",
     "title": "A Regression Framework for Diff-in-Diff",
     "section": "Application 1: Background",
-    "text": "Application 1: Background\n\nPresident Johnson’s “War On Poverty”: - A series of legislative actions that introduced and expanded some important programs. - (1) Food Stamps (2) Head Start (3) Medicaid. - Office of Economic Opportunity oversaw program rollout through adoption at the county level."
+    "text": "Application 1: Background\nPresident Johnson’s “War On Poverty”:\n\n\nA series of legislative actions that introduced and expanded some important programs.\n\nFood Stamps\nHead Start\nMedicaid.\n\nOffice of Economic Opportunity oversaw program rollout through adoption at the county level."
   },
   {
     "objectID": "lectures/Diff-in-Diff-Regression.html#approach",
@@ -1895,5 +1895,19 @@
     "title": "A Regression Framework for Diff-in-Diff",
     "section": "Application: Head Start",
     "text": "Application: Head Start"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#example---employment-in-nj-and-pa",
+    "href": "lectures/Diff-in-Diff-Regression.html#example---employment-in-nj-and-pa",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Example - Employment in NJ and PA",
+    "text": "Example - Employment in NJ and PA\nTotal nonfarm employment:"
+  },
+  {
+    "objectID": "lectures/Diff-in-Diff-Regression.html#example---employment-in-nj-and-pa-1",
+    "href": "lectures/Diff-in-Diff-Regression.html#example---employment-in-nj-and-pa-1",
+    "title": "A Regression Framework for Diff-in-Diff",
+    "section": "Example - Employment in NJ and PA",
+    "text": "Example - Employment in NJ and PA\nChanges in total nonfarm employment:"
   }
 ]
