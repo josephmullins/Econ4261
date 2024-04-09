@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\nSlides\n\n\nApplication: the Child Penalty\nSlides\n\n\nApplication: Neighborhood Effects and Moving to Opportunity\nSlides\n\n\nInstrumental Variables\n\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\nSlides\n\n\nApplication: the Child Penalty\nSlides\n\n\nApplication: Neighborhood Effects and Moving to Opportunity\nSlides\n\n\nInstrumental Variables\nSlides\n\n\nRegression Discontinuity"
   },
   {
     "objectID": "about.html",
@@ -1909,5 +1909,222 @@
     "title": "A Regression Framework for Diff-in-Diff",
     "section": "Example - Employment in NJ and PA",
     "text": "Example - Employment in NJ and PA\nChanges in total nonfarm employment:"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#introduction",
+    "href": "lectures/IV-Intro.html#introduction",
+    "title": "Instrumental Variables",
+    "section": "Introduction",
+    "text": "Introduction\nSuppose we have a causal model:\n\\[ Y = \\mu + \\alpha D + \\eta \\]\nwhere \\(D\\) is the policy or treatment of interest. We are unwilling to assume that \\(D\\) is randomly assigned, so\n\\[ \\mathbb{E}[\\eta | D] = 0 \\]\nis a bad assumption. Where to next?"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#an-instrumental-variable",
+    "href": "lectures/IV-Intro.html#an-instrumental-variable",
+    "title": "Instrumental Variables",
+    "section": "An Instrumental Variable",
+    "text": "An Instrumental Variable\n\n\nSuppose that there is some variable \\(Z\\) that is randomly assigned\nSuppose that \\(Z\\) influences that value of \\(D\\)\nIf we can find such a variable in the real world, this is like a natural experiment…\n… and we can estimate \\(\\alpha\\) using Instrumental Variables"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-1-college-attendance",
+    "href": "lectures/IV-Intro.html#example-1-college-attendance",
+    "title": "Instrumental Variables",
+    "section": "Example 1: College Attendance",
+    "text": "Example 1: College Attendance\n\n\\(Y\\) is earnings\n\\(D\\) is college attendance\n\\(Z_{1}\\) is an offer of a tuition subsidy\n\\(Z_{2}\\) is distance to nearest college (just go with it)\n\n\nWe can use the variation in \\(D\\) that is induced by \\(Z_{1}\\) or \\(Z_{2}\\) (or both) to estimate \\(\\alpha\\)"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-2-incarceration",
+    "href": "lectures/IV-Intro.html#example-2-incarceration",
+    "title": "Instrumental Variables",
+    "section": "Example 2: Incarceration",
+    "text": "Example 2: Incarceration\n\n\\(Y\\) is earnings / employment / future criminal activity\n\\(D\\) is whether a guilty party receives a prison sentence\n\\(Z\\) is the stringency of a judge that is randomly assigned to the case\n\n\nWe can use the variation in \\(D\\) that is induced by \\(Z\\) to estimate \\(\\alpha\\)"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-elasticity-of-demand",
+    "href": "lectures/IV-Intro.html#example-3-elasticity-of-demand",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Elasticity of Demand",
+    "text": "Example 3: Elasticity of Demand\n\\[ \\log(Q_{D}) = \\alpha_{0} - \\alpha_{1}\\log(P) + \\eta_{D} \\]\nAnd\n\\[ \\log(Q_{S}) = \\gamma_{0} + \\gamma_{1}\\log(P) + \\gamma_{2}Z + \\eta_{S} \\]\n\n\\(Q_{D}\\) is quantity demanded\n\\(P\\) is price\n\\(Z\\) is a variable that shifts supply and is independent of demand\n\n\nWe can use the variation in \\(P\\) that is induced by \\(Z\\) to estimate \\(\\alpha_{1}\\)"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-1-use-the-distance-to-nearest-college",
+    "href": "lectures/IV-Intro.html#example-1-use-the-distance-to-nearest-college",
+    "title": "Instrumental Variables",
+    "section": "Example 1: Use the distance to nearest college",
+    "text": "Example 1: Use the distance to nearest college\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(X,Z)}  \\]\nSo an estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\widehat{\\mathbb{C}(Y,Z)}}{\\widehat{\\mathbb{C}(X,Z)}} = \\frac{\\sum_{n}\\hat{Y}_{n}\\hat{Z}_{n}}{\\sum_{n}\\hat{X}_{n}\\hat{Z}_{n}} \\]\nwhere \\(\\hat{Y} = Y - \\overline{Y}\\).\n\nUnbiased? Consistent? Asymptotically normal?"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-1-use-the-tuition-subsidy",
+    "href": "lectures/IV-Intro.html#example-1-use-the-tuition-subsidy",
+    "title": "Instrumental Variables",
+    "section": "Example 1: Use the tuition subsidy",
+    "text": "Example 1: Use the tuition subsidy\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(X,Z)} = \\frac{\\mathbb{E}[Y|Z=1] - \\mathbb{E}[Y|Z=0]}{\\mathbb{E}[D|Z=1] - \\mathbb{E}[D|Z=0]} \\]\nSo one estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\overline{Y}_{1} - \\overline{Y}_{0}}{\\overline{D}_{1}-\\overline{D}_{0}} \\]\n\nConsistent?"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-demand-elasticity",
+    "href": "lectures/IV-Intro.html#example-3-demand-elasticity",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Demand Elasticity",
+    "text": "Example 3: Demand Elasticity\n\\[ \\alpha_{1} = \\frac{\\mathbb{C}(\\log(Q),Z)}{\\mathbb{C}(\\log(P),Z)} \\]"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-demand-elasticity-1",
+    "href": "lectures/IV-Intro.html#example-3-demand-elasticity-1",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Demand Elasticity",
+    "text": "Example 3: Demand Elasticity"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-simultaneity",
+    "href": "lectures/IV-Intro.html#example-3-simultaneity",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Simultaneity",
+    "text": "Example 3: Simultaneity"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-1-how-to-use-both-instruments",
+    "href": "lectures/IV-Intro.html#example-1-how-to-use-both-instruments",
+    "title": "Instrumental Variables",
+    "section": "Example 1: How to use both instruments?",
+    "text": "Example 1: How to use both instruments?\n\nRemember we have \\(Z_{1}\\) and \\(Z_{2}\\). Could we use them both?\nWe can use a technique called Two Stage Least Squares\nThis method works in general for all of our examples"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-using-the-supply-shock",
+    "href": "lectures/IV-Intro.html#example-3-using-the-supply-shock",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Using the Supply Shock",
+    "text": "Example 3: Using the Supply Shock"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-demand-elasticity-2",
+    "href": "lectures/IV-Intro.html#example-3-demand-elasticity-2",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Demand Elasticity",
+    "text": "Example 3: Demand Elasticity"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#example-3-using-the-supply-shock-1",
+    "href": "lectures/IV-Intro.html#example-3-using-the-supply-shock-1",
+    "title": "Instrumental Variables",
+    "section": "Example 3: Using the Supply Shock",
+    "text": "Example 3: Using the Supply Shock"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#general-setup",
+    "href": "lectures/IV-Intro.html#general-setup",
+    "title": "Instrumental Variables",
+    "section": "General Setup",
+    "text": "General Setup\n\n\n\\(Z_{n} = [1,\\ Z_{1,n},\\ ...,\\ Z_{1,M}]\\)\n\\(Y_{n} = \\mu + \\alpha D_{n} + \\eta_{n}\\)\n\\(\\mathbb{E}[\\eta | Z] = \\mathbb{E}[\\eta] = 0\\) due to independence.\n\\(\\mathbb{E}[D | Z] = Z\\pi\\) where \\(\\pi\\) is an \\(M+1\\times 1\\) vector\nExercise: Calculate \\(\\mathbb{E}[Y | Z]\\) to motivate."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#two-stage-least-squares",
+    "href": "lectures/IV-Intro.html#two-stage-least-squares",
+    "title": "Instrumental Variables",
+    "section": "Two Stage Least Squares",
+    "text": "Two Stage Least Squares\n\n\nDecompose \\(D = \\pi_0 + \\pi_{1}Z_{1} + \\pi_{2}Z_{2} + \\varepsilon\\)\nEstimate \\(\\hat{\\pi}\\) using OLS\nGet \\(\\hat{D} = Z\\hat{\\pi}\\)\nEstimate \\(\\hat{\\alpha}\\) by regressing \\(Y\\) on \\(\\hat{D}\\).\n\n\n\nExercise: show consistent, asymptotically normal, biased."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#adding-controls",
+    "href": "lectures/IV-Intro.html#adding-controls",
+    "title": "Instrumental Variables",
+    "section": "Adding Controls",
+    "text": "Adding Controls\n\n\n\\(Z_{2}\\): the distance to nearest college. Not a good instrument!\nBottineau, ND is not comparable to Minneapolis, MN\n\\(\\mathbb{E}[\\eta | Z_{2}] \\neq 0\\) in reality\nBut what if we conditioned on zip code?\n\\(\\mathbb{E}[\\eta | Z_{2},\\text{zip}] = \\mathbb{E}[\\eta | \\text{zip}]\\)"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#adding-controls-1",
+    "href": "lectures/IV-Intro.html#adding-controls-1",
+    "title": "Instrumental Variables",
+    "section": "Adding Controls",
+    "text": "Adding Controls\nNow we get:\n\\[ \\mathbb{E}[Y|Z,\\text{zip}] = \\mu + \\alpha\\mathbb{E}[D|Z,\\text{zip}] + \\mathbb{E}[\\eta|\\text{zip}] \\]\nGiving a system:\n\\[ Y = \\mu + \\gamma\\text{zip} + \\alpha D + \\epsilon,\\qquad \\mathbb{E}[\\epsilon|Z_{2},\\text{zip}] = 0 \\]\n\\[ D = \\pi_{0} + \\pi_{1}Z_{2} + \\pi_{2}\\text{zip} + \\varepsilon \\]\nAnd we run 2SLS on this system. We need college openings over time to identify the model."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#adding-controls-2",
+    "href": "lectures/IV-Intro.html#adding-controls-2",
+    "title": "Instrumental Variables",
+    "section": "Adding Controls",
+    "text": "Adding Controls\n\n\nIn general, common for \\(Z\\) to only be a valid instrument conditional on a set of controls \\(W\\).\nWe write: \\[ Y = W\\beta + \\alpha D + \\eta \\] and \\[ D = [W,\\ Z]\\pi + \\varepsilon \\]\nAnd 2SLS is valid when \\(\\mathbb{E}[\\eta|W,Z] = 0\\)."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#general-setup-1",
+    "href": "lectures/IV-Intro.html#general-setup-1",
+    "title": "Instrumental Variables",
+    "section": "General Setup",
+    "text": "General Setup\nTake the system:\n\\[ Y = X\\beta + \\eta \\]\nand\n\\[ X = Z\\pi + \\varepsilon \\]\nwhere \\(X = [W,\\ D]\\) includes both controls and the treatment of interest and \\(Z\\) includes the controls plus all instruments."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#general-setup-2",
+    "href": "lectures/IV-Intro.html#general-setup-2",
+    "title": "Instrumental Variables",
+    "section": "General Setup",
+    "text": "General Setup\nThe 2SLS estimator is:\n\\[ \\hat{\\beta}_{IV} = (\\hat{\\mathbf{X}}^\\prime \\hat{\\mathbf{X}})^{-1}\\hat{\\mathbf{X}}^\\prime \\mathbf{Y} \\]\nwith \\(\\hat{\\mathbf{X}} = \\mathbf{Z}(\\mathbf{Z}'\\mathbf{Z})^{-1}\\mathbf{Z}'X = \\mathbf{Z}\\hat{\\pi}\\)\n\nExercises:\n\n\nShow consistent.\nShow asymptotically normal.\nShow biased."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#assumptions-for-iv",
+    "href": "lectures/IV-Intro.html#assumptions-for-iv",
+    "title": "Instrumental Variables",
+    "section": "Assumptions for IV",
+    "text": "Assumptions for IV\nDefine \\(\\mathbb{E}[X'Z]=\\mathbf{Q}_{XZ}\\), \\(\\mathbb{E}[Z'Z]=\\mathbf{Q}_{ZZ}\\) and so forth. Here are the assumptions we were using for the previous exercise:\n\n\\((X_n,Z_n,Y_n)\\) are iid data.\n\\(Y_n = X_n\\beta + \\eta_n\\) (linear model)\nStrict exogeneity: \\(\\mathbb{E}[\\eta_n|Z_n]=0\\).\nRank assumption on \\(X_n\\) and \\(Z_n\\): \\(\\text{rank}(\\mathbb{E}[X_n])=K\\), \\(\\text{rank}(\\mathbb{E}[Z_n])=L\\).\nSpherical errors: \\(\\mathbb{V}[\\eta_n|Z_n] = \\sigma^2\\).\nRelevance of instruments: \\(\\text{Rank}(\\mathbf{Q}_{ZX})=K\\)\nWell-behaved data: \\(\\mathbf{Q}_{ZX}&lt;\\infty\\), \\(\\mathbf{Q}_{ZZ}&lt;\\infty\\).\n\nAs before, A5 only matters for the calculation of standard errors."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#performing-inference",
+    "href": "lectures/IV-Intro.html#performing-inference",
+    "title": "Instrumental Variables",
+    "section": "Performing Inference",
+    "text": "Performing Inference\n\nLet \\(V_{\\beta} = \\mathbb{V}[\\hat{\\beta}_{2SLS}]\\). We can estimate \\(V_\\beta\\).\nUnder A4 we worked out that: \\[ V_\\beta = \\frac{\\sigma^2}{N}(\\mathbf{Q}_{XZ}\\mathbf{Q}_{ZZ}^{-1}\\mathbf{Q}_{XZ}')^{-1}\\] which we can estimate with: \\[ \\hat{V}_\\beta = s^2 (\\mathbf{X}'\\mathbf{Z} (\\mathbf{Z}'\\mathbf{Z})^{-1}\\mathbf{Z}'\\mathbf{X})^{-1},\\qquad s^2 = \\frac{1}{N}\\sum_n\\hat{\\eta}_n^2 \\]\nWithout A5 we have: \\[V_\\beta = \\frac{1}{N}\\mathbf{A}\\mathbb{E}[Z_n'Z_n\\eta_n^2]\\mathbf{A}',\\qquad \\mathbf{A}=(\\mathbf{Q}_{XZ}\\mathbf{Q}_{ZZ}^{-1}\\mathbf{Q}_{XZ}')^{-1}\\mathbf{Q}_{XZ}\\mathbf{Q}^{-1}_{ZZ} \\] which we estimate as: \\[\\hat{V}_\\beta = \\frac{1}{N}\\h{\\mathbf{A}}\\left(\\frac{1}{N}\\sum_{i=1}^NZ_n'Z_n\\hat{\\eta}_n^2\\right) \\h{\\mathbf{A}}' \\]"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#performing-inference-homoskedasticity",
+    "href": "lectures/IV-Intro.html#performing-inference-homoskedasticity",
+    "title": "Instrumental Variables",
+    "section": "Performing Inference (Homoskedasticity)",
+    "text": "Performing Inference (Homoskedasticity)\n\nLet \\(V_{\\beta} = \\mathbb{V}[\\hat{\\beta}_{2SLS}]\\). We can estimate \\(V_\\beta\\).\nUnder A5 we worked out that: \\[ V_\\beta = \\frac{\\sigma^2}{N}(\\mathbf{Q}_{XZ}\\mathbf{Q}_{ZZ}^{-1}\\mathbf{Q}_{XZ}')^{-1}\\] which we can estimate with: \\[ \\hat{V}_\\beta = s^2 (\\mathbf{X}'\\mathbf{Z} (\\mathbf{Z}'\\mathbf{Z})^{-1}\\mathbf{Z}'\\mathbf{X})^{-1},\\qquad s^2 = \\frac{1}{N}\\sum_n\\hat{\\eta}_n^2 \\]"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#performing-inference-heteroskedasticity",
+    "href": "lectures/IV-Intro.html#performing-inference-heteroskedasticity",
+    "title": "Instrumental Variables",
+    "section": "Performing Inference (Heteroskedasticity)",
+    "text": "Performing Inference (Heteroskedasticity)\n\nLet \\(V_{\\beta} = \\mathbb{V}[\\hat{\\beta}_{2SLS}]\\). We can estimate \\(V_\\beta\\).\nWithout A5 we have: \\[V_\\beta = \\frac{1}{N}\\mathbf{A}\\mathbb{E}[Z'Z\\eta^2]\\mathbf{A}',\\qquad \\mathbf{A}=(\\mathbf{Q}_{XZ}\\mathbf{Q}_{ZZ}^{-1}\\mathbf{Q}_{XZ}')^{-1}\\mathbf{Q}_{XZ}\\mathbf{Q}^{-1}_{ZZ} \\] which we estimate as: \\[\\hat{V}_\\beta = \\frac{1}{N}\\hat{\\mathbf{A}}\\left(\\frac{1}{N}\\sum_{i=1}^NZ_n'Z_n\\hat{\\eta}_n^2\\right) \\hat{\\mathbf{A}}' \\]"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education",
+    "href": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education",
+    "title": "Instrumental Variables",
+    "section": "Application 1 - The Effect of Mother’s Education",
+    "text": "Application 1 - The Effect of Mother’s Education\n“Mother’s Education and the Intergenerational Transmission of Human Capital: Evidence from College Openings” - Currie & Moretti, 2003:\n\nHow does mother’s education affect child outcomes?\nFour channels:\n\nPrenatal care\nSmoking\nMarriage\nFertility"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-1",
+    "href": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-1",
+    "title": "Instrumental Variables",
+    "section": "Application 1 - The Effect of Mother’s Education",
+    "text": "Application 1 - The Effect of Mother’s Education\n\nInstrument: Availability of college in county at age 17.\nFirst Stage: \\[\n\\begin{multline}\n\\text{EDUC} = b_0 + b_1 \\text{IV}_1 + b_2 \\text{IV}_2 + b_3\\text{AGE} + b_4\\text{COHORT} \\\\ + b_5\\text{COUNTY}\\times\\text{YRBIRTH} + b_6\\text{INCOME}17 + \\text{URBAN}17 + u\n\\end{multline}\n\\]\nOutcome equation: \\[   \n\\begin{multline}\nY = c_0 + c_1\\text{PEDUC} + c_2\\text{AGE} + c_3\\text{COHORT} \\\\ + c_4\\text{COUNTY}\\times\\text{YRBIRTH} + c_5\\text{INCOME}17 +c_6\\text{URBAN17} + z\n\\end{multline}\n\\]"
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-2---the-effect-of-school-finance-reform",
+    "href": "lectures/IV-Intro.html#application-2---the-effect-of-school-finance-reform",
+    "title": "Instrumental Variables",
+    "section": "Application 2 - The Effect of School Finance Reform",
+    "text": "Application 2 - The Effect of School Finance Reform\n“The Effects of School Spending on Educational and Economic Outcomes: Evidence from School Finance Reforms” - Jackson et al, 2016\n\nDoes school spending/financial resources affect student outcomes?\nData: admin data on students born between 1955-1985, school spending.\nInstruments: timing of court-mandated reform and changes in funding formulae."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-2---stage-1",
+    "href": "lectures/IV-Intro.html#application-2---stage-1",
+    "title": "Instrumental Variables",
+    "section": "Application 2 - Stage 1",
+    "text": "Application 2 - Stage 1\nStage 1: \\[\n    \\begin{multline}\n      \\ln(PPE_{5-17})_{idb} = \\pi_1(\\text{Exp}_{idb}\\times\\text{Dosage}_d) + \\pi_2 \\text{Exp}_{idb}  \\\\ + \\Pi C_{idb} + \\rho_d + \\rho_b + \\zeta_{idb} \\nonumber\n    \\end{multline}\n\\]\n\nIndividual \\(i\\), district \\(d\\), birth cohort \\(b\\).\n\\(PPE_{5-17}\\) average expenditure per pupil from ages 5-7\n\\(\\text{Exp}\\) - years after state court-ordered finance reform.\n\\(\\text{Dosage}\\) - district level mean of expenditure change induced by reform.\n\\(\\rho_d,\\rho_b\\) - district and cohort fixed effects (dummies).\n\\(C_{idb}\\) - controls\nNotice combination of DiD with IV."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-2---stage-2",
+    "href": "lectures/IV-Intro.html#application-2---stage-2",
+    "title": "Instrumental Variables",
+    "section": "Application 2 - Stage 2",
+    "text": "Application 2 - Stage 2\nStage 2: \\[    Y_{idb} = \\delta \\widehat{\\ln(PPE_{5-17})_{idb}} + \\Phi C_{idb} + \\theta_d + \\theta_b + \\varepsilon_{idb} \\]\nFinding: a 10% increase in spending in each of 12 years leads to:\n\n0.31 extra years of schooling;\n7% higher wages; and\n3.2 percentage point reduction in adult poverty.\n\nMuch larger for children of poor families: 25% increase can eliminate educational attainment gap between poor and non-poor."
+  },
+  {
+    "objectID": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-2",
+    "href": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-2",
+    "title": "Instrumental Variables",
+    "section": "Application 1 - The Effect of Mother’s Education",
+    "text": "Application 1 - The Effect of Mother’s Education\nThe county/year effects control for many characteristics of the local area that may affect outcomes, such as the availability and quality of medical services, the local business cycle, pollution, etc. Identification in our models comes from the fact that *within* each county and year of birth of the baby, there are mothers who were seventeen before a college opening, and mothers who were seventeen after a college opening.\n\nFinding: higher maternal ed. increases probability of marriage, increases use of prenatal care."
   }
 ]

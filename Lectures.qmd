@@ -16,5 +16,5 @@ Materials here will be uploaded as we continue through the course.
 | A Regression Framework for Diff-in-Diff | [Slides](lectures/Diff-in-Diff-Regression.qmd) |
 | Application: the Child Penalty | [Slides](lectures/Diff-in-Diff-ChildPenalty.pdf) |
 | Application: Neighborhood Effects and Moving to Opportunity | [Slides](lectures/movers_paper1_slides.pdf) |
-| Instrumental Variables | |
+| Instrumental Variables | [Slides](lectures/IV-Intro.qmd) |
 | Regression Discontinuity | |
