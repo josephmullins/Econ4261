@@ -40,6 +40,7 @@ This paper studies more conventional effects, but follow-up papers suggest that 
 I downloaded the data from the [AER's replication files](https://www.openicpsr.org/openicpsr/project/112670/version/V1/view). The original data are in stata format, which we can read in as follows:
 
 ```{r}
+library(tidyverse)
 d <- readstata13::read.dta13("../data/workfile_china.dta")
 ```
 
@@ -50,7 +51,6 @@ There are lots of variables in here, but the replication materials provide a gui
 Figure 2 Panel A in the paper shows how the instrument ("change in predicted import exposure") correlates with the endogenous variable ("change in import exposure"), controlling for the lagged share of manufacturing employment (which will be one of the controls in $\mathbf{X}_{it}$. The graph shows the strength of the instrument. Panel B of the figure shows how the instrument itself predicts changes in manufacturing employment (the so-called "reduced form"), which you will replicate in your homework.
 
 ```{r}
-library(tidyverse)
 mod_trade <- lm(d_tradeusch_pw ~ l_shind_manuf_cbp, weights = timepwt48,d)
 mod_IV <- lm(d_tradeotch_pw_lag ~ l_shind_manuf_cbp,weights = timepwt48,d)
 d$resid_trade <- residuals(mod_trade)
