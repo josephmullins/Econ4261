@@ -1,0 +1,31 @@
+---
+title: "Teaching Evaluations"
+format: 
+  revealjs:
+    theme: solarized
+    transition: slide
+    chalkboard:
+        theme: whiteboard
+        chalk-effect: 0.0
+        chalk-width: 6
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+---
+
+## Please!!
+
+- Go to [srt.umn.edu/blue](srt.umn.edu/blue)
+- Fill out your evaluation
+- I will wait until everyone in the room has responded
+
+## Something to ponder
+
+::: {layout-ncol=2}
+
+![](../figures/sickos.jpeg){width=70%}
+
+![](../figures/Toilet_paper_under.jpg)
+
+:::
+

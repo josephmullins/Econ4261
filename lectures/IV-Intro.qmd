@@ -8,6 +8,9 @@ format:
         theme: whiteboard
         chalk-effect: 0.0
         chalk-width: 6
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 ---
 
 ```{r}
@@ -352,6 +355,8 @@ $$
 ## Application 2 - Stage 2 {.smaller}
   Stage 2:
 $$    Y_{idb} = \delta \widehat{\ln(PPE_{5-17})_{idb}} + \Phi C_{idb} + \theta_d + \theta_b + \varepsilon_{idb} $$
+
+. . .
 
 Finding: a 10\% increase in spending in each of 12 years leads to: 
 

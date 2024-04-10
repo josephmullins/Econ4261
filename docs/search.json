@@ -32,7 +32,7 @@
     "href": "Lectures.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\nSlides\n\n\nApplication: the Child Penalty\nSlides\n\n\nApplication: Neighborhood Effects and Moving to Opportunity\nSlides\n\n\nInstrumental Variables\nSlides\n\n\nRegression Discontinuity"
+    "text": "Materials here will be uploaded as we continue through the course.\n\n\n\nTopic\nSlides\n\n\n\n\nIntroduction and Syllabus\nSlides\n\n\nIntroduction: Overview of Applications\nSlides\n\n\nReview: Probability and Statistics\nSlides\n\n\nReview: Linear Models\nSlides\n\n\nCausality\nSlides\n\n\nExperiments in Economics\nSlides\n\n\nIntroduction to Difference in Differences\nSlides\n\n\nA Regression Framework for Diff-in-Diff\nSlides\n\n\nApplication: the Child Penalty\nSlides\n\n\nApplication: Neighborhood Effects and Moving to Opportunity\nSlides\n\n\nInstrumental Variables\nSlides\n\n\nRegression Discontinuity\n\n\n\nTeaching Evals\nSlides"
   },
   {
     "objectID": "about.html",
@@ -2090,7 +2090,7 @@
     "href": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education",
     "title": "Instrumental Variables",
     "section": "Application 1 - The Effect of Mother’s Education",
-    "text": "Application 1 - The Effect of Mother’s Education\n“Mother’s Education and the Intergenerational Transmission of Human Capital: Evidence from College Openings” - Currie & Moretti, 2003:\n\nHow does mother’s education affect child outcomes?\nFour channels:\n\nPrenatal care\nSmoking\nMarriage\nFertility"
+    "text": "Application 1 - The Effect of Mother’s Education\n“Mother’s Education and the Intergenerational Transmission of Human Capital: Evidence from College Openings” - Currie & Moretti, 2003\n\nHow does mother’s education affect child outcomes?\nFour channels:\n\nPrenatal care\nSmoking\nMarriage\nFertility"
   },
   {
     "objectID": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-1",
@@ -2126,5 +2126,26 @@
     "title": "Instrumental Variables",
     "section": "Application 1 - The Effect of Mother’s Education",
     "text": "Application 1 - The Effect of Mother’s Education\nThe county/year effects control for many characteristics of the local area that may affect outcomes, such as the availability and quality of medical services, the local business cycle, pollution, etc. Identification in our models comes from the fact that *within* each county and year of birth of the baby, there are mothers who were seventeen before a college opening, and mothers who were seventeen after a college opening.\n\nFinding: higher maternal ed. increases probability of marriage, increases use of prenatal care."
+  },
+  {
+    "objectID": "lectures/TeachingEvalutions.html#please",
+    "href": "lectures/TeachingEvalutions.html#please",
+    "title": "Teaching Evaluations",
+    "section": "Please!!",
+    "text": "Please!!\n\nGo to srt.umn.edu/blue\nFill out your evaluation\nI will wait until everyone in the room has responded"
+  },
+  {
+    "objectID": "lectures/TeachingEvalutions.html#something-to-ponder",
+    "href": "lectures/TeachingEvalutions.html#something-to-ponder",
+    "title": "Teaching Evaluations",
+    "section": "Something to ponder",
+    "text": "Something to ponder"
+  },
+  {
+    "objectID": "lectures/TeachingEvalutions.html#section",
+    "href": "lectures/TeachingEvalutions.html#section",
+    "title": "Teaching Evaluations",
+    "section": "",
+    "text": "::: {layout = “[[70,30], [100]]”}\n\n\n\n\n\n\nFamous Elephants :::"
   }
 ]

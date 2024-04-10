@@ -10,7 +10,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.4.549">
 
-  <title>Econ4261 - Instrumental Variables</title>
+  <title>Econ4261 - Teaching Evaluations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -327,295 +327,32 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Instrumental Variables</h1>
+  <h1 class="title">Teaching Evaluations</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
-<p>Suppose we have a <em>causal model</em>:</p>
-<p><span class="math display">\[ Y = \mu + \alpha D + \eta \]</span></p>
-<p>where <span class="math inline">\(D\)</span> is the policy or treatment of interest. We are unwilling to assume that <span class="math inline">\(D\)</span> is <em>randomly assigned</em>, so</p>
-<p><span class="math display">\[ \mathbb{E}[\eta | D] = 0 \]</span></p>
-<p>is a bad assumption. Where to next?</p>
-</section>
-<section id="an-instrumental-variable" class="slide level2">
-<h2>An Instrumental Variable</h2>
-<div>
+<section id="please" class="slide level2">
+<h2>Please!!</h2>
 <ul>
-<li class="fragment">Suppose that there is some variable <span class="math inline">\(Z\)</span> that <em>is</em> randomly assigned</li>
-<li class="fragment">Suppose that <span class="math inline">\(Z\)</span> <em>influences</em> that value of <span class="math inline">\(D\)</span></li>
-<li class="fragment">If we can find such a variable in the real world, this is like a <em>natural experiment</em>…</li>
-<li class="fragment">… and we can estimate <span class="math inline">\(\alpha\)</span> using <strong>Instrumental Variables</strong></li>
-</ul>
-</div>
-</section>
-<section id="example-1-college-attendance" class="slide level2">
-<h2>Example 1: College Attendance</h2>
-<ul>
-<li><span class="math inline">\(Y\)</span> is earnings</li>
-<li><span class="math inline">\(D\)</span> is college attendance</li>
-<li><span class="math inline">\(Z_{1}\)</span> is an offer of a tuition subsidy</li>
-<li><span class="math inline">\(Z_{2}\)</span> is distance to nearest college (just go with it)</li>
-</ul>
-<div class="fragment">
-<p>We can use the variation in <span class="math inline">\(D\)</span> that is induced by <span class="math inline">\(Z_{1}\)</span> or <span class="math inline">\(Z_{2}\)</span> (or both) to estimate <span class="math inline">\(\alpha\)</span></p>
-</div>
-</section>
-<section id="example-2-incarceration" class="slide level2">
-<h2>Example 2: Incarceration</h2>
-<ul>
-<li><span class="math inline">\(Y\)</span> is earnings / employment / future criminal activity</li>
-<li><span class="math inline">\(D\)</span> is whether a guilty party <em>receives a prison sentence</em></li>
-<li><span class="math inline">\(Z\)</span> is the stringency of a judge that is randomly assigned to the case</li>
-</ul>
-<div class="fragment">
-<p>We can use the variation in <span class="math inline">\(D\)</span> that is induced by <span class="math inline">\(Z\)</span> to estimate <span class="math inline">\(\alpha\)</span></p>
-</div>
-</section>
-<section id="example-3-elasticity-of-demand" class="slide level2">
-<h2>Example 3: Elasticity of Demand</h2>
-<p><span class="math display">\[ \log(Q_{D}) = \alpha_{0} - \alpha_{1}\log(P) + \eta_{D} \]</span></p>
-<p>And</p>
-<p><span class="math display">\[ \log(Q_{S}) = \gamma_{0} + \gamma_{1}\log(P) + \gamma_{2}Z + \eta_{S} \]</span></p>
-<ul>
-<li><span class="math inline">\(Q_{D}\)</span> is quantity demanded</li>
-<li><span class="math inline">\(P\)</span> is price</li>
-<li><span class="math inline">\(Z\)</span> is a variable that <em>shifts supply</em> and is independent of demand</li>
-</ul>
-<div class="fragment">
-<p>We can use the variation in <span class="math inline">\(P\)</span> that is induced by <span class="math inline">\(Z\)</span> to estimate <span class="math inline">\(\alpha_{1}\)</span></p>
-</div>
-</section>
-<section id="example-1-use-the-distance-to-nearest-college" class="slide level2">
-<h2>Example 1: Use the distance to nearest college</h2>
-<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)}  \]</span></p>
-<p>So an estimator is:</p>
-<p><span class="math display">\[ \hat{\alpha} = \frac{\widehat{\mathbb{C}(Y,Z)}}{\widehat{\mathbb{C}(X,Z)}} = \frac{\sum_{n}\hat{Y}_{n}\hat{Z}_{n}}{\sum_{n}\hat{X}_{n}\hat{Z}_{n}} \]</span></p>
-<p>where <span class="math inline">\(\hat{Y} = Y - \overline{Y}\)</span>.</p>
-<div class="fragment">
-<p>Unbiased? Consistent? Asymptotically normal?</p>
-</div>
-</section>
-<section id="example-1-use-the-tuition-subsidy" class="slide level2">
-<h2>Example 1: Use the tuition subsidy</h2>
-<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)} = \frac{\mathbb{E}[Y|Z=1] - \mathbb{E}[Y|Z=0]}{\mathbb{E}[D|Z=1] - \mathbb{E}[D|Z=0]} \]</span></p>
-<p>So one estimator is:</p>
-<p><span class="math display">\[ \hat{\alpha} = \frac{\overline{Y}_{1} - \overline{Y}_{0}}{\overline{D}_{1}-\overline{D}_{0}} \]</span></p>
-<div class="fragment">
-<p>Consistent?</p>
-</div>
-</section>
-<section id="example-3-demand-elasticity" class="slide level2">
-<h2>Example 3: Demand Elasticity</h2>
-<p><span class="math display">\[ \alpha_{1} = \frac{\mathbb{C}(\log(Q),Z)}{\mathbb{C}(\log(P),Z)} \]</span></p>
-</section>
-<section id="example-3-demand-elasticity-1" class="slide level2">
-<h2>Example 3: Demand Elasticity</h2>
-</section>
-<section id="example-3-demand-elasticity-2" class="slide level2">
-<h2>Example 3: Demand Elasticity</h2>
-
-<img data-src="IV-Intro_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="example-3-using-the-supply-shock" class="slide level2">
-<h2>Example 3: Using the Supply Shock</h2>
-
-<img data-src="IV-Intro_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="example-3-using-the-supply-shock-1" class="slide level2">
-<h2>Example 3: Using the Supply Shock</h2>
-</section>
-<section id="example-1-how-to-use-both-instruments" class="slide level2">
-<h2>Example 1: How to use both instruments?</h2>
-<ul>
-<li>Remember we have <span class="math inline">\(Z_{1}\)</span> <em>and</em> <span class="math inline">\(Z_{2}\)</span>. Could we use them both?</li>
-<li>We can use a technique called <strong>Two Stage Least Squares</strong></li>
-<li>This method works in general for all of our examples</li>
+<li>Go to <a href="srt.umn.edu/blue">srt.umn.edu/blue</a></li>
+<li>Fill out your evaluation</li>
+<li>I will wait until everyone in the room has responded</li>
 </ul>
 </section>
-<section id="general-setup" class="slide level2">
-<h2>General Setup</h2>
-<div>
-<ul>
-<li class="fragment"><span class="math inline">\(Z_{n} = [1,\ Z_{1,n},\ ...,\ Z_{1,M}]\)</span></li>
-<li class="fragment"><span class="math inline">\(Y_{n} = \mu + \alpha D_{n} + \eta_{n}\)</span></li>
-<li class="fragment"><span class="math inline">\(\mathbb{E}[\eta | Z] = \mathbb{E}[\eta] = 0\)</span> due to independence.</li>
-<li class="fragment"><span class="math inline">\(\mathbb{E}[D | Z] = Z\pi\)</span> where <span class="math inline">\(\pi\)</span> is an <span class="math inline">\(M+1\times 1\)</span> vector</li>
-<li class="fragment"><em>Exercise</em>: Calculate <span class="math inline">\(\mathbb{E}[Y | Z]\)</span> to motivate.</li>
-</ul>
+<section id="something-to-ponder" class="slide level2">
+<h2>Something to ponder</h2>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../figures/sickos.jpeg" style="width:70.0%"></p>
 </div>
-</section>
-<section id="two-stage-least-squares" class="slide level2">
-<h2>Two Stage Least Squares</h2>
-<div>
-<ol type="1">
-<li class="fragment">Decompose <span class="math inline">\(D = \pi_0 + \pi_{1}Z_{1} + \pi_{2}Z_{2} + \varepsilon\)</span></li>
-<li class="fragment">Estimate <span class="math inline">\(\hat{\pi}\)</span> using OLS</li>
-<li class="fragment">Get <span class="math inline">\(\hat{D} = Z\hat{\pi}\)</span></li>
-<li class="fragment">Estimate <span class="math inline">\(\hat{\alpha}\)</span> by regressing <span class="math inline">\(Y\)</span> on <span class="math inline">\(\hat{D}\)</span>.</li>
-</ol>
-</div>
-<div class="fragment">
-<p>Exercise: show consistent, asymptotically normal, <strong>biased</strong>.</p>
-</div>
-</section>
-<section id="adding-controls" class="slide level2">
-<h2>Adding Controls</h2>
-<div>
-<ul>
-<li class="fragment"><span class="math inline">\(Z_{2}\)</span>: the distance to nearest college. Not a good instrument!</li>
-<li class="fragment">Bottineau, ND is not comparable to Minneapolis, MN</li>
-<li class="fragment"><span class="math inline">\(\mathbb{E}[\eta | Z_{2}] \neq 0\)</span> in reality</li>
-<li class="fragment">But what if we conditioned on zip code?</li>
-<li class="fragment"><span class="math inline">\(\mathbb{E}[\eta | Z_{2},\text{zip}] = \mathbb{E}[\eta | \text{zip}]\)</span></li>
-</ul>
-</div>
-</section>
-<section id="adding-controls-1" class="slide level2">
-<h2>Adding Controls</h2>
-<p>Now we get:</p>
-<p><span class="math display">\[ \mathbb{E}[Y|Z,\text{zip}] = \mu + \alpha\mathbb{E}[D|Z,\text{zip}] + \mathbb{E}[\eta|\text{zip}] \]</span></p>
-<p>Giving a system:</p>
-<p><span class="math display">\[ Y = \mu + \gamma\text{zip} + \alpha D + \epsilon,\qquad \mathbb{E}[\epsilon|Z_{2},\text{zip}] = 0 \]</span></p>
-<p><span class="math display">\[ D = \pi_{0} + \pi_{1}Z_{2} + \pi_{2}\text{zip} + \varepsilon \]</span></p>
-<p>And we run 2SLS on this system. We need college openings over time to identify the model.</p>
-</section>
-<section id="adding-controls-2" class="slide level2">
-<h2>Adding Controls</h2>
-<div>
-<ul>
-<li class="fragment">In general, common for <span class="math inline">\(Z\)</span> to only be a valid instrument <em>conditional on a set of controls</em> <span class="math inline">\(W\)</span>.</li>
-<li class="fragment">We write: <span class="math display">\[ Y = W\beta + \alpha D + \eta \]</span> and <span class="math display">\[ D = [W,\ Z]\pi + \varepsilon \]</span></li>
-<li class="fragment">And 2SLS is valid when <span class="math inline">\(\mathbb{E}[\eta|W,Z] = 0\)</span>.</li>
-</ul>
-</div>
-</section>
-<section id="general-setup-1" class="slide level2">
-<h2>General Setup</h2>
-<p>Take the system:</p>
-<p><span class="math display">\[ Y = X\beta + \eta \]</span></p>
-<p>and</p>
-<p><span class="math display">\[ X = Z\pi + \varepsilon \]</span></p>
-<p>where <span class="math inline">\(X = [W,\ D]\)</span> includes both controls and the treatment of interest and <span class="math inline">\(Z\)</span> includes the controls plus <em>all instruments</em>.</p>
-</section>
-<section id="general-setup-2" class="slide level2">
-<h2>General Setup</h2>
-<p>The 2SLS estimator is:</p>
-<p><span class="math display">\[ \hat{\beta}_{IV} = (\hat{\mathbf{X}}^\prime \hat{\mathbf{X}})^{-1}\hat{\mathbf{X}}^\prime \mathbf{Y} \]</span></p>
-<p>with <span class="math inline">\(\hat{\mathbf{X}} = \mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'X = \mathbf{Z}\hat{\pi}\)</span></p>
-<div class="fragment">
-<p>Exercises:</p>
-<div>
-<ol type="1">
-<li class="fragment">Show consistent.</li>
-<li class="fragment">Show asymptotically normal.</li>
-<li class="fragment">Show biased.</li>
-</ol>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../figures/Toilet_paper_under.jpg"></p>
 </div>
 </div>
-</section>
-<section id="assumptions-for-iv" class="slide level2 smaller">
-<h2>Assumptions for IV</h2>
-<p>Define <span class="math inline">\(\mathbb{E}[X'Z]=\mathbf{Q}_{XZ}\)</span>, <span class="math inline">\(\mathbb{E}[Z'Z]=\mathbf{Q}_{ZZ}\)</span> and so forth. Here are the assumptions we were using for the previous exercise:</p>
-<ol type="1">
-<li><span class="math inline">\((X_n,Z_n,Y_n)\)</span> are iid data.</li>
-<li><span class="math inline">\(Y_n = X_n\beta + \eta_n\)</span> (linear model)</li>
-<li>Strict exogeneity: <span class="math inline">\(\mathbb{E}[\eta_n|Z_n]=0\)</span>.</li>
-<li>Rank assumption on <span class="math inline">\(X_n\)</span> and <span class="math inline">\(Z_n\)</span>: <span class="math inline">\(\text{rank}(\mathbb{E}[X_n])=K\)</span>, <span class="math inline">\(\text{rank}(\mathbb{E}[Z_n])=L\)</span>.</li>
-<li>Spherical errors: <span class="math inline">\(\mathbb{V}[\eta_n|Z_n] = \sigma^2\)</span>.</li>
-<li>Relevance of instruments: <span class="math inline">\(\text{Rank}(\mathbf{Q}_{ZX})=K\)</span></li>
-<li>Well-behaved data: <span class="math inline">\(\mathbf{Q}_{ZX}&lt;\infty\)</span>, <span class="math inline">\(\mathbf{Q}_{ZZ}&lt;\infty\)</span>.</li>
-</ol>
-<p>As before, A5 only matters for the calculation of standard errors.</p>
-</section>
-<section id="performing-inference-homoskedasticity" class="slide level2">
-<h2>Performing Inference (Homoskedasticity)</h2>
-<ul>
-<li>Let <span class="math inline">\(V_{\beta} = \mathbb{V}[\hat{\beta}_{2SLS}]\)</span>. We can estimate <span class="math inline">\(V_\beta\)</span>.</li>
-<li>Under <strong>A5</strong> we worked out that: <span class="math display">\[ V_\beta = \frac{\sigma^2}{N}(\mathbf{Q}_{XZ}\mathbf{Q}_{ZZ}^{-1}\mathbf{Q}_{XZ}')^{-1}\]</span> which we can estimate with: <span class="math display">\[ \hat{V}_\beta = s^2 (\mathbf{X}'\mathbf{Z} (\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X})^{-1},\qquad s^2 = \frac{1}{N}\sum_n\hat{\eta}_n^2 \]</span></li>
-</ul>
-</section>
-<section id="performing-inference-heteroskedasticity" class="slide level2">
-<h2>Performing Inference (Heteroskedasticity)</h2>
-<ul>
-<li><p>Let <span class="math inline">\(V_{\beta} = \mathbb{V}[\hat{\beta}_{2SLS}]\)</span>. We can estimate <span class="math inline">\(V_\beta\)</span>.</p></li>
-<li><p>Without <strong>A5</strong> we have: <span class="math display">\[V_\beta = \frac{1}{N}\mathbf{A}\mathbb{E}[Z'Z\eta^2]\mathbf{A}',\qquad \mathbf{A}=(\mathbf{Q}_{XZ}\mathbf{Q}_{ZZ}^{-1}\mathbf{Q}_{XZ}')^{-1}\mathbf{Q}_{XZ}\mathbf{Q}^{-1}_{ZZ} \]</span> which we estimate as: <span class="math display">\[\hat{V}_\beta = \frac{1}{N}\hat{\mathbf{A}}\left(\frac{1}{N}\sum_{i=1}^NZ_n'Z_n\hat{\eta}_n^2\right) \hat{\mathbf{A}}' \]</span></p></li>
-</ul>
-</section>
-<section id="application-1---the-effect-of-mothers-education" class="slide level2">
-<h2>Application 1 - The Effect of Mother’s Education</h2>
-<p>“Mother’s Education and the Intergenerational Transmission of Human Capital: Evidence from College Openings” - Currie &amp; Moretti, 2003</p>
-<ul>
-<li>How does mother’s education affect child outcomes?</li>
-<li>Four channels:
-<ol type="1">
-<li>Prenatal care</li>
-<li>Smoking</li>
-<li>Marriage</li>
-<li>Fertility</li>
-</ol></li>
-</ul>
-</section>
-<section id="application-1---the-effect-of-mothers-education-1" class="slide level2 smaller">
-<h2>Application 1 - The Effect of Mother’s Education</h2>
-<ul>
-<li><strong>Instrument</strong>: Availability of college in county at age 17.</li>
-<li>First Stage: <span class="math display">\[
-\begin{multline}
-\text{EDUC} = b_0 + b_1 \text{IV}_1 + b_2 \text{IV}_2 + b_3\text{AGE} + b_4\text{COHORT} \\ + b_5\text{COUNTY}\times\text{YRBIRTH} + b_6\text{INCOME}17 + \text{URBAN}17 + u
-\end{multline}
-\]</span></li>
-<li>Outcome equation: <span class="math display">\[   
-\begin{multline}
-Y = c_0 + c_1\text{PEDUC} + c_2\text{AGE} + c_3\text{COHORT} \\ + c_4\text{COUNTY}\times\text{YRBIRTH} + c_5\text{INCOME}17 +c_6\text{URBAN17} + z
-\end{multline}
-\]</span></li>
-</ul>
-</section>
-<section id="application-1---the-effect-of-mothers-education-2" class="slide level2">
-<h2>Application 1 - The Effect of Mother’s Education</h2>
-<pre><code>The county/year effects control for many characteristics of the local area that may affect outcomes, such as the availability and quality of medical services, the local business cycle, pollution, etc. Identification in our models comes from the fact that *within* each county and year of birth of the baby, there are mothers who were seventeen before a college opening, and mothers who were seventeen after a college opening.</code></pre>
-<div class="fragment">
-<p><strong>Finding</strong>: higher maternal ed.&nbsp;increases probability of marriage, increases use of prenatal care.</p>
 </div>
-</section>
-<section id="application-2---the-effect-of-school-finance-reform" class="slide level2">
-<h2>Application 2 - The Effect of School Finance Reform</h2>
-<p>“The Effects of School Spending on Educational and Economic Outcomes: Evidence from School Finance Reforms” - Jackson et al, 2016</p>
-<ul>
-<li>Does school spending/financial resources affect student outcomes?</li>
-<li>Data: admin data on students born between 1955-1985, school spending.</li>
-<li><strong>Instruments</strong>: timing of court-mandated reform and changes in funding formulae.</li>
-</ul>
-</section>
-<section id="application-2---stage-1" class="slide level2 smaller">
-<h2>Application 2 - Stage 1</h2>
-<p>Stage 1: <span class="math display">\[
-    \begin{multline}
-      \ln(PPE_{5-17})_{idb} = \pi_1(\text{Exp}_{idb}\times\text{Dosage}_d) + \pi_2 \text{Exp}_{idb}  \\ + \Pi C_{idb} + \rho_d + \rho_b + \zeta_{idb} \nonumber
-    \end{multline}
-\]</span></p>
-<ul>
-<li>Individual <span class="math inline">\(i\)</span>, district <span class="math inline">\(d\)</span>, birth cohort <span class="math inline">\(b\)</span>.</li>
-<li><span class="math inline">\(PPE_{5-17}\)</span> average expenditure per pupil from ages 5-7</li>
-<li><span class="math inline">\(\text{Exp}\)</span> - years after state court-ordered finance reform.</li>
-<li><span class="math inline">\(\text{Dosage}\)</span> - district level mean of expenditure change induced by reform.</li>
-<li><span class="math inline">\(\rho_d,\rho_b\)</span> - district and cohort fixed effects (dummies).</li>
-<li><span class="math inline">\(C_{idb}\)</span> - controls</li>
-<li>Notice combination of DiD with IV.</li>
-</ul>
-</section>
-<section id="application-2---stage-2" class="slide level2 smaller">
-<h2>Application 2 - Stage 2</h2>
-<p>Stage 2: <span class="math display">\[    Y_{idb} = \delta \widehat{\ln(PPE_{5-17})_{idb}} + \Phi C_{idb} + \theta_d + \theta_b + \varepsilon_{idb} \]</span></p>
-<p>Finding: a 10% increase in spending in each of 12 years leads to:</p>
-<ul>
-<li>0.31 extra years of schooling;</li>
-<li>7% higher wages; and</li>
-<li>3.2 percentage point reduction in adult poverty.</li>
-</ul>
-<p>Much larger for children of poor families: 25% increase can eliminate educational attainment gap between poor and non-poor.</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -835,44 +572,6 @@ Y = c_0 + c_1\text{PEDUC} + c_2\text{AGE} + c_3\text{COHORT} \\ + c_4\text{COUNT
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
