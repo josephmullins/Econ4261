@@ -29,7 +29,7 @@ where $D$ is the policy or treatment of interest. We are unwilling to assume tha
 
 $$ \mathbb{E}[\eta | D] = 0 $$
 
-is a bad assumption. Where to next? 
+is a **bad assumption**. Where to next? 
 
 ## An Instrumental Variable
 
@@ -80,11 +80,11 @@ We can use the variation in $P$ that is induced by $Z$ to estimate $\alpha_{1}$
 ## Example 1: Use the distance to nearest college {.smaller}
 
 **Exercise**:
-$$ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)}  $$
+$$ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(D,Z)}  $$
 
 So an estimator is:
 
-$$ \hat{\alpha} = \frac{\widehat{\mathbb{C}(Y,Z)}}{\widehat{\mathbb{C}(X,Z)}} = \frac{\sum_{n}\hat{Y}_{n}\hat{Z}_{n}}{\sum_{n}\hat{X}_{n}\hat{Z}_{n}} $$
+$$ \hat{\alpha} = \frac{\widehat{\mathbb{C}(Y,Z)}}{\widehat{\mathbb{C}(D,Z)}} = \frac{\sum_{n}\hat{Y}_{n}\hat{Z}_{n}}{\sum_{n}\hat{D}_{n}\hat{Z}_{n}} $$
 
 where $\hat{Y} = Y - \overline{Y}$. 
 
@@ -95,19 +95,16 @@ Unbiased? Consistent? Asymptotically normal?
 ## Example 1: Use the tuition subsidy
 
 **Exercise**:
-$$ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)} = \frac{\mathbb{E}[Y|Z=1] - \mathbb{E}[Y|Z=0]}{\mathbb{E}[D|Z=1] - \mathbb{E}[D|Z=0]} $$
+$$ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(D,Z)} = \frac{\mathbb{E}[Y|Z=1] - \mathbb{E}[Y|Z=0]}{\mathbb{E}[D|Z=1] - \mathbb{E}[D|Z=0]} $$
 
 So one estimator is:
 
 $$ \hat{\alpha} = \frac{\overline{Y}_{1} - \overline{Y}_{0}}{\overline{D}_{1}-\overline{D}_{0}} $$
 
-. . .
-
-Consistent?
 
 ## Example 3: Demand Elasticity
 
-$$ \alpha_{1} = \frac{\mathbb{C}(\log(Q),Z)}{\mathbb{C}(\log(P),Z)} $$
+$$ \alpha_{1} = -\frac{\mathbb{C}(\log(Q),Z)}{\mathbb{C}(\log(P),Z)} $$
 
 ## Example 3: Demand Elasticity
 
@@ -139,28 +136,19 @@ ggplot(d,aes(q,p,color=Z)) + geom_point()
 
 ```{r}
 
-d$title = "No Apparent Relationship"
 d$stage = "No Apparent Relationship"
 d$alpha_line = 0
 
 d2 <- d %>%
     group_by(Z) %>%
-    mutate(p = mean(p)) %>%
-    mutate(stage = "Average prices by Z") %>%
-    mutate(title = "Average prices by Z")
+    mutate(p = mean(p),q = mean(q)) %>%
+    mutate(stage = "Average prices and quantities by Z") 
 
-d3 <- d2 %>%
-    group_by(Z) %>%
-    mutate(q = mean(q)) %>%
-    mutate(stage = "Average quantities by Z") %>%
-    mutate(title = "Average quantities by Z")
-
-d4 <- d3 %>%
-    mutate(alpha_line = 1,stage = "Elasticity is $\\Delta Q / \\Delta P $") %>%
-    mutate(title = "Elasticity is inverse of slope")
+d4 <- d2 %>%
+    mutate(alpha_line = 1,stage = "Elasticity is inverse of slope") 
 
 
-ggplot(rbind(d,d2,d3,d4),aes(q,p,color=Z)) + geom_point(size=2) + theme_minimal() + transition_states(stage) + geom_line(aes(x=q,y=p,alpha = as.factor(alpha_line)),color="black",size=1.5) + scale_alpha_discrete(range = c(0, 1),guide="none") +  labs(title = '{closest_state}')
+ggplot(rbind(d,d2,d4),aes(q,p,color=Z)) + geom_point(size=2) + theme_minimal() + transition_states(stage) + geom_line(aes(x=q,y=p,alpha = as.factor(alpha_line)),color="black",size=1.5) + scale_alpha_discrete(range = c(0, 1),guide="none") +  labs(title = '{closest_state}')
 
 ```
 
@@ -176,8 +164,9 @@ ggplot(rbind(d,d2,d3,d4),aes(q,p,color=Z)) + geom_point(size=2) + theme_minimal(
 ## General Setup
 
 :::{.incremental}
-- $Z_{n} = [1,\ Z_{1,n},\ ...,\ Z_{1,M}]$
-- $Y_{n} = \mu + \alpha D_{n} + \eta_{n}$
+- $Z_{n} = [1,\ Z_{1,n},\ ...,\ Z_{M,n}]$
+- $X_{n} = [1,\ D_{n}]$, $\gamma = [\mu,\ \alpha]'$
+- $Y_{n} = \mu + \alpha D_{n} + \eta_{n} = X_{n}\gamma + \eta_{n}$
 - $\mathbb{E}[\eta | Z] = \mathbb{E}[\eta] = 0$ due to independence.
 - $\mathbb{E}[D | Z] = Z\pi$ where $\pi$ is an $M+1\times 1$ vector
 - *Exercise*: Calculate $\mathbb{E}[Y | Z]$ to motivate.
@@ -211,6 +200,8 @@ Exercise: show consistent, asymptotically normal, **biased**.
 Now we get:
 
 $$ \mathbb{E}[Y|Z,\text{zip}] = \mu + \alpha\mathbb{E}[D|Z,\text{zip}] + \mathbb{E}[\eta|\text{zip}] $$
+
+. . .
 
 Giving a system:
 
@@ -249,7 +240,7 @@ The 2SLS estimator is:
 
 $$ \hat{\beta}_{IV} = (\hat{\mathbf{X}}^\prime \hat{\mathbf{X}})^{-1}\hat{\mathbf{X}}^\prime \mathbf{Y} $$
 
-with $\hat{\mathbf{X}} = \mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'X = \mathbf{Z}\hat{\pi}$
+with $\hat{\mathbf{X}} = \mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X} = \mathbf{Z}\hat{\pi}$
 
 . . .
 

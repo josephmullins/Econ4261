@@ -339,7 +339,7 @@
 <p><span class="math display">\[ Y = \mu + \alpha D + \eta \]</span></p>
 <p>where <span class="math inline">\(D\)</span> is the policy or treatment of interest. We are unwilling to assume that <span class="math inline">\(D\)</span> is <em>randomly assigned</em>, so</p>
 <p><span class="math display">\[ \mathbb{E}[\eta | D] = 0 \]</span></p>
-<p>is a bad assumption. Where to next?</p>
+<p>is a <strong>bad assumption</strong>. Where to next?</p>
 </section>
 <section id="an-instrumental-variable" class="slide level2">
 <h2>An Instrumental Variable</h2>
@@ -391,9 +391,9 @@
 </section>
 <section id="example-1-use-the-distance-to-nearest-college" class="slide level2 smaller">
 <h2>Example 1: Use the distance to nearest college</h2>
-<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)}  \]</span></p>
+<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(D,Z)}  \]</span></p>
 <p>So an estimator is:</p>
-<p><span class="math display">\[ \hat{\alpha} = \frac{\widehat{\mathbb{C}(Y,Z)}}{\widehat{\mathbb{C}(X,Z)}} = \frac{\sum_{n}\hat{Y}_{n}\hat{Z}_{n}}{\sum_{n}\hat{X}_{n}\hat{Z}_{n}} \]</span></p>
+<p><span class="math display">\[ \hat{\alpha} = \frac{\widehat{\mathbb{C}(Y,Z)}}{\widehat{\mathbb{C}(D,Z)}} = \frac{\sum_{n}\hat{Y}_{n}\hat{Z}_{n}}{\sum_{n}\hat{D}_{n}\hat{Z}_{n}} \]</span></p>
 <p>where <span class="math inline">\(\hat{Y} = Y - \overline{Y}\)</span>.</p>
 <div class="fragment">
 <p>Unbiased? Consistent? Asymptotically normal?</p>
@@ -401,16 +401,13 @@
 </section>
 <section id="example-1-use-the-tuition-subsidy" class="slide level2">
 <h2>Example 1: Use the tuition subsidy</h2>
-<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)} = \frac{\mathbb{E}[Y|Z=1] - \mathbb{E}[Y|Z=0]}{\mathbb{E}[D|Z=1] - \mathbb{E}[D|Z=0]} \]</span></p>
+<p><strong>Exercise</strong>: <span class="math display">\[ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(D,Z)} = \frac{\mathbb{E}[Y|Z=1] - \mathbb{E}[Y|Z=0]}{\mathbb{E}[D|Z=1] - \mathbb{E}[D|Z=0]} \]</span></p>
 <p>So one estimator is:</p>
 <p><span class="math display">\[ \hat{\alpha} = \frac{\overline{Y}_{1} - \overline{Y}_{0}}{\overline{D}_{1}-\overline{D}_{0}} \]</span></p>
-<div class="fragment">
-<p>Consistent?</p>
-</div>
 </section>
 <section id="example-3-demand-elasticity" class="slide level2">
 <h2>Example 3: Demand Elasticity</h2>
-<p><span class="math display">\[ \alpha_{1} = \frac{\mathbb{C}(\log(Q),Z)}{\mathbb{C}(\log(P),Z)} \]</span></p>
+<p><span class="math display">\[ \alpha_{1} = -\frac{\mathbb{C}(\log(Q),Z)}{\mathbb{C}(\log(P),Z)} \]</span></p>
 </section>
 <section id="example-3-demand-elasticity-1" class="slide level2">
 <h2>Example 3: Demand Elasticity</h2>
@@ -440,8 +437,9 @@
 <h2>General Setup</h2>
 <div>
 <ul>
-<li class="fragment"><span class="math inline">\(Z_{n} = [1,\ Z_{1,n},\ ...,\ Z_{1,M}]\)</span></li>
-<li class="fragment"><span class="math inline">\(Y_{n} = \mu + \alpha D_{n} + \eta_{n}\)</span></li>
+<li class="fragment"><span class="math inline">\(Z_{n} = [1,\ Z_{1,n},\ ...,\ Z_{M,n}]\)</span></li>
+<li class="fragment"><span class="math inline">\(X_{n} = [1,\ D_{n}]\)</span>, <span class="math inline">\(\gamma = [\mu,\ \alpha]'\)</span></li>
+<li class="fragment"><span class="math inline">\(Y_{n} = \mu + \alpha D_{n} + \eta_{n} = X_{n}\gamma + \eta_{n}\)</span></li>
 <li class="fragment"><span class="math inline">\(\mathbb{E}[\eta | Z] = \mathbb{E}[\eta] = 0\)</span> due to independence.</li>
 <li class="fragment"><span class="math inline">\(\mathbb{E}[D | Z] = Z\pi\)</span> where <span class="math inline">\(\pi\)</span> is an <span class="math inline">\(M+1\times 1\)</span> vector</li>
 <li class="fragment"><em>Exercise</em>: Calculate <span class="math inline">\(\mathbb{E}[Y | Z]\)</span> to motivate.</li>
@@ -478,10 +476,12 @@
 <h2>Adding Controls</h2>
 <p>Now we get:</p>
 <p><span class="math display">\[ \mathbb{E}[Y|Z,\text{zip}] = \mu + \alpha\mathbb{E}[D|Z,\text{zip}] + \mathbb{E}[\eta|\text{zip}] \]</span></p>
+<div class="fragment">
 <p>Giving a system:</p>
 <p><span class="math display">\[ Y = \mu + \gamma\text{zip} + \alpha D + \epsilon,\qquad \mathbb{E}[\epsilon|Z_{2},\text{zip}] = 0 \]</span></p>
 <p><span class="math display">\[ D = \pi_{0} + \pi_{1}Z_{2} + \pi_{2}\text{zip} + \varepsilon \]</span></p>
 <p>And we run 2SLS on this system. We need college openings over time to identify the model.</p>
+</div>
 </section>
 <section id="adding-controls-2" class="slide level2">
 <h2>Adding Controls</h2>
@@ -505,7 +505,7 @@
 <h2>General Setup</h2>
 <p>The 2SLS estimator is:</p>
 <p><span class="math display">\[ \hat{\beta}_{IV} = (\hat{\mathbf{X}}^\prime \hat{\mathbf{X}})^{-1}\hat{\mathbf{X}}^\prime \mathbf{Y} \]</span></p>
-<p>with <span class="math inline">\(\hat{\mathbf{X}} = \mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'X = \mathbf{Z}\hat{\pi}\)</span></p>
+<p>with <span class="math inline">\(\hat{\mathbf{X}} = \mathbf{Z}(\mathbf{Z}'\mathbf{Z})^{-1}\mathbf{Z}'\mathbf{X} = \mathbf{Z}\hat{\pi}\)</span></p>
 <div class="fragment">
 <p>Exercises:</p>
 <div>

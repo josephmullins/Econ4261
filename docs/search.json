@@ -1950,21 +1950,21 @@
     "href": "lectures/IV-Intro.html#example-1-use-the-distance-to-nearest-college",
     "title": "Instrumental Variables",
     "section": "Example 1: Use the distance to nearest college",
-    "text": "Example 1: Use the distance to nearest college\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(X,Z)}  \\]\nSo an estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\widehat{\\mathbb{C}(Y,Z)}}{\\widehat{\\mathbb{C}(X,Z)}} = \\frac{\\sum_{n}\\hat{Y}_{n}\\hat{Z}_{n}}{\\sum_{n}\\hat{X}_{n}\\hat{Z}_{n}} \\]\nwhere \\(\\hat{Y} = Y - \\overline{Y}\\).\n\nUnbiased? Consistent? Asymptotically normal?"
+    "text": "Example 1: Use the distance to nearest college\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(D,Z)}  \\]\nSo an estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\widehat{\\mathbb{C}(Y,Z)}}{\\widehat{\\mathbb{C}(D,Z)}} = \\frac{\\sum_{n}\\hat{Y}_{n}\\hat{Z}_{n}}{\\sum_{n}\\hat{D}_{n}\\hat{Z}_{n}} \\]\nwhere \\(\\hat{Y} = Y - \\overline{Y}\\).\n\nUnbiased? Consistent? Asymptotically normal?"
   },
   {
     "objectID": "lectures/IV-Intro.html#example-1-use-the-tuition-subsidy",
     "href": "lectures/IV-Intro.html#example-1-use-the-tuition-subsidy",
     "title": "Instrumental Variables",
     "section": "Example 1: Use the tuition subsidy",
-    "text": "Example 1: Use the tuition subsidy\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(X,Z)} = \\frac{\\mathbb{E}[Y|Z=1] - \\mathbb{E}[Y|Z=0]}{\\mathbb{E}[D|Z=1] - \\mathbb{E}[D|Z=0]} \\]\nSo one estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\overline{Y}_{1} - \\overline{Y}_{0}}{\\overline{D}_{1}-\\overline{D}_{0}} \\]\n\nConsistent?"
+    "text": "Example 1: Use the tuition subsidy\nExercise: \\[ \\alpha = \\frac{\\mathbb{C}(Y,Z)}{\\mathbb{C}(D,Z)} = \\frac{\\mathbb{E}[Y|Z=1] - \\mathbb{E}[Y|Z=0]}{\\mathbb{E}[D|Z=1] - \\mathbb{E}[D|Z=0]} \\]\nSo one estimator is:\n\\[ \\hat{\\alpha} = \\frac{\\overline{Y}_{1} - \\overline{Y}_{0}}{\\overline{D}_{1}-\\overline{D}_{0}} \\]"
   },
   {
     "objectID": "lectures/IV-Intro.html#example-3-demand-elasticity",
     "href": "lectures/IV-Intro.html#example-3-demand-elasticity",
     "title": "Instrumental Variables",
     "section": "Example 3: Demand Elasticity",
-    "text": "Example 3: Demand Elasticity\n\\[ \\alpha_{1} = \\frac{\\mathbb{C}(\\log(Q),Z)}{\\mathbb{C}(\\log(P),Z)} \\]"
+    "text": "Example 3: Demand Elasticity\n\\[ \\alpha_{1} = -\\frac{\\mathbb{C}(\\log(Q),Z)}{\\mathbb{C}(\\log(P),Z)} \\]"
   },
   {
     "objectID": "lectures/IV-Intro.html#example-3-demand-elasticity-1",
@@ -2013,7 +2013,7 @@
     "href": "lectures/IV-Intro.html#general-setup",
     "title": "Instrumental Variables",
     "section": "General Setup",
-    "text": "General Setup\n\n\n\\(Z_{n} = [1,\\ Z_{1,n},\\ ...,\\ Z_{1,M}]\\)\n\\(Y_{n} = \\mu + \\alpha D_{n} + \\eta_{n}\\)\n\\(\\mathbb{E}[\\eta | Z] = \\mathbb{E}[\\eta] = 0\\) due to independence.\n\\(\\mathbb{E}[D | Z] = Z\\pi\\) where \\(\\pi\\) is an \\(M+1\\times 1\\) vector\nExercise: Calculate \\(\\mathbb{E}[Y | Z]\\) to motivate."
+    "text": "General Setup\n\n\n\\(Z_{n} = [1,\\ Z_{1,n},\\ ...,\\ Z_{M,n}]\\)\n\\(X_{n} = [1,\\ D_{n}]\\), \\(\\gamma = [\\mu,\\ \\alpha]'\\)\n\\(Y_{n} = \\mu + \\alpha D_{n} + \\eta_{n} = X_{n}\\gamma + \\eta_{n}\\)\n\\(\\mathbb{E}[\\eta | Z] = \\mathbb{E}[\\eta] = 0\\) due to independence.\n\\(\\mathbb{E}[D | Z] = Z\\pi\\) where \\(\\pi\\) is an \\(M+1\\times 1\\) vector\nExercise: Calculate \\(\\mathbb{E}[Y | Z]\\) to motivate."
   },
   {
     "objectID": "lectures/IV-Intro.html#two-stage-least-squares",
@@ -2034,7 +2034,7 @@
     "href": "lectures/IV-Intro.html#adding-controls-1",
     "title": "Instrumental Variables",
     "section": "Adding Controls",
-    "text": "Adding Controls\nNow we get:\n\\[ \\mathbb{E}[Y|Z,\\text{zip}] = \\mu + \\alpha\\mathbb{E}[D|Z,\\text{zip}] + \\mathbb{E}[\\eta|\\text{zip}] \\]\nGiving a system:\n\\[ Y = \\mu + \\gamma\\text{zip} + \\alpha D + \\epsilon,\\qquad \\mathbb{E}[\\epsilon|Z_{2},\\text{zip}] = 0 \\]\n\\[ D = \\pi_{0} + \\pi_{1}Z_{2} + \\pi_{2}\\text{zip} + \\varepsilon \\]\nAnd we run 2SLS on this system. We need college openings over time to identify the model."
+    "text": "Adding Controls\nNow we get:\n\\[ \\mathbb{E}[Y|Z,\\text{zip}] = \\mu + \\alpha\\mathbb{E}[D|Z,\\text{zip}] + \\mathbb{E}[\\eta|\\text{zip}] \\]\n\nGiving a system:\n\\[ Y = \\mu + \\gamma\\text{zip} + \\alpha D + \\epsilon,\\qquad \\mathbb{E}[\\epsilon|Z_{2},\\text{zip}] = 0 \\]\n\\[ D = \\pi_{0} + \\pi_{1}Z_{2} + \\pi_{2}\\text{zip} + \\varepsilon \\]\nAnd we run 2SLS on this system. We need college openings over time to identify the model."
   },
   {
     "objectID": "lectures/IV-Intro.html#adding-controls-2",
@@ -2055,7 +2055,7 @@
     "href": "lectures/IV-Intro.html#general-setup-2",
     "title": "Instrumental Variables",
     "section": "General Setup",
-    "text": "General Setup\nThe 2SLS estimator is:\n\\[ \\hat{\\beta}_{IV} = (\\hat{\\mathbf{X}}^\\prime \\hat{\\mathbf{X}})^{-1}\\hat{\\mathbf{X}}^\\prime \\mathbf{Y} \\]\nwith \\(\\hat{\\mathbf{X}} = \\mathbf{Z}(\\mathbf{Z}'\\mathbf{Z})^{-1}\\mathbf{Z}'X = \\mathbf{Z}\\hat{\\pi}\\)\n\nExercises:\n\n\nShow consistent.\nShow asymptotically normal.\nShow biased."
+    "text": "General Setup\nThe 2SLS estimator is:\n\\[ \\hat{\\beta}_{IV} = (\\hat{\\mathbf{X}}^\\prime \\hat{\\mathbf{X}})^{-1}\\hat{\\mathbf{X}}^\\prime \\mathbf{Y} \\]\nwith \\(\\hat{\\mathbf{X}} = \\mathbf{Z}(\\mathbf{Z}'\\mathbf{Z})^{-1}\\mathbf{Z}'\\mathbf{X} = \\mathbf{Z}\\hat{\\pi}\\)\n\nExercises:\n\n\nShow consistent.\nShow asymptotically normal.\nShow biased."
   },
   {
     "objectID": "lectures/IV-Intro.html#assumptions-for-iv",
