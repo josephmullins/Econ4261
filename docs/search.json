@@ -2118,7 +2118,7 @@
     "href": "lectures/IV-Intro.html#application-2---stage-2",
     "title": "Instrumental Variables",
     "section": "Application 2 - Stage 2",
-    "text": "Application 2 - Stage 2\nStage 2: \\[    Y_{idb} = \\delta \\widehat{\\ln(PPE_{5-17})_{idb}} + \\Phi C_{idb} + \\theta_d + \\theta_b + \\varepsilon_{idb} \\]\nFinding: a 10% increase in spending in each of 12 years leads to:\n\n0.31 extra years of schooling;\n7% higher wages; and\n3.2 percentage point reduction in adult poverty.\n\nMuch larger for children of poor families: 25% increase can eliminate educational attainment gap between poor and non-poor."
+    "text": "Application 2 - Stage 2\nStage 2: \\[    Y_{idb} = \\delta \\widehat{\\ln(PPE_{5-17})_{idb}} + \\Phi C_{idb} + \\theta_d + \\theta_b + \\varepsilon_{idb} \\]\n\nFinding: a 10% increase in spending in each of 12 years leads to:\n\n0.31 extra years of schooling;\n7% higher wages; and\n3.2 percentage point reduction in adult poverty.\n\nMuch larger for children of poor families: 25% increase can eliminate educational attainment gap between poor and non-poor."
   },
   {
     "objectID": "lectures/IV-Intro.html#application-1---the-effect-of-mothers-education-2",

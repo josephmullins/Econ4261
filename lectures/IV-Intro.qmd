@@ -61,7 +61,7 @@ We can use the variation in $D$ that is induced by $Z_{1}$ or $Z_{2}$ (or both) 
 
 We can use the variation in $D$ that is induced by $Z$ to estimate $\alpha$
 
-## Example 3: Elasticity of Demand
+## Example 3: Elasticity of Demand {.smaller}
 
 $$ \log(Q_{D}) = \alpha_{0} - \alpha_{1}\log(P) + \eta_{D} $$
 
@@ -77,7 +77,7 @@ $$ \log(Q_{S}) = \gamma_{0} + \gamma_{1}\log(P) + \gamma_{2}Z + \eta_{S} $$
 
 We can use the variation in $P$ that is induced by $Z$ to estimate $\alpha_{1}$
 
-## Example 1: Use the distance to nearest college
+## Example 1: Use the distance to nearest college {.smaller}
 
 **Exercise**:
 $$ \alpha = \frac{\mathbb{C}(Y,Z)}{\mathbb{C}(X,Z)}  $$
@@ -118,7 +118,7 @@ d <- data.frame(n = 1:(2*N+1),ed = c(kronecker(0.5*rnorm(N),c(1,1)),0),es = c(0,
 d$p <- (1/2)*(d$ed - d$es - d$Z2)
 d$q <- d$ed - d$p
 
-#ggplot(d,aes(q,p)) + geom_point(size=2) + geom_abline(aes(intercept=-Z2-es,slope=1),alpha=0.2) + geom_abline(aes(intercept=ed,slope=-1),alpha=0.2) + transition_states(n) + shadow_mark()+ theme_minimal()
+ggplot(d,aes(q,p)) + geom_point(size=2) + geom_abline(aes(intercept=-Z2-es,slope=1),alpha=0.2) + geom_abline(aes(intercept=ed,slope=-1),alpha=0.2) + transition_states(n) + shadow_mark()+ theme_minimal()
 
 ```
 
@@ -160,7 +160,7 @@ d4 <- d3 %>%
     mutate(title = "Elasticity is inverse of slope")
 
 
-#ggplot(rbind(d,d2,d3,d4),aes(q,p,color=Z)) + geom_point(size=2) + theme_minimal() + transition_states(stage) + geom_line(aes(x=q,y=p,alpha = as.factor(alpha_line)),color="black",size=1.5) + scale_alpha_discrete(range = c(0, 1),guide="none") +  labs(title = '{closest_state}')
+ggplot(rbind(d,d2,d3,d4),aes(q,p,color=Z)) + geom_point(size=2) + theme_minimal() + transition_states(stage) + geom_line(aes(x=q,y=p,alpha = as.factor(alpha_line)),color="black",size=1.5) + scale_alpha_discrete(range = c(0, 1),guide="none") +  labs(title = '{closest_state}')
 
 ```
 
