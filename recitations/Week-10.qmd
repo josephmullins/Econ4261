@@ -18,7 +18,7 @@ Assume now the following, to make sense of monotonicity:
   - There is an instrument $Z$ that is randomly assigned and therefore independent of potential outcomes.
   - Potential outcomes and treatment are determined by some unobserved type, $\omega\in\Omega$. This is not restrictive because $\Omega$ can be arbitrarily large (e.g. the position and rotational speed of every single atom and electron in your body).
   - Let $D_{Z}(\omega)\in\{0,1\}$ be the function that determines *treatment assignment* given the realization of the instrument $Z$. For example, if $Z$ is a randomly offered college subsidy, $D_{Z}(\omega)$ determines whether someone of type $\omega$ goes to college for each value of $Z$.
-  - The model is given by: \[ Y_{1}(\omega), Y_{0}(\omega), D_{Z}(\omega).$$
+  - The model is given by: $(Y_{1}(\omega), Y_{0}(\omega), D_{Z}(\omega))$
   
 We say that $Z$ is monotonic if for two potential values of $z\neq z'$, either:
 
@@ -46,7 +46,7 @@ Going back to our applications in class with Judge stringency, let $Z_{j}\in(0,1
 
 $$ \mathbb{E}[I_{n}|Z_{j(n)}] = \gamma Z_{j(n)} $$
 
-with $\gamma > 0 $.
+with $\gamma>0$.
 
 Next, prove with your TA that monotonicity implies that if a defendant is sentenced to prison by a judge with leniency $z$, that they would also be sentenced to prison had they been assigned to a judge with leniency $z'<z$.
 
@@ -68,7 +68,8 @@ First, let's assume $Z_{j}$ is distributed uniformly on the interval between 0.2
 
 Second, let's assume that defendants can be characterized by some $V$ such that:
 $$ I_{n} = \mathbf{1}\{Z_{j(n)} - V_{n}\geq 0\}$$
-Higher levels of $V_{n}$ represent higher levels of "innonence" in that these individuals are less likely to go to prison when assigned randomly to any one of the judges.
+
+Higher levels of $V_{n}$ represent higher levels of "innocence" in that these individuals are less likely to go to prison when assigned randomly to any one of the judges.
 
 Third, let's assume that the effect of prison on outcome $Y$ is heterogeneous and depends on $V$:
 
@@ -108,7 +109,7 @@ Now let's look at what the estimate is when prison has a positive effect on ever
 monte_carlo_judgeIV(50,10000,1,0,0.4)
 ```
 
-We get, once again, that tsls converges to the average treatment effect among ``compliers'' which are individiuals with $V$ between 0.25 and 0.75. A picture to visualize:
+We get, once again, that TSLS converges to the average treatment effect among "compliers" which are individiuals with $V$ between 0.25 and 0.75. A picture to visualize:
 
 ```{r}
 data <- sim_judgeIV(200000,1,0,0.4)
