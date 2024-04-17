@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.539">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -229,10 +229,14 @@ ul.task-list li input[type="checkbox"] {
 <td><a href="./lectures/IV-Intro.html">Slides</a></td>
 </tr>
 <tr class="even">
+<td>Application: Judge Stringency Instruments</td>
+<td><a href="lectures/L2-IncarcerationRecidivismEmployment.pdf">Slides</a></td>
+</tr>
+<tr class="odd">
 <td>Regression Discontinuity</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Teaching Evals</td>
 <td><a href="./lectures/TeachingEvalutions.html">Slides</a></td>
 </tr>
@@ -403,12 +407,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {

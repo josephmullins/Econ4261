@@ -17,5 +17,6 @@ Materials here will be uploaded as we continue through the course.
 | Application: the Child Penalty | [Slides](lectures/Diff-in-Diff-ChildPenalty.pdf) |
 | Application: Neighborhood Effects and Moving to Opportunity | [Slides](lectures/movers_paper1_slides.pdf) |
 | Instrumental Variables | [Slides](lectures/IV-Intro.qmd) |
+| Application: Judge Stringency Instruments | [Slides](lectures/L2-IncarcerationRecidivismEmployment.pdf) |
 | Regression Discontinuity | |
 | Teaching Evals | [Slides](lectures/TeachingEvalutions.qmd) |
