@@ -13,3 +13,4 @@ You can find some practice questions for the theory part of this class here. Don
 | [Causality and Experiments](/supplementary/Exercises-Experiments.pdf) | [Solutions](/supplementary/Exercises-Experiments-Solutions.pdf) | 
 | [Diff-in-Diff and IV](/supplementary/Exercises-QuasiExperiments.pdf) | [Solutions](supplementary/QuasiExperiments%20-%20Solutions.pdf) (handwritten) | 
 | [2023 Midterm](/supplementary/Midterm-2023.pdf) | Solutions given in recitation |
+| [2023 Final](/supplementary/Final-2023.pdf) | [Solutions](/supplementary/Final-2023-Solutions.pdf) |
