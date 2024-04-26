@@ -101,10 +101,34 @@ Most of the rules follow almost immediately from the basic definitions, so you s
       \item And if $\EE[\epsilon^2_{n}|\bm{x}_{n}] = \sigma^2$:
         \[\hat{V}_{\hat{\beta}} = \frac{1}{N}(\bm{X}^{T}\bm{X})^{-1}\sum_{n}\hat{\epsilon}_{n}^2 \]
   \end{itemize}
+
+  \section*{Instrumental Variables}
+  Let the first stage be
+  \[ \bm{x}_{n} = \bm{z}_{n}\pi + \epsilon_{n} \]
+  with a second stage
+  \[ Y_{n} = \bm{x}_{n}\gamma + \eta_{n} \]
+  Let $\bm{X}$ be all of the $\bm{x}_{n}$ stacked in a vector and $\bm{Z}$ the same for $\bm{z}$. 
   
+  \begin{itemize}
+    \item The 2SLS estimator is 
+    \[ \hat{\gamma} = (\hat{\bm{X}}'\hat{\bm{X}})^{-1}\hat{\bm{X}}'\bm{Y}\] 
+    and
+    \[ \hat{\bm{X}} = \bm{Z}(\bm{Z}'\hat{\bm{Z}})^{-1}\bm{Z}'{\bm{Y}} \]
+    \item The variance of the 2SLS estimator is \textbf{approximately}:\footnote{This approximation is derived from the asymptotic variance implied by the central limit theorem.} 
+    \[ V_{\hat{\gamma}} = \sigma^2_{\eta}\left(\bm{Q}_{XZ}\bm{Q}_{ZZ}^{-1}\bm{Q}_{XZ}'\right)^{-1} \]
+    where $\sigma^2_{\eta} = \mathbb{E}[\eta^2|\bm{z}]$, $\bm{Q}_{XZ}=\mathbb{E}[\bm{x}'\bm{z}]$ and $\bm{Q}_{ZZ} = \mathbb{E}[\bm{z}'\bm{z}]$.
+    The variance can be estimated as
+    \[ \hat{V}_{\hat{\gamma}} = s^2(\bm{X}'\bm{Z}(\bm{Z}'\bm{Z})^{-1}\bm{Z}'\bm{X})^{-1} \]
+    where 
+    \[ s^2 = \frac{1}{N}\sum \hat{\eta}_{n}^2,\qquad \hat{\eta}_{n} = Y_{n}-\bm{x}_{n}\hat{\gamma} \]
+  \end{itemize}
+
+
+
 \end{document}
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+% where 
