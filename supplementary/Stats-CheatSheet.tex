@@ -84,7 +84,10 @@ Most of the rules follow almost immediately from the basic definitions, so you s
   \begin{itemize}
   \item $\BB{V}[CX] = C\Sigma_{X}C^{T}$.
   \item $\ov{X}\rightarrow_{p} \mu_{X}$ (law of large numbers)
-  \item $\sqrt{N}(\ov{X} - \mu_{X}) \rightarrow_{d} \mc(0,\Sigma_{X})$ (central limit theorem)
+  \item $\sqrt{N}(\ov{X} - \mu_{X}) \rightarrow_{d} \mc{N}(0,\Sigma_{X})$ (central limit theorem)
+  \item If $\sqrt{N}(\hat{\beta}-\beta)\rightarrow_{d}\mc{N}(0,\Sigma)$ and $H_{0}: R\beta - c = 0$ then we can test $H_{0}$ with the Wald or Chi squared test statistic which follows under the null:
+ \[ (R\hat{\beta}-c)^{T}(R\hat{\Sigma} R^{T})^{-1}(R\hat{\beta}-c) \sim \chi^2_{L} \]
+ where $L$ is the ``degrees of freedom", the number of rows in $R$. We reject the null if this statistic exceeds a suitably defined critical value.
   \end{itemize}
 
   \section*{OLS}
