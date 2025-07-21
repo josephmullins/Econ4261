@@ -1,0 +1,79 @@
+---
+title: "Econ4261 - Introduction to Econometrics"
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+---
+
+## Course Information
+
+### Class Times
+Tuesdays and Thursdays, 8.15am-9.30am, Blegen Hall 145
+
+### Your Instructor
+
+- [Joseph Mullins](http://www.josephlyonmullins.com/)
+- [mullinsj\@umn.edu](mailto:mullinsj@umn.edu?subject=Econ4261) (use ECON4261 in subject)
+- Office Hours: Fridays 10am-12pm on zoom. *Please check Canvas for a link to sign up*.
+
+### Important Dates
+
+| Date | Event |
+| ---- | ---- |
+| January 25 | [Assignment 1](assignments/Homework-1.qmd) due |
+| February 15 | [Assignment 2](assignments/Homework-2.qmd) due |
+| February 29 | Midterm (in class) |
+| March 21 | [Assignment 3](assignments/Homework-3.qmd) due |
+| April 11 | [Assignment 4](assignments/Homework-4.qmd) due |
+| April 25 | [Assignment 5](assignments/Homework-5.qmd) due |
+| April 23 | Groups 1, 2, and 3 present [Group Project](assignments/GroupProject.qmd) |
+| April 25 | Groups 4 and 5 present [Group Project](assignments/GroupProject.qmd) |
+| May 5 | Individual writeups for [group project](assignments/GroupProject.qmd) due  |
+| May 7 | Final Exam (10:30am - 12:30pm, Blegen 145) [see the schedule](https://onestop.umn.edu/calendar/final-exam-times) |
+
+## Course Description
+
+Economics provides a far-reaching theoretical toolkit for understanding the world around us. Econometrics is a discipline that studies how to test and quantify these theories. It draws from probability, statistics and economics in equal measures to achieve this.
+
+In this course you will learn the most important econometric tools both in theory and practice by working with data in the `R` programming language. We will emphasize throughout the importance of economic theory when interpreting data.
+
+It is important to highlight that this is a mathematics and statistics intensive course and students should be comfortable with the material in the enrollment prerequisites (Econ 3101, Math 1271/2, Math 2243, Math 2263, Stat 4/5101/2).
+
+## Assessment
+
+| Assessment | Weight |
+| ----- | ----- |
+| Assignments | 40% total, the lowest grade of 5 will be dropped. |
+| Midterm | 20% |
+| Final | 20% |
+| Group project | 20% total |
+
+
+### Homework Submission Guidelines
+
+It is your responsibility to submit neat and legible solutions to the homeworks. Your TA may deduct marks for illegible submissions. Please follow these guidelines:
+
+- All homework assignments must be submitted as a `Quarto` or `R` notebook rendered as an html or pdf, with code and output showing all required results. You will be introduced to these notebooks through recitation materials.
+- For questions requiring mathematical solutions, you may submit handwritten solutions if you prefer, but they *must* be submitted as a pdf using a scanner or scanning app on your phone.
+
+## Supplemental Material
+
+Here is a [link](https://youtube.com/playlist?list=PLZCuo6AdR2dhd3qYHUGPZpqxZvZOI03tH) to lecture videos I recorded in Spring 2021. You may find them useful but please be warned that the course has changed and they are *not a substitute* for attending lectures.
+
+## Statistical Software
+We apply the methods we learn in the course to data using R, a free and open source statistical software package. Students are encouraged to download and install RStudio, which provides a graphical interface with R. 
+
+Download RStudio here: <https://www.rstudio.com/products/rstudio/download/>
+
+Find the user guide here: <https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf>
+
+I will provide lots of example code to help students learn how to use this language.
+
+Additional Resources for R, RStudio, and the "tidyverse" libraries
+I have tried to make materials for learning R in this course self-contained, but if you need a little extra help, I recommend chapters (1)-(4) of [this free online book](https://moderndive.com/index.html). You can find [more helpful resources here](https://www.tidyverse.org/learn/).
+
+## Policies and Procedures
+
+Please review the University's [Policies and Procedures](docs/University_department_policies_syllabus_23_24.docx).
